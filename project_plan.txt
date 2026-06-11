@@ -1,0 +1,67 @@
+1. Define project
+    - Why am I making this project?
+        - Learn to plan a software project
+        - Work with GUI creation
+        - Understand program workflow
+        - Understand file handling
+        - Help me plan my projects
+        - Build my portfolio
+
+
+    - Who is this project for?
+        - Me
+        - Family/friends
+
+
+    - What is going to make it valuable?
+        - Overview of projects in life
+
+
+2. User stories
+    - Ugh
+
+
+3. Data management
+    - .json files for projects
+    - PySide files for GUI
+
+
+4. MVP
+    - Add projects
+    - Display projects
+    - Close projects
+
+
+5. Draw a simple prototype/wireframe
+    - Keep
+    - It
+    - Simple
+    - Navigation
+    - How does the user get to where they want to go?
+
+
+6. Understand the project future
+    - Deploy online?
+    - App?
+    - User specified project types?
+
+
+7. Specific components
+    - Backend/frontend
+    - Architecture
+
+
+8. Pick stack
+    - Python
+    - PySide6
+    - .json
+
+
+9. Development process
+    - Folder structure:
+        -
+    - Environments:
+        - project_planner_1.0
+    - Version control:
+        - https://github.com/SimonJagerSwe/project_planner_1.0
+
