@@ -13,6 +13,285 @@
   <property name="windowTitle">
    <string>Project Planner 1.0 - Programming project editor</string>
   </property>
+  <widget class="QLineEdit" name="programmingHeader">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>421</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Programming project</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>421</width>
+     <height>321</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridProgramming">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="nameLayoutProgramming" stretch="1,3">
+      <item>
+       <widget class="QLabel" name="nameLabelProgramming">
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Project name</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="projectNameProgramming">
+        <property name="text">
+         <string>Project name</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="startLayoutProgramming" stretch="1,3">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="startLabelProgramming">
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Project start</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDateEdit" name="startDateProgramming"/>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0">
+     <layout class="QHBoxLayout" name="finishLayoutProgramming" stretch="1,3">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="finishLabelProgramming">
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Project finish</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDateEdit" name="finishDateProgramming"/>
+      </item>
+     </layout>
+    </item>
+    <item row="3" column="0">
+     <layout class="QHBoxLayout" name="languagesLayout" stretch="1,3">
+      <item>
+       <widget class="QLabel" name="languagesLabel">
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Language(s) </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="languagesEdit">
+        <property name="text">
+         <string>Language(s)</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="4" column="0">
+     <layout class="QHBoxLayout" name="languagesLayout_2" stretch="1,3">
+      <item>
+       <widget class="QLabel" name="languagesLabel_2">
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>GitHub link</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="languagesEdit_2">
+        <property name="text">
+         <string>GitHub link</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="5" column="0">
+     <layout class="QHBoxLayout" name="nameLayoutProgramming_2" stretch="1,3">
+      <item>
+       <widget class="QLabel" name="notesLabelProgramming">
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Notes</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="notesEditProgramming">
+        <property name="text">
+         <string>Notes</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="6" column="0">
+     <layout class="QHBoxLayout" name="progressLayoutProgramming" stretch="1,3">
+      <item>
+       <widget class="QLabel" name="progressLabelProgramming">
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Progress</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="progressSliderProgramming">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="7" column="0">
+     <layout class="QHBoxLayout" name="statusLayoutProgramming" stretch="1,3">
+      <item>
+       <widget class="QLabel" name="statusLabelProgramming">
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Status</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="statusComboProgramming">
+        <property name="maxVisibleItems">
+         <number>4</number>
+        </property>
+        <property name="maxCount">
+         <number>4</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>Select project status</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Pending</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>In progress</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Cancelled</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>470</y>
+     <width>421</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="programmingMenuGrid">
+    <item row="0" column="0">
+     <widget class="QPushButton" name="saveProgrammingButton">
+      <property name="text">
+       <string>Save project</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="clearAllProgrammingButton">
+      <property name="text">
+       <string>Clear all</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="returnToMainProgramming">
+      <property name="text">
+       <string>Return to main</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="exitProgramming">
+      <property name="text">
+       <string>Exit program</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <resources/>
  <connections/>
