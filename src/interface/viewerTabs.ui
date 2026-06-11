@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Viewer</class>
+ <widget class="QWidget" name="Viewer">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>447</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Project Planner 1.0 - Viewer</string>
+  </property>
+  <widget class="QTabWidget" name="viewer">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>431</width>
+     <height>571</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>1</number>
+   </property>
+   <widget class="QWidget" name="currentProjects">
+    <attribute name="title">
+     <string>Current projects</string>
+    </attribute>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>401</width>
+       <height>481</height>
+      </rect>
+     </property>
+     <property name="currentIndex">
+      <number>2</number>
+     </property>
+     <widget class="QWidget" name="everydayProjectsTab">
+      <attribute name="title">
+       <string>Everyday projects</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="programmingProjects">
+      <attribute name="title">
+       <string>Programming projects</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="allProjects">
+      <attribute name="title">
+       <string>All projects</string>
+      </attribute>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="archive">
+    <attribute name="title">
+     <string>Archive</string>
+    </attribute>
+    <widget class="QTabWidget" name="tabWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>401</width>
+       <height>481</height>
+      </rect>
+     </property>
+     <property name="currentIndex">
+      <number>2</number>
+     </property>
+     <widget class="QWidget" name="everydayProjectsTab_2">
+      <attribute name="title">
+       <string>Everyday projects</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="programmingProjects_2">
+      <attribute name="title">
+       <string>Programming projects</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="allProjects_2">
+      <attribute name="title">
+       <string>All projects</string>
+      </attribute>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
