@@ -199,15 +199,15 @@ class Ui_programmingProjectEditor(object):
         self.programmingMenuGrid = QGridLayout(self.widget1)
         self.programmingMenuGrid.setObjectName(u"programmingMenuGrid")
         self.programmingMenuGrid.setContentsMargins(0, 0, 0, 0)
-        self.saveProgrammingButton = QPushButton(self.widget1)
-        self.saveProgrammingButton.setObjectName(u"saveProgrammingButton")
+        self.saveProgramming = QPushButton(self.widget1)
+        self.saveProgramming.setObjectName(u"saveProgramming")
 
-        self.programmingMenuGrid.addWidget(self.saveProgrammingButton, 0, 0, 1, 1)
+        self.programmingMenuGrid.addWidget(self.saveProgramming, 0, 0, 1, 1)
 
-        self.clearAllProgrammingButton = QPushButton(self.widget1)
-        self.clearAllProgrammingButton.setObjectName(u"clearAllProgrammingButton")
+        self.clearProgramming = QPushButton(self.widget1)
+        self.clearProgramming.setObjectName(u"clearProgramming")
 
-        self.programmingMenuGrid.addWidget(self.clearAllProgrammingButton, 0, 1, 1, 1)
+        self.programmingMenuGrid.addWidget(self.clearProgramming, 0, 1, 1, 1)
 
         self.returnToMainProgramming = QPushButton(self.widget1)
         self.returnToMainProgramming.setObjectName(u"returnToMainProgramming")
@@ -245,8 +245,8 @@ class Ui_programmingProjectEditor(object):
         self.statusComboProgramming.setItemText(2, QCoreApplication.translate("programmingProjectEditor", u"In progress", None))
         self.statusComboProgramming.setItemText(3, QCoreApplication.translate("programmingProjectEditor", u"Cancelled", None))
 
-        self.saveProgrammingButton.setText(QCoreApplication.translate("programmingProjectEditor", u"Save project", None))
-        self.clearAllProgrammingButton.setText(QCoreApplication.translate("programmingProjectEditor", u"Clear all", None))
+        self.saveProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Save project", None))
+        self.clearProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Clear all", None))
         self.returnToMainProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Return to main", None))
         self.exitProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Exit program", None))
     # retranslateUi
