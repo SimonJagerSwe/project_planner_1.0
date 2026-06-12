@@ -48,12 +48,15 @@
 
 7. Specific components
     - Backend/frontend
+        - Backend: Python/PySide6
+        - Frontend: PySide6/PyQt
     - Architecture
 
 
 8. Pick stack
     - Python
     - PySide6
+    - PyQt
     - .json
 
 
