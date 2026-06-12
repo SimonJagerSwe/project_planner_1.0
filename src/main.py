@@ -16,6 +16,16 @@
 # Imports
 import sys
 
+from PySide6.QtWidgets import QApplication, QWidget
 
-from PySide6.QtWidgets import QApplication
+def main():
+    app = QApplication(sys.argv)
 
+    window = QWidget()
+    window.show()
+
+    app.exec()
+
+if __name__ == "__main__":
+    main()
+    
