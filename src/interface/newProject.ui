@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>addNewProject</class>
+ <widget class="QWidget" name="addNewProject">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -83,7 +83,7 @@ project</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="addProjectExit">
+       <widget class="QPushButton" name="exitAddProject">
         <property name="text">
          <string>Exit program</string>
         </property>
