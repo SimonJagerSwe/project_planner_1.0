@@ -140,8 +140,46 @@
      <height>19</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>Menu</string>
+    </property>
+    <addaction name="actionAdd_project"/>
+    <addaction name="actionAdd_programming_project"/>
+    <addaction name="separator"/>
+    <addaction name="actionView_projects"/>
+    <addaction name="actionView_archive"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit_program"/>
+   </widget>
+   <addaction name="menuMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAdd_project">
+   <property name="text">
+    <string>Add everyday project</string>
+   </property>
+  </action>
+  <action name="actionAdd_programming_project">
+   <property name="text">
+    <string>Add programming project</string>
+   </property>
+  </action>
+  <action name="actionView_projects">
+   <property name="text">
+    <string>View projects</string>
+   </property>
+  </action>
+  <action name="actionView_archive">
+   <property name="text">
+    <string>View archive</string>
+   </property>
+  </action>
+  <action name="actionExit_program">
+   <property name="text">
+    <string>Exit program</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

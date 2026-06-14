@@ -1,12 +1,13 @@
-from PySide6 import QtCore, QtWidgets
+from PySide6 import QtCore
 from PySide6.QtUiTools import QUiLoader
 
-loader = QUiLoader()
 
-class Loader(QtCore.QObject):
-    def __init__(self):
-        super().__init__()
-        self.ui = loader.load("interface/main.ui", None)
-    
-    def show(self):
-        self.ui.show()
+def load_ui(ui_path, parent=None):
+    loader = QUiLoader()
+    ui_file = QtCore.QFile(ui_path)
+    if not ui_file.open(QtCore.QFile.OpenModeFlag.ReadOnly):
+        raise RuntimeError(f"Can't open {ui_file}")
+    widget = loader.load(ui_file, parent)
+    ui_file.close()
+
+    return widget

@@ -2,18 +2,36 @@
 # Imports
 import sys
 
+from loader import load_ui
 
-from interface.ui_everyday import Ui_everydayProjectEditor
-from interface.ui_main import Ui_mainMenu
-from interface.ui_new_project import Ui_addNewProject
-from interface.ui_programming import Ui_programmingProjectEditor
-from interface.ui_tabs import Ui_Viewer
+from PySide6.QtWidgets import QMessageBox, QPushButton
 
-from PySide6.QtWidgets import QPushButton
+overlay = None
 
 def connect_buttons(window):
+    # Top menu buttons
+
+    # Universal buttons
+    main_exit = window.findChild(QPushButton, "mainExit")
+    main_exit.clicked.connect(exit_clicked)
+
+
+    # Main menu buttons
     add_project = window.findChild(QPushButton, "addProject")
-    add_project.clicked.connect(add_project_clicked)
+    add_project.clicked.connect(lambda: add_project_clicked(window))
+    view_projects = window.findChild(QPushButton, "viewProjects")
+    view_projects.clicked.connect(view_projects_clicked)
+    view_archive = window.findChild(QPushButton, "viewArchive")
+    view_archive.clicked.connect(view_archive_clicked)
+
+    # Add project menu buttons
+    add_everyday = window.findChild(QPushButton, "addEveryday")
+    # add_everyday.clicked.connect(everyday_project_clicked)
+    add_programming = window.findChild(QPushButton, "addProgramming")
+    # add_programming.clicked.connect(programming_project_clicked)
+
+    # View projects/archive buttons
+
 
 # Universal buttons
 def return_to_main_clicked():
@@ -21,31 +39,29 @@ def return_to_main_clicked():
 
 def exit_clicked():
     print("Exiting program...")
-    close = input("Are you sure you want to quit? y/n").upper()
+    close = input("Are you sure you want to quit? y/n: ").upper()
     if close == "Y":
         sys.exit()
     else:
         print("Returning to previous menu")
 
+
 # Main menu buttons
-def add_project_clicked():
+def add_project_clicked(window):
     print("Add project clicked!")
-# Ui_mainMenu.addProject.clicked.connect(add_project_clicked)
+    project_interface = load_ui("interface/newProject.ui", parent=window)
+    project_interface.show()
 
 def view_projects_clicked():
     print("View projects clicked")
-# Ui_mainMenu.viewProjects.clicked.connect(view_projects_clicked)
 
 def view_archive_clicked():
     print("View archive clicked")
-# Ui_mainMenu.viewArchive.clicked.connect(view_archive_clicked)
 
 # Add project menu buttons
 def everyday_project_clicked():
     print("Add everyday project clicked")
-# Ui_addNewProject.addEveryday.clicked.connect(everyday_project_clicked)
 
 def programming_project_clicked():
     print("Add programming project clicked")
-# Ui_addNewProject.addProgramming.clicked.connect(programming_project_clicked)
 
