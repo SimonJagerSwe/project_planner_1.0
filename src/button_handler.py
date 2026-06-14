@@ -3,12 +3,13 @@
 import os
 import sys
 
+import main
+
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_main import Ui_ProjectPlannerMain
 from interface.ui_new_project import Ui_addNewProject
 from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_tabs import Ui_Viewer
-
 
 
 

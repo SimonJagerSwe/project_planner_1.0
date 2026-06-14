@@ -23,40 +23,83 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="currentProjects">
     <attribute name="title">
      <string>Current projects</string>
     </attribute>
-    <widget class="QTabWidget" name="tabWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>401</width>
-       <height>481</height>
-      </rect>
-     </property>
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
-     <widget class="QWidget" name="everydayProjectsTab">
-      <attribute name="title">
-       <string>Everyday projects</string>
-      </attribute>
-     </widget>
-     <widget class="QWidget" name="programmingProjects">
-      <attribute name="title">
-       <string>Programming projects</string>
-      </attribute>
-     </widget>
-     <widget class="QWidget" name="allProjects">
-      <attribute name="title">
-       <string>All projects</string>
-      </attribute>
-     </widget>
-    </widget>
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="0" column="0">
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="everydayProjectsTab">
+        <attribute name="title">
+         <string>Everyday projects</string>
+        </attribute>
+       </widget>
+       <widget class="QWidget" name="programmingProjects">
+        <attribute name="title">
+         <string>Programming projects</string>
+        </attribute>
+       </widget>
+       <widget class="QWidget" name="allProjects">
+        <attribute name="title">
+         <string>All projects</string>
+        </attribute>
+       </widget>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <layout class="QGridLayout" name="projectButtonsLayout">
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="projectManagerLayout">
+         <item>
+          <widget class="QPushButton" name="editProject">
+           <property name="text">
+            <string>Edit project</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="archiveProject">
+           <property name="text">
+            <string>Archive project</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="deleteProject">
+           <property name="text">
+            <string>Delete project</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <layout class="QHBoxLayout" name="projectsNavigatorLayout">
+         <item>
+          <widget class="QPushButton" name="returnToMainProjects">
+           <property name="text">
+            <string>Return to main menu</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="exitProjects">
+           <property name="text">
+            <string>Exit program</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </widget>
    <widget class="QWidget" name="archive">
     <attribute name="title">
@@ -67,8 +110,8 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>401</width>
-       <height>481</height>
+       <width>411</width>
+       <height>461</height>
       </rect>
      </property>
      <property name="currentIndex">
@@ -89,6 +132,54 @@
        <string>All projects</string>
       </attribute>
      </widget>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>480</y>
+       <width>411</width>
+       <height>56</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="archiveButtonsLayout">
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="archiveManagerLayout">
+        <item>
+         <widget class="QPushButton" name="restoreArchivedProject">
+          <property name="text">
+           <string>Restore project</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="deletArchivedProject">
+          <property name="text">
+           <string>Delete from archive</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
+       <layout class="QHBoxLayout" name="archiveNavigatorLayout">
+        <item>
+         <widget class="QPushButton" name="returnToMainArchive">
+          <property name="text">
+           <string>Return to main menu</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="exitArchive">
+          <property name="text">
+           <string>Exit program</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </widget>
    </widget>
   </widget>
