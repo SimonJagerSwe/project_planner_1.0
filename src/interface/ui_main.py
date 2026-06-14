@@ -25,6 +25,9 @@ class Ui_mainMenu(object):
         if not mainMenu.objectName():
             mainMenu.setObjectName(u"mainMenu")
         mainMenu.resize(447, 600)
+        icon = QIcon()
+        icon.addFile(u"../images/icon_16.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        mainMenu.setWindowIcon(icon)
         self.actionAdd_project = QAction(mainMenu)
         self.actionAdd_project.setObjectName(u"actionAdd_project")
         self.actionAdd_programming_project = QAction(mainMenu)

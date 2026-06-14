@@ -23,6 +23,9 @@ class Ui_Viewer(object):
         if not Viewer.objectName():
             Viewer.setObjectName(u"Viewer")
         Viewer.resize(447, 600)
+        icon = QIcon()
+        icon.addFile(u"../images/icon_16.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        Viewer.setWindowIcon(icon)
         self.viewer = QTabWidget(Viewer)
         self.viewer.setObjectName(u"viewer")
         self.viewer.setGeometry(QRect(10, 20, 431, 571))

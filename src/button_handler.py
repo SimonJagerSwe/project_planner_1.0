@@ -18,17 +18,11 @@ def connect_buttons(main_window):
 
     # Main menu buttons
     add_project = main_window.findChild(QPushButton, "addProject")
-    if add_project is None:
-        raise RuntimeError("Could not find reqested ui file")
-    # add_project.clicked.connect(lambda: add_project_clicked(new_project_page))
-    # add_project.clicked.connect(lambda: stack.setCurrentWidget(new_project_page))
     add_project.clicked.connect(lambda: add_project_clicked(main_window))
-    
-    
     view_projects = main_window.findChild(QPushButton, "viewProjects")
-    view_projects.clicked.connect(view_projects_clicked)
+    view_projects.clicked.connect(lambda: view_projects_clicked(main_window))
     view_archive = main_window.findChild(QPushButton, "viewArchive")
-    view_archive.clicked.connect(view_archive_clicked)
+    view_archive.clicked.connect(lambda: view_archive_clicked(main_window))
 
     # Add project menu buttons
     add_everyday = main_window.findChild(QPushButton, "addEveryday")

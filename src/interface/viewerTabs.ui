@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Project Planner 1.0 - Viewer</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../images/icon_16.png</normaloff>../images/icon_16.png</iconset>
+  </property>
   <widget class="QTabWidget" name="viewer">
    <property name="geometry">
     <rect>

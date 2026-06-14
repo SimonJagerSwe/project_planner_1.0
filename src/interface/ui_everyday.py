@@ -24,21 +24,24 @@ class Ui_everydayProjectEditor(object):
         if not everydayProjectEditor.objectName():
             everydayProjectEditor.setObjectName(u"everydayProjectEditor")
         everydayProjectEditor.resize(446, 599)
+        icon = QIcon()
+        icon.addFile(u"../images/icon_16.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        everydayProjectEditor.setWindowIcon(icon)
         self.layoutWidget = QWidget(everydayProjectEditor)
         self.layoutWidget.setObjectName(u"layoutWidget")
         self.layoutWidget.setGeometry(QRect(10, 470, 421, 111))
         self.everydayMenuGrid = QGridLayout(self.layoutWidget)
         self.everydayMenuGrid.setObjectName(u"everydayMenuGrid")
         self.everydayMenuGrid.setContentsMargins(0, 0, 0, 0)
-        self.saveButtonEveryday = QPushButton(self.layoutWidget)
-        self.saveButtonEveryday.setObjectName(u"saveButtonEveryday")
+        self.saveEveryday = QPushButton(self.layoutWidget)
+        self.saveEveryday.setObjectName(u"saveEveryday")
 
-        self.everydayMenuGrid.addWidget(self.saveButtonEveryday, 0, 0, 1, 1)
+        self.everydayMenuGrid.addWidget(self.saveEveryday, 0, 0, 1, 1)
 
-        self.clearAllButtonEveryday = QPushButton(self.layoutWidget)
-        self.clearAllButtonEveryday.setObjectName(u"clearAllButtonEveryday")
+        self.clearEveryday = QPushButton(self.layoutWidget)
+        self.clearEveryday.setObjectName(u"clearEveryday")
 
-        self.everydayMenuGrid.addWidget(self.clearAllButtonEveryday, 0, 1, 1, 1)
+        self.everydayMenuGrid.addWidget(self.clearEveryday, 0, 1, 1, 1)
 
         self.returnToMainEveryday = QPushButton(self.layoutWidget)
         self.returnToMainEveryday.setObjectName(u"returnToMainEveryday")
@@ -191,8 +194,8 @@ class Ui_everydayProjectEditor(object):
 
     def retranslateUi(self, everydayProjectEditor):
         everydayProjectEditor.setWindowTitle(QCoreApplication.translate("everydayProjectEditor", u"Project Planner 1.0 - Everyday project editor", None))
-        self.saveButtonEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Save project", None))
-        self.clearAllButtonEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Clear all", None))
+        self.saveEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Save project", None))
+        self.clearEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Clear all", None))
         self.returnToMainEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Return to main", None))
         self.exitEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Exit program", None))
         self.nameLabelEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Project name", None))

@@ -23,6 +23,9 @@ class Ui_addNewProject(object):
         if not addNewProject.objectName():
             addNewProject.setObjectName(u"addNewProject")
         addNewProject.resize(375, 290)
+        icon = QIcon()
+        icon.addFile(u"../images/icon_16.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        addNewProject.setWindowIcon(icon)
         self.widget = QWidget(addNewProject)
         self.widget.setObjectName(u"widget")
         self.widget.setGeometry(QRect(10, 20, 351, 251))
