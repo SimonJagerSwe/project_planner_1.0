@@ -2,7 +2,7 @@
 # Imports
 import sys
 from loader import load_ui
-
+from interface.ui_new_project import Ui_addNewProject
 from PySide6.QtWidgets import QDialog, QPushButton, QVBoxLayout
 
 overlay = None
@@ -13,7 +13,7 @@ def connect_buttons(main_window):
 
     # Universal buttons
     main_exit = main_window.findChild(QPushButton, "mainExit")
-    # main_exit.clicked.connect(exit_clicked)
+    main_exit.clicked.connect(exit_clicked)
 
 
     # Main menu buttons
@@ -55,15 +55,10 @@ def exit_clicked():
 # Main menu buttons
 def add_project_clicked(parent_window):
     print("Add project clicked!")
-    # project_interface = load_ui("interface/newProject.ui", parent=window)
-    # project_interface.show()
     dialog = QDialog(parent_window)
-    dialog.setModal(True)
-    dialog.setWindowTitle("Project Planner 1.0 - Add new project")
-    dialog.setLayout(QVBoxLayout())
+    ui = Ui_addNewProject()
+    ui.setupUi(dialog)
 
-    project_selector = load_ui("interface/newProject.ui", parent=dialog)
-    dialog.layout().addWidget(project_selector)
     dialog.exec()
 
 
