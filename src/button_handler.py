@@ -2,16 +2,14 @@
 # Imports
 import sys
 
-from loader import load_ui
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
 from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_recurring import Ui_recurringProjectEditor
 from interface.ui_tabs import Ui_Viewer
 
-from PySide6.QtCore import Qt
 from PySide6.QtGui import QAction
-from PySide6.QtWidgets import QDialog, QMessageBox, QPushButton, QTabWidget
+from PySide6.QtWidgets import QDialog, QMessageBox, QPushButton
 
 
 ##### Universal buttons #####
