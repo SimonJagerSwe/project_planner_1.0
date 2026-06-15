@@ -52,9 +52,7 @@ def add_project_clicked(parent_window):
     dialog = QDialog(parent_window)
     ui = Ui_addNewProject()
     ui.setupUi(dialog)
-
     dialog.exec()
-
 
 
 def view_projects_clicked():
