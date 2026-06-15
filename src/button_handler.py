@@ -7,7 +7,7 @@ from interface.ui_new_project import Ui_addNewProject
 from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_tabs import Ui_Viewer
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QDialog, QPushButton, QTabWidget
+from PySide6.QtWidgets import QDialog, QMessageBox, QPushButton, QTabWidget
 
 overlay = None
 
@@ -17,7 +17,7 @@ def connect_buttons(main_window):
 
     # Universal buttons
     main_exit = main_window.findChild(QPushButton, "mainExit")
-    main_exit.clicked.connect(exit_clicked)
+    main_exit.clicked.connect(lambda: exit_clicked(main_window))
 
 
     # Main menu buttons
@@ -36,10 +36,16 @@ def connect_buttons(main_window):
 def return_to_main_clicked():
     print("Return to main menu clicked")
 
-def exit_clicked():
+def exit_clicked(parent=None):
     print("Exiting program...")
-    close = input("Are you sure you want to quit? y/n: ").upper()
-    if close == "Y":
+    close = QMessageBox.question(
+        parent, 
+        "Confirm exit", 
+        "Are you sure you want to quit?",
+        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        QMessageBox.StandardButton.No
+        )
+    if close == QMessageBox.StandardButton.Yes:
         sys.exit()
     else:
         print("Returning to previous menu")
