@@ -25,7 +25,7 @@ from PySide6.QtWidgets import QApplication
 def main():
     app = QApplication(sys.argv)
     main_window = load_ui("interface/main.ui")
-    button_handler.connect_buttons(main_window)
+    button_handler.main_menu_buttons(main_window)
     main_window.show()
     sys.exit(app.exec())
 

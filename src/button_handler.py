@@ -11,16 +11,10 @@ from PySide6.QtWidgets import QDialog, QMessageBox, QPushButton, QTabWidget
 
 overlay = None
 
-# def connect_buttons(main_page, stack, new_project_page):
-def connect_buttons(main_window):
-    # Top menu buttons
-
-    # Universal buttons
+# Main menu buttons
+def main_menu_buttons(main_window):
     main_exit = main_window.findChild(QPushButton, "mainExit")
     main_exit.clicked.connect(lambda: exit_clicked(main_window))
-
-
-    # Main menu buttons
     add_project = main_window.findChild(QPushButton, "addProject")
     add_project.clicked.connect(lambda: add_project_clicked(main_window))
     view_projects = main_window.findChild(QPushButton, "viewProjects")
@@ -28,14 +22,11 @@ def connect_buttons(main_window):
     view_archive = main_window.findChild(QPushButton, "viewArchive")
     view_archive.clicked.connect(lambda: view_archive_clicked(main_window))
 
-
-    # View projects/archive buttons
-
-
-# Universal buttons
+# Return to main menu
 def return_to_main_clicked():
     print("Return to main menu clicked")
 
+# Exit program
 def exit_clicked(parent=None):
     print("Exiting program...")
     close = QMessageBox.question(
@@ -50,8 +41,7 @@ def exit_clicked(parent=None):
     else:
         print("Returning to previous menu")
 
-
-# Main menu buttons
+# Add project menu
 def add_project_clicked(main_window):
     print("Add project clicked!")
     add_project = QDialog(main_window)
@@ -63,6 +53,30 @@ def add_project_clicked(main_window):
     ui.exitAddProject.clicked.connect(exit_clicked)    
     add_project.exec()
 
+# Add everyday project
+def everyday_project_clicked(current_dialog, main_window):
+    print("Add everyday project clicked")
+    current_dialog.close()
+    main_window.close()
+    everyday_dialog = QDialog(None)
+    ui = Ui_everydayProjectEditor()
+    ui.setupUi(everyday_dialog)
+    everyday_dialog.exec()
+    main_window.show()
+
+# Add programming project
+def programming_project_clicked(current_dialog, main_window):
+    print("Add programming project clicked")
+    current_dialog.close()
+    main_window.close()
+    dialog = QDialog(main_window)
+    ui = Ui_programmingProjectEditor()
+    ui.setupUi(dialog)
+    dialog.exec()
+    main_window.show()
+
+
+# View projects
 def view_projects_clicked(main_window):
     print("View projects clicked")
     main_window.close()
@@ -74,7 +88,7 @@ def view_projects_clicked(main_window):
     view_projects.exec()
     main_window.show()
 
-
+# View archive
 def view_archive_clicked(main_window):
     print("View archive clicked")
     main_window.close()
@@ -83,26 +97,5 @@ def view_archive_clicked(main_window):
     ui.setupUi(view_archive)
     ui.viewer.setCurrentIndex(1)
     view_archive.exec()
-    main_window.show()
-
-# Add project menu buttons
-def everyday_project_clicked(current_dialog, main_window):
-    print("Add everyday project clicked")
-    current_dialog.close()
-    main_window.close()
-    everyday_dialog = QDialog(None)
-    ui = Ui_everydayProjectEditor()
-    ui.setupUi(everyday_dialog)
-    everyday_dialog.exec()
-    main_window.show()
-
-def programming_project_clicked(current_dialog, main_window):
-    print("Add programming project clicked")
-    current_dialog.close()
-    main_window.close()
-    dialog = QDialog(main_window)
-    ui = Ui_programmingProjectEditor()
-    ui.setupUi(dialog)
-    dialog.exec()
     main_window.show()
 
