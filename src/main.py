@@ -1,3 +1,4 @@
+################### Main file ####################
 ##################################################
 ##################################################
 ################                  ################
@@ -15,18 +16,20 @@
 
 # Imports
 import sys
+import button_handler
+from loader import load_ui
+from PySide6.QtWidgets import QApplication
 
-from PySide6 import QtWidgets
-from PySide6.QtUiTools import QUiLoader
 
+# Main function
 def main():
-    loader = QUiLoader()
-    app = QtWidgets.QApplication(sys.argv)
+    app = QApplication(sys.argv)
+    main_window = load_ui("interface/main.ui")
+    button_handler.main_menu_buttons(main_window)
+    main_window.show()
+    sys.exit(app.exec())
 
-    window = loader.load("interface/main.ui")
-    window.show()
 
-    app.exec()
-
+# Checker to call main
 if __name__ == "__main__":
     main()

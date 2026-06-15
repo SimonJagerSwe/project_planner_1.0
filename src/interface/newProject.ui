@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>addNewProject</class>
+ <widget class="QWidget" name="addNewProject">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>375</width>
+    <height>290</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Project Planner 1.0 - Add new project</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../images/icon_16.png</normaloff>../images/icon_16.png</iconset>
+  </property>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>351</width>
+     <height>251</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="addProjectMenuLayout">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="addProjectLayout">
+      <item>
+       <widget class="QPushButton" name="addEveryday">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>131</width>
+          <height>131</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>131</width>
+          <height>131</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Add everyday
+project</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="addProgramming">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>131</width>
+          <height>131</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>131</width>
+          <height>131</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Add programming
+project</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <layout class="QVBoxLayout" name="returnExitLayout">
+      <item>
+       <widget class="QPushButton" name="returnToMainAddProject">
+        <property name="text">
+         <string>Return to main menu</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="exitAddProject">
+        <property name="text">
+         <string>Exit program</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

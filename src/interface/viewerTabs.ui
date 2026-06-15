@@ -6,92 +6,214 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>447</width>
+    <width>592</width>
     <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Project Planner 1.0 - Viewer</string>
   </property>
-  <widget class="QTabWidget" name="viewer">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>20</y>
-     <width>431</width>
-     <height>571</height>
-    </rect>
-   </property>
-   <property name="currentIndex">
-    <number>0</number>
-   </property>
-   <widget class="QWidget" name="currentProjects">
-    <attribute name="title">
-     <string>Current projects</string>
-    </attribute>
-    <widget class="QTabWidget" name="tabWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>401</width>
-       <height>481</height>
-      </rect>
-     </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../images/icon_16.png</normaloff>../images/icon_16.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QTabWidget" name="viewer">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
-     <widget class="QWidget" name="everydayProjectsTab">
+     <widget class="QWidget" name="currentProjects">
       <attribute name="title">
-       <string>Everyday projects</string>
+       <string>Current projects</string>
       </attribute>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>9</x>
+         <y>9</y>
+         <width>551</width>
+         <height>531</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="projectTabLayout">
+        <item row="0" column="0">
+         <widget class="QTabWidget" name="projectTabs">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="tabShape">
+           <enum>QTabWidget::TabShape::Rounded</enum>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="everydayProjectsTab">
+           <attribute name="title">
+            <string>Everyday projects</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="programmingProjects">
+           <attribute name="title">
+            <string>Programming projects</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="allProjects">
+           <attribute name="title">
+            <string>All projects</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="tab">
+           <attribute name="title">
+            <string>Recurring projects</string>
+           </attribute>
+          </widget>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <layout class="QGridLayout" name="projectMenuLayout">
+          <item row="0" column="0">
+           <layout class="QHBoxLayout" name="projectManagerLayout">
+            <item>
+             <widget class="QPushButton" name="editProject">
+              <property name="text">
+               <string>Edit project</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="archiveProject">
+              <property name="text">
+               <string>Archive project</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="deleteProject">
+              <property name="text">
+               <string>Delete project</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="projectsNavigatorLayout">
+            <item>
+             <widget class="QPushButton" name="returnToMainProjects">
+              <property name="text">
+               <string>Return to main menu</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="exitProjects">
+              <property name="text">
+               <string>Exit program</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </widget>
-     <widget class="QWidget" name="programmingProjects">
+     <widget class="QWidget" name="archive">
       <attribute name="title">
-       <string>Programming projects</string>
+       <string>Archive</string>
       </attribute>
-     </widget>
-     <widget class="QWidget" name="allProjects">
-      <attribute name="title">
-       <string>All projects</string>
-      </attribute>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>9</x>
+         <y>9</y>
+         <width>551</width>
+         <height>531</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="archiveTabLayout">
+        <item row="0" column="0">
+         <widget class="QTabWidget" name="archivedTabs">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <property name="elideMode">
+           <enum>Qt::TextElideMode::ElideNone</enum>
+          </property>
+          <property name="tabsClosable">
+           <bool>false</bool>
+          </property>
+          <widget class="QWidget" name="everydayArchive">
+           <attribute name="title">
+            <string>Everyday projects</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="programmingArchive">
+           <attribute name="title">
+            <string>Programming projects</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="fullArchive">
+           <attribute name="title">
+            <string>All projects</string>
+           </attribute>
+          </widget>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <layout class="QGridLayout" name="archiveMenuLayout">
+          <item row="0" column="0">
+           <layout class="QHBoxLayout" name="archiveManagerLayout">
+            <item>
+             <widget class="QPushButton" name="restoreArchived">
+              <property name="text">
+               <string>Restore</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="deleteArchived">
+              <property name="text">
+               <string>Delete project</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="archiveNavigatorLayout">
+            <item>
+             <widget class="QPushButton" name="returnToMainArchive">
+              <property name="text">
+               <string>Return to main menu</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="exitArchive">
+              <property name="text">
+               <string>Exit program</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </widget>
-   </widget>
-   <widget class="QWidget" name="archive">
-    <attribute name="title">
-     <string>Archive</string>
-    </attribute>
-    <widget class="QTabWidget" name="tabWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>401</width>
-       <height>481</height>
-      </rect>
-     </property>
-     <property name="currentIndex">
-      <number>2</number>
-     </property>
-     <widget class="QWidget" name="everydayProjectsTab_2">
-      <attribute name="title">
-       <string>Everyday projects</string>
-      </attribute>
-     </widget>
-     <widget class="QWidget" name="programmingProjects_2">
-      <attribute name="title">
-       <string>Programming projects</string>
-      </attribute>
-     </widget>
-     <widget class="QWidget" name="allProjects_2">
-      <attribute name="title">
-       <string>All projects</string>
-      </attribute>
-     </widget>
-    </widget>
-   </widget>
-  </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

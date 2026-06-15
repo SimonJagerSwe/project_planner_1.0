@@ -24,20 +24,49 @@ class Ui_programmingProjectEditor(object):
         if not programmingProjectEditor.objectName():
             programmingProjectEditor.setObjectName(u"programmingProjectEditor")
         programmingProjectEditor.resize(447, 600)
-        self.programmingHeader = QLineEdit(programmingProjectEditor)
-        self.programmingHeader.setObjectName(u"programmingHeader")
-        self.programmingHeader.setGeometry(QRect(10, 20, 421, 91))
+        icon = QIcon()
+        icon.addFile(u"../images/icon_16.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        programmingProjectEditor.setWindowIcon(icon)
+        self.layoutWidget = QWidget(programmingProjectEditor)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(10, 470, 421, 111))
+        self.programmingMenuGrid = QGridLayout(self.layoutWidget)
+        self.programmingMenuGrid.setObjectName(u"programmingMenuGrid")
+        self.programmingMenuGrid.setContentsMargins(0, 0, 0, 0)
+        self.saveProgramming = QPushButton(self.layoutWidget)
+        self.saveProgramming.setObjectName(u"saveProgramming")
+
+        self.programmingMenuGrid.addWidget(self.saveProgramming, 0, 0, 1, 1)
+
+        self.clearProgramming = QPushButton(self.layoutWidget)
+        self.clearProgramming.setObjectName(u"clearProgramming")
+
+        self.programmingMenuGrid.addWidget(self.clearProgramming, 0, 1, 1, 1)
+
+        self.returnToMainProgramming = QPushButton(self.layoutWidget)
+        self.returnToMainProgramming.setObjectName(u"returnToMainProgramming")
+
+        self.programmingMenuGrid.addWidget(self.returnToMainProgramming, 1, 0, 1, 1)
+
+        self.exitProgramming = QPushButton(self.layoutWidget)
+        self.exitProgramming.setObjectName(u"exitProgramming")
+
+        self.programmingMenuGrid.addWidget(self.exitProgramming, 1, 1, 1, 1)
+
+        self.programmingLabel = QLabel(programmingProjectEditor)
+        self.programmingLabel.setObjectName(u"programmingLabel")
+        self.programmingLabel.setGeometry(QRect(20, 20, 411, 71))
         font = QFont()
         font.setPointSize(18)
         font.setBold(True)
-        self.programmingHeader.setFont(font)
-        self.programmingHeader.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.programmingLabel.setFont(font)
+        self.programmingLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.widget = QWidget(programmingProjectEditor)
         self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(10, 130, 421, 321))
-        self.gridProgramming = QGridLayout(self.widget)
-        self.gridProgramming.setObjectName(u"gridProgramming")
-        self.gridProgramming.setContentsMargins(0, 0, 0, 0)
+        self.widget.setGeometry(QRect(11, 131, 421, 321))
+        self.gridLayout = QGridLayout(self.widget)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.nameLayoutProgramming = QHBoxLayout()
         self.nameLayoutProgramming.setObjectName(u"nameLayoutProgramming")
         self.nameLabelProgramming = QLabel(self.widget)
@@ -56,7 +85,7 @@ class Ui_programmingProjectEditor(object):
         self.nameLayoutProgramming.setStretch(0, 1)
         self.nameLayoutProgramming.setStretch(1, 3)
 
-        self.gridProgramming.addLayout(self.nameLayoutProgramming, 0, 0, 1, 1)
+        self.gridLayout.addLayout(self.nameLayoutProgramming, 0, 0, 1, 1)
 
         self.startLayoutProgramming = QHBoxLayout()
         self.startLayoutProgramming.setSpacing(6)
@@ -69,13 +98,14 @@ class Ui_programmingProjectEditor(object):
 
         self.startDateProgramming = QDateEdit(self.widget)
         self.startDateProgramming.setObjectName(u"startDateProgramming")
+        self.startDateProgramming.setDate(QDate(2000, 1, 1))
 
         self.startLayoutProgramming.addWidget(self.startDateProgramming)
 
         self.startLayoutProgramming.setStretch(0, 1)
         self.startLayoutProgramming.setStretch(1, 3)
 
-        self.gridProgramming.addLayout(self.startLayoutProgramming, 1, 0, 1, 1)
+        self.gridLayout.addLayout(self.startLayoutProgramming, 1, 0, 1, 1)
 
         self.finishLayoutProgramming = QHBoxLayout()
         self.finishLayoutProgramming.setSpacing(6)
@@ -94,7 +124,7 @@ class Ui_programmingProjectEditor(object):
         self.finishLayoutProgramming.setStretch(0, 1)
         self.finishLayoutProgramming.setStretch(1, 3)
 
-        self.gridProgramming.addLayout(self.finishLayoutProgramming, 2, 0, 1, 1)
+        self.gridLayout.addLayout(self.finishLayoutProgramming, 2, 0, 1, 1)
 
         self.languagesLayout = QHBoxLayout()
         self.languagesLayout.setObjectName(u"languagesLayout")
@@ -112,25 +142,25 @@ class Ui_programmingProjectEditor(object):
         self.languagesLayout.setStretch(0, 1)
         self.languagesLayout.setStretch(1, 3)
 
-        self.gridProgramming.addLayout(self.languagesLayout, 3, 0, 1, 1)
+        self.gridLayout.addLayout(self.languagesLayout, 3, 0, 1, 1)
 
-        self.languagesLayout_2 = QHBoxLayout()
-        self.languagesLayout_2.setObjectName(u"languagesLayout_2")
-        self.languagesLabel_2 = QLabel(self.widget)
-        self.languagesLabel_2.setObjectName(u"languagesLabel_2")
-        self.languagesLabel_2.setFont(font1)
+        self.githuhLayout = QHBoxLayout()
+        self.githuhLayout.setObjectName(u"githuhLayout")
+        self.githubLabel = QLabel(self.widget)
+        self.githubLabel.setObjectName(u"githubLabel")
+        self.githubLabel.setFont(font1)
 
-        self.languagesLayout_2.addWidget(self.languagesLabel_2)
+        self.githuhLayout.addWidget(self.githubLabel)
 
-        self.languagesEdit_2 = QLineEdit(self.widget)
-        self.languagesEdit_2.setObjectName(u"languagesEdit_2")
+        self.githubEdit = QLineEdit(self.widget)
+        self.githubEdit.setObjectName(u"githubEdit")
 
-        self.languagesLayout_2.addWidget(self.languagesEdit_2)
+        self.githuhLayout.addWidget(self.githubEdit)
 
-        self.languagesLayout_2.setStretch(0, 1)
-        self.languagesLayout_2.setStretch(1, 3)
+        self.githuhLayout.setStretch(0, 1)
+        self.githuhLayout.setStretch(1, 3)
 
-        self.gridProgramming.addLayout(self.languagesLayout_2, 4, 0, 1, 1)
+        self.gridLayout.addLayout(self.githuhLayout, 4, 0, 1, 1)
 
         self.nameLayoutProgramming_2 = QHBoxLayout()
         self.nameLayoutProgramming_2.setObjectName(u"nameLayoutProgramming_2")
@@ -148,26 +178,29 @@ class Ui_programmingProjectEditor(object):
         self.nameLayoutProgramming_2.setStretch(0, 1)
         self.nameLayoutProgramming_2.setStretch(1, 3)
 
-        self.gridProgramming.addLayout(self.nameLayoutProgramming_2, 5, 0, 1, 1)
+        self.gridLayout.addLayout(self.nameLayoutProgramming_2, 5, 0, 1, 1)
 
-        self.progressLayoutProgramming = QHBoxLayout()
-        self.progressLayoutProgramming.setObjectName(u"progressLayoutProgramming")
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.progressLabelProgramming = QLabel(self.widget)
         self.progressLabelProgramming.setObjectName(u"progressLabelProgramming")
         self.progressLabelProgramming.setFont(font1)
 
-        self.progressLayoutProgramming.addWidget(self.progressLabelProgramming)
+        self.horizontalLayout.addWidget(self.progressLabelProgramming)
 
         self.progressSliderProgramming = QSlider(self.widget)
         self.progressSliderProgramming.setObjectName(u"progressSliderProgramming")
         self.progressSliderProgramming.setOrientation(Qt.Orientation.Horizontal)
 
-        self.progressLayoutProgramming.addWidget(self.progressSliderProgramming)
+        self.horizontalLayout.addWidget(self.progressSliderProgramming)
 
-        self.progressLayoutProgramming.setStretch(0, 1)
-        self.progressLayoutProgramming.setStretch(1, 3)
+        self.progressPercentageProgramming = QLabel(self.widget)
+        self.progressPercentageProgramming.setObjectName(u"progressPercentageProgramming")
 
-        self.gridProgramming.addLayout(self.progressLayoutProgramming, 6, 0, 1, 1)
+        self.horizontalLayout.addWidget(self.progressPercentageProgramming)
+
+
+        self.gridLayout.addLayout(self.horizontalLayout, 6, 0, 1, 1)
 
         self.statusLayoutProgramming = QHBoxLayout()
         self.statusLayoutProgramming.setObjectName(u"statusLayoutProgramming")
@@ -191,33 +224,7 @@ class Ui_programmingProjectEditor(object):
         self.statusLayoutProgramming.setStretch(0, 1)
         self.statusLayoutProgramming.setStretch(1, 3)
 
-        self.gridProgramming.addLayout(self.statusLayoutProgramming, 7, 0, 1, 1)
-
-        self.widget1 = QWidget(programmingProjectEditor)
-        self.widget1.setObjectName(u"widget1")
-        self.widget1.setGeometry(QRect(10, 470, 421, 111))
-        self.programmingMenuGrid = QGridLayout(self.widget1)
-        self.programmingMenuGrid.setObjectName(u"programmingMenuGrid")
-        self.programmingMenuGrid.setContentsMargins(0, 0, 0, 0)
-        self.saveProgrammingButton = QPushButton(self.widget1)
-        self.saveProgrammingButton.setObjectName(u"saveProgrammingButton")
-
-        self.programmingMenuGrid.addWidget(self.saveProgrammingButton, 0, 0, 1, 1)
-
-        self.clearAllProgrammingButton = QPushButton(self.widget1)
-        self.clearAllProgrammingButton.setObjectName(u"clearAllProgrammingButton")
-
-        self.programmingMenuGrid.addWidget(self.clearAllProgrammingButton, 0, 1, 1, 1)
-
-        self.returnToMainProgramming = QPushButton(self.widget1)
-        self.returnToMainProgramming.setObjectName(u"returnToMainProgramming")
-
-        self.programmingMenuGrid.addWidget(self.returnToMainProgramming, 1, 0, 1, 1)
-
-        self.exitProgramming = QPushButton(self.widget1)
-        self.exitProgramming.setObjectName(u"exitProgramming")
-
-        self.programmingMenuGrid.addWidget(self.exitProgramming, 1, 1, 1, 1)
+        self.gridLayout.addLayout(self.statusLayoutProgramming, 7, 0, 1, 1)
 
 
         self.retranslateUi(programmingProjectEditor)
@@ -227,27 +234,28 @@ class Ui_programmingProjectEditor(object):
 
     def retranslateUi(self, programmingProjectEditor):
         programmingProjectEditor.setWindowTitle(QCoreApplication.translate("programmingProjectEditor", u"Project Planner 1.0 - Programming project editor", None))
-        self.programmingHeader.setText(QCoreApplication.translate("programmingProjectEditor", u"Programming project", None))
+        self.saveProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Save project", None))
+        self.clearProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Clear all", None))
+        self.returnToMainProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Return to main", None))
+        self.exitProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Exit program", None))
+        self.programmingLabel.setText(QCoreApplication.translate("programmingProjectEditor", u"Programming project", None))
         self.nameLabelProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Project name", None))
         self.projectNameProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Project name", None))
         self.startLabelProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Project start", None))
         self.finishLabelProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Project finish", None))
         self.languagesLabel.setText(QCoreApplication.translate("programmingProjectEditor", u"Language(s) ", None))
         self.languagesEdit.setText(QCoreApplication.translate("programmingProjectEditor", u"Language(s)", None))
-        self.languagesLabel_2.setText(QCoreApplication.translate("programmingProjectEditor", u"GitHub link", None))
-        self.languagesEdit_2.setText(QCoreApplication.translate("programmingProjectEditor", u"GitHub link", None))
+        self.githubLabel.setText(QCoreApplication.translate("programmingProjectEditor", u"GitHub link", None))
+        self.githubEdit.setText(QCoreApplication.translate("programmingProjectEditor", u"GitHub link", None))
         self.notesLabelProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Notes", None))
         self.notesEditProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Notes", None))
         self.progressLabelProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Progress", None))
+        self.progressPercentageProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"0%", None))
         self.statusLabelProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Status", None))
         self.statusComboProgramming.setItemText(0, QCoreApplication.translate("programmingProjectEditor", u"Select project status", None))
         self.statusComboProgramming.setItemText(1, QCoreApplication.translate("programmingProjectEditor", u"Pending", None))
         self.statusComboProgramming.setItemText(2, QCoreApplication.translate("programmingProjectEditor", u"In progress", None))
         self.statusComboProgramming.setItemText(3, QCoreApplication.translate("programmingProjectEditor", u"Cancelled", None))
 
-        self.saveProgrammingButton.setText(QCoreApplication.translate("programmingProjectEditor", u"Save project", None))
-        self.clearAllProgrammingButton.setText(QCoreApplication.translate("programmingProjectEditor", u"Clear all", None))
-        self.returnToMainProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Return to main", None))
-        self.exitProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Exit program", None))
     # retranslateUi
 

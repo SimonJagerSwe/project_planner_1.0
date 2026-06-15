@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ProjectPlannerMain</class>
- <widget class="QMainWindow" name="ProjectPlannerMain">
+ <class>mainMenu</class>
+ <widget class="QMainWindow" name="mainMenu">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,12 +13,16 @@
   <property name="windowTitle">
    <string>Project Planner 1.0 - Main menu</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../images/icon_16.png</normaloff>../images/icon_16.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="mainHeader">
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>50</y>
+      <y>40</y>
       <width>271</width>
       <height>81</height>
      </rect>
@@ -39,18 +43,18 @@
      <string>Project Planner 1.0</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>250</y>
+      <y>240</y>
       <width>423</width>
       <height>282</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="mainMenuLayout">
      <item row="1" column="0">
-      <widget class="QPushButton" name="viewArchivePushButton">
+      <widget class="QPushButton" name="viewArchive">
        <property name="minimumSize">
         <size>
          <width>131</width>
@@ -69,7 +73,7 @@
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QPushButton" name="addProjectPushButton">
+      <widget class="QPushButton" name="addProject">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -91,7 +95,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QPushButton" name="mainExitPushButton">
+      <widget class="QPushButton" name="mainExit">
        <property name="minimumSize">
         <size>
          <width>131</width>
@@ -110,7 +114,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QPushButton" name="viewProjectsPushButton">
+      <widget class="QPushButton" name="viewProjects">
        <property name="minimumSize">
         <size>
          <width>131</width>
@@ -140,8 +144,46 @@
      <height>19</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>Menu</string>
+    </property>
+    <addaction name="actionAddEveryday"/>
+    <addaction name="actionAddProgramming"/>
+    <addaction name="separator"/>
+    <addaction name="actionProjects"/>
+    <addaction name="actionArchive"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAddEveryday">
+   <property name="text">
+    <string>Add everyday project</string>
+   </property>
+  </action>
+  <action name="actionAddProgramming">
+   <property name="text">
+    <string>Add programming project</string>
+   </property>
+  </action>
+  <action name="actionProjects">
+   <property name="text">
+    <string>View projects</string>
+   </property>
+  </action>
+  <action name="actionArchive">
+   <property name="text">
+    <string>View archive</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit program</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

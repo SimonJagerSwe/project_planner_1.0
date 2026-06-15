@@ -44,16 +44,20 @@
     - Deploy online?
     - App?
     - User specified project types?
+    - Recurring tasks
 
 
 7. Specific components
     - Backend/frontend
+        - Backend: Python/PySide6
+        - Frontend: PySide6/PyQt
     - Architecture
 
 
 8. Pick stack
     - Python
     - PySide6
+    - PyQt
     - .json
 
 
@@ -65,3 +69,7 @@
     - Version control:
         - https://github.com/SimonJagerSwe/project_planner_1.0
 
+
+
+Misc.
+    - Fix slight discrepancy for alignment of windows for current projects/archive
