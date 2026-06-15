@@ -14,8 +14,13 @@ overlay = None
 
 ##### Universal buttons #####
 # Return to main menu
-def return_to_main_clicked():
+def return_to_main_clicked(current_dialog, main_window):
     print("Return to main menu clicked")
+    if current_dialog is not None:
+        current_dialog.close()
+    main_window.show()
+    main_window.setEnabled(True)
+
 
 # Exit program
 def exit_clicked(parent=None):
@@ -59,7 +64,6 @@ def main_menu_buttons(main_window):
     exit_action.triggered.connect(lambda: (exit_clicked(main_window)))
 
 
-
 # Add project menu
 def add_project_clicked(main_window):
     print("Add project clicked!")
@@ -68,9 +72,10 @@ def add_project_clicked(main_window):
     ui.setupUi(add_project)
     ui.addEveryday.clicked.connect(lambda: everyday_project_clicked(add_project, main_window))
     ui.addProgramming.clicked.connect(lambda: programming_project_clicked(add_project, main_window))
-    ui.returnToMainAddProject.clicked.connect(add_project.accept)
-    ui.exitAddProject.clicked.connect(exit_clicked)    
+    ui.returnToMainAddProject.clicked.connect(lambda: (return_to_main_clicked(add_project, main_window)))
+    ui.exitAddProject.clicked.connect(lambda: exit_clicked(add_project))
     add_project.exec()
+
 
 # Add everyday project
 def everyday_project_clicked(current_dialog, main_window):
@@ -81,8 +86,19 @@ def everyday_project_clicked(current_dialog, main_window):
     everyday_dialog = QDialog(None)
     ui = Ui_everydayProjectEditor()
     ui.setupUi(everyday_dialog)
+    ui.saveEveryday.clicked.connect(save_everyday_clicked)
+    ui.clearEveryday.clicked.connect(clear_everyday_clicked)
+    ui.returnToMainEveryday.clicked.connect(lambda: return_to_main_clicked(everyday_dialog, main_window))
+    ui.exitEveryday.clicked.connect(lambda: exit_clicked(everyday_dialog))
     everyday_dialog.exec()
     main_window.show()
+
+def save_everyday_clicked():
+    print("Saving everyday project...")
+
+def clear_everyday_clicked():
+    print("Clearing all everyday project parameters...")
+
 
 # Add programming project
 def programming_project_clicked(current_dialog, main_window):
@@ -108,6 +124,7 @@ def view_projects_clicked(main_window):
     ui.projectTabs.setCurrentIndex(0)
     view_projects.exec()
     main_window.show()
+
 
 # View archive
 def view_archive_clicked(main_window):
