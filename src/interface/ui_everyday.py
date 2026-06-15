@@ -178,14 +178,14 @@ class Ui_everydayProjectEditor(object):
 
         self.gridEveryday.addLayout(self.finishLayoutEveryday, 2, 0, 1, 1)
 
-        self.everydayHeader = QLineEdit(everydayProjectEditor)
-        self.everydayHeader.setObjectName(u"everydayHeader")
-        self.everydayHeader.setGeometry(QRect(10, 20, 421, 91))
+        self.programmingLabel = QLabel(everydayProjectEditor)
+        self.programmingLabel.setObjectName(u"programmingLabel")
+        self.programmingLabel.setGeometry(QRect(20, 20, 411, 71))
         font1 = QFont()
         font1.setPointSize(18)
         font1.setBold(True)
-        self.everydayHeader.setFont(font1)
-        self.everydayHeader.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.programmingLabel.setFont(font1)
+        self.programmingLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.retranslateUi(everydayProjectEditor)
 
@@ -211,6 +211,6 @@ class Ui_everydayProjectEditor(object):
         self.statusComboEveryday.setItemText(3, QCoreApplication.translate("everydayProjectEditor", u"Cancelled", None))
 
         self.finishLabelEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Project finish", None))
-        self.everydayHeader.setText(QCoreApplication.translate("everydayProjectEditor", u"Everyday project", None))
+        self.programmingLabel.setText(QCoreApplication.translate("everydayProjectEditor", u"Everyday project", None))
     # retranslateUi
 

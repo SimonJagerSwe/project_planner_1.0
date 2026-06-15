@@ -27,14 +27,6 @@ class Ui_programmingProjectEditor(object):
         icon = QIcon()
         icon.addFile(u"../images/icon_16.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         programmingProjectEditor.setWindowIcon(icon)
-        self.programmingHeader = QLineEdit(programmingProjectEditor)
-        self.programmingHeader.setObjectName(u"programmingHeader")
-        self.programmingHeader.setGeometry(QRect(10, 20, 421, 91))
-        font = QFont()
-        font.setPointSize(18)
-        font.setBold(True)
-        self.programmingHeader.setFont(font)
-        self.programmingHeader.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.layoutWidget = QWidget(programmingProjectEditor)
         self.layoutWidget.setObjectName(u"layoutWidget")
         self.layoutWidget.setGeometry(QRect(10, 130, 421, 321))
@@ -45,9 +37,9 @@ class Ui_programmingProjectEditor(object):
         self.nameLayoutProgramming.setObjectName(u"nameLayoutProgramming")
         self.nameLabelProgramming = QLabel(self.layoutWidget)
         self.nameLabelProgramming.setObjectName(u"nameLabelProgramming")
-        font1 = QFont()
-        font1.setBold(True)
-        self.nameLabelProgramming.setFont(font1)
+        font = QFont()
+        font.setBold(True)
+        self.nameLabelProgramming.setFont(font)
 
         self.nameLayoutProgramming.addWidget(self.nameLabelProgramming)
 
@@ -66,12 +58,13 @@ class Ui_programmingProjectEditor(object):
         self.startLayoutProgramming.setObjectName(u"startLayoutProgramming")
         self.startLabelProgramming = QLabel(self.layoutWidget)
         self.startLabelProgramming.setObjectName(u"startLabelProgramming")
-        self.startLabelProgramming.setFont(font1)
+        self.startLabelProgramming.setFont(font)
 
         self.startLayoutProgramming.addWidget(self.startLabelProgramming)
 
         self.startDateProgramming = QDateEdit(self.layoutWidget)
         self.startDateProgramming.setObjectName(u"startDateProgramming")
+        self.startDateProgramming.setDate(QDate(2000, 1, 1))
 
         self.startLayoutProgramming.addWidget(self.startDateProgramming)
 
@@ -85,7 +78,7 @@ class Ui_programmingProjectEditor(object):
         self.finishLayoutProgramming.setObjectName(u"finishLayoutProgramming")
         self.finishLabelProgramming = QLabel(self.layoutWidget)
         self.finishLabelProgramming.setObjectName(u"finishLabelProgramming")
-        self.finishLabelProgramming.setFont(font1)
+        self.finishLabelProgramming.setFont(font)
 
         self.finishLayoutProgramming.addWidget(self.finishLabelProgramming)
 
@@ -103,7 +96,7 @@ class Ui_programmingProjectEditor(object):
         self.languagesLayout.setObjectName(u"languagesLayout")
         self.languagesLabel = QLabel(self.layoutWidget)
         self.languagesLabel.setObjectName(u"languagesLabel")
-        self.languagesLabel.setFont(font1)
+        self.languagesLabel.setFont(font)
 
         self.languagesLayout.addWidget(self.languagesLabel)
 
@@ -117,29 +110,29 @@ class Ui_programmingProjectEditor(object):
 
         self.gridProgramming.addLayout(self.languagesLayout, 3, 0, 1, 1)
 
-        self.languagesLayout_2 = QHBoxLayout()
-        self.languagesLayout_2.setObjectName(u"languagesLayout_2")
-        self.languagesLabel_2 = QLabel(self.layoutWidget)
-        self.languagesLabel_2.setObjectName(u"languagesLabel_2")
-        self.languagesLabel_2.setFont(font1)
+        self.githuhLayout = QHBoxLayout()
+        self.githuhLayout.setObjectName(u"githuhLayout")
+        self.githubLabel = QLabel(self.layoutWidget)
+        self.githubLabel.setObjectName(u"githubLabel")
+        self.githubLabel.setFont(font)
 
-        self.languagesLayout_2.addWidget(self.languagesLabel_2)
+        self.githuhLayout.addWidget(self.githubLabel)
 
-        self.languagesEdit_2 = QLineEdit(self.layoutWidget)
-        self.languagesEdit_2.setObjectName(u"languagesEdit_2")
+        self.githubEdit = QLineEdit(self.layoutWidget)
+        self.githubEdit.setObjectName(u"githubEdit")
 
-        self.languagesLayout_2.addWidget(self.languagesEdit_2)
+        self.githuhLayout.addWidget(self.githubEdit)
 
-        self.languagesLayout_2.setStretch(0, 1)
-        self.languagesLayout_2.setStretch(1, 3)
+        self.githuhLayout.setStretch(0, 1)
+        self.githuhLayout.setStretch(1, 3)
 
-        self.gridProgramming.addLayout(self.languagesLayout_2, 4, 0, 1, 1)
+        self.gridProgramming.addLayout(self.githuhLayout, 4, 0, 1, 1)
 
         self.nameLayoutProgramming_2 = QHBoxLayout()
         self.nameLayoutProgramming_2.setObjectName(u"nameLayoutProgramming_2")
         self.notesLabelProgramming = QLabel(self.layoutWidget)
         self.notesLabelProgramming.setObjectName(u"notesLabelProgramming")
-        self.notesLabelProgramming.setFont(font1)
+        self.notesLabelProgramming.setFont(font)
 
         self.nameLayoutProgramming_2.addWidget(self.notesLabelProgramming)
 
@@ -157,7 +150,7 @@ class Ui_programmingProjectEditor(object):
         self.progressLayoutProgramming.setObjectName(u"progressLayoutProgramming")
         self.progressLabelProgramming = QLabel(self.layoutWidget)
         self.progressLabelProgramming.setObjectName(u"progressLabelProgramming")
-        self.progressLabelProgramming.setFont(font1)
+        self.progressLabelProgramming.setFont(font)
 
         self.progressLayoutProgramming.addWidget(self.progressLabelProgramming)
 
@@ -176,7 +169,7 @@ class Ui_programmingProjectEditor(object):
         self.statusLayoutProgramming.setObjectName(u"statusLayoutProgramming")
         self.statusLabelProgramming = QLabel(self.layoutWidget)
         self.statusLabelProgramming.setObjectName(u"statusLabelProgramming")
-        self.statusLabelProgramming.setFont(font1)
+        self.statusLabelProgramming.setFont(font)
 
         self.statusLayoutProgramming.addWidget(self.statusLabelProgramming)
 
@@ -222,6 +215,14 @@ class Ui_programmingProjectEditor(object):
 
         self.programmingMenuGrid.addWidget(self.exitProgramming, 1, 1, 1, 1)
 
+        self.programmingLabel = QLabel(programmingProjectEditor)
+        self.programmingLabel.setObjectName(u"programmingLabel")
+        self.programmingLabel.setGeometry(QRect(16, 23, 411, 71))
+        font1 = QFont()
+        font1.setPointSize(18)
+        font1.setBold(True)
+        self.programmingLabel.setFont(font1)
+        self.programmingLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.retranslateUi(programmingProjectEditor)
 
@@ -230,15 +231,14 @@ class Ui_programmingProjectEditor(object):
 
     def retranslateUi(self, programmingProjectEditor):
         programmingProjectEditor.setWindowTitle(QCoreApplication.translate("programmingProjectEditor", u"Project Planner 1.0 - Programming project editor", None))
-        self.programmingHeader.setText(QCoreApplication.translate("programmingProjectEditor", u"Programming project", None))
         self.nameLabelProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Project name", None))
         self.projectNameProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Project name", None))
         self.startLabelProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Project start", None))
         self.finishLabelProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Project finish", None))
         self.languagesLabel.setText(QCoreApplication.translate("programmingProjectEditor", u"Language(s) ", None))
         self.languagesEdit.setText(QCoreApplication.translate("programmingProjectEditor", u"Language(s)", None))
-        self.languagesLabel_2.setText(QCoreApplication.translate("programmingProjectEditor", u"GitHub link", None))
-        self.languagesEdit_2.setText(QCoreApplication.translate("programmingProjectEditor", u"GitHub link", None))
+        self.githubLabel.setText(QCoreApplication.translate("programmingProjectEditor", u"GitHub link", None))
+        self.githubEdit.setText(QCoreApplication.translate("programmingProjectEditor", u"GitHub link", None))
         self.notesLabelProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Notes", None))
         self.notesEditProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Notes", None))
         self.progressLabelProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Progress", None))
@@ -252,5 +252,6 @@ class Ui_programmingProjectEditor(object):
         self.clearProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Clear all", None))
         self.returnToMainProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Return to main", None))
         self.exitProgramming.setText(QCoreApplication.translate("programmingProjectEditor", u"Exit program", None))
+        self.programmingLabel.setText(QCoreApplication.translate("programmingProjectEditor", u"Programming project", None))
     # retranslateUi
 
