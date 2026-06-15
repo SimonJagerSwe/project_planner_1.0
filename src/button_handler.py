@@ -106,11 +106,21 @@ def programming_project_clicked(current_dialog, main_window):
     if current_dialog is not None:
         current_dialog.close()
     main_window.close()
-    dialog = QDialog(main_window)
+    programming_dialog = QDialog(main_window)
     ui = Ui_programmingProjectEditor()
-    ui.setupUi(dialog)
-    dialog.exec()
+    ui.setupUi(programming_dialog)
+    ui.saveProgramming.clicked.connect(save_programming_clicked)
+    ui.clearProgramming.clicked.connect(clear_programming_clicked)
+    ui.returnToMainProgramming.clicked.connect(lambda: return_to_main_clicked(programming_dialog, main_window))
+    ui.exitProgramming.clicked.connect(lambda: exit_clicked(programming_dialog))
+    programming_dialog.exec()
     main_window.show()
+
+def save_programming_clicked():
+    print("Saving programming project...")
+
+def clear_programming_clicked():
+    print("Clearing all programming project parameters...")
 
 
 # View projects
