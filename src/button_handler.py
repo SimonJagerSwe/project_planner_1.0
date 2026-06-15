@@ -7,21 +7,12 @@ from interface.ui_new_project import Ui_addNewProject
 from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_tabs import Ui_Viewer
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QAction
 from PySide6.QtWidgets import QDialog, QMessageBox, QPushButton, QTabWidget
 
 overlay = None
 
-# Main menu buttons
-def main_menu_buttons(main_window):
-    main_exit = main_window.findChild(QPushButton, "mainExit")
-    main_exit.clicked.connect(lambda: exit_clicked(main_window))
-    add_project = main_window.findChild(QPushButton, "addProject")
-    add_project.clicked.connect(lambda: add_project_clicked(main_window))
-    view_projects = main_window.findChild(QPushButton, "viewProjects")
-    view_projects.clicked.connect(lambda: view_projects_clicked(main_window))
-    view_archive = main_window.findChild(QPushButton, "viewArchive")
-    view_archive.clicked.connect(lambda: view_archive_clicked(main_window))
-
+##### Universal buttons #####
 # Return to main menu
 def return_to_main_clicked():
     print("Return to main menu clicked")
@@ -41,6 +32,34 @@ def exit_clicked(parent=None):
     else:
         print("Returning to previous menu")
 
+
+##### Non-universal buttons #####
+# Main menu buttons
+def main_menu_buttons(main_window):
+    # Regular buttons
+    add_project = main_window.findChild(QPushButton, "addProject")
+    add_project.clicked.connect(lambda: add_project_clicked(main_window))
+    view_projects = main_window.findChild(QPushButton, "viewProjects")
+    view_projects.clicked.connect(lambda: view_projects_clicked(main_window))
+    view_archive = main_window.findChild(QPushButton, "viewArchive")
+    view_archive.clicked.connect(lambda: view_archive_clicked(main_window))
+    main_exit = main_window.findChild(QPushButton, "mainExit")
+    main_exit.clicked.connect(lambda: exit_clicked(main_window))
+    
+    # Drop down menu actions
+    everyday_action = main_window.findChild(QAction, "actionAddEveryday")
+    everyday_action.triggered.connect(lambda: everyday_project_clicked(None, main_window))
+    programming_action = main_window.findChild(QAction, "actionAddProgramming")
+    programming_action.triggered.connect(lambda: (programming_project_clicked(None, main_window)))
+    projects_action = main_window.findChild(QAction, "actionProjects")
+    projects_action.triggered.connect(lambda: (view_projects_clicked(main_window)))
+    archive_action = main_window.findChild(QAction, "actionArchive")
+    archive_action.triggered.connect(lambda: (view_archive_clicked(main_window)))
+    exit_action = main_window.findChild(QAction, "actionExit")
+    exit_action.triggered.connect(lambda: (exit_clicked(main_window)))
+
+
+
 # Add project menu
 def add_project_clicked(main_window):
     print("Add project clicked!")
@@ -56,7 +75,8 @@ def add_project_clicked(main_window):
 # Add everyday project
 def everyday_project_clicked(current_dialog, main_window):
     print("Add everyday project clicked")
-    current_dialog.close()
+    if current_dialog is not None:
+        current_dialog.close()
     main_window.close()
     everyday_dialog = QDialog(None)
     ui = Ui_everydayProjectEditor()
@@ -67,7 +87,8 @@ def everyday_project_clicked(current_dialog, main_window):
 # Add programming project
 def programming_project_clicked(current_dialog, main_window):
     print("Add programming project clicked")
-    current_dialog.close()
+    if current_dialog is not None:
+        current_dialog.close()
     main_window.close()
     dialog = QDialog(main_window)
     ui = Ui_programmingProjectEditor()
