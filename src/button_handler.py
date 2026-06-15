@@ -5,8 +5,9 @@ from loader import load_ui
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
 from interface.ui_programming import Ui_programmingProjectEditor
+from interface.ui_tabs import Ui_Viewer
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QDialog, QPushButton
+from PySide6.QtWidgets import QDialog, QPushButton, QTabWidget
 
 overlay = None
 
@@ -47,22 +48,36 @@ def exit_clicked():
 # Main menu buttons
 def add_project_clicked(main_window):
     print("Add project clicked!")
-    dialog = QDialog(main_window)
+    add_project = QDialog(main_window)
     ui = Ui_addNewProject()
-    ui.setupUi(dialog)
-    ui.addEveryday.clicked.connect(lambda: everyday_project_clicked(dialog, main_window))
-    ui.addProgramming.clicked.connect(lambda: programming_project_clicked(dialog, main_window))
-    ui.returnToMainAddProject.clicked.connect(dialog.accept)
+    ui.setupUi(add_project)
+    ui.addEveryday.clicked.connect(lambda: everyday_project_clicked(add_project, main_window))
+    ui.addProgramming.clicked.connect(lambda: programming_project_clicked(add_project, main_window))
+    ui.returnToMainAddProject.clicked.connect(add_project.accept)
     ui.exitAddProject.clicked.connect(exit_clicked)    
-    dialog.exec()
+    add_project.exec()
 
-
-def view_projects_clicked():
+def view_projects_clicked(main_window):
     print("View projects clicked")
+    main_window.close()
+    view_projects = QDialog(main_window)
+    ui = Ui_Viewer()
+    ui.setupUi(view_projects)
+    ui.viewer.setCurrentIndex(0)
+    ui.projectTabs.setCurrentIndex(0)
+    view_projects.exec()
+    main_window.show()
 
 
-def view_archive_clicked():
+def view_archive_clicked(main_window):
     print("View archive clicked")
+    main_window.close()
+    view_archive = QDialog(main_window)
+    ui = Ui_Viewer()
+    ui.setupUi(view_archive)
+    ui.viewer.setCurrentIndex(1)
+    view_archive.exec()
+    main_window.show()
 
 # Add project menu buttons
 def everyday_project_clicked(current_dialog, main_window):
