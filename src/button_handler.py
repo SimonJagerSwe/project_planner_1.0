@@ -52,8 +52,13 @@ def add_project_clicked(parent_window):
     dialog = QDialog(parent_window)
     ui = Ui_addNewProject()
     ui.setupUi(dialog)
+    ui.addEveryday.clicked.connect(lambda: everyday_project_clicked(dialog))
+    ui.addProgramming.clicked.connect(lambda: programming_project_clicked(dialog))
+    ui.returnToMainAddProject.clicked.connect(dialog.accept)
+    ui.exitAddProject.clicked.connect(exit_clicked)
+    
+    
     dialog.exec()
-
 
 def view_projects_clicked():
     print("View projects clicked")
@@ -62,9 +67,9 @@ def view_archive_clicked():
     print("View archive clicked")
 
 # Add project menu buttons
-def everyday_project_clicked():
+def everyday_project_clicked(dialog):
     print("Add everyday project clicked")
 
-def programming_project_clicked():
+def programming_project_clicked(dialog):
     print("Add programming project clicked")
 
