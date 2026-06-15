@@ -1,16 +1,17 @@
 ########## Button handler ##########
 # Imports
 import sys
+
 from loader import load_ui
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
 from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_tabs import Ui_Viewer
+
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QAction
 from PySide6.QtWidgets import QDialog, QMessageBox, QPushButton, QTabWidget
 
-overlay = None
 
 ##### Universal buttons #####
 # Return to main menu
@@ -20,7 +21,6 @@ def return_to_main_clicked(current_dialog, main_window):
         current_dialog.close()
     main_window.show()
     main_window.setEnabled(True)
-
 
 # Exit program
 def exit_clicked(parent=None):
@@ -45,9 +45,9 @@ def main_menu_buttons(main_window):
     add_project = main_window.findChild(QPushButton, "addProject")
     add_project.clicked.connect(lambda: add_project_clicked(main_window))
     view_projects = main_window.findChild(QPushButton, "viewProjects")
-    view_projects.clicked.connect(lambda: view_projects_clicked(main_window))
+    view_projects.clicked.connect(lambda: project_viewer_clicked(main_window, 0))
     view_archive = main_window.findChild(QPushButton, "viewArchive")
-    view_archive.clicked.connect(lambda: view_archive_clicked(main_window))
+    view_archive.clicked.connect(lambda: project_viewer_clicked(main_window, 1))
     main_exit = main_window.findChild(QPushButton, "mainExit")
     main_exit.clicked.connect(lambda: exit_clicked(main_window))
     
@@ -57,9 +57,9 @@ def main_menu_buttons(main_window):
     programming_action = main_window.findChild(QAction, "actionAddProgramming")
     programming_action.triggered.connect(lambda: (programming_project_clicked(None, main_window)))
     projects_action = main_window.findChild(QAction, "actionProjects")
-    projects_action.triggered.connect(lambda: (view_projects_clicked(main_window)))
+    projects_action.triggered.connect(lambda: (project_viewer_clicked(main_window)))
     archive_action = main_window.findChild(QAction, "actionArchive")
-    archive_action.triggered.connect(lambda: (view_archive_clicked(main_window)))
+    archive_action.triggered.connect(lambda: (project_viewer_clicked(main_window)))
     exit_action = main_window.findChild(QAction, "actionExit")
     exit_action.triggered.connect(lambda: (exit_clicked(main_window)))
 
@@ -75,7 +75,6 @@ def add_project_clicked(main_window):
     ui.returnToMainAddProject.clicked.connect(lambda: (return_to_main_clicked(add_project, main_window)))
     ui.exitAddProject.clicked.connect(lambda: exit_clicked(add_project))
     add_project.exec()
-
 
 # Add everyday project
 def everyday_project_clicked(current_dialog, main_window):
@@ -98,7 +97,6 @@ def save_everyday_clicked():
 
 def clear_everyday_clicked():
     print("Clearing all everyday project parameters...")
-
 
 # Add programming project
 def programming_project_clicked(current_dialog, main_window):
@@ -123,25 +121,28 @@ def clear_programming_clicked():
     print("Clearing all programming project parameters...")
 
 
-# View projects
-def load_viewer(main_window):
+# View projects and archives
+def project_viewer_clicked(main_window, idx):
     print("Loading viewer...")
     main_window.close()
     viewer = QDialog(main_window)
-'''def view_projects_clicked(main_window):
-    print("View projects clicked")
-    main_window.close()
-    view_projects = QDialog(main_window)
     ui = Ui_Viewer()
-    ui.setupUi(view_projects)
-    ui.viewer.setCurrentIndex(0)
-    ui.projectTabs.setCurrentIndex(0)
+    ui.setupUi(viewer)
+    ui.viewer.setCurrentIndex(idx)
+    if ui.viewer.currentIndex == 0:
+        ui.currentProjects.setCurrentIndex(0)
+    if ui.viewer.currentIndex == 1:
+        ui.archive.setCurrentIndex(0)
     ui.editProject.clicked.connect(edit_project_clicked)
     ui.archiveProject.clicked.connect(archive_project_clicked)
     ui.deleteProject.clicked.connect(delete_project_clicked)
-    ui.returnToMainProjects.clicked.connect(lambda: return_to_main_clicked(view_projects, main_window))
-    ui.exitProjects.clicked.connect(lambda: exit_clicked(view_projects))
-    view_projects.exec()
+    ui.returnToMainProjects.clicked.connect(lambda: return_to_main_clicked(viewer, main_window))
+    ui.exitProjects.clicked.connect(lambda: exit_clicked(viewer))
+    ui.restoreArchived.clicked.connect(restore_project_clicked)
+    ui.deleteArchived.clicked.connect(delete_archive_clicked)
+    ui.returnToMainArchive.clicked.connect(lambda: return_to_main_clicked(viewer, main_window))
+    ui.exitArchive.clicked.connect(lambda: exit_clicked(viewer))
+    viewer.exec()
     main_window.show()
 
 def edit_project_clicked():
@@ -153,25 +154,8 @@ def archive_project_clicked():
 def delete_project_clicked():
     print("Deleting project from project list...")   # Needs a safety check
 
-
-# View archive
-def view_archive_clicked(main_window):
-    print("View archive clicked")
-    main_window.close()
-    view_archive = QDialog(main_window)
-    ui = Ui_Viewer()
-    ui.setupUi(view_archive)
-    ui.viewer.setCurrentIndex(1)
-    ui.archivedTabs.setCurrentIndex(0)
-    ui.restoreArchived.clicked.connect(restore_project_clicked)
-    ui.deleteArchived.clicked.connect(delete_archive_clicked)
-    ui.returnToMainArchive.clicked.connect(lambda: return_to_main_clicked(view_archive, main_window))
-    ui.exitArchive.clicked.connect(lambda: exit_clicked(view_archive))
-    view_archive.exec()
-    main_window.show()
-
 def restore_project_clicked():
     print("Restore project...")
 
 def delete_archive_clicked():
-    print("Deleting project from archive...")'''
+    print("Deleting project from archive...")       # Needs a safety check
