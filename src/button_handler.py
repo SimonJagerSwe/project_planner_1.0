@@ -124,7 +124,11 @@ def clear_programming_clicked():
 
 
 # View projects
-def view_projects_clicked(main_window):
+def load_viewer(main_window):
+    print("Loading viewer...")
+    main_window.close()
+    viewer = QDialog(main_window)
+'''def view_projects_clicked(main_window):
     print("View projects clicked")
     main_window.close()
     view_projects = QDialog(main_window)
@@ -132,8 +136,22 @@ def view_projects_clicked(main_window):
     ui.setupUi(view_projects)
     ui.viewer.setCurrentIndex(0)
     ui.projectTabs.setCurrentIndex(0)
+    ui.editProject.clicked.connect(edit_project_clicked)
+    ui.archiveProject.clicked.connect(archive_project_clicked)
+    ui.deleteProject.clicked.connect(delete_project_clicked)
+    ui.returnToMainProjects.clicked.connect(lambda: return_to_main_clicked(view_projects, main_window))
+    ui.exitProjects.clicked.connect(lambda: exit_clicked(view_projects))
     view_projects.exec()
     main_window.show()
+
+def edit_project_clicked():
+    print("Editing project...")
+
+def archive_project_clicked():
+    print("Archiving project...")
+
+def delete_project_clicked():
+    print("Deleting project from project list...")   # Needs a safety check
 
 
 # View archive
@@ -144,6 +162,16 @@ def view_archive_clicked(main_window):
     ui = Ui_Viewer()
     ui.setupUi(view_archive)
     ui.viewer.setCurrentIndex(1)
+    ui.archivedTabs.setCurrentIndex(0)
+    ui.restoreArchived.clicked.connect(restore_project_clicked)
+    ui.deleteArchived.clicked.connect(delete_archive_clicked)
+    ui.returnToMainArchive.clicked.connect(lambda: return_to_main_clicked(view_archive, main_window))
+    ui.exitArchive.clicked.connect(lambda: exit_clicked(view_archive))
     view_archive.exec()
     main_window.show()
 
+def restore_project_clicked():
+    print("Restore project...")
+
+def delete_archive_clicked():
+    print("Deleting project from archive...")'''

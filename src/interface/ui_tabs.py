@@ -127,10 +127,10 @@ class Ui_Viewer(object):
         self.archiveMenuLayout.setObjectName(u"archiveMenuLayout")
         self.archiveManagerLayout = QHBoxLayout()
         self.archiveManagerLayout.setObjectName(u"archiveManagerLayout")
-        self.restoreProject = QPushButton(self.widget1)
-        self.restoreProject.setObjectName(u"restoreProject")
+        self.restoreArchived = QPushButton(self.widget1)
+        self.restoreArchived.setObjectName(u"restoreArchived")
 
-        self.archiveManagerLayout.addWidget(self.restoreProject)
+        self.archiveManagerLayout.addWidget(self.restoreArchived)
 
         self.deleteArchived = QPushButton(self.widget1)
         self.deleteArchived.setObjectName(u"deleteArchived")
@@ -165,7 +165,7 @@ class Ui_Viewer(object):
 
         self.retranslateUi(Viewer)
 
-        self.viewer.setCurrentIndex(0)
+        self.viewer.setCurrentIndex(1)
         self.projectTabs.setCurrentIndex(0)
         self.archivedTabs.setCurrentIndex(0)
 
@@ -188,7 +188,7 @@ class Ui_Viewer(object):
         self.archivedTabs.setTabText(self.archivedTabs.indexOf(self.everydayArchive), QCoreApplication.translate("Viewer", u"Everyday projects", None))
         self.archivedTabs.setTabText(self.archivedTabs.indexOf(self.programmingArchive), QCoreApplication.translate("Viewer", u"Programming projects", None))
         self.archivedTabs.setTabText(self.archivedTabs.indexOf(self.fullArchive), QCoreApplication.translate("Viewer", u"All projects", None))
-        self.restoreProject.setText(QCoreApplication.translate("Viewer", u"Restore", None))
+        self.restoreArchived.setText(QCoreApplication.translate("Viewer", u"Restore", None))
         self.deleteArchived.setText(QCoreApplication.translate("Viewer", u"Delete project", None))
         self.returnToMainArchive.setText(QCoreApplication.translate("Viewer", u"Return to main menu", None))
         self.exitArchive.setText(QCoreApplication.translate("Viewer", u"Exit program", None))
