@@ -165,7 +165,7 @@ class Ui_Viewer(object):
 
         self.retranslateUi(Viewer)
 
-        self.viewer.setCurrentIndex(1)
+        self.viewer.setCurrentIndex(0)
         self.projectTabs.setCurrentIndex(0)
         self.archivedTabs.setCurrentIndex(0)
 

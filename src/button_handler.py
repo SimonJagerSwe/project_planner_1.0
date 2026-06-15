@@ -6,6 +6,7 @@ from loader import load_ui
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
 from interface.ui_programming import Ui_programmingProjectEditor
+from interface.ui_recurring import Ui_recurringProjectEditor
 from interface.ui_tabs import Ui_Viewer
 
 from PySide6.QtCore import Qt
@@ -72,6 +73,7 @@ def add_project_clicked(main_window):
     ui.setupUi(add_project)
     ui.addEveryday.clicked.connect(lambda: everyday_project_clicked(add_project, main_window))
     ui.addProgramming.clicked.connect(lambda: programming_project_clicked(add_project, main_window))
+    ui.addRecurring.clicked.connect(lambda: recurring_project_clicked(add_project, main_window))
     ui.returnToMainAddProject.clicked.connect(lambda: (return_to_main_clicked(add_project, main_window)))
     ui.exitAddProject.clicked.connect(lambda: exit_clicked(add_project))
     add_project.exec()
@@ -119,6 +121,28 @@ def save_programming_clicked():
 
 def clear_programming_clicked():
     print("Clearing all programming project parameters...")
+
+# Add recurring project
+def recurring_project_clicked(current_dialog, main_window):
+    print("Add recurring project clicked")
+    if current_dialog is not None:
+        current_dialog.close()
+    main_window.close()
+    recurring_dialog = QDialog(main_window)
+    ui = Ui_recurringProjectEditor()
+    ui.setupUi(recurring_dialog)
+    ui.saveRecurring.clicked.connect(save_recurring_clicked)
+    ui.clearRecurring.clicked.connect(clear_recurring_clicked)
+    ui.returnToMainRecurring.clicked.connect(lambda: return_to_main_clicked(recurring_dialog, main_window))
+    ui.exitRecurring.clicked.connect(lambda: exit_clicked(recurring_dialog))
+    recurring_dialog.exec()
+    main_window.show()
+
+def save_recurring_clicked():
+    print("Saving recurring task...")
+
+def clear_recurring_clicked():
+    print("Clearing all recurring task parameters...")
 
 
 # View projects and archives

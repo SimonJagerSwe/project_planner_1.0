@@ -16,31 +16,31 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QPushButton,
-    QSizePolicy, QVBoxLayout, QWidget)
+    QSizePolicy, QWidget)
 
 class Ui_addNewProject(object):
     def setupUi(self, addNewProject):
         if not addNewProject.objectName():
             addNewProject.setObjectName(u"addNewProject")
-        addNewProject.resize(375, 290)
+        addNewProject.resize(450, 232)
         icon = QIcon()
         icon.addFile(u"../images/icon_16.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         addNewProject.setWindowIcon(icon)
         self.widget = QWidget(addNewProject)
         self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(10, 20, 351, 251))
-        self.addProjectMenuLayout = QGridLayout(self.widget)
-        self.addProjectMenuLayout.setObjectName(u"addProjectMenuLayout")
-        self.addProjectMenuLayout.setContentsMargins(0, 0, 0, 0)
-        self.addProjectLayout = QHBoxLayout()
+        self.widget.setGeometry(QRect(12, 20, 421, 191))
+        self.addProjectLayout = QGridLayout(self.widget)
         self.addProjectLayout.setObjectName(u"addProjectLayout")
+        self.addProjectLayout.setContentsMargins(0, 0, 0, 0)
+        self.projectButtonsLayout = QHBoxLayout()
+        self.projectButtonsLayout.setObjectName(u"projectButtonsLayout")
         self.addEveryday = QPushButton(self.widget)
         self.addEveryday.setObjectName(u"addEveryday")
         self.addEveryday.setEnabled(True)
         self.addEveryday.setMinimumSize(QSize(131, 131))
         self.addEveryday.setMaximumSize(QSize(131, 131))
 
-        self.addProjectLayout.addWidget(self.addEveryday)
+        self.projectButtonsLayout.addWidget(self.addEveryday)
 
         self.addProgramming = QPushButton(self.widget)
         self.addProgramming.setObjectName(u"addProgramming")
@@ -48,25 +48,33 @@ class Ui_addNewProject(object):
         self.addProgramming.setMinimumSize(QSize(131, 131))
         self.addProgramming.setMaximumSize(QSize(131, 131))
 
-        self.addProjectLayout.addWidget(self.addProgramming)
+        self.projectButtonsLayout.addWidget(self.addProgramming)
+
+        self.addRecurring = QPushButton(self.widget)
+        self.addRecurring.setObjectName(u"addRecurring")
+        self.addRecurring.setEnabled(True)
+        self.addRecurring.setMinimumSize(QSize(131, 131))
+        self.addRecurring.setMaximumSize(QSize(131, 131))
+
+        self.projectButtonsLayout.addWidget(self.addRecurring)
 
 
-        self.addProjectMenuLayout.addLayout(self.addProjectLayout, 0, 0, 1, 1)
+        self.addProjectLayout.addLayout(self.projectButtonsLayout, 0, 0, 1, 1)
 
-        self.returnExitLayout = QVBoxLayout()
-        self.returnExitLayout.setObjectName(u"returnExitLayout")
+        self.projectMenuLayout = QHBoxLayout()
+        self.projectMenuLayout.setObjectName(u"projectMenuLayout")
         self.returnToMainAddProject = QPushButton(self.widget)
         self.returnToMainAddProject.setObjectName(u"returnToMainAddProject")
 
-        self.returnExitLayout.addWidget(self.returnToMainAddProject)
+        self.projectMenuLayout.addWidget(self.returnToMainAddProject)
 
         self.exitAddProject = QPushButton(self.widget)
         self.exitAddProject.setObjectName(u"exitAddProject")
 
-        self.returnExitLayout.addWidget(self.exitAddProject)
+        self.projectMenuLayout.addWidget(self.exitAddProject)
 
 
-        self.addProjectMenuLayout.addLayout(self.returnExitLayout, 1, 0, 1, 1)
+        self.addProjectLayout.addLayout(self.projectMenuLayout, 1, 0, 1, 1)
 
 
         self.retranslateUi(addNewProject)
@@ -79,6 +87,8 @@ class Ui_addNewProject(object):
         self.addEveryday.setText(QCoreApplication.translate("addNewProject", u"Add everyday\n"
 "project", None))
         self.addProgramming.setText(QCoreApplication.translate("addNewProject", u"Add programming\n"
+"project", None))
+        self.addRecurring.setText(QCoreApplication.translate("addNewProject", u"Add recurring\n"
 "project", None))
         self.returnToMainAddProject.setText(QCoreApplication.translate("addNewProject", u"Return to main menu", None))
         self.exitAddProject.setText(QCoreApplication.translate("addNewProject", u"Exit program", None))

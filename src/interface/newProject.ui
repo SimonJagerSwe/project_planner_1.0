@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>375</width>
-    <height>290</height>
+    <width>450</width>
+    <height>232</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,15 +20,15 @@
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>12</x>
      <y>20</y>
-     <width>351</width>
-     <height>251</height>
+     <width>421</width>
+     <height>191</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="addProjectMenuLayout">
+   <layout class="QGridLayout" name="addProjectLayout">
     <item row="0" column="0">
-     <layout class="QHBoxLayout" name="addProjectLayout">
+     <layout class="QHBoxLayout" name="projectButtonsLayout">
       <item>
        <widget class="QPushButton" name="addEveryday">
         <property name="enabled">
@@ -75,10 +75,33 @@ project</string>
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="addRecurring">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>131</width>
+          <height>131</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>131</width>
+          <height>131</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Add recurring
+project</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item row="1" column="0">
-     <layout class="QVBoxLayout" name="returnExitLayout">
+     <layout class="QHBoxLayout" name="projectMenuLayout">
       <item>
        <widget class="QPushButton" name="returnToMainAddProject">
         <property name="text">
