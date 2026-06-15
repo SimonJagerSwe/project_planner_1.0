@@ -26,15 +26,23 @@ class Ui_Viewer(object):
         icon = QIcon()
         icon.addFile(u"../images/icon_16.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         Viewer.setWindowIcon(icon)
+        self.gridLayout = QGridLayout(Viewer)
+        self.gridLayout.setObjectName(u"gridLayout")
         self.viewer = QTabWidget(Viewer)
         self.viewer.setObjectName(u"viewer")
-        self.viewer.setGeometry(QRect(0, 10, 571, 571))
         self.currentProjects = QWidget()
         self.currentProjects.setObjectName(u"currentProjects")
-        self.gridLayout_2 = QGridLayout(self.currentProjects)
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.projectTabs = QTabWidget(self.currentProjects)
+        self.widget = QWidget(self.currentProjects)
+        self.widget.setObjectName(u"widget")
+        self.widget.setGeometry(QRect(9, 9, 551, 531))
+        self.projectTabLayout = QGridLayout(self.widget)
+        self.projectTabLayout.setObjectName(u"projectTabLayout")
+        self.projectTabLayout.setContentsMargins(0, 0, 0, 0)
+        self.projectTabs = QTabWidget(self.widget)
         self.projectTabs.setObjectName(u"projectTabs")
+        self.projectTabs.setEnabled(True)
+        self.projectTabs.setMinimumSize(QSize(0, 0))
+        self.projectTabs.setTabShape(QTabWidget.TabShape.Rounded)
         self.everydayProjectsTab = QWidget()
         self.everydayProjectsTab.setObjectName(u"everydayProjectsTab")
         self.projectTabs.addTab(self.everydayProjectsTab, "")
@@ -48,54 +56,61 @@ class Ui_Viewer(object):
         self.tab.setObjectName(u"tab")
         self.projectTabs.addTab(self.tab, "")
 
-        self.gridLayout_2.addWidget(self.projectTabs, 0, 0, 1, 1)
+        self.projectTabLayout.addWidget(self.projectTabs, 0, 0, 1, 1)
 
-        self.projectButtonsLayout = QGridLayout()
-        self.projectButtonsLayout.setObjectName(u"projectButtonsLayout")
+        self.projectMenuLayout = QGridLayout()
+        self.projectMenuLayout.setObjectName(u"projectMenuLayout")
         self.projectManagerLayout = QHBoxLayout()
         self.projectManagerLayout.setObjectName(u"projectManagerLayout")
-        self.editProject = QPushButton(self.currentProjects)
+        self.editProject = QPushButton(self.widget)
         self.editProject.setObjectName(u"editProject")
 
         self.projectManagerLayout.addWidget(self.editProject)
 
-        self.archiveProject = QPushButton(self.currentProjects)
+        self.archiveProject = QPushButton(self.widget)
         self.archiveProject.setObjectName(u"archiveProject")
 
         self.projectManagerLayout.addWidget(self.archiveProject)
 
-        self.deleteProject = QPushButton(self.currentProjects)
+        self.deleteProject = QPushButton(self.widget)
         self.deleteProject.setObjectName(u"deleteProject")
 
         self.projectManagerLayout.addWidget(self.deleteProject)
 
 
-        self.projectButtonsLayout.addLayout(self.projectManagerLayout, 0, 0, 1, 1)
+        self.projectMenuLayout.addLayout(self.projectManagerLayout, 0, 0, 1, 1)
 
         self.projectsNavigatorLayout = QHBoxLayout()
         self.projectsNavigatorLayout.setObjectName(u"projectsNavigatorLayout")
-        self.returnToMainProjects = QPushButton(self.currentProjects)
+        self.returnToMainProjects = QPushButton(self.widget)
         self.returnToMainProjects.setObjectName(u"returnToMainProjects")
 
         self.projectsNavigatorLayout.addWidget(self.returnToMainProjects)
 
-        self.exitProjects = QPushButton(self.currentProjects)
+        self.exitProjects = QPushButton(self.widget)
         self.exitProjects.setObjectName(u"exitProjects")
 
         self.projectsNavigatorLayout.addWidget(self.exitProjects)
 
 
-        self.projectButtonsLayout.addLayout(self.projectsNavigatorLayout, 1, 0, 1, 1)
+        self.projectMenuLayout.addLayout(self.projectsNavigatorLayout, 1, 0, 1, 1)
 
 
-        self.gridLayout_2.addLayout(self.projectButtonsLayout, 1, 0, 1, 1)
+        self.projectTabLayout.addLayout(self.projectMenuLayout, 1, 0, 1, 1)
 
         self.viewer.addTab(self.currentProjects, "")
         self.archive = QWidget()
         self.archive.setObjectName(u"archive")
-        self.archivedTabs = QTabWidget(self.archive)
+        self.widget1 = QWidget(self.archive)
+        self.widget1.setObjectName(u"widget1")
+        self.widget1.setGeometry(QRect(9, 9, 551, 531))
+        self.archiveTabLayout = QGridLayout(self.widget1)
+        self.archiveTabLayout.setObjectName(u"archiveTabLayout")
+        self.archiveTabLayout.setContentsMargins(0, 0, 0, 0)
+        self.archivedTabs = QTabWidget(self.widget1)
         self.archivedTabs.setObjectName(u"archivedTabs")
-        self.archivedTabs.setGeometry(QRect(8, 10, 551, 463))
+        self.archivedTabs.setElideMode(Qt.TextElideMode.ElideNone)
+        self.archivedTabs.setTabsClosable(False)
         self.everydayArchive = QWidget()
         self.everydayArchive.setObjectName(u"everydayArchive")
         self.archivedTabs.addTab(self.everydayArchive, "")
@@ -105,49 +120,54 @@ class Ui_Viewer(object):
         self.fullArchive = QWidget()
         self.fullArchive.setObjectName(u"fullArchive")
         self.archivedTabs.addTab(self.fullArchive, "")
-        self.layoutWidget = QWidget(self.archive)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(10, 480, 549, 56))
-        self.archiveButtonsLayout = QGridLayout(self.layoutWidget)
-        self.archiveButtonsLayout.setObjectName(u"archiveButtonsLayout")
-        self.archiveButtonsLayout.setContentsMargins(0, 0, 0, 0)
+
+        self.archiveTabLayout.addWidget(self.archivedTabs, 0, 0, 1, 1)
+
+        self.archiveMenuLayout = QGridLayout()
+        self.archiveMenuLayout.setObjectName(u"archiveMenuLayout")
         self.archiveManagerLayout = QHBoxLayout()
         self.archiveManagerLayout.setObjectName(u"archiveManagerLayout")
-        self.restoreProject = QPushButton(self.layoutWidget)
+        self.restoreProject = QPushButton(self.widget1)
         self.restoreProject.setObjectName(u"restoreProject")
 
         self.archiveManagerLayout.addWidget(self.restoreProject)
 
-        self.deleteArchived = QPushButton(self.layoutWidget)
+        self.deleteArchived = QPushButton(self.widget1)
         self.deleteArchived.setObjectName(u"deleteArchived")
 
         self.archiveManagerLayout.addWidget(self.deleteArchived)
 
 
-        self.archiveButtonsLayout.addLayout(self.archiveManagerLayout, 0, 0, 1, 1)
+        self.archiveMenuLayout.addLayout(self.archiveManagerLayout, 0, 0, 1, 1)
 
         self.archiveNavigatorLayout = QHBoxLayout()
         self.archiveNavigatorLayout.setObjectName(u"archiveNavigatorLayout")
-        self.returnToMainArchive = QPushButton(self.layoutWidget)
+        self.returnToMainArchive = QPushButton(self.widget1)
         self.returnToMainArchive.setObjectName(u"returnToMainArchive")
 
         self.archiveNavigatorLayout.addWidget(self.returnToMainArchive)
 
-        self.exitArchive = QPushButton(self.layoutWidget)
+        self.exitArchive = QPushButton(self.widget1)
         self.exitArchive.setObjectName(u"exitArchive")
 
         self.archiveNavigatorLayout.addWidget(self.exitArchive)
 
 
-        self.archiveButtonsLayout.addLayout(self.archiveNavigatorLayout, 1, 0, 1, 1)
+        self.archiveMenuLayout.addLayout(self.archiveNavigatorLayout, 1, 0, 1, 1)
+
+
+        self.archiveTabLayout.addLayout(self.archiveMenuLayout, 1, 0, 1, 1)
 
         self.viewer.addTab(self.archive, "")
 
+        self.gridLayout.addWidget(self.viewer, 0, 0, 1, 1)
+
+
         self.retranslateUi(Viewer)
 
-        self.viewer.setCurrentIndex(1)
-        self.projectTabs.setCurrentIndex(3)
-        self.archivedTabs.setCurrentIndex(1)
+        self.viewer.setCurrentIndex(0)
+        self.projectTabs.setCurrentIndex(0)
+        self.archivedTabs.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Viewer)
