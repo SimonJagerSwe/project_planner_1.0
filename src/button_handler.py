@@ -2,8 +2,10 @@
 # Imports
 import sys
 
-import writers
 import readers
+import resources
+import writers
+
 
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
@@ -152,21 +154,13 @@ def project_viewer_clicked(main_window, idx):
         ui.currentProjects.setCurrentIndex(0)
     if ui.viewer.currentIndex == 1:
         ui.archive.setCurrentIndex(0)
-
-    # The following need a good solution for calling correct project type function
-    ui.editProject.clicked.connect(edit_project_clicked)
-    ui.archiveProject.clicked.connect(archive_project_clicked)
-    ui.deleteProject.clicked.connect(delete_project_clicked)
-
-    # Below works for now
+    ui.editProject.clicked.connect(lambda: edit_project_clicked)
+    ui.archiveProject.clicked.connect(lambda: archive_project_clicked)
+    ui.deleteProject.clicked.connect(lambda: delete_project_clicked)
     ui.returnToMainProjects.clicked.connect(lambda: return_to_main_clicked(viewer, main_window))
     ui.exitProjects.clicked.connect(lambda: exit_clicked(viewer))
-
-    # The following need a good solution for calling correct project type function
     ui.restoreArchived.clicked.connect(restore_project_clicked)
     ui.deleteArchived.clicked.connect(delete_archive_clicked)
-
-    # Below works for now
     ui.returnToMainArchive.clicked.connect(lambda: return_to_main_clicked(viewer, main_window))
     ui.exitArchive.clicked.connect(lambda: exit_clicked(viewer))
     viewer.exec()
