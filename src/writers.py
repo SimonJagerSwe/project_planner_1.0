@@ -18,14 +18,14 @@ def w_e_project(ui):
     finish = ui.everydayFinish.date().toString("yyyy-MM-dd")
     notes = ui.everydayNotes.text()
     # progress = ui.everydayProgressSlider.value()
-    progress_percent = ui.everydayProgressPercent.text()
+    percent = ui.everydayProgressPercent.text()
     status = ui.everydayStatus.currentText()
     e_project = {
         "Project name" : name,
         "Project start date" : start,
         "Project end date" : finish,
         "Project notes" : notes,
-        "Project progress" : progress_percent,
+        "Project progress" : percent,
         "Project status" : status
     }
     print(f"Project variables to save:\n{e_project}")
@@ -46,18 +46,41 @@ def d_e_project():
     print("Deleting everyday project...")
 
 # Write programming project
-def w_p_project():
+def w_p_project(ui):
     print(f"Writing programming project to {resources.PROGRAMING_FILE}...")
+    name = ui.programmingName.text()
+    start = ui.programmingStart.date().toString("yyyy-MM-dd")
+    finish = ui.programmingFinish.date().toString("yyyy-MM-dd")
+    language = ui.languagesEdit.text()
+    link = ui.githubEdit.text()
+    notes = ui.programmingNotes.text()
+    # progress = ui.programmingProgressSlider.value()
+    percent = ui.programmingProgressPercent.text()
+    status = ui.programmingStatus.currentText()
     p_project = {
-
+        "Project name" : name,
+        "Project start date" : start,
+        "Project end dage" : finish,
+        "Language(s)" : language,
+        "GitHub link" : link,
+        "Project notes" : notes,
+        "Project progress" : percent,
+        "Project status" : status
     }
+    print(f"Project variables to save:\n{p_project}")
 
 # Clear programming project
-def c_p_project():
+def c_p_project(ui):
     print("Clearing programming project...")
-    p_project = {
-
-    }
+    ui.programmingName.setText("")
+    ui.programmingStart.setDate(QDate.currentDate())
+    ui.programmingFinish.setDate(QDate.currentDate())
+    ui.languagesEdit.setText("")
+    ui.githubEdit.setText("")
+    ui.programmingNotes.setText("")
+    ui.programmingProgressSlider.setValue(0)
+    ui.programmingProgressPercent.setText("0%")
+    ui.programmingStatus.setCurrentText("Select project status")
 
 # Delete programming project
 def d_e_project():
