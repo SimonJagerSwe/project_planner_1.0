@@ -2,6 +2,9 @@
 # Imports
 import sys
 
+import writers
+import readers
+
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
 from interface.ui_programming import Ui_programmingProjectEditor
@@ -95,7 +98,7 @@ def everyday_project_clicked(current_dialog, main_window):
 def save_everyday_clicked():
     print("Saving everyday project...")
 
-def clear_everyday_clicked():
+def clear_everyday_clicked():          # Needs confirmation box
     print("Clearing all everyday project parameters...")
 
 # Add programming project
@@ -117,7 +120,7 @@ def programming_project_clicked(current_dialog, main_window):
 def save_programming_clicked():
     print("Saving programming project...")
 
-def clear_programming_clicked():
+def clear_programming_clicked():        # Needs confirmation box
     print("Clearing all programming project parameters...")
 
 # Add recurring project
@@ -139,7 +142,7 @@ def recurring_project_clicked(current_dialog, main_window):
 def save_recurring_clicked():
     print("Saving recurring task...")
 
-def clear_recurring_clicked():
+def clear_recurring_clicked():      # Needs confirmation box
     print("Clearing all recurring task parameters...")
 
 
@@ -170,7 +173,7 @@ def project_viewer_clicked(main_window, idx):
 def edit_project_clicked():
     print("Editing project...")
 
-def archive_project_clicked():
+def archive_project_clicked():      # Check if project is completed or to be archived as is
     print("Archiving project...")
 
 def delete_project_clicked():
