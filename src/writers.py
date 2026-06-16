@@ -8,29 +8,38 @@ import resources
 
 from interface.ui_everyday import Ui_everydayProjectEditor as everyday
 
-# Write everyday project
-def w_e_project():
-    print(f"Writing everyday project to {resources.EVERYDAY_FILE}...")
-    ui = everyday()
-    ui.setupUi()
-    '''
-    name = ui.everydayName
-    start = ui.everydayStart
-    finish = ui.everydayFinish
-    notes = ui.everydayNotes
-    progress = ui.everydayProgressSlider
-    progress_percent = ui.everydayProgressPercent
-    status = ui.everydayStatus'''
-    e_project = {
+from PySide6.QtCore import QDate
 
+# Write everyday project
+def w_e_project(ui):
+    print(f"Writing everyday project to {resources.EVERYDAY_FILE}...")
+    name = ui.everydayName.text()
+    start = ui.everydayStart.date().toString("yyyy-MM-dd")
+    finish = ui.everydayFinish.date().toString("yyyy-MM-dd")
+    notes = ui.everydayNotes.text()
+    # progress = ui.everydayProgressSlider.value()
+    progress_percent = ui.everydayProgressPercent.text()
+    status = ui.everydayStatus.currentText()
+    e_project = {
+        "Project name" : name,
+        "Project start date" : start,
+        "Project end date" : finish,
+        "Project notes" : notes,
+        "Project progress" : progress_percent,
+        "Project status" : status
     }
+    print(f"Project variables to save:\n{e_project}")
 
 # Clear everyday project input
-def c_e_project():
+def c_e_project(ui):
     print("Clearing everyday project...")
-    e_project = {
-
-    }
+    ui.everydayName.setText("")
+    ui.everydayStart.setDate(QDate.currentDate())
+    ui.everydayFinish.setDate(QDate.currentDate())
+    ui.everydayNotes.setText("")
+    ui.everydayProgressSlider.setValue(0)
+    ui.everydayProgressPercent.setText("0%")
+    ui.everydayStatus.setCurrentText("Select project status")
 
 # Delete everyday project
 def d_e_project():

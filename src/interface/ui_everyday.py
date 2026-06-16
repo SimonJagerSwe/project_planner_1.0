@@ -187,10 +187,11 @@ class Ui_everydayProjectEditor(object):
         self.everydayStatus.addItem("")
         self.everydayStatus.addItem("")
         self.everydayStatus.addItem("")
+        self.everydayStatus.addItem("")
         self.everydayStatus.setObjectName(u"everydayStatus")
         self.everydayStatus.setMaximumSize(QSize(16777215, 22))
-        self.everydayStatus.setMaxVisibleItems(4)
-        self.everydayStatus.setMaxCount(4)
+        self.everydayStatus.setMaxVisibleItems(5)
+        self.everydayStatus.setMaxCount(5)
 
         self.everydayStatusLayout.addWidget(self.everydayStatus)
 
@@ -226,7 +227,8 @@ class Ui_everydayProjectEditor(object):
         self.everydayStatus.setItemText(0, QCoreApplication.translate("everydayProjectEditor", u"Select project status", None))
         self.everydayStatus.setItemText(1, QCoreApplication.translate("everydayProjectEditor", u"Pending", None))
         self.everydayStatus.setItemText(2, QCoreApplication.translate("everydayProjectEditor", u"In progress", None))
-        self.everydayStatus.setItemText(3, QCoreApplication.translate("everydayProjectEditor", u"Cancelled", None))
+        self.everydayStatus.setItemText(3, QCoreApplication.translate("everydayProjectEditor", u"Completed", None))
+        self.everydayStatus.setItemText(4, QCoreApplication.translate("everydayProjectEditor", u"Cancelled", None))
 
     # retranslateUi
 

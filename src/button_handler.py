@@ -13,8 +13,8 @@ from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_recurring import Ui_recurringProjectEditor
 from interface.ui_tabs import Ui_Viewer
 
-from PySide6.QtCore import QDate
-from PySide6.QtGui import QAction
+from PySide6.QtCore import QDate, QTimer
+from PySide6.QtGui import QAction, QCursor
 from PySide6.QtWidgets import QDialog, QMessageBox, QPushButton
 
 
@@ -93,12 +93,15 @@ def everyday_project_clicked(current_dialog, main_window):
     ui.setupUi(everyday_dialog)
     ui.everydayStart.setDate(QDate.currentDate())
     ui.everydayFinish.setDate(QDate.currentDate())
-    ui.everydaySave.clicked.connect(writers.w_e_project)
-    ui.everydayClear.clicked.connect(writers.c_e_project)
+    ui.everydayProgressSlider.valueChanged.connect(lambda value: 
+        ui.everydayProgressPercent.setText(f"{value}%"))
+    ui.everydaySave.clicked.connect(lambda: writers.w_e_project(ui))
+    ui.everydayClear.clicked.connect(lambda: writers.c_e_project(ui))
     ui.everydayReturn.clicked.connect(lambda: return_to_main_clicked(everyday_dialog, main_window))
     ui.everydayExit.clicked.connect(lambda: exit_clicked(everyday_dialog))
     everyday_dialog.exec()
     main_window.show()
+
 
 # Add programming project
 def programming_project_clicked(current_dialog, main_window):
@@ -111,6 +114,8 @@ def programming_project_clicked(current_dialog, main_window):
     ui.setupUi(programming_dialog)
     ui.programmingStart.setDate(QDate.currentDate())
     ui.programmingFinish.setDate(QDate.currentDate())
+    ui.programmingProgressSlider.valueChanged.connect(lambda value:
+        ui.programmingProgressPercent.setText(f"{value}%"))
     ui.programmingSave.clicked.connect(writers.w_p_project)
     ui.programmingClear.clicked.connect(writers.c_p_project)
     ui.programmingReturn.clicked.connect(lambda: return_to_main_clicked(programming_dialog, main_window))
@@ -118,11 +123,6 @@ def programming_project_clicked(current_dialog, main_window):
     programming_dialog.exec()
     main_window.show()
 
-def save_programming_clicked():
-    print("Saving programming project...")
-
-def clear_programming_clicked():        # Needs confirmation box
-    print("Clearing all programming project parameters...")
 
 # Add recurring project
 def recurring_project_clicked(current_dialog, main_window):
@@ -139,12 +139,6 @@ def recurring_project_clicked(current_dialog, main_window):
     ui.exitRecurring.clicked.connect(lambda: exit_clicked(recurring_dialog))
     recurring_dialog.exec()
     main_window.show()
-
-def save_recurring_clicked():
-    print("Saving recurring task...")
-
-def clear_recurring_clicked():      # Needs confirmation box
-    print("Clearing all recurring task parameters...")
 
 
 # View projects and archives

@@ -181,10 +181,11 @@ class Ui_programmingProjectEditor(object):
         self.programmingStatus.addItem("")
         self.programmingStatus.addItem("")
         self.programmingStatus.addItem("")
+        self.programmingStatus.addItem("")
         self.programmingStatus.setObjectName(u"programmingStatus")
         self.programmingStatus.setMaximumSize(QSize(16777215, 22))
-        self.programmingStatus.setMaxVisibleItems(4)
-        self.programmingStatus.setMaxCount(4)
+        self.programmingStatus.setMaxVisibleItems(5)
+        self.programmingStatus.setMaxCount(5)
 
         self.programmingStatusLayout.addWidget(self.programmingStatus)
 
@@ -263,7 +264,8 @@ class Ui_programmingProjectEditor(object):
         self.programmingStatus.setItemText(0, QCoreApplication.translate("programmingProjectEditor", u"Select project status", None))
         self.programmingStatus.setItemText(1, QCoreApplication.translate("programmingProjectEditor", u"Pending", None))
         self.programmingStatus.setItemText(2, QCoreApplication.translate("programmingProjectEditor", u"In progress", None))
-        self.programmingStatus.setItemText(3, QCoreApplication.translate("programmingProjectEditor", u"Cancelled", None))
+        self.programmingStatus.setItemText(3, QCoreApplication.translate("programmingProjectEditor", u"Completed", None))
+        self.programmingStatus.setItemText(4, QCoreApplication.translate("programmingProjectEditor", u"Cancelled", None))
 
         self.programmingProgressLabel.setText(QCoreApplication.translate("programmingProjectEditor", u"Progress", None))
         self.programmingProgressPercent.setText(QCoreApplication.translate("programmingProjectEditor", u"0%", None))
