@@ -12,14 +12,15 @@ from interface.ui_everyday import Ui_everydayProjectEditor as everyday
 def w_e_project():
     print(f"Writing everyday project to {resources.EVERYDAY_FILE}...")
     ui = everyday()
-    ui.setupUi(everyday)
-    name = ui.projectNameEveryday
-    start = ui.startDateEveryday
-    finish = ui.finishDateEveryday
-    notes = ui.notesEditEveryday
-    progress = ui.progressSliderEveryday
-    progress_percent = ui.progressPercentageEveryday
-    status = ui.statusComboEveryday 
+    ui.setupUi()
+    '''
+    name = ui.everydayName
+    start = ui.everydayStart
+    finish = ui.everydayFinish
+    notes = ui.everydayNotes
+    progress = ui.everydayProgressSlider
+    progress_percent = ui.everydayProgressPercent
+    status = ui.everydayStatus'''
     e_project = {
 
     }

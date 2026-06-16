@@ -28,28 +28,28 @@
    </property>
    <layout class="QGridLayout" name="everydayMenuGrid">
     <item row="0" column="0">
-     <widget class="QPushButton" name="saveEveryday">
+     <widget class="QPushButton" name="everydaySave">
       <property name="text">
        <string>Save project</string>
       </property>
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QPushButton" name="clearEveryday">
+     <widget class="QPushButton" name="everydayClear">
       <property name="text">
        <string>Clear all</string>
       </property>
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QPushButton" name="returnToMainEveryday">
+     <widget class="QPushButton" name="everydayReturn">
       <property name="text">
        <string>Return to main</string>
       </property>
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QPushButton" name="exitEveryday">
+     <widget class="QPushButton" name="everydayExit">
       <property name="text">
        <string>Exit program</string>
       </property>
@@ -57,7 +57,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QLabel" name="programmingLabel">
+  <widget class="QLabel" name="everydayHeader">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -92,7 +92,7 @@
     <item row="0" column="0">
      <layout class="QHBoxLayout" name="everydayNameLayout">
       <item>
-       <widget class="QLabel" name="nameLabelEveryday">
+       <widget class="QLabel" name="everydayNameLabel">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -110,7 +110,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="projectNameEveryday">
+       <widget class="QLineEdit" name="everydayName">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -125,9 +125,9 @@
      </layout>
     </item>
     <item row="1" column="0">
-     <layout class="QHBoxLayout" name="everydayStartLayout">
+     <layout class="QHBoxLayout" name="everydayStartLayout" stretch="1,3">
       <item>
-       <widget class="QLabel" name="startLabelEveryday">
+       <widget class="QLabel" name="everydayStartLabel">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -173,9 +173,9 @@
      </layout>
     </item>
     <item row="2" column="0">
-     <layout class="QHBoxLayout" name="everydayFinishLayout">
+     <layout class="QHBoxLayout" name="everydayFinishLayout" stretch="1,3">
       <item>
-       <widget class="QLabel" name="finishLabelEveryday">
+       <widget class="QLabel" name="everydayFinishLabel">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -213,7 +213,7 @@
     <item row="3" column="0">
      <layout class="QHBoxLayout" name="everydayNotesLayout">
       <item>
-       <widget class="QLabel" name="notesLabelEveryday">
+       <widget class="QLabel" name="everydayNotesLabel">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -231,7 +231,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="notesEditEveryday">
+       <widget class="QLineEdit" name="everydayNotes">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -248,7 +248,7 @@
     <item row="4" column="0">
      <layout class="QHBoxLayout" name="everydayProgressLayout">
       <item>
-       <widget class="QLabel" name="progressLabelEveryday">
+       <widget class="QLabel" name="everydayProgressLabel">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -266,7 +266,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QSlider" name="progressSliderEveryday">
+       <widget class="QSlider" name="everydayProgressSlider">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -279,7 +279,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="progressPercentageEveryday">
+       <widget class="QLabel" name="everydayProgressPercent">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -294,9 +294,9 @@
      </layout>
     </item>
     <item row="5" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <layout class="QHBoxLayout" name="everydayStatusLayout" stretch="1,3">
       <item>
-       <widget class="QLabel" name="statusLabelEveryday">
+       <widget class="QLabel" name="everydayStatusLabel">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -314,7 +314,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="everydayNotesLayout_2">
+       <widget class="QComboBox" name="everydayStatus">
         <property name="maximumSize">
          <size>
           <width>16777215</width>

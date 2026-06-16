@@ -28,28 +28,28 @@
    </property>
    <layout class="QGridLayout" name="programmingMenuGrid">
     <item row="0" column="0">
-     <widget class="QPushButton" name="saveProgramming">
+     <widget class="QPushButton" name="programmingSave">
       <property name="text">
        <string>Save project</string>
       </property>
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QPushButton" name="clearProgramming">
+     <widget class="QPushButton" name="programmingClear">
       <property name="text">
        <string>Clear all</string>
       </property>
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QPushButton" name="returnToMainProgramming">
+     <widget class="QPushButton" name="programmingReturn">
       <property name="text">
        <string>Return to main</string>
       </property>
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QPushButton" name="exitProgramming">
+     <widget class="QPushButton" name="programmingExit">
       <property name="text">
        <string>Exit program</string>
       </property>
@@ -57,7 +57,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QLabel" name="programmingLabel">
+  <widget class="QLabel" name="programmingHeader">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -92,7 +92,7 @@
     <item row="2" column="0">
      <layout class="QHBoxLayout" name="programmingFinishedLayout" stretch="1,3">
       <item>
-       <widget class="QLabel" name="finishLabelProgramming">
+       <widget class="QLabel" name="programmingFinishLabel">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -130,7 +130,7 @@
     <item row="1" column="0">
      <layout class="QHBoxLayout" name="programmingStartLayout" stretch="1,3">
       <item>
-       <widget class="QLabel" name="startLabelProgramming">
+       <widget class="QLabel" name="programmingStartLabel">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -251,7 +251,7 @@
     <item row="5" column="0">
      <layout class="QHBoxLayout" name="programmingNotesLayout">
       <item>
-       <widget class="QLabel" name="notesLabelProgramming">
+       <widget class="QLabel" name="programmingNotesLabel">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -269,7 +269,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="notesEditProgramming">
+       <widget class="QLineEdit" name="programmingNotes">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -286,7 +286,7 @@
     <item row="7" column="0">
      <layout class="QHBoxLayout" name="programmingStatusLayout" stretch="1,3">
       <item>
-       <widget class="QLabel" name="statusLabelProgramming">
+       <widget class="QLabel" name="programmingStatusLabel">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -304,7 +304,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="statusComboProgramming">
+       <widget class="QComboBox" name="programmingStatus">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -344,7 +344,7 @@
     <item row="6" column="0">
      <layout class="QHBoxLayout" name="programmingProgressLayout">
       <item>
-       <widget class="QLabel" name="progressLabelProgramming">
+       <widget class="QLabel" name="programmingProgressLabel">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -362,7 +362,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QSlider" name="progressSliderProgramming">
+       <widget class="QSlider" name="programmingProgressSlider">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -375,7 +375,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="progressPercentageProgramming">
+       <widget class="QLabel" name="programmingProgressPercent">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -392,7 +392,7 @@
     <item row="0" column="0">
      <layout class="QHBoxLayout" name="programmingNameLayout">
       <item>
-       <widget class="QLabel" name="nameLabelProgramming">
+       <widget class="QLabel" name="programmingNameLabel">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -410,7 +410,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="projectNameProgramming">
+       <widget class="QLineEdit" name="programmingName">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
