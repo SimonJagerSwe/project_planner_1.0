@@ -63,131 +63,135 @@ class Ui_everydayProjectEditor(object):
         self.programmingLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.widget = QWidget(everydayProjectEditor)
         self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(11, 131, 421, 321))
+        self.widget.setGeometry(QRect(14, 127, 421, 321))
         self.gridLayout = QGridLayout(self.widget)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.nameLayoutEveryday = QHBoxLayout()
-        self.nameLayoutEveryday.setObjectName(u"nameLayoutEveryday")
+        self.everydayNameLayout = QHBoxLayout()
+        self.everydayNameLayout.setObjectName(u"everydayNameLayout")
         self.nameLabelEveryday = QLabel(self.widget)
         self.nameLabelEveryday.setObjectName(u"nameLabelEveryday")
+        self.nameLabelEveryday.setMaximumSize(QSize(16777215, 22))
         font1 = QFont()
         font1.setBold(True)
         self.nameLabelEveryday.setFont(font1)
 
-        self.nameLayoutEveryday.addWidget(self.nameLabelEveryday)
+        self.everydayNameLayout.addWidget(self.nameLabelEveryday)
 
         self.projectNameEveryday = QLineEdit(self.widget)
         self.projectNameEveryday.setObjectName(u"projectNameEveryday")
+        self.projectNameEveryday.setMaximumSize(QSize(16777215, 22))
 
-        self.nameLayoutEveryday.addWidget(self.projectNameEveryday)
+        self.everydayNameLayout.addWidget(self.projectNameEveryday)
 
-        self.nameLayoutEveryday.setStretch(0, 1)
-        self.nameLayoutEveryday.setStretch(1, 3)
 
-        self.gridLayout.addLayout(self.nameLayoutEveryday, 0, 0, 1, 1)
+        self.gridLayout.addLayout(self.everydayNameLayout, 0, 0, 1, 1)
 
-        self.startLayoutEveryday = QHBoxLayout()
-        self.startLayoutEveryday.setSpacing(6)
-        self.startLayoutEveryday.setObjectName(u"startLayoutEveryday")
+        self.everydayStartLayout = QHBoxLayout()
+        self.everydayStartLayout.setObjectName(u"everydayStartLayout")
         self.startLabelEveryday = QLabel(self.widget)
         self.startLabelEveryday.setObjectName(u"startLabelEveryday")
+        self.startLabelEveryday.setMaximumSize(QSize(16777215, 22))
         self.startLabelEveryday.setFont(font1)
 
-        self.startLayoutEveryday.addWidget(self.startLabelEveryday)
+        self.everydayStartLayout.addWidget(self.startLabelEveryday)
 
-        self.startDateEveryday = QDateEdit(self.widget)
-        self.startDateEveryday.setObjectName(u"startDateEveryday")
+        self.everydayStart = QDateEdit(self.widget)
+        self.everydayStart.setObjectName(u"everydayStart")
+        self.everydayStart.setMaximumSize(QSize(16777215, 22))
+        self.everydayStart.setMaximumDateTime(QDateTime(QDate(9999, 8, 30), QTime(23, 59, 59)))
+        self.everydayStart.setCalendarPopup(True)
 
-        self.startLayoutEveryday.addWidget(self.startDateEveryday)
+        self.everydayStartLayout.addWidget(self.everydayStart)
 
-        self.startLayoutEveryday.setStretch(0, 1)
-        self.startLayoutEveryday.setStretch(1, 3)
 
-        self.gridLayout.addLayout(self.startLayoutEveryday, 1, 0, 1, 1)
+        self.gridLayout.addLayout(self.everydayStartLayout, 1, 0, 1, 1)
 
-        self.finishLayoutEveryday = QHBoxLayout()
-        self.finishLayoutEveryday.setSpacing(6)
-        self.finishLayoutEveryday.setObjectName(u"finishLayoutEveryday")
+        self.everydayFinishLayout = QHBoxLayout()
+        self.everydayFinishLayout.setObjectName(u"everydayFinishLayout")
         self.finishLabelEveryday = QLabel(self.widget)
         self.finishLabelEveryday.setObjectName(u"finishLabelEveryday")
+        self.finishLabelEveryday.setMaximumSize(QSize(16777215, 22))
         self.finishLabelEveryday.setFont(font1)
 
-        self.finishLayoutEveryday.addWidget(self.finishLabelEveryday)
+        self.everydayFinishLayout.addWidget(self.finishLabelEveryday)
 
-        self.finishDateEveryday = QDateEdit(self.widget)
-        self.finishDateEveryday.setObjectName(u"finishDateEveryday")
+        self.everydayFinish = QDateEdit(self.widget)
+        self.everydayFinish.setObjectName(u"everydayFinish")
+        self.everydayFinish.setMaximumSize(QSize(16777215, 22))
+        self.everydayFinish.setCalendarPopup(True)
 
-        self.finishLayoutEveryday.addWidget(self.finishDateEveryday)
+        self.everydayFinishLayout.addWidget(self.everydayFinish)
 
-        self.finishLayoutEveryday.setStretch(0, 1)
-        self.finishLayoutEveryday.setStretch(1, 3)
 
-        self.gridLayout.addLayout(self.finishLayoutEveryday, 2, 0, 1, 1)
+        self.gridLayout.addLayout(self.everydayFinishLayout, 2, 0, 1, 1)
 
-        self.notesEveryday = QHBoxLayout()
-        self.notesEveryday.setObjectName(u"notesEveryday")
+        self.everydayNotesLayout = QHBoxLayout()
+        self.everydayNotesLayout.setObjectName(u"everydayNotesLayout")
         self.notesLabelEveryday = QLabel(self.widget)
         self.notesLabelEveryday.setObjectName(u"notesLabelEveryday")
+        self.notesLabelEveryday.setMaximumSize(QSize(16777215, 22))
         self.notesLabelEveryday.setFont(font1)
 
-        self.notesEveryday.addWidget(self.notesLabelEveryday)
+        self.everydayNotesLayout.addWidget(self.notesLabelEveryday)
 
         self.notesEditEveryday = QLineEdit(self.widget)
         self.notesEditEveryday.setObjectName(u"notesEditEveryday")
+        self.notesEditEveryday.setMaximumSize(QSize(16777215, 22))
 
-        self.notesEveryday.addWidget(self.notesEditEveryday)
+        self.everydayNotesLayout.addWidget(self.notesEditEveryday)
 
-        self.notesEveryday.setStretch(0, 1)
-        self.notesEveryday.setStretch(1, 3)
 
-        self.gridLayout.addLayout(self.notesEveryday, 3, 0, 1, 1)
+        self.gridLayout.addLayout(self.everydayNotesLayout, 3, 0, 1, 1)
 
-        self.everydayInputLayout = QHBoxLayout()
-        self.everydayInputLayout.setObjectName(u"everydayInputLayout")
+        self.everydayProgressLayout = QHBoxLayout()
+        self.everydayProgressLayout.setObjectName(u"everydayProgressLayout")
         self.progressLabelEveryday = QLabel(self.widget)
         self.progressLabelEveryday.setObjectName(u"progressLabelEveryday")
+        self.progressLabelEveryday.setMaximumSize(QSize(16777215, 22))
         self.progressLabelEveryday.setFont(font1)
 
-        self.everydayInputLayout.addWidget(self.progressLabelEveryday)
+        self.everydayProgressLayout.addWidget(self.progressLabelEveryday)
 
         self.progressSliderEveryday = QSlider(self.widget)
         self.progressSliderEveryday.setObjectName(u"progressSliderEveryday")
+        self.progressSliderEveryday.setMaximumSize(QSize(16777215, 22))
         self.progressSliderEveryday.setOrientation(Qt.Orientation.Horizontal)
 
-        self.everydayInputLayout.addWidget(self.progressSliderEveryday)
+        self.everydayProgressLayout.addWidget(self.progressSliderEveryday)
 
         self.progressPercentageEveryday = QLabel(self.widget)
         self.progressPercentageEveryday.setObjectName(u"progressPercentageEveryday")
+        self.progressPercentageEveryday.setMaximumSize(QSize(16777215, 22))
 
-        self.everydayInputLayout.addWidget(self.progressPercentageEveryday)
+        self.everydayProgressLayout.addWidget(self.progressPercentageEveryday)
 
 
-        self.gridLayout.addLayout(self.everydayInputLayout, 4, 0, 1, 1)
+        self.gridLayout.addLayout(self.everydayProgressLayout, 4, 0, 1, 1)
 
-        self.statusLayoutEveryday = QHBoxLayout()
-        self.statusLayoutEveryday.setObjectName(u"statusLayoutEveryday")
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.statusLabelEveryday = QLabel(self.widget)
         self.statusLabelEveryday.setObjectName(u"statusLabelEveryday")
+        self.statusLabelEveryday.setMaximumSize(QSize(16777215, 22))
         self.statusLabelEveryday.setFont(font1)
 
-        self.statusLayoutEveryday.addWidget(self.statusLabelEveryday)
+        self.horizontalLayout_6.addWidget(self.statusLabelEveryday)
 
-        self.statusComboEveryday = QComboBox(self.widget)
-        self.statusComboEveryday.addItem("")
-        self.statusComboEveryday.addItem("")
-        self.statusComboEveryday.addItem("")
-        self.statusComboEveryday.addItem("")
-        self.statusComboEveryday.setObjectName(u"statusComboEveryday")
-        self.statusComboEveryday.setMaxVisibleItems(4)
-        self.statusComboEveryday.setMaxCount(4)
+        self.everydayNotesLayout_2 = QComboBox(self.widget)
+        self.everydayNotesLayout_2.addItem("")
+        self.everydayNotesLayout_2.addItem("")
+        self.everydayNotesLayout_2.addItem("")
+        self.everydayNotesLayout_2.addItem("")
+        self.everydayNotesLayout_2.setObjectName(u"everydayNotesLayout_2")
+        self.everydayNotesLayout_2.setMaximumSize(QSize(16777215, 22))
+        self.everydayNotesLayout_2.setMaxVisibleItems(4)
+        self.everydayNotesLayout_2.setMaxCount(4)
 
-        self.statusLayoutEveryday.addWidget(self.statusComboEveryday)
+        self.horizontalLayout_6.addWidget(self.everydayNotesLayout_2)
 
-        self.statusLayoutEveryday.setStretch(0, 1)
-        self.statusLayoutEveryday.setStretch(1, 3)
 
-        self.gridLayout.addLayout(self.statusLayoutEveryday, 5, 0, 1, 1)
+        self.gridLayout.addLayout(self.horizontalLayout_6, 5, 0, 1, 1)
 
 
         self.retranslateUi(everydayProjectEditor)
@@ -205,16 +209,18 @@ class Ui_everydayProjectEditor(object):
         self.nameLabelEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Project name", None))
         self.projectNameEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Project name", None))
         self.startLabelEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Project start", None))
+        self.everydayStart.setDisplayFormat(QCoreApplication.translate("everydayProjectEditor", u"dd/MM/yy", None))
         self.finishLabelEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Project finish", None))
+        self.everydayFinish.setDisplayFormat(QCoreApplication.translate("everydayProjectEditor", u"dd/MM/yy", None))
         self.notesLabelEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Notes", None))
         self.notesEditEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Notes", None))
         self.progressLabelEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Progress", None))
         self.progressPercentageEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"0%", None))
         self.statusLabelEveryday.setText(QCoreApplication.translate("everydayProjectEditor", u"Status", None))
-        self.statusComboEveryday.setItemText(0, QCoreApplication.translate("everydayProjectEditor", u"Select project status", None))
-        self.statusComboEveryday.setItemText(1, QCoreApplication.translate("everydayProjectEditor", u"Pending", None))
-        self.statusComboEveryday.setItemText(2, QCoreApplication.translate("everydayProjectEditor", u"In progress", None))
-        self.statusComboEveryday.setItemText(3, QCoreApplication.translate("everydayProjectEditor", u"Cancelled", None))
+        self.everydayNotesLayout_2.setItemText(0, QCoreApplication.translate("everydayProjectEditor", u"Select project status", None))
+        self.everydayNotesLayout_2.setItemText(1, QCoreApplication.translate("everydayProjectEditor", u"Pending", None))
+        self.everydayNotesLayout_2.setItemText(2, QCoreApplication.translate("everydayProjectEditor", u"In progress", None))
+        self.everydayNotesLayout_2.setItemText(3, QCoreApplication.translate("everydayProjectEditor", u"Cancelled", None))
 
     # retranslateUi
 

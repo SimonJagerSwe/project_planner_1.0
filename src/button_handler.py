@@ -13,6 +13,7 @@ from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_recurring import Ui_recurringProjectEditor
 from interface.ui_tabs import Ui_Viewer
 
+from PySide6.QtCore import QDate
 from PySide6.QtGui import QAction
 from PySide6.QtWidgets import QDialog, QMessageBox, QPushButton
 
@@ -90,6 +91,8 @@ def everyday_project_clicked(current_dialog, main_window):
     everyday_dialog = QDialog(None)
     ui = Ui_everydayProjectEditor()
     ui.setupUi(everyday_dialog)
+    ui.everydayStart.setDate(QDate.currentDate())
+    ui.everydayFinish.setDate(QDate.currentDate())
     ui.saveEveryday.clicked.connect(writers.w_e_project)
     ui.clearEveryday.clicked.connect(writers.c_e_project)
     ui.returnToMainEveryday.clicked.connect(lambda: return_to_main_clicked(everyday_dialog, main_window))
@@ -106,6 +109,8 @@ def programming_project_clicked(current_dialog, main_window):
     programming_dialog = QDialog(main_window)
     ui = Ui_programmingProjectEditor()
     ui.setupUi(programming_dialog)
+    ui.programmingStart.setDate(QDate.currentDate())
+    ui.programmingFinish.setDate(QDate.currentDate())
     ui.saveProgramming.clicked.connect(writers.w_p_project)
     ui.clearProgramming.clicked.connect(writers.c_p_project)
     ui.returnToMainProgramming.clicked.connect(lambda: return_to_main_clicked(programming_dialog, main_window))

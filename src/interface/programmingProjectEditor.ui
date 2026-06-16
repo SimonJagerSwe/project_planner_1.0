@@ -82,73 +82,23 @@
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>11</x>
-     <y>131</y>
+     <x>13</x>
+     <y>133</y>
      <width>421</width>
      <height>321</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <layout class="QHBoxLayout" name="nameLayoutProgramming" stretch="1,3">
-      <item>
-       <widget class="QLabel" name="nameLabelProgramming">
-        <property name="font">
-         <font>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Project name</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="projectNameProgramming">
-        <property name="text">
-         <string>Project name</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="1" column="0">
-     <layout class="QHBoxLayout" name="startLayoutProgramming" stretch="1,3">
-      <property name="spacing">
-       <number>6</number>
-      </property>
-      <item>
-       <widget class="QLabel" name="startLabelProgramming">
-        <property name="font">
-         <font>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Project start</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QDateEdit" name="startDateProgramming">
-        <property name="date">
-         <date>
-          <year>2000</year>
-          <month>1</month>
-          <day>1</day>
-         </date>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
+   <layout class="QGridLayout" name="programmingGridLayout">
     <item row="2" column="0">
-     <layout class="QHBoxLayout" name="finishLayoutProgramming" stretch="1,3">
-      <property name="spacing">
-       <number>6</number>
-      </property>
+     <layout class="QHBoxLayout" name="programmingFinishedLayout" stretch="1,3">
       <item>
        <widget class="QLabel" name="finishLabelProgramming">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
         <property name="font">
          <font>
           <bold>true</bold>
@@ -160,37 +110,78 @@
        </widget>
       </item>
       <item>
-       <widget class="QDateEdit" name="finishDateProgramming"/>
+       <widget class="QDateEdit" name="programmingFinish">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="displayFormat">
+         <string>dd/MM/yy</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
-    <item row="3" column="0">
-     <layout class="QHBoxLayout" name="languagesLayout" stretch="1,3">
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="programmingStartLayout" stretch="1,3">
       <item>
-       <widget class="QLabel" name="languagesLabel">
+       <widget class="QLabel" name="startLabelProgramming">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
         <property name="font">
          <font>
           <bold>true</bold>
          </font>
         </property>
         <property name="text">
-         <string>Language(s) </string>
+         <string>Project start</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="languagesEdit">
-        <property name="text">
-         <string>Language(s)</string>
+       <widget class="QDateEdit" name="programmingStart">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="displayFormat">
+         <string>dd/MM/yy</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+        <property name="date">
+         <date>
+          <year>2000</year>
+          <month>1</month>
+          <day>1</day>
+         </date>
         </property>
        </widget>
       </item>
      </layout>
     </item>
     <item row="4" column="0">
-     <layout class="QHBoxLayout" name="githuhLayout" stretch="1,3">
+     <layout class="QHBoxLayout" name="githubLayout">
       <item>
        <widget class="QLabel" name="githubLabel">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
         <property name="font">
          <font>
           <bold>true</bold>
@@ -203,6 +194,12 @@
       </item>
       <item>
        <widget class="QLineEdit" name="githubEdit">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
         <property name="text">
          <string>GitHub link</string>
         </property>
@@ -210,10 +207,57 @@
       </item>
      </layout>
     </item>
+    <item row="3" column="0">
+     <layout class="QHBoxLayout" name="languagesLayout">
+      <item>
+       <widget class="QLabel" name="languagesLabel">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Language(s) </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="languagesEdit">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>0</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Language(s)</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
     <item row="5" column="0">
-     <layout class="QHBoxLayout" name="nameLayoutProgramming_2" stretch="1,3">
+     <layout class="QHBoxLayout" name="programmingNotesLayout">
       <item>
        <widget class="QLabel" name="notesLabelProgramming">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
         <property name="font">
          <font>
           <bold>true</bold>
@@ -226,6 +270,12 @@
       </item>
       <item>
        <widget class="QLineEdit" name="notesEditProgramming">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
         <property name="text">
          <string>Notes</string>
         </property>
@@ -233,40 +283,16 @@
       </item>
      </layout>
     </item>
-    <item row="6" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QLabel" name="progressLabelProgramming">
-        <property name="font">
-         <font>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Progress</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSlider" name="progressSliderProgramming">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="progressPercentageProgramming">
-        <property name="text">
-         <string>0%</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
     <item row="7" column="0">
-     <layout class="QHBoxLayout" name="statusLayoutProgramming" stretch="1,3">
+     <layout class="QHBoxLayout" name="programmingStatusLayout" stretch="1,3">
       <item>
        <widget class="QLabel" name="statusLabelProgramming">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
         <property name="font">
          <font>
           <bold>true</bold>
@@ -279,6 +305,12 @@
       </item>
       <item>
        <widget class="QComboBox" name="statusComboProgramming">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
         <property name="maxVisibleItems">
          <number>4</number>
         </property>
@@ -305,6 +337,89 @@
           <string>Cancelled</string>
          </property>
         </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="6" column="0">
+     <layout class="QHBoxLayout" name="programmingProgressLayout">
+      <item>
+       <widget class="QLabel" name="progressLabelProgramming">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Progress</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="progressSliderProgramming">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="progressPercentageProgramming">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>0%</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="programmingNameLayout">
+      <item>
+       <widget class="QLabel" name="nameLabelProgramming">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Project name</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="projectNameProgramming">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Project name</string>
+        </property>
        </widget>
       </item>
      </layout>

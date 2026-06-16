@@ -6,9 +6,20 @@ import sys
 
 import resources
 
+from interface.ui_everyday import Ui_everydayProjectEditor as everyday
+
 # Write everyday project
 def w_e_project():
     print(f"Writing everyday project to {resources.EVERYDAY_FILE}...")
+    ui = everyday()
+    ui.setupUi(everyday)
+    name = ui.projectNameEveryday
+    start = ui.startDateEveryday
+    finish = ui.finishDateEveryday
+    notes = ui.notesEditEveryday
+    progress = ui.progressSliderEveryday
+    progress_percent = ui.progressPercentageEveryday
+    status = ui.statusComboEveryday 
     e_project = {
 
     }
