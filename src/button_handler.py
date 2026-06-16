@@ -88,18 +88,12 @@ def everyday_project_clicked(current_dialog, main_window):
     everyday_dialog = QDialog(None)
     ui = Ui_everydayProjectEditor()
     ui.setupUi(everyday_dialog)
-    ui.saveEveryday.clicked.connect(save_everyday_clicked)
-    ui.clearEveryday.clicked.connect(clear_everyday_clicked)
+    ui.saveEveryday.clicked.connect(writers.w_e_project)
+    ui.clearEveryday.clicked.connect(writers.c_e_project)
     ui.returnToMainEveryday.clicked.connect(lambda: return_to_main_clicked(everyday_dialog, main_window))
     ui.exitEveryday.clicked.connect(lambda: exit_clicked(everyday_dialog))
     everyday_dialog.exec()
     main_window.show()
-
-def save_everyday_clicked():
-    print("Saving everyday project...")
-
-def clear_everyday_clicked():          # Needs confirmation box
-    print("Clearing all everyday project parameters...")
 
 # Add programming project
 def programming_project_clicked(current_dialog, main_window):
@@ -110,8 +104,8 @@ def programming_project_clicked(current_dialog, main_window):
     programming_dialog = QDialog(main_window)
     ui = Ui_programmingProjectEditor()
     ui.setupUi(programming_dialog)
-    ui.saveProgramming.clicked.connect(save_programming_clicked)
-    ui.clearProgramming.clicked.connect(clear_programming_clicked)
+    ui.saveProgramming.clicked.connect(writers.w_p_project)
+    ui.clearProgramming.clicked.connect(writers.c_p_project)
     ui.returnToMainProgramming.clicked.connect(lambda: return_to_main_clicked(programming_dialog, main_window))
     ui.exitProgramming.clicked.connect(lambda: exit_clicked(programming_dialog))
     programming_dialog.exec()
@@ -132,8 +126,8 @@ def recurring_project_clicked(current_dialog, main_window):
     recurring_dialog = QDialog(main_window)
     ui = Ui_recurringProjectEditor()
     ui.setupUi(recurring_dialog)
-    ui.saveRecurring.clicked.connect(save_recurring_clicked)
-    ui.clearRecurring.clicked.connect(clear_recurring_clicked)
+    ui.saveRecurring.clicked.connect(writers.w_r_task)
+    ui.clearRecurring.clicked.connect(writers.c_r_task)
     ui.returnToMainRecurring.clicked.connect(lambda: return_to_main_clicked(recurring_dialog, main_window))
     ui.exitRecurring.clicked.connect(lambda: exit_clicked(recurring_dialog))
     recurring_dialog.exec()
@@ -158,13 +152,21 @@ def project_viewer_clicked(main_window, idx):
         ui.currentProjects.setCurrentIndex(0)
     if ui.viewer.currentIndex == 1:
         ui.archive.setCurrentIndex(0)
+
+    # The following need a good solution for calling correct project type function
     ui.editProject.clicked.connect(edit_project_clicked)
     ui.archiveProject.clicked.connect(archive_project_clicked)
     ui.deleteProject.clicked.connect(delete_project_clicked)
+
+    # Below works for now
     ui.returnToMainProjects.clicked.connect(lambda: return_to_main_clicked(viewer, main_window))
     ui.exitProjects.clicked.connect(lambda: exit_clicked(viewer))
+
+    # The following need a good solution for calling correct project type function
     ui.restoreArchived.clicked.connect(restore_project_clicked)
     ui.deleteArchived.clicked.connect(delete_archive_clicked)
+
+    # Below works for now
     ui.returnToMainArchive.clicked.connect(lambda: return_to_main_clicked(viewer, main_window))
     ui.exitArchive.clicked.connect(lambda: exit_clicked(viewer))
     viewer.exec()
