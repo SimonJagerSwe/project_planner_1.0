@@ -79,7 +79,7 @@
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>13</x>
@@ -88,7 +88,7 @@
      <height>321</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="programmingGridLayout">
+   <layout class="QGridLayout" name="programmingGrid">
     <item row="2" column="0">
      <layout class="QHBoxLayout" name="programmingFinishedLayout" stretch="1,3">
       <item>
@@ -201,7 +201,7 @@
          </size>
         </property>
         <property name="text">
-         <string>GitHub link</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -242,7 +242,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Language(s)</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -277,7 +277,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Notes</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -418,7 +418,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Project name</string>
+         <string/>
         </property>
        </widget>
       </item>

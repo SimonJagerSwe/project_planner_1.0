@@ -44,13 +44,13 @@
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>100</y>
+     <x>11</x>
+     <y>101</y>
      <width>421</width>
-     <height>261</height>
+     <height>251</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout_2">
+   <layout class="QGridLayout" name="recurringGrid">
     <item row="0" column="0">
      <layout class="QGridLayout" name="recurringProjectLayout">
       <item row="0" column="0">
@@ -70,7 +70,7 @@
         <item>
          <widget class="QLineEdit" name="projectNameRecurring">
           <property name="text">
-           <string>Project name</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -139,7 +139,7 @@
         <item>
          <widget class="QLineEdit" name="notesEditProgramming">
           <property name="text">
-           <string>Notes</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -148,42 +148,38 @@
      </layout>
     </item>
     <item row="1" column="0">
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QPushButton" name="saveRecurring">
-          <property name="text">
-           <string>Save project</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="clearRecurring">
-          <property name="text">
-           <string>Clear all</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+     <layout class="QHBoxLayout" name="recurringProjectManagerGrid">
+      <item>
+       <widget class="QPushButton" name="saveRecurring">
+        <property name="text">
+         <string>Save project</string>
+        </property>
+       </widget>
       </item>
-      <item row="1" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QPushButton" name="returnToMainRecurring">
-          <property name="text">
-           <string>Return to main</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="exitRecurring">
-          <property name="text">
-           <string>Exit program</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+      <item>
+       <widget class="QPushButton" name="clearRecurring">
+        <property name="text">
+         <string>Clear all</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0">
+     <layout class="QHBoxLayout" name="recurringMenyLayout">
+      <item>
+       <widget class="QPushButton" name="returnToMainRecurring">
+        <property name="text">
+         <string>Return to main</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="exitRecurring">
+        <property name="text">
+         <string>Exit program</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

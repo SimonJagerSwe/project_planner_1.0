@@ -61,15 +61,15 @@ class Ui_programmingProjectEditor(object):
         font.setBold(True)
         self.programmingHeader.setFont(font)
         self.programmingHeader.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.widget = QWidget(programmingProjectEditor)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(13, 133, 421, 321))
-        self.programmingGridLayout = QGridLayout(self.widget)
-        self.programmingGridLayout.setObjectName(u"programmingGridLayout")
-        self.programmingGridLayout.setContentsMargins(0, 0, 0, 0)
+        self.layoutWidget1 = QWidget(programmingProjectEditor)
+        self.layoutWidget1.setObjectName(u"layoutWidget1")
+        self.layoutWidget1.setGeometry(QRect(13, 133, 421, 321))
+        self.programmingGrid = QGridLayout(self.layoutWidget1)
+        self.programmingGrid.setObjectName(u"programmingGrid")
+        self.programmingGrid.setContentsMargins(0, 0, 0, 0)
         self.programmingFinishedLayout = QHBoxLayout()
         self.programmingFinishedLayout.setObjectName(u"programmingFinishedLayout")
-        self.programmingFinishLabel = QLabel(self.widget)
+        self.programmingFinishLabel = QLabel(self.layoutWidget1)
         self.programmingFinishLabel.setObjectName(u"programmingFinishLabel")
         self.programmingFinishLabel.setMaximumSize(QSize(16777215, 22))
         font1 = QFont()
@@ -78,7 +78,7 @@ class Ui_programmingProjectEditor(object):
 
         self.programmingFinishedLayout.addWidget(self.programmingFinishLabel)
 
-        self.programmingFinish = QDateEdit(self.widget)
+        self.programmingFinish = QDateEdit(self.layoutWidget1)
         self.programmingFinish.setObjectName(u"programmingFinish")
         self.programmingFinish.setMaximumSize(QSize(16777215, 22))
         self.programmingFinish.setCalendarPopup(True)
@@ -88,18 +88,18 @@ class Ui_programmingProjectEditor(object):
         self.programmingFinishedLayout.setStretch(0, 1)
         self.programmingFinishedLayout.setStretch(1, 3)
 
-        self.programmingGridLayout.addLayout(self.programmingFinishedLayout, 2, 0, 1, 1)
+        self.programmingGrid.addLayout(self.programmingFinishedLayout, 2, 0, 1, 1)
 
         self.programmingStartLayout = QHBoxLayout()
         self.programmingStartLayout.setObjectName(u"programmingStartLayout")
-        self.programmingStartLabel = QLabel(self.widget)
+        self.programmingStartLabel = QLabel(self.layoutWidget1)
         self.programmingStartLabel.setObjectName(u"programmingStartLabel")
         self.programmingStartLabel.setMaximumSize(QSize(16777215, 22))
         self.programmingStartLabel.setFont(font1)
 
         self.programmingStartLayout.addWidget(self.programmingStartLabel)
 
-        self.programmingStart = QDateEdit(self.widget)
+        self.programmingStart = QDateEdit(self.layoutWidget1)
         self.programmingStart.setObjectName(u"programmingStart")
         self.programmingStart.setMaximumSize(QSize(16777215, 22))
         self.programmingStart.setCalendarPopup(True)
@@ -110,36 +110,36 @@ class Ui_programmingProjectEditor(object):
         self.programmingStartLayout.setStretch(0, 1)
         self.programmingStartLayout.setStretch(1, 3)
 
-        self.programmingGridLayout.addLayout(self.programmingStartLayout, 1, 0, 1, 1)
+        self.programmingGrid.addLayout(self.programmingStartLayout, 1, 0, 1, 1)
 
         self.githubLayout = QHBoxLayout()
         self.githubLayout.setObjectName(u"githubLayout")
-        self.githubLabel = QLabel(self.widget)
+        self.githubLabel = QLabel(self.layoutWidget1)
         self.githubLabel.setObjectName(u"githubLabel")
         self.githubLabel.setMaximumSize(QSize(16777215, 22))
         self.githubLabel.setFont(font1)
 
         self.githubLayout.addWidget(self.githubLabel)
 
-        self.githubEdit = QLineEdit(self.widget)
+        self.githubEdit = QLineEdit(self.layoutWidget1)
         self.githubEdit.setObjectName(u"githubEdit")
         self.githubEdit.setMaximumSize(QSize(16777215, 22))
 
         self.githubLayout.addWidget(self.githubEdit)
 
 
-        self.programmingGridLayout.addLayout(self.githubLayout, 4, 0, 1, 1)
+        self.programmingGrid.addLayout(self.githubLayout, 4, 0, 1, 1)
 
         self.languagesLayout = QHBoxLayout()
         self.languagesLayout.setObjectName(u"languagesLayout")
-        self.languagesLabel = QLabel(self.widget)
+        self.languagesLabel = QLabel(self.layoutWidget1)
         self.languagesLabel.setObjectName(u"languagesLabel")
         self.languagesLabel.setMaximumSize(QSize(16777215, 22))
         self.languagesLabel.setFont(font1)
 
         self.languagesLayout.addWidget(self.languagesLabel)
 
-        self.languagesEdit = QLineEdit(self.widget)
+        self.languagesEdit = QLineEdit(self.layoutWidget1)
         self.languagesEdit.setObjectName(u"languagesEdit")
         self.languagesEdit.setMaximumSize(QSize(16777215, 22))
         self.languagesEdit.setSizeIncrement(QSize(0, 22))
@@ -147,36 +147,36 @@ class Ui_programmingProjectEditor(object):
         self.languagesLayout.addWidget(self.languagesEdit)
 
 
-        self.programmingGridLayout.addLayout(self.languagesLayout, 3, 0, 1, 1)
+        self.programmingGrid.addLayout(self.languagesLayout, 3, 0, 1, 1)
 
         self.programmingNotesLayout = QHBoxLayout()
         self.programmingNotesLayout.setObjectName(u"programmingNotesLayout")
-        self.programmingNotesLabel = QLabel(self.widget)
+        self.programmingNotesLabel = QLabel(self.layoutWidget1)
         self.programmingNotesLabel.setObjectName(u"programmingNotesLabel")
         self.programmingNotesLabel.setMaximumSize(QSize(16777215, 22))
         self.programmingNotesLabel.setFont(font1)
 
         self.programmingNotesLayout.addWidget(self.programmingNotesLabel)
 
-        self.programmingNotes = QLineEdit(self.widget)
+        self.programmingNotes = QLineEdit(self.layoutWidget1)
         self.programmingNotes.setObjectName(u"programmingNotes")
         self.programmingNotes.setMaximumSize(QSize(16777215, 22))
 
         self.programmingNotesLayout.addWidget(self.programmingNotes)
 
 
-        self.programmingGridLayout.addLayout(self.programmingNotesLayout, 5, 0, 1, 1)
+        self.programmingGrid.addLayout(self.programmingNotesLayout, 5, 0, 1, 1)
 
         self.programmingStatusLayout = QHBoxLayout()
         self.programmingStatusLayout.setObjectName(u"programmingStatusLayout")
-        self.programmingStatusLabel = QLabel(self.widget)
+        self.programmingStatusLabel = QLabel(self.layoutWidget1)
         self.programmingStatusLabel.setObjectName(u"programmingStatusLabel")
         self.programmingStatusLabel.setMaximumSize(QSize(16777215, 22))
         self.programmingStatusLabel.setFont(font1)
 
         self.programmingStatusLayout.addWidget(self.programmingStatusLabel)
 
-        self.programmingStatus = QComboBox(self.widget)
+        self.programmingStatus = QComboBox(self.layoutWidget1)
         self.programmingStatus.addItem("")
         self.programmingStatus.addItem("")
         self.programmingStatus.addItem("")
@@ -191,50 +191,50 @@ class Ui_programmingProjectEditor(object):
         self.programmingStatusLayout.setStretch(0, 1)
         self.programmingStatusLayout.setStretch(1, 3)
 
-        self.programmingGridLayout.addLayout(self.programmingStatusLayout, 7, 0, 1, 1)
+        self.programmingGrid.addLayout(self.programmingStatusLayout, 7, 0, 1, 1)
 
         self.programmingProgressLayout = QHBoxLayout()
         self.programmingProgressLayout.setObjectName(u"programmingProgressLayout")
-        self.programmingProgressLabel = QLabel(self.widget)
+        self.programmingProgressLabel = QLabel(self.layoutWidget1)
         self.programmingProgressLabel.setObjectName(u"programmingProgressLabel")
         self.programmingProgressLabel.setMaximumSize(QSize(16777215, 22))
         self.programmingProgressLabel.setFont(font1)
 
         self.programmingProgressLayout.addWidget(self.programmingProgressLabel)
 
-        self.programmingProgressSlider = QSlider(self.widget)
+        self.programmingProgressSlider = QSlider(self.layoutWidget1)
         self.programmingProgressSlider.setObjectName(u"programmingProgressSlider")
         self.programmingProgressSlider.setMaximumSize(QSize(16777215, 22))
         self.programmingProgressSlider.setOrientation(Qt.Orientation.Horizontal)
 
         self.programmingProgressLayout.addWidget(self.programmingProgressSlider)
 
-        self.programmingProgressPercent = QLabel(self.widget)
+        self.programmingProgressPercent = QLabel(self.layoutWidget1)
         self.programmingProgressPercent.setObjectName(u"programmingProgressPercent")
         self.programmingProgressPercent.setMaximumSize(QSize(16777215, 22))
 
         self.programmingProgressLayout.addWidget(self.programmingProgressPercent)
 
 
-        self.programmingGridLayout.addLayout(self.programmingProgressLayout, 6, 0, 1, 1)
+        self.programmingGrid.addLayout(self.programmingProgressLayout, 6, 0, 1, 1)
 
         self.programmingNameLayout = QHBoxLayout()
         self.programmingNameLayout.setObjectName(u"programmingNameLayout")
-        self.programmingNameLabel = QLabel(self.widget)
+        self.programmingNameLabel = QLabel(self.layoutWidget1)
         self.programmingNameLabel.setObjectName(u"programmingNameLabel")
         self.programmingNameLabel.setMaximumSize(QSize(16777215, 22))
         self.programmingNameLabel.setFont(font1)
 
         self.programmingNameLayout.addWidget(self.programmingNameLabel)
 
-        self.programmingName = QLineEdit(self.widget)
+        self.programmingName = QLineEdit(self.layoutWidget1)
         self.programmingName.setObjectName(u"programmingName")
         self.programmingName.setMaximumSize(QSize(16777215, 22))
 
         self.programmingNameLayout.addWidget(self.programmingName)
 
 
-        self.programmingGridLayout.addLayout(self.programmingNameLayout, 0, 0, 1, 1)
+        self.programmingGrid.addLayout(self.programmingNameLayout, 0, 0, 1, 1)
 
 
         self.retranslateUi(programmingProjectEditor)
@@ -254,11 +254,11 @@ class Ui_programmingProjectEditor(object):
         self.programmingStartLabel.setText(QCoreApplication.translate("programmingProjectEditor", u"Project start", None))
         self.programmingStart.setDisplayFormat(QCoreApplication.translate("programmingProjectEditor", u"dd/MM/yy", None))
         self.githubLabel.setText(QCoreApplication.translate("programmingProjectEditor", u"GitHub link", None))
-        self.githubEdit.setText(QCoreApplication.translate("programmingProjectEditor", u"GitHub link", None))
+        self.githubEdit.setText("")
         self.languagesLabel.setText(QCoreApplication.translate("programmingProjectEditor", u"Language(s) ", None))
-        self.languagesEdit.setText(QCoreApplication.translate("programmingProjectEditor", u"Language(s)", None))
+        self.languagesEdit.setText("")
         self.programmingNotesLabel.setText(QCoreApplication.translate("programmingProjectEditor", u"Notes", None))
-        self.programmingNotes.setText(QCoreApplication.translate("programmingProjectEditor", u"Notes", None))
+        self.programmingNotes.setText("")
         self.programmingStatusLabel.setText(QCoreApplication.translate("programmingProjectEditor", u"Status", None))
         self.programmingStatus.setItemText(0, QCoreApplication.translate("programmingProjectEditor", u"Select project status", None))
         self.programmingStatus.setItemText(1, QCoreApplication.translate("programmingProjectEditor", u"Pending", None))
@@ -268,6 +268,6 @@ class Ui_programmingProjectEditor(object):
         self.programmingProgressLabel.setText(QCoreApplication.translate("programmingProjectEditor", u"Progress", None))
         self.programmingProgressPercent.setText(QCoreApplication.translate("programmingProjectEditor", u"0%", None))
         self.programmingNameLabel.setText(QCoreApplication.translate("programmingProjectEditor", u"Project name", None))
-        self.programmingName.setText(QCoreApplication.translate("programmingProjectEditor", u"Project name", None))
+        self.programmingName.setText("")
     # retranslateUi
 
