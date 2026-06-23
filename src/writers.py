@@ -30,6 +30,19 @@ def w_e_project(ui):
     }
     print(f"Project variables to save:\n{e_project}")
 
+    n_e_list = []
+    n_e_list.append(e_project)
+    print(n_e_list)
+
+    with open("project_files/everyday_projects.json", "w") as file:
+        json.dump(n_e_list, file)
+
+    
+
+# Edit everyday project
+def e_e_project(ui):
+    print("Editing everyday project...")
+
 # Clear everyday project input
 def c_e_project(ui):
     print("Clearing everyday project...")
@@ -68,6 +81,10 @@ def w_p_project(ui):
         "Project status" : status
     }
     print(f"Project variables to save:\n{p_project}")
+
+# Edit programming project
+def e_p_project(ui):
+    print("Editing programming project...")
 
 # Clear programming project
 def c_p_project(ui):
