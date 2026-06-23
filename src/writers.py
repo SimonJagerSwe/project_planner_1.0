@@ -4,14 +4,14 @@ import json
 
 import button_handler, resources
 
-from reader import reader
+from loader import load_file
 
 from PySide6.QtCore import QDate
 
 
 # Project writer
 def writer(ui, projects_file, current_dialog=None, main_window=None):
-    projects = reader(projects_file)
+    projects = load_file(projects_file)
     print(f"Working file:\n{projects_file}\n\n")
     print(f"Projects in file:\n{projects}\n\n")
 
