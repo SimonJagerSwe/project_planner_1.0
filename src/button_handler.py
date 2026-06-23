@@ -2,7 +2,7 @@
 # Imports
 import sys
 
-import writers
+import resources, writers
 
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
@@ -92,7 +92,8 @@ def everyday_project_clicked(current_dialog, main_window):
     ui.everydayFinish.setDate(QDate.currentDate())
     ui.everydayProgressSlider.valueChanged.connect(lambda value: 
         ui.everydayProgressPercent.setText(f"{value}%"))
-    ui.everydaySave.clicked.connect(lambda: writers.w_e_project(ui, everyday_dialog, main_window))
+    # ui.everydaySave.clicked.connect(lambda: writers.w_e_project(ui, everyday_dialog, main_window))
+    ui.everydaySave.clicked.connect(lambda: writers.writer(ui, resources.EVERYDAY_FILE, everyday_dialog, main_window))
     ui.everydayClear.clicked.connect(lambda: writers.c_e_project(ui))
     ui.everydayReturn.clicked.connect(lambda: return_to_main_clicked(everyday_dialog, main_window))
     ui.everydayExit.clicked.connect(lambda: exit_clicked(everyday_dialog))

@@ -211,3 +211,77 @@ def w_f_archive():
     f_archive = {
 
     }
+
+
+
+
+
+
+
+
+
+
+# New test layout
+def writer(ui, projects_file, current_dialog=None, main_window=None):
+    projects = reader(projects_file)
+    print(f"Working file:\n{projects_file}")
+    print(f"Projects in file:\n{projects}")
+
+    # Write everyday project
+    if projects_file == resources.EVERYDAY_FILE:
+        name = ui.everydayName.text()
+        start = ui.everydayStart.date().toString("yyyy-MM-dd")
+        finish = ui.everydayFinish.date().toString("yyyy-MM-dd")
+        notes = ui.everydayNotes.text()
+        percent = ui.everydayProgressPercent.text()
+        status = ui.everydayStatus.currentText()
+        project = {
+            "Project name" : name,
+            "Project start date" : start,
+            "Project end date" : finish,
+            "Project notes" : notes,
+            "Project progress" : percent,
+            "Project status" : status
+        }
+        print(f"Project variables to save:\n{project}")
+        # p_project = False
+        # r_task = False
+    
+    # Write programming project
+    elif projects_file == resources.PROGRAMING_FILE:
+        name = ui.programmingName.text()
+        start = ui.programmingStart.date().toString("yyyy-MM-dd")
+        finish = ui.programmingFinish.date().toString("yyyy-MM-dd")
+        language = ui.languagesEdit.text()
+        link = ui.githubEdit.text()
+        notes = ui.programmingNotes.text()
+        percent = ui.programmingProgressPercent.text()
+        status = ui.programmingStatus.currentText()
+        project = {
+            "Project name" : name,
+            "Project start date" : start,
+            "Project end dage" : finish,
+            "Language(s)" : language,
+            "GitHub link" : link,
+            "Project notes" : notes,
+            "Project progress" : percent,
+            "Project status" : status
+        }
+        print(f"Project variables to save:\n{project}")
+        # e_project = False
+        # r_task = False
+
+    # Write recurring task
+    else:
+        name = ui.recurringName.text()
+        frequency = ui.recurringFrequency.currentText()
+        notes = ui.recurringNotes.text()
+        project = {
+            "Task name" : name,
+            "Task frequency" : frequency,
+            "Task notes" : notes
+        }
+        print(f"Task variables to save:\n{project}")
+        # e_project = False
+        # p_project = False
+
