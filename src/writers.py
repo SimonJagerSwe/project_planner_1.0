@@ -1,8 +1,6 @@
 ########## Writers ##########
 # Imports
 import json
-import os
-import sys
 
 import resources, button_handler
 
@@ -12,22 +10,26 @@ from PySide6.QtCore import QDate
 
 # Write everyday project
 def w_e_project(ui, current_dialog=None, main_window=None):
+    # Try to open file with current everyday projects and load into projects list
     try:
         with open(resources.EVERYDAY_FILE, "r") as file:
             projects = json.load(file)
             print(projects)
+
+    # If there are no active everyday projects, initialise empty projects list
     except:
         print("No current everyday projects found")
         projects = []
 
-    print(f"Writing everyday project to {resources.EVERYDAY_FILE}...")
+    # Read project parameters from gui
     name = ui.everydayName.text()
     start = ui.everydayStart.date().toString("yyyy-MM-dd")
     finish = ui.everydayFinish.date().toString("yyyy-MM-dd")
     notes = ui.everydayNotes.text()
-    # progress = ui.everydayProgressSlider.value()
     percent = ui.everydayProgressPercent.text()
     status = ui.everydayStatus.currentText()
+
+    # Store project parameters in project dict
     e_project = {
         "Project name" : name,
         "Project start date" : start,
@@ -38,14 +40,18 @@ def w_e_project(ui, current_dialog=None, main_window=None):
     }
     print(f"Project variables to save:\n{e_project}")
 
-    # n_e_list = projects
+    # Append new project to the end of the projects file
     projects.append(e_project)
     print(projects)
 
+    # Write updated projects file
     with open(resources.EVERYDAY_FILE, "w") as file:
         json.dump(projects, file)
 
+    # Display message to let user know that the project has been saved
     resources.success_message("Everyday")
+
+    # Return to main menu
     if current_dialog and main_window:
         button_handler.return_to_main_clicked(current_dialog, main_window)
     
