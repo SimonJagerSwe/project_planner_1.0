@@ -4,15 +4,22 @@ import json
 import os
 import sys
 
-import resources
+import resources, button_handler
 
 from interface.ui_everyday import Ui_everydayProjectEditor as everyday
 
 from PySide6.QtCore import QDate
-from PySide6.QtWidgets import QMessageBox
 
 # Write everyday project
-def w_e_project(ui):
+def w_e_project(ui, current_dialog=None, main_window=None):
+    try:
+        with open(resources.EVERYDAY_FILE, "r") as file:
+            projects = json.load(file)
+            print(projects)
+    except:
+        print("No current everyday projects found")
+        projects = []
+
     print(f"Writing everyday project to {resources.EVERYDAY_FILE}...")
     name = ui.everydayName.text()
     start = ui.everydayStart.date().toString("yyyy-MM-dd")
@@ -31,14 +38,17 @@ def w_e_project(ui):
     }
     print(f"Project variables to save:\n{e_project}")
 
-    n_e_list = []
-    n_e_list.append(e_project)
-    print(n_e_list)
+    # n_e_list = projects
+    projects.append(e_project)
+    print(projects)
 
-    with open("project_files/everyday_projects.json", "w") as file:
-        json.dump(n_e_list, file)
+    with open(resources.EVERYDAY_FILE, "w") as file:
+        json.dump(projects, file)
 
-    resources.success_message("Programming")
+    resources.success_message("Everyday")
+    if current_dialog and main_window:
+        button_handler.return_to_main_clicked(current_dialog, main_window)
+    
 
 # Edit everyday project
 def e_e_project(ui):

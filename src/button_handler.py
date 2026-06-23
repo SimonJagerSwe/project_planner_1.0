@@ -2,10 +2,7 @@
 # Imports
 import sys
 
-import readers
-import resources
 import writers
-
 
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
@@ -13,8 +10,8 @@ from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_recurring import Ui_recurringProjectEditor
 from interface.ui_tabs import Ui_Viewer
 
-from PySide6.QtCore import QDate, QTimer
-from PySide6.QtGui import QAction, QCursor
+from PySide6.QtCore import QDate
+from PySide6.QtGui import QAction
 from PySide6.QtWidgets import QDialog, QMessageBox, QPushButton
 
 
@@ -95,7 +92,7 @@ def everyday_project_clicked(current_dialog, main_window):
     ui.everydayFinish.setDate(QDate.currentDate())
     ui.everydayProgressSlider.valueChanged.connect(lambda value: 
         ui.everydayProgressPercent.setText(f"{value}%"))
-    ui.everydaySave.clicked.connect(lambda: writers.w_e_project(ui))
+    ui.everydaySave.clicked.connect(lambda: writers.w_e_project(ui, everyday_dialog, main_window))
     ui.everydayClear.clicked.connect(lambda: writers.c_e_project(ui))
     ui.everydayReturn.clicked.connect(lambda: return_to_main_clicked(everyday_dialog, main_window))
     ui.everydayExit.clicked.connect(lambda: exit_clicked(everyday_dialog))
