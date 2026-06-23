@@ -9,6 +9,7 @@ import resources
 from interface.ui_everyday import Ui_everydayProjectEditor as everyday
 
 from PySide6.QtCore import QDate
+from PySide6.QtWidgets import QMessageBox
 
 # Write everyday project
 def w_e_project(ui):
@@ -37,7 +38,7 @@ def w_e_project(ui):
     with open("project_files/everyday_projects.json", "w") as file:
         json.dump(n_e_list, file)
 
-    
+    resources.success_message("Programming")
 
 # Edit everyday project
 def e_e_project(ui):
