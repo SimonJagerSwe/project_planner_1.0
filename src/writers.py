@@ -2,22 +2,17 @@
 # Imports
 import json
 
-import resources, button_handler
+import button_handler, resources
+
+from reader import reader
 
 from PySide6.QtCore import QDate
 
 # Write everyday project
 def w_e_project(ui, current_dialog=None, main_window=None):
-    # Try to open file with current everyday projects and load into projects list
-    try:
-        with open(resources.EVERYDAY_FILE, "r") as file:
-            projects = json.load(file)
-            print(projects)
-
-    # If there are no active everyday projects, initialise empty projects list
-    except:
-        print("No current everyday projects found")
-        projects = []
+    # Call reader to fetch all current everyday projects
+    projects = reader(resources.EVERYDAY_FILE)
+    print(f"Current eveyday projects:\n{projects}")
 
     # Read project parameters from gui
     name = ui.everydayName.text()
@@ -75,16 +70,9 @@ def d_e_project():
 
 # Write programming project
 def w_p_project(ui, current_dialog=None, main_window=None):
-    # Try to open file with current programming projects and load into projects list
-    try:
-        with open(resources.PROGRAMING_FILE, "r") as file:
-            projects = json.load(file)
-            print(projects)
-
-    # If there are no active programming projects, initialise empty projects list
-    except:
-        print("No programming projects found")
-        projects = []
+    # Call reader to fetch all current programming projects
+    projects = reader(resources.PROGRAMING_FILE)
+    print(f"Current programming projects:\n{projects}")
 
     # Read project parameters from gui
     name = ui.programmingName.text()
@@ -149,16 +137,9 @@ def d_e_project():
 # Write recurring task
 def w_r_task(ui, current_dialog=None, main_window=None):
     print("Writing recurring task...")
-    # Try to open file with recurring tasks and load into tasks list
-    try:
-        with open(resources.RECURRING_FILE, "r") as file:
-            tasks = json.load(file)
-            print(tasks)
+    # Call reader to fetch all current recurring tasks
+    tasks = reader(resources.RECURRING_FILE)
 
-    # If there are no active recurring tasks, initialise empty tasks list
-    except:
-        print("No recurring tasks found")
-        tasks = []
     
     # Read project parameters from gui
     name = ui.recurringName.text()
