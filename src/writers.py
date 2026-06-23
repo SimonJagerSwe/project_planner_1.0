@@ -4,53 +4,83 @@ import json
 
 import button_handler, resources
 
-from reader import reader
+from loader import load_file
 
 from PySide6.QtCore import QDate
 
-# Write everyday project
-def w_e_project(ui, current_dialog=None, main_window=None):
-    # Call reader to fetch all current everyday projects
-    projects = reader(resources.EVERYDAY_FILE)
-    print(f"Current eveyday projects:\n{projects}")
 
-    # Read project parameters from gui
-    name = ui.everydayName.text()
-    start = ui.everydayStart.date().toString("yyyy-MM-dd")
-    finish = ui.everydayFinish.date().toString("yyyy-MM-dd")
-    notes = ui.everydayNotes.text()
-    percent = ui.everydayProgressPercent.text()
-    status = ui.everydayStatus.currentText()
+# Project writer
+def writer(ui, projects_file, current_dialog=None, main_window=None):
+    projects = load_file(projects_file)
+    print(f"Working file:\n{projects_file}\n\n")
+    print(f"Projects in file:\n{projects}\n\n")
 
-    # Store project parameters in project dict
-    e_project = {
-        "Project name" : name,
-        "Project start date" : start,
-        "Project end date" : finish,
-        "Project notes" : notes,
-        "Project progress" : percent,
-        "Project status" : status
-    }
-    print(f"Project variables to save:\n{e_project}")
+    # Create everyday project
+    if projects_file == resources.EVERYDAY_FILE:
+        name = ui.everydayName.text()
+        start = ui.everydayStart.date().toString("yyyy-MM-dd")
+        finish = ui.everydayFinish.date().toString("yyyy-MM-dd")
+        notes = ui.everydayNotes.text()
+        percent = ui.everydayProgressPercent.text()
+        status = ui.everydayStatus.currentText()
+        project = {
+            "Project name" : name,
+            "Project start date" : start,
+            "Project end date" : finish,
+            "Project notes" : notes,
+            "Project progress" : percent,
+            "Project status" : status
+        }
+    
+    # Create programming project
+    elif projects_file == resources.PROGRAMING_FILE:
+        name = ui.programmingName.text()
+        start = ui.programmingStart.date().toString("yyyy-MM-dd")
+        finish = ui.programmingFinish.date().toString("yyyy-MM-dd")
+        language = ui.languagesEdit.text()
+        link = ui.githubEdit.text()
+        notes = ui.programmingNotes.text()
+        percent = ui.programmingProgressPercent.text()
+        status = ui.programmingStatus.currentText()
+        project = {
+            "Project name" : name,
+            "Project start date" : start,
+            "Project end dage" : finish,
+            "Language(s)" : language,
+            "GitHub link" : link,
+            "Project notes" : notes,
+            "Project progress" : percent,
+            "Project status" : status
+        }
 
-    # Append new project to the end of the everyday projects file
-    projects.append(e_project)
-    print(projects)
+    # Create recurring task
+    else:
+        name = ui.recurringName.text()
+        frequency = ui.recurringFrequency.currentText()
+        notes = ui.recurringNotes.text()
+        project = {
+            "Task name" : name,
+            "Task frequency" : frequency,
+            "Task notes" : notes
+        }
 
-    # Write updated everyday projects file
-    with open(resources.EVERYDAY_FILE, "w") as file:
+    print(f"Project to be added:\n{project}\n\n")
+    projects.append(project)
+    print(f"Updated projects file:\n{projects}\n\n")
+
+
+    # Write updated projects file
+    with open(projects_file, "w") as file:
         json.dump(projects, file)
-
-    # Display message to let user know that the everyday project has been saved
-    resources.success_message("Everyday")
+    resources.success_message()
 
     # Return to main menu
     if current_dialog and main_window:
         button_handler.return_to_main_clicked(current_dialog, main_window)
-    
 
-# Edit everyday project
-def e_e_project(ui):
+'''
+# Project editor
+def editor(ui):
     print("Editing everyday project...")
 
 # Clear everyday project input
@@ -211,3 +241,4 @@ def w_f_archive():
     f_archive = {
 
     }
+'''

@@ -2,7 +2,7 @@
 # Imports
 import sys
 
-import writers
+import resources, writers
 
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
@@ -92,7 +92,8 @@ def everyday_project_clicked(current_dialog, main_window):
     ui.everydayFinish.setDate(QDate.currentDate())
     ui.everydayProgressSlider.valueChanged.connect(lambda value: 
         ui.everydayProgressPercent.setText(f"{value}%"))
-    ui.everydaySave.clicked.connect(lambda: writers.w_e_project(ui, everyday_dialog, main_window))
+    # ui.everydaySave.clicked.connect(lambda: writers.w_e_project(ui, everyday_dialog, main_window))
+    ui.everydaySave.clicked.connect(lambda: writers.writer(ui, resources.EVERYDAY_FILE, everyday_dialog, main_window))
     ui.everydayClear.clicked.connect(lambda: writers.c_e_project(ui))
     ui.everydayReturn.clicked.connect(lambda: return_to_main_clicked(everyday_dialog, main_window))
     ui.everydayExit.clicked.connect(lambda: exit_clicked(everyday_dialog))
@@ -113,7 +114,8 @@ def programming_project_clicked(current_dialog, main_window):
     ui.programmingFinish.setDate(QDate.currentDate())
     ui.programmingProgressSlider.valueChanged.connect(lambda value:
         ui.programmingProgressPercent.setText(f"{value}%"))
-    ui.programmingSave.clicked.connect(lambda: writers.w_p_project(ui, programming_dialog, main_window))
+    # ui.programmingSave.clicked.connect(lambda: writers.w_p_project(ui, programming_dialog, main_window))
+    ui.programmingSave.clicked.connect(lambda: writers.writer(ui, resources.PROGRAMING_FILE, programming_dialog, main_window))
     ui.programmingClear.clicked.connect(lambda: writers.c_p_project(ui))
     ui.programmingReturn.clicked.connect(lambda: return_to_main_clicked(programming_dialog, main_window))
     ui.programmingExit.clicked.connect(lambda: exit_clicked(programming_dialog))
@@ -130,7 +132,8 @@ def recurring_project_clicked(current_dialog, main_window):
     recurring_dialog = QDialog(main_window)
     ui = Ui_recurringProjectEditor()
     ui.setupUi(recurring_dialog)
-    ui.saveRecurring.clicked.connect(lambda: writers.w_r_task(ui, recurring_dialog, main_window))
+    # ui.saveRecurring.clicked.connect(lambda: writers.w_r_task(ui, recurring_dialog, main_window))
+    ui.saveRecurring.clicked.connect(lambda: writers.writer(ui, resources.RECURRING_FILE, recurring_dialog, main_window))
     ui.clearRecurring.clicked.connect(lambda: writers.c_r_task(ui))
     ui.returnToMainRecurring.clicked.connect(lambda: return_to_main_clicked(recurring_dialog, main_window))
     ui.exitRecurring.clicked.connect(lambda: exit_clicked(recurring_dialog))
