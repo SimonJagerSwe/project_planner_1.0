@@ -154,11 +154,12 @@ def w_r_task():
     }
 
 # Clear recurring task
-def c_r_task():
+def c_r_task(ui):
     print("Clearing recurring task")
-    r_task = {
-
-    }
+    ui.recurringName.setText("")
+    ui.recurringFrequency.setCurrentText("Select frequency")
+    ui.recurringNotes.setText("")
+    
     
 # Delete recurring task
 def d_r_task():

@@ -41,7 +41,7 @@
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>11</x>
@@ -68,7 +68,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="projectNameRecurring">
+         <widget class="QLineEdit" name="recurringName">
           <property name="text">
            <string/>
           </property>
@@ -91,7 +91,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="frequencyComboRecurring">
+         <widget class="QComboBox" name="recurringFrequency">
           <property name="maxVisibleItems">
            <number>4</number>
           </property>
@@ -137,7 +137,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="notesEditProgramming">
+         <widget class="QLineEdit" name="recurringNotes">
           <property name="text">
            <string/>
           </property>

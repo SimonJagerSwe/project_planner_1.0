@@ -33,17 +33,17 @@ class Ui_recurringProjectEditor(object):
         font.setBold(True)
         self.recurringLabel.setFont(font)
         self.recurringLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.widget = QWidget(recurringProjectEditor)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(11, 101, 421, 251))
-        self.recurringGrid = QGridLayout(self.widget)
+        self.layoutWidget = QWidget(recurringProjectEditor)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(11, 101, 421, 251))
+        self.recurringGrid = QGridLayout(self.layoutWidget)
         self.recurringGrid.setObjectName(u"recurringGrid")
         self.recurringGrid.setContentsMargins(0, 0, 0, 0)
         self.recurringProjectLayout = QGridLayout()
         self.recurringProjectLayout.setObjectName(u"recurringProjectLayout")
         self.nameLayoutRecurring = QHBoxLayout()
         self.nameLayoutRecurring.setObjectName(u"nameLayoutRecurring")
-        self.nameLabelRecurring = QLabel(self.widget)
+        self.nameLabelRecurring = QLabel(self.layoutWidget)
         self.nameLabelRecurring.setObjectName(u"nameLabelRecurring")
         font1 = QFont()
         font1.setBold(True)
@@ -51,10 +51,10 @@ class Ui_recurringProjectEditor(object):
 
         self.nameLayoutRecurring.addWidget(self.nameLabelRecurring)
 
-        self.projectNameRecurring = QLineEdit(self.widget)
-        self.projectNameRecurring.setObjectName(u"projectNameRecurring")
+        self.recurringName = QLineEdit(self.layoutWidget)
+        self.recurringName.setObjectName(u"recurringName")
 
-        self.nameLayoutRecurring.addWidget(self.projectNameRecurring)
+        self.nameLayoutRecurring.addWidget(self.recurringName)
 
         self.nameLayoutRecurring.setStretch(0, 1)
         self.nameLayoutRecurring.setStretch(1, 3)
@@ -63,22 +63,22 @@ class Ui_recurringProjectEditor(object):
 
         self.frequencyLayoutRecurring = QHBoxLayout()
         self.frequencyLayoutRecurring.setObjectName(u"frequencyLayoutRecurring")
-        self.frequencyLabelRecurring = QLabel(self.widget)
+        self.frequencyLabelRecurring = QLabel(self.layoutWidget)
         self.frequencyLabelRecurring.setObjectName(u"frequencyLabelRecurring")
         self.frequencyLabelRecurring.setFont(font1)
 
         self.frequencyLayoutRecurring.addWidget(self.frequencyLabelRecurring)
 
-        self.frequencyComboRecurring = QComboBox(self.widget)
-        self.frequencyComboRecurring.addItem("")
-        self.frequencyComboRecurring.addItem("")
-        self.frequencyComboRecurring.addItem("")
-        self.frequencyComboRecurring.addItem("")
-        self.frequencyComboRecurring.setObjectName(u"frequencyComboRecurring")
-        self.frequencyComboRecurring.setMaxVisibleItems(4)
-        self.frequencyComboRecurring.setMaxCount(4)
+        self.recurringFrequency = QComboBox(self.layoutWidget)
+        self.recurringFrequency.addItem("")
+        self.recurringFrequency.addItem("")
+        self.recurringFrequency.addItem("")
+        self.recurringFrequency.addItem("")
+        self.recurringFrequency.setObjectName(u"recurringFrequency")
+        self.recurringFrequency.setMaxVisibleItems(4)
+        self.recurringFrequency.setMaxCount(4)
 
-        self.frequencyLayoutRecurring.addWidget(self.frequencyComboRecurring)
+        self.frequencyLayoutRecurring.addWidget(self.recurringFrequency)
 
         self.frequencyLayoutRecurring.setStretch(0, 1)
         self.frequencyLayoutRecurring.setStretch(1, 3)
@@ -87,16 +87,16 @@ class Ui_recurringProjectEditor(object):
 
         self.notesLayoutRecurring = QHBoxLayout()
         self.notesLayoutRecurring.setObjectName(u"notesLayoutRecurring")
-        self.notesLabelRecurring = QLabel(self.widget)
+        self.notesLabelRecurring = QLabel(self.layoutWidget)
         self.notesLabelRecurring.setObjectName(u"notesLabelRecurring")
         self.notesLabelRecurring.setFont(font1)
 
         self.notesLayoutRecurring.addWidget(self.notesLabelRecurring)
 
-        self.notesEditProgramming = QLineEdit(self.widget)
-        self.notesEditProgramming.setObjectName(u"notesEditProgramming")
+        self.recurringNotes = QLineEdit(self.layoutWidget)
+        self.recurringNotes.setObjectName(u"recurringNotes")
 
-        self.notesLayoutRecurring.addWidget(self.notesEditProgramming)
+        self.notesLayoutRecurring.addWidget(self.recurringNotes)
 
 
         self.recurringProjectLayout.addLayout(self.notesLayoutRecurring, 2, 0, 1, 1)
@@ -106,12 +106,12 @@ class Ui_recurringProjectEditor(object):
 
         self.recurringProjectManagerGrid = QHBoxLayout()
         self.recurringProjectManagerGrid.setObjectName(u"recurringProjectManagerGrid")
-        self.saveRecurring = QPushButton(self.widget)
+        self.saveRecurring = QPushButton(self.layoutWidget)
         self.saveRecurring.setObjectName(u"saveRecurring")
 
         self.recurringProjectManagerGrid.addWidget(self.saveRecurring)
 
-        self.clearRecurring = QPushButton(self.widget)
+        self.clearRecurring = QPushButton(self.layoutWidget)
         self.clearRecurring.setObjectName(u"clearRecurring")
 
         self.recurringProjectManagerGrid.addWidget(self.clearRecurring)
@@ -121,12 +121,12 @@ class Ui_recurringProjectEditor(object):
 
         self.recurringMenyLayout = QHBoxLayout()
         self.recurringMenyLayout.setObjectName(u"recurringMenyLayout")
-        self.returnToMainRecurring = QPushButton(self.widget)
+        self.returnToMainRecurring = QPushButton(self.layoutWidget)
         self.returnToMainRecurring.setObjectName(u"returnToMainRecurring")
 
         self.recurringMenyLayout.addWidget(self.returnToMainRecurring)
 
-        self.exitRecurring = QPushButton(self.widget)
+        self.exitRecurring = QPushButton(self.layoutWidget)
         self.exitRecurring.setObjectName(u"exitRecurring")
 
         self.recurringMenyLayout.addWidget(self.exitRecurring)
@@ -144,15 +144,15 @@ class Ui_recurringProjectEditor(object):
         recurringProjectEditor.setWindowTitle(QCoreApplication.translate("recurringProjectEditor", u"Form", None))
         self.recurringLabel.setText(QCoreApplication.translate("recurringProjectEditor", u"Recurring project", None))
         self.nameLabelRecurring.setText(QCoreApplication.translate("recurringProjectEditor", u"Project name", None))
-        self.projectNameRecurring.setText("")
+        self.recurringName.setText("")
         self.frequencyLabelRecurring.setText(QCoreApplication.translate("recurringProjectEditor", u"Frequency", None))
-        self.frequencyComboRecurring.setItemText(0, QCoreApplication.translate("recurringProjectEditor", u"Select frequency", None))
-        self.frequencyComboRecurring.setItemText(1, QCoreApplication.translate("recurringProjectEditor", u"Weekly", None))
-        self.frequencyComboRecurring.setItemText(2, QCoreApplication.translate("recurringProjectEditor", u"Bi-weekly", None))
-        self.frequencyComboRecurring.setItemText(3, QCoreApplication.translate("recurringProjectEditor", u"Other", None))
+        self.recurringFrequency.setItemText(0, QCoreApplication.translate("recurringProjectEditor", u"Select frequency", None))
+        self.recurringFrequency.setItemText(1, QCoreApplication.translate("recurringProjectEditor", u"Weekly", None))
+        self.recurringFrequency.setItemText(2, QCoreApplication.translate("recurringProjectEditor", u"Bi-weekly", None))
+        self.recurringFrequency.setItemText(3, QCoreApplication.translate("recurringProjectEditor", u"Other", None))
 
         self.notesLabelRecurring.setText(QCoreApplication.translate("recurringProjectEditor", u"Notes", None))
-        self.notesEditProgramming.setText("")
+        self.recurringNotes.setText("")
         self.saveRecurring.setText(QCoreApplication.translate("recurringProjectEditor", u"Save project", None))
         self.clearRecurring.setText(QCoreApplication.translate("recurringProjectEditor", u"Clear all", None))
         self.returnToMainRecurring.setText(QCoreApplication.translate("recurringProjectEditor", u"Return to main", None))
