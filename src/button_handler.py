@@ -113,7 +113,7 @@ def programming_project_clicked(current_dialog, main_window):
     ui.programmingFinish.setDate(QDate.currentDate())
     ui.programmingProgressSlider.valueChanged.connect(lambda value:
         ui.programmingProgressPercent.setText(f"{value}%"))
-    ui.programmingSave.clicked.connect(lambda: writers.w_p_project(ui))
+    ui.programmingSave.clicked.connect(lambda: writers.w_p_project(ui, programming_dialog, main_window))
     ui.programmingClear.clicked.connect(lambda: writers.c_p_project(ui))
     ui.programmingReturn.clicked.connect(lambda: return_to_main_clicked(programming_dialog, main_window))
     ui.programmingExit.clicked.connect(lambda: exit_clicked(programming_dialog))

@@ -1,8 +1,10 @@
 ########## Loader ##########
+# Imports
 from PySide6 import QtCore
 from PySide6.QtUiTools import QUiLoader
 
 
+# Loader function, to save load at runtime
 def load_ui(ui_path, parent=None):
     loader = QUiLoader()
     ui_file = QtCore.QFile(ui_path)

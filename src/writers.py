@@ -4,8 +4,6 @@ import json
 
 import resources, button_handler
 
-from interface.ui_everyday import Ui_everydayProjectEditor as everyday
-
 from PySide6.QtCore import QDate
 
 # Write everyday project
@@ -40,15 +38,15 @@ def w_e_project(ui, current_dialog=None, main_window=None):
     }
     print(f"Project variables to save:\n{e_project}")
 
-    # Append new project to the end of the projects file
+    # Append new project to the end of the everyday projects file
     projects.append(e_project)
     print(projects)
 
-    # Write updated projects file
+    # Write updated everyday projects file
     with open(resources.EVERYDAY_FILE, "w") as file:
         json.dump(projects, file)
 
-    # Display message to let user know that the project has been saved
+    # Display message to let user know that the everyday project has been saved
     resources.success_message("Everyday")
 
     # Return to main menu
@@ -76,17 +74,29 @@ def d_e_project():
     print("Deleting everyday project...")
 
 # Write programming project
-def w_p_project(ui):
-    print(f"Writing programming project to {resources.PROGRAMING_FILE}...")
+def w_p_project(ui, current_dialog=None, main_window=None):
+    # Try to open file with current programming projects and load into projects list
+    try:
+        with open(resources.PROGRAMING_FILE, "r") as file:
+            projects = json.load(file)
+            print(projects)
+
+    # If there are no active everyday projects, initialise empty projects list
+    except:
+        print("No programming projects found")
+        projects = []
+
+    # Read project parameters from gui
     name = ui.programmingName.text()
     start = ui.programmingStart.date().toString("yyyy-MM-dd")
     finish = ui.programmingFinish.date().toString("yyyy-MM-dd")
     language = ui.languagesEdit.text()
     link = ui.githubEdit.text()
     notes = ui.programmingNotes.text()
-    # progress = ui.programmingProgressSlider.value()
     percent = ui.programmingProgressPercent.text()
     status = ui.programmingStatus.currentText()
+
+    # Store project parameters in project dict
     p_project = {
         "Project name" : name,
         "Project start date" : start,
@@ -98,6 +108,22 @@ def w_p_project(ui):
         "Project status" : status
     }
     print(f"Project variables to save:\n{p_project}")
+
+    # Append new project to the end of the programming projects file
+    projects.append(p_project)
+    print(projects)
+
+    # Write updated programming projects file
+    with open(resources.PROGRAMING_FILE, "w") as file:
+        json.dump(projects, file)
+
+    # Display message to let user know that the programming project has been saved
+    resources.success_message("Programming")
+
+    # Return to main menu
+    if current_dialog and main_window:
+        button_handler.return_to_main_clicked(current_dialog, main_window)
+
 
 # Edit programming project
 def e_p_project(ui):
