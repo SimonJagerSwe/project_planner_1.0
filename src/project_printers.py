@@ -6,13 +6,18 @@ from loader import load_file
 
 # Print contents of file obtained from loaded projects file
 def print_projects(ui, top_tab, sub_tab):
+    # Clear ui on tab switch, otherwise all projects will be printed multiple times
     ui.everydayProjects.clear()
     ui.programmingProjects.clear()
     ui.recurringWeekly.clear()
     ui.recurringBi.clear()
     ui.recurringOther.clear()
+
+    # Open project file based on tab indices
     project_file = resources.tab_handler[top_tab][sub_tab]
     projects = load_file(project_file)
+
+    # Print precurring tasks depending on frequency
     if sub_tab == 3:
         for project in projects:
             name = project["Task name"]
@@ -25,6 +30,8 @@ def print_projects(ui, top_tab, sub_tab):
                 ui.recurringBi.addItem(full_project)
             else:
                 ui.recurringOther.addItem(full_project)
+
+    # Print everyday or programming projects, based on whether programming-specific variables exist
     else:
         for project in projects:
             name = project["Project name"]

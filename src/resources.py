@@ -1,5 +1,7 @@
 ########## Resources ##########
 # Imports
+import sys
+
 import resources
 
 from PySide6.QtWidgets import QMessageBox
@@ -16,7 +18,7 @@ FULL_ARCHIVE = "project_files/full_archive.json"
 SUCCESS_WINDOW_TITLE = "Project saved"
 SUCCESS_TEXT = "Project saved successfully!\nClick OK to return to main menu."
 
-# Resource variables
+# Utility variables
 tab_handler = [
     {
         0 : resources.EVERYDAY_FILE,
@@ -31,8 +33,31 @@ tab_handler = [
     }
 ]
 
-
 # Utility functions
+##### Universal buttons #####
+# Return to main menu
+def return_to_main_clicked(current_dialog, main_window):
+    print("Return to main menu clicked")
+    if current_dialog is not None:
+        current_dialog.close()
+    main_window.show()
+    main_window.setEnabled(True)
+
+# Exit program
+def exit_clicked(parent=None):
+    print("Exiting program...")
+    close = QMessageBox.question(
+        parent, 
+        "Confirm exit", 
+        "Are you sure you want to quit?",
+        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        QMessageBox.StandardButton.No
+        )
+    if close == QMessageBox.StandardButton.Yes:
+        sys.exit()
+    else:
+        print("Returning to previous menu")
+
 def success_message():
     success_message = QMessageBox()
     success_message.setWindowTitle(SUCCESS_WINDOW_TITLE)
