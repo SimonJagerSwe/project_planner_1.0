@@ -152,8 +152,6 @@ def project_viewer_clicked(main_window, idx):
 
     # Function to handle tab changes
     def tab_changed(top_tab, sub_tab):
-        print(f"Top tab: {top_tab}")
-        print(f"Sub tab: {sub_tab}\n")
         printer(top_tab, sub_tab)
 
     ui.viewer.setCurrentIndex(idx)
