@@ -156,15 +156,15 @@ def project_viewer_clicked(main_window, idx):
         print(f"Sub tab: {sub_tab}\n")
         printer(top_tab, sub_tab)
 
-
     ui.viewer.setCurrentIndex(idx)
     if ui.viewer.currentIndex == 0:
         ui.currentProjects.setCurrentIndex(0)
     if ui.viewer.currentIndex == 1:
         ui.archive.setCurrentIndex(0)
-    ui.viewer.currentChanged.connect(tab_changed(ui.viewer.currentIndex, ))
-    ui.projectTabs.currentChanged.connect(tab_changed)
-    ui.archivedTabs.currentChanged.connect(tab_changed)
+    tab_changed(ui.viewer.currentIndex(), 0)
+    ui.viewer.currentChanged.connect(lambda: tab_changed(ui.viewer.currentIndex(), 0))
+    ui.projectTabs.currentChanged.connect(lambda index: tab_changed(0, index))
+    ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
     ui.editProject.clicked.connect(lambda: edit_project_clicked)
     ui.archiveProject.clicked.connect(lambda: archive_project_clicked)
     ui.deleteProject.clicked.connect(lambda: delete_project_clicked)
