@@ -13,35 +13,9 @@ from project_printers import print_projects as printer
 
 from PySide6.QtCore import QDate
 from PySide6.QtGui import QAction
-from PySide6.QtWidgets import QDialog, QMessageBox, QPushButton
+from PySide6.QtWidgets import QDialog, QPushButton
 
 
-##### Universal buttons #####
-'''# Return to main menu
-def return_to_main_clicked(current_dialog, main_window):
-    print("Return to main menu clicked")
-    if current_dialog is not None:
-        current_dialog.close()
-    main_window.show()
-    main_window.setEnabled(True)
-
-# Exit program
-def exit_clicked(parent=None):
-    print("Exiting program...")
-    close = QMessageBox.question(
-        parent, 
-        "Confirm exit", 
-        "Are you sure you want to quit?",
-        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-        QMessageBox.StandardButton.No
-        )
-    if close == QMessageBox.StandardButton.Yes:
-        sys.exit()
-    else:
-        print("Returning to previous menu")'''
-
-
-##### Non-universal buttons #####
 # Main menu buttons
 def main_menu_buttons(main_window):
     # Regular buttons
