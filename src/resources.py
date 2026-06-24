@@ -17,17 +17,19 @@ SUCCESS_WINDOW_TITLE = "Project saved"
 SUCCESS_TEXT = "Project saved successfully!\nClick OK to return to main menu."
 
 # Resource variables
-project_tabs = {
-    0 : resources.EVERYDAY_FILE,
-    1 : resources.PROGRAMING_FILE,
-    2 : resources.ALL_PROJECTS_FILE,
-    3 : resources.RECURRING_FILE
-}
-archive_tabs = {
-    0 : resources.EVERYDAY_ARCHIVE,
-    1 : resources.PROGRAMMING_ARCHIVE,
-    2 : resources.FULL_ARCHIVE
-}
+tab_handler = [
+    {
+        0 : resources.EVERYDAY_FILE,
+        1 : resources.PROGRAMING_FILE,
+        2 : resources.ALL_PROJECTS_FILE,
+        3 : resources.RECURRING_FILE
+    }, 
+    {
+        0 : resources.EVERYDAY_ARCHIVE,
+        1 : resources.PROGRAMMING_ARCHIVE,
+        2 : resources.FULL_ARCHIVE
+    }
+]
 
 
 # Utility functions
