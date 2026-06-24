@@ -78,6 +78,11 @@ def writer(ui, projects_file, current_dialog=None, main_window=None):
     if current_dialog and main_window:
         button_handler.return_to_main_clicked(current_dialog, main_window)
 
+
+# Clear project input
+def clear_input():
+    ...
+
 '''
 # Project editor
 def editor(ui):

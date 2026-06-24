@@ -9,6 +9,7 @@ from interface.ui_new_project import Ui_addNewProject
 from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_recurring import Ui_recurringProjectEditor
 from interface.ui_tabs import Ui_Viewer
+from project_printers import print_projects as printer
 
 from PySide6.QtCore import QDate
 from PySide6.QtGui import QAction
@@ -94,7 +95,7 @@ def everyday_project_clicked(current_dialog, main_window):
         ui.everydayProgressPercent.setText(f"{value}%"))
     # ui.everydaySave.clicked.connect(lambda: writers.w_e_project(ui, everyday_dialog, main_window))
     ui.everydaySave.clicked.connect(lambda: writers.writer(ui, resources.EVERYDAY_FILE, everyday_dialog, main_window))
-    ui.everydayClear.clicked.connect(lambda: writers.c_e_project(ui))
+    ui.everydayClear.clicked.connect(lambda: writers.clear_input(ui))
     ui.everydayReturn.clicked.connect(lambda: return_to_main_clicked(everyday_dialog, main_window))
     ui.everydayExit.clicked.connect(lambda: exit_clicked(everyday_dialog))
     everyday_dialog.exec()
@@ -148,11 +149,22 @@ def project_viewer_clicked(main_window, idx):
     viewer = QDialog(main_window)
     ui = Ui_Viewer()
     ui.setupUi(viewer)
+
+    # Function to handle tab changes
+    def tab_changed(top_tab, sub_tab):
+        print(f"Top tab: {top_tab}")
+        print(f"Sub tab: {sub_tab}\n")
+        printer(top_tab, sub_tab)
+
+
     ui.viewer.setCurrentIndex(idx)
     if ui.viewer.currentIndex == 0:
         ui.currentProjects.setCurrentIndex(0)
     if ui.viewer.currentIndex == 1:
         ui.archive.setCurrentIndex(0)
+    ui.viewer.currentChanged.connect(tab_changed(ui.viewer.currentIndex, ))
+    ui.projectTabs.currentChanged.connect(tab_changed)
+    ui.archivedTabs.currentChanged.connect(tab_changed)
     ui.editProject.clicked.connect(lambda: edit_project_clicked)
     ui.archiveProject.clicked.connect(lambda: archive_project_clicked)
     ui.deleteProject.clicked.connect(lambda: delete_project_clicked)
@@ -164,6 +176,9 @@ def project_viewer_clicked(main_window, idx):
     ui.exitArchive.clicked.connect(lambda: exit_clicked(viewer))
     viewer.exec()
     main_window.show()
+
+    
+
 
 def edit_project_clicked():
     print("Editing project...")
