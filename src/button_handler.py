@@ -177,7 +177,7 @@ def project_viewer_clicked(main_window, idx):
 
     
 
-
+# Placeholder functions
 def edit_project_clicked():
     print("Editing project...")
 

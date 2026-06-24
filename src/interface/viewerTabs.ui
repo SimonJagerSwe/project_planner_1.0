@@ -27,7 +27,7 @@
       <attribute name="title">
        <string>Current projects</string>
       </attribute>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>9</x>
@@ -58,21 +58,61 @@
            <attribute name="title">
             <string>Everyday projects</string>
            </attribute>
+           <widget class="QListWidget" name="everydayProjects">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>521</width>
+              <height>421</height>
+             </rect>
+            </property>
+           </widget>
           </widget>
-          <widget class="QWidget" name="programmingProjects">
+          <widget class="QWidget" name="programmingProjectsTab">
            <attribute name="title">
             <string>Programming projects</string>
            </attribute>
+           <widget class="QListWidget" name="programmingProjects">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>521</width>
+              <height>421</height>
+             </rect>
+            </property>
+           </widget>
           </widget>
-          <widget class="QWidget" name="allProjects">
+          <widget class="QWidget" name="allProjectsTab">
            <attribute name="title">
             <string>All projects</string>
            </attribute>
+           <widget class="QListWidget" name="allProjects">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>521</width>
+              <height>421</height>
+             </rect>
+            </property>
+           </widget>
           </widget>
-          <widget class="QWidget" name="tab">
+          <widget class="QWidget" name="recurringProjectsTab">
            <attribute name="title">
             <string>Recurring projects</string>
            </attribute>
+           <widget class="QListWidget" name="recurringProjects">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>521</width>
+              <height>421</height>
+             </rect>
+            </property>
+           </widget>
           </widget>
          </widget>
         </item>
@@ -130,7 +170,7 @@
       <attribute name="title">
        <string>Archive</string>
       </attribute>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>9</x>
@@ -151,20 +191,50 @@
           <property name="tabsClosable">
            <bool>false</bool>
           </property>
-          <widget class="QWidget" name="everydayArchive">
+          <widget class="QWidget" name="everydayArchiveTab">
            <attribute name="title">
             <string>Everyday projects</string>
            </attribute>
+           <widget class="QListWidget" name="everydayArchive">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>521</width>
+              <height>421</height>
+             </rect>
+            </property>
+           </widget>
           </widget>
-          <widget class="QWidget" name="programmingArchive">
+          <widget class="QWidget" name="programmingArchiveTab">
            <attribute name="title">
             <string>Programming projects</string>
            </attribute>
+           <widget class="QListWidget" name="programmingArchive">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>521</width>
+              <height>421</height>
+             </rect>
+            </property>
+           </widget>
           </widget>
-          <widget class="QWidget" name="fullArchive">
+          <widget class="QWidget" name="fullArchiveTab">
            <attribute name="title">
             <string>All projects</string>
            </attribute>
+           <widget class="QListWidget" name="fullArchive">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>521</width>
+              <height>421</height>
+             </rect>
+            </property>
+           </widget>
           </widget>
          </widget>
         </item>
