@@ -25,8 +25,8 @@ def writer(ui, projects_file, current_dialog=None, main_window=None):
         status = ui.everydayStatus.currentText()
         project = {
             "Project name" : name,
-            "Project start date" : start,
-            "Project end date" : finish,
+            "Project start" : start,
+            "Project end" : finish,
             "Project notes" : notes,
             "Project progress" : percent,
             "Project status" : status
@@ -44,8 +44,8 @@ def writer(ui, projects_file, current_dialog=None, main_window=None):
         status = ui.programmingStatus.currentText()
         project = {
             "Project name" : name,
-            "Project start date" : start,
-            "Project end dage" : finish,
+            "Project start" : start,
+            "Project end" : finish,
             "Language(s)" : language,
             "GitHub link" : link,
             "Project notes" : notes,
@@ -123,7 +123,7 @@ def w_p_project(ui, current_dialog=None, main_window=None):
     p_project = {
         "Project name" : name,
         "Project start date" : start,
-        "Project end dage" : finish,
+        "Project end date" : finish,
         "Language(s)" : language,
         "GitHub link" : link,
         "Project notes" : notes,

@@ -172,6 +172,9 @@ def project_viewer_clicked(main_window, idx):
     ui.deleteArchived.clicked.connect(delete_archive_clicked)
     ui.returnToMainArchive.clicked.connect(lambda: return_to_main_clicked(viewer, main_window))
     ui.exitArchive.clicked.connect(lambda: exit_clicked(viewer))
+
+    
+
     viewer.exec()
     main_window.show()
 
