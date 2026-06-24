@@ -25,8 +25,8 @@ def writer(ui, projects_file, current_dialog=None, main_window=None):
         status = ui.everydayStatus.currentText()
         project = {
             "Project name" : name,
-            "Project start date" : start,
-            "Project end date" : finish,
+            "Project start" : start,
+            "Project end" : finish,
             "Project notes" : notes,
             "Project progress" : percent,
             "Project status" : status
@@ -44,8 +44,8 @@ def writer(ui, projects_file, current_dialog=None, main_window=None):
         status = ui.programmingStatus.currentText()
         project = {
             "Project name" : name,
-            "Project start date" : start,
-            "Project end dage" : finish,
+            "Project start" : start,
+            "Project end" : finish,
             "Language(s)" : language,
             "GitHub link" : link,
             "Project notes" : notes,
@@ -77,6 +77,11 @@ def writer(ui, projects_file, current_dialog=None, main_window=None):
     # Return to main menu
     if current_dialog and main_window:
         button_handler.return_to_main_clicked(current_dialog, main_window)
+
+
+# Clear project input
+def clear_input():
+    ...
 
 '''
 # Project editor
@@ -118,7 +123,7 @@ def w_p_project(ui, current_dialog=None, main_window=None):
     p_project = {
         "Project name" : name,
         "Project start date" : start,
-        "Project end dage" : finish,
+        "Project end date" : finish,
         "Language(s)" : language,
         "GitHub link" : link,
         "Project notes" : notes,
@@ -164,41 +169,8 @@ def c_p_project(ui):
 def d_e_project():
     print("Deleting programming project...")
 
-# Write recurring task
-def w_r_task(ui, current_dialog=None, main_window=None):
-    print("Writing recurring task...")
-    # Call reader to fetch all current recurring tasks
-    tasks = reader(resources.RECURRING_FILE)
-
     
-    # Read project parameters from gui
-    name = ui.recurringName.text()
-    frequency = ui.recurringFrequency.currentText()
-    notes = ui.recurringNotes.text()
-
-    # Store task parameters in task dict
-    r_task = {
-        "Task name" : name,
-        "Task frequency" : frequency,
-        "Task notes" : notes
-    }
-    print(f"Task variables to save:\n{r_task}")
-
-    # Append new task to the end of the tasks list
-    tasks.append(r_task)
-    print(tasks)
-
-    # Write updated tasks file
-    with open(resources.RECURRING_FILE, "w") as file:
-        json.dump(tasks, file)
-
-    # Display message to let user know that recurring task has been saved
-    resources.success_message("Recurring")
-
-    # Return to main menu
-    if current_dialog and main_window:
-        button_handler.return_to_main_clicked(current_dialog, main_window)
-
+# Edit recurring task
 def e_r_task():
     print("Editing recurring task...")
 

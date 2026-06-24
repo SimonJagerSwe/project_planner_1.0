@@ -27,7 +27,7 @@
       <attribute name="title">
        <string>Current projects</string>
       </attribute>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>9</x>
@@ -37,45 +37,6 @@
         </rect>
        </property>
        <layout class="QGridLayout" name="projectTabLayout">
-        <item row="0" column="0">
-         <widget class="QTabWidget" name="projectTabs">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="tabShape">
-           <enum>QTabWidget::TabShape::Rounded</enum>
-          </property>
-          <property name="currentIndex">
-           <number>0</number>
-          </property>
-          <widget class="QWidget" name="everydayProjectsTab">
-           <attribute name="title">
-            <string>Everyday projects</string>
-           </attribute>
-          </widget>
-          <widget class="QWidget" name="programmingProjects">
-           <attribute name="title">
-            <string>Programming projects</string>
-           </attribute>
-          </widget>
-          <widget class="QWidget" name="allProjects">
-           <attribute name="title">
-            <string>All projects</string>
-           </attribute>
-          </widget>
-          <widget class="QWidget" name="tab">
-           <attribute name="title">
-            <string>Recurring projects</string>
-           </attribute>
-          </widget>
-         </widget>
-        </item>
         <item row="1" column="0">
          <layout class="QGridLayout" name="projectMenuLayout">
           <item row="0" column="0">
@@ -123,6 +84,210 @@
           </item>
          </layout>
         </item>
+        <item row="0" column="0">
+         <widget class="QTabWidget" name="projectTabs">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="tabShape">
+           <enum>QTabWidget::TabShape::Rounded</enum>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="everydayProjectsTab">
+           <attribute name="title">
+            <string>Everyday projects</string>
+           </attribute>
+           <widget class="QListWidget" name="everydayProjects">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>521</width>
+              <height>421</height>
+             </rect>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QWidget" name="programmingProjectsTab">
+           <attribute name="title">
+            <string>Programming projects</string>
+           </attribute>
+           <widget class="QListWidget" name="programmingProjects">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>521</width>
+              <height>421</height>
+             </rect>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QWidget" name="allProjectsTab">
+           <attribute name="title">
+            <string>All projects</string>
+           </attribute>
+           <widget class="QListWidget" name="allProjects">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>521</width>
+              <height>421</height>
+             </rect>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QWidget" name="recurringProjectsTab">
+           <attribute name="title">
+            <string>Recurring projects</string>
+           </attribute>
+           <widget class="QWidget" name="layoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>12</y>
+              <width>521</width>
+              <height>121</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="weeklyGrid">
+             <item row="0" column="0">
+              <widget class="QLabel" name="weeklyLabel">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Weekly tasks</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QListWidget" name="recurringWeekly"/>
+             </item>
+             <item row="1" column="1">
+              <layout class="QVBoxLayout" name="weeklyButtonLayout">
+               <item>
+                <widget class="QPushButton" name="weeklyDone">
+                 <property name="text">
+                  <string>Task done</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="weeklyReset">
+                 <property name="text">
+                  <string>Reset weekly</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="layoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>11</x>
+              <y>151</y>
+              <width>521</width>
+              <height>121</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="biGrid">
+             <item row="0" column="0">
+              <widget class="QLabel" name="biLabel">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Bi-weekly tasks</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QListWidget" name="recurringBi"/>
+             </item>
+             <item row="1" column="1">
+              <layout class="QVBoxLayout" name="biButtonLayout">
+               <item>
+                <widget class="QPushButton" name="biDone">
+                 <property name="text">
+                  <string>Task done</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="biReset">
+                 <property name="text">
+                  <string>Reset Bb-weekly</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="">
+            <property name="geometry">
+             <rect>
+              <x>11</x>
+              <y>301</y>
+              <width>521</width>
+              <height>111</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="otherGrid">
+             <item row="0" column="0">
+              <widget class="QLabel" name="otherLabel">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Other tasks</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QListWidget" name="recurringOther"/>
+             </item>
+             <item row="1" column="1">
+              <layout class="QVBoxLayout" name="otherButtonLayout">
+               <item>
+                <widget class="QPushButton" name="otherDone">
+                 <property name="text">
+                  <string>Task done</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="otherReset">
+                 <property name="text">
+                  <string>Reset other</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </widget>
+        </item>
        </layout>
       </widget>
      </widget>
@@ -130,7 +295,7 @@
       <attribute name="title">
        <string>Archive</string>
       </attribute>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>9</x>
@@ -151,20 +316,50 @@
           <property name="tabsClosable">
            <bool>false</bool>
           </property>
-          <widget class="QWidget" name="everydayArchive">
+          <widget class="QWidget" name="everydayArchiveTab">
            <attribute name="title">
             <string>Everyday projects</string>
            </attribute>
+           <widget class="QListWidget" name="everydayArchive">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>521</width>
+              <height>421</height>
+             </rect>
+            </property>
+           </widget>
           </widget>
-          <widget class="QWidget" name="programmingArchive">
+          <widget class="QWidget" name="programmingArchiveTab">
            <attribute name="title">
             <string>Programming projects</string>
            </attribute>
+           <widget class="QListWidget" name="programmingArchive">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>521</width>
+              <height>421</height>
+             </rect>
+            </property>
+           </widget>
           </widget>
-          <widget class="QWidget" name="fullArchive">
+          <widget class="QWidget" name="fullArchiveTab">
            <attribute name="title">
             <string>All projects</string>
            </attribute>
+           <widget class="QListWidget" name="fullArchive">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>521</width>
+              <height>421</height>
+             </rect>
+            </property>
+           </widget>
           </widget>
          </widget>
         </item>
