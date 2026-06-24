@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QListWidget,
-    QListWidgetItem, QPushButton, QSizePolicy, QTabWidget,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QLabel,
+    QListWidget, QListWidgetItem, QPushButton, QSizePolicy,
+    QTabWidget, QVBoxLayout, QWidget)
 
 class Ui_Viewer(object):
     def setupUi(self, Viewer):
@@ -39,38 +39,6 @@ class Ui_Viewer(object):
         self.projectTabLayout = QGridLayout(self.layoutWidget)
         self.projectTabLayout.setObjectName(u"projectTabLayout")
         self.projectTabLayout.setContentsMargins(0, 0, 0, 0)
-        self.projectTabs = QTabWidget(self.layoutWidget)
-        self.projectTabs.setObjectName(u"projectTabs")
-        self.projectTabs.setEnabled(True)
-        self.projectTabs.setMinimumSize(QSize(0, 0))
-        self.projectTabs.setTabShape(QTabWidget.TabShape.Rounded)
-        self.everydayProjectsTab = QWidget()
-        self.everydayProjectsTab.setObjectName(u"everydayProjectsTab")
-        self.everydayProjects = QListWidget(self.everydayProjectsTab)
-        self.everydayProjects.setObjectName(u"everydayProjects")
-        self.everydayProjects.setGeometry(QRect(10, 10, 521, 421))
-        self.projectTabs.addTab(self.everydayProjectsTab, "")
-        self.programmingProjectsTab = QWidget()
-        self.programmingProjectsTab.setObjectName(u"programmingProjectsTab")
-        self.programmingProjects = QListWidget(self.programmingProjectsTab)
-        self.programmingProjects.setObjectName(u"programmingProjects")
-        self.programmingProjects.setGeometry(QRect(10, 10, 521, 421))
-        self.projectTabs.addTab(self.programmingProjectsTab, "")
-        self.allProjectsTab = QWidget()
-        self.allProjectsTab.setObjectName(u"allProjectsTab")
-        self.allProjects = QListWidget(self.allProjectsTab)
-        self.allProjects.setObjectName(u"allProjects")
-        self.allProjects.setGeometry(QRect(10, 10, 521, 421))
-        self.projectTabs.addTab(self.allProjectsTab, "")
-        self.recurringProjectsTab = QWidget()
-        self.recurringProjectsTab.setObjectName(u"recurringProjectsTab")
-        self.recurringProjects = QListWidget(self.recurringProjectsTab)
-        self.recurringProjects.setObjectName(u"recurringProjects")
-        self.recurringProjects.setGeometry(QRect(10, 10, 521, 421))
-        self.projectTabs.addTab(self.recurringProjectsTab, "")
-
-        self.projectTabLayout.addWidget(self.projectTabs, 0, 0, 1, 1)
-
         self.projectMenuLayout = QGridLayout()
         self.projectMenuLayout.setObjectName(u"projectMenuLayout")
         self.projectManagerLayout = QHBoxLayout()
@@ -111,16 +79,143 @@ class Ui_Viewer(object):
 
         self.projectTabLayout.addLayout(self.projectMenuLayout, 1, 0, 1, 1)
 
+        self.projectTabs = QTabWidget(self.layoutWidget)
+        self.projectTabs.setObjectName(u"projectTabs")
+        self.projectTabs.setEnabled(True)
+        self.projectTabs.setMinimumSize(QSize(0, 0))
+        self.projectTabs.setTabShape(QTabWidget.TabShape.Rounded)
+        self.everydayProjectsTab = QWidget()
+        self.everydayProjectsTab.setObjectName(u"everydayProjectsTab")
+        self.everydayProjects = QListWidget(self.everydayProjectsTab)
+        self.everydayProjects.setObjectName(u"everydayProjects")
+        self.everydayProjects.setGeometry(QRect(10, 10, 521, 421))
+        self.projectTabs.addTab(self.everydayProjectsTab, "")
+        self.programmingProjectsTab = QWidget()
+        self.programmingProjectsTab.setObjectName(u"programmingProjectsTab")
+        self.programmingProjects = QListWidget(self.programmingProjectsTab)
+        self.programmingProjects.setObjectName(u"programmingProjects")
+        self.programmingProjects.setGeometry(QRect(10, 10, 521, 421))
+        self.projectTabs.addTab(self.programmingProjectsTab, "")
+        self.allProjectsTab = QWidget()
+        self.allProjectsTab.setObjectName(u"allProjectsTab")
+        self.allProjects = QListWidget(self.allProjectsTab)
+        self.allProjects.setObjectName(u"allProjects")
+        self.allProjects.setGeometry(QRect(10, 10, 521, 421))
+        self.projectTabs.addTab(self.allProjectsTab, "")
+        self.recurringProjectsTab = QWidget()
+        self.recurringProjectsTab.setObjectName(u"recurringProjectsTab")
+        self.layoutWidget1 = QWidget(self.recurringProjectsTab)
+        self.layoutWidget1.setObjectName(u"layoutWidget1")
+        self.layoutWidget1.setGeometry(QRect(12, 12, 521, 121))
+        self.weeklyGrid = QGridLayout(self.layoutWidget1)
+        self.weeklyGrid.setObjectName(u"weeklyGrid")
+        self.weeklyGrid.setContentsMargins(0, 0, 0, 0)
+        self.weeklyLabel = QLabel(self.layoutWidget1)
+        self.weeklyLabel.setObjectName(u"weeklyLabel")
+        font = QFont()
+        font.setBold(True)
+        self.weeklyLabel.setFont(font)
+
+        self.weeklyGrid.addWidget(self.weeklyLabel, 0, 0, 1, 1)
+
+        self.recurringWeekly = QListWidget(self.layoutWidget1)
+        self.recurringWeekly.setObjectName(u"recurringWeekly")
+
+        self.weeklyGrid.addWidget(self.recurringWeekly, 1, 0, 1, 1)
+
+        self.weeklyButtonLayout = QVBoxLayout()
+        self.weeklyButtonLayout.setObjectName(u"weeklyButtonLayout")
+        self.weeklyDone = QPushButton(self.layoutWidget1)
+        self.weeklyDone.setObjectName(u"weeklyDone")
+
+        self.weeklyButtonLayout.addWidget(self.weeklyDone)
+
+        self.weeklyReset = QPushButton(self.layoutWidget1)
+        self.weeklyReset.setObjectName(u"weeklyReset")
+
+        self.weeklyButtonLayout.addWidget(self.weeklyReset)
+
+
+        self.weeklyGrid.addLayout(self.weeklyButtonLayout, 1, 1, 1, 1)
+
+        self.layoutWidget2 = QWidget(self.recurringProjectsTab)
+        self.layoutWidget2.setObjectName(u"layoutWidget2")
+        self.layoutWidget2.setGeometry(QRect(11, 151, 521, 121))
+        self.biGrid = QGridLayout(self.layoutWidget2)
+        self.biGrid.setObjectName(u"biGrid")
+        self.biGrid.setContentsMargins(0, 0, 0, 0)
+        self.biLabel = QLabel(self.layoutWidget2)
+        self.biLabel.setObjectName(u"biLabel")
+        self.biLabel.setFont(font)
+
+        self.biGrid.addWidget(self.biLabel, 0, 0, 1, 1)
+
+        self.recurringBi = QListWidget(self.layoutWidget2)
+        self.recurringBi.setObjectName(u"recurringBi")
+
+        self.biGrid.addWidget(self.recurringBi, 1, 0, 1, 1)
+
+        self.biButtonLayout = QVBoxLayout()
+        self.biButtonLayout.setObjectName(u"biButtonLayout")
+        self.biDone = QPushButton(self.layoutWidget2)
+        self.biDone.setObjectName(u"biDone")
+
+        self.biButtonLayout.addWidget(self.biDone)
+
+        self.biReset = QPushButton(self.layoutWidget2)
+        self.biReset.setObjectName(u"biReset")
+
+        self.biButtonLayout.addWidget(self.biReset)
+
+
+        self.biGrid.addLayout(self.biButtonLayout, 1, 1, 1, 1)
+
+        self.widget = QWidget(self.recurringProjectsTab)
+        self.widget.setObjectName(u"widget")
+        self.widget.setGeometry(QRect(11, 301, 521, 111))
+        self.otherGrid = QGridLayout(self.widget)
+        self.otherGrid.setObjectName(u"otherGrid")
+        self.otherGrid.setContentsMargins(0, 0, 0, 0)
+        self.otherLabel = QLabel(self.widget)
+        self.otherLabel.setObjectName(u"otherLabel")
+        self.otherLabel.setFont(font)
+
+        self.otherGrid.addWidget(self.otherLabel, 0, 0, 1, 1)
+
+        self.recurringOther = QListWidget(self.widget)
+        self.recurringOther.setObjectName(u"recurringOther")
+
+        self.otherGrid.addWidget(self.recurringOther, 1, 0, 1, 1)
+
+        self.otherButtonLayout = QVBoxLayout()
+        self.otherButtonLayout.setObjectName(u"otherButtonLayout")
+        self.otherDone = QPushButton(self.widget)
+        self.otherDone.setObjectName(u"otherDone")
+
+        self.otherButtonLayout.addWidget(self.otherDone)
+
+        self.otherReset = QPushButton(self.widget)
+        self.otherReset.setObjectName(u"otherReset")
+
+        self.otherButtonLayout.addWidget(self.otherReset)
+
+
+        self.otherGrid.addLayout(self.otherButtonLayout, 1, 1, 1, 1)
+
+        self.projectTabs.addTab(self.recurringProjectsTab, "")
+
+        self.projectTabLayout.addWidget(self.projectTabs, 0, 0, 1, 1)
+
         self.viewer.addTab(self.currentProjects, "")
         self.archive = QWidget()
         self.archive.setObjectName(u"archive")
-        self.layoutWidget1 = QWidget(self.archive)
-        self.layoutWidget1.setObjectName(u"layoutWidget1")
-        self.layoutWidget1.setGeometry(QRect(9, 9, 551, 531))
-        self.archiveTabLayout = QGridLayout(self.layoutWidget1)
+        self.layoutWidget3 = QWidget(self.archive)
+        self.layoutWidget3.setObjectName(u"layoutWidget3")
+        self.layoutWidget3.setGeometry(QRect(9, 9, 551, 531))
+        self.archiveTabLayout = QGridLayout(self.layoutWidget3)
         self.archiveTabLayout.setObjectName(u"archiveTabLayout")
         self.archiveTabLayout.setContentsMargins(0, 0, 0, 0)
-        self.archivedTabs = QTabWidget(self.layoutWidget1)
+        self.archivedTabs = QTabWidget(self.layoutWidget3)
         self.archivedTabs.setObjectName(u"archivedTabs")
         self.archivedTabs.setElideMode(Qt.TextElideMode.ElideNone)
         self.archivedTabs.setTabsClosable(False)
@@ -149,12 +244,12 @@ class Ui_Viewer(object):
         self.archiveMenuLayout.setObjectName(u"archiveMenuLayout")
         self.archiveManagerLayout = QHBoxLayout()
         self.archiveManagerLayout.setObjectName(u"archiveManagerLayout")
-        self.restoreArchived = QPushButton(self.layoutWidget1)
+        self.restoreArchived = QPushButton(self.layoutWidget3)
         self.restoreArchived.setObjectName(u"restoreArchived")
 
         self.archiveManagerLayout.addWidget(self.restoreArchived)
 
-        self.deleteArchived = QPushButton(self.layoutWidget1)
+        self.deleteArchived = QPushButton(self.layoutWidget3)
         self.deleteArchived.setObjectName(u"deleteArchived")
 
         self.archiveManagerLayout.addWidget(self.deleteArchived)
@@ -164,12 +259,12 @@ class Ui_Viewer(object):
 
         self.archiveNavigatorLayout = QHBoxLayout()
         self.archiveNavigatorLayout.setObjectName(u"archiveNavigatorLayout")
-        self.returnToMainArchive = QPushButton(self.layoutWidget1)
+        self.returnToMainArchive = QPushButton(self.layoutWidget3)
         self.returnToMainArchive.setObjectName(u"returnToMainArchive")
 
         self.archiveNavigatorLayout.addWidget(self.returnToMainArchive)
 
-        self.exitArchive = QPushButton(self.layoutWidget1)
+        self.exitArchive = QPushButton(self.layoutWidget3)
         self.exitArchive.setObjectName(u"exitArchive")
 
         self.archiveNavigatorLayout.addWidget(self.exitArchive)
@@ -197,15 +292,24 @@ class Ui_Viewer(object):
 
     def retranslateUi(self, Viewer):
         Viewer.setWindowTitle(QCoreApplication.translate("Viewer", u"Project Planner 1.0 - Viewer", None))
-        self.projectTabs.setTabText(self.projectTabs.indexOf(self.everydayProjectsTab), QCoreApplication.translate("Viewer", u"Everyday projects", None))
-        self.projectTabs.setTabText(self.projectTabs.indexOf(self.programmingProjectsTab), QCoreApplication.translate("Viewer", u"Programming projects", None))
-        self.projectTabs.setTabText(self.projectTabs.indexOf(self.allProjectsTab), QCoreApplication.translate("Viewer", u"All projects", None))
-        self.projectTabs.setTabText(self.projectTabs.indexOf(self.recurringProjectsTab), QCoreApplication.translate("Viewer", u"Recurring projects", None))
         self.editProject.setText(QCoreApplication.translate("Viewer", u"Edit project", None))
         self.archiveProject.setText(QCoreApplication.translate("Viewer", u"Archive project", None))
         self.deleteProject.setText(QCoreApplication.translate("Viewer", u"Delete project", None))
         self.returnToMainProjects.setText(QCoreApplication.translate("Viewer", u"Return to main menu", None))
         self.exitProjects.setText(QCoreApplication.translate("Viewer", u"Exit program", None))
+        self.projectTabs.setTabText(self.projectTabs.indexOf(self.everydayProjectsTab), QCoreApplication.translate("Viewer", u"Everyday projects", None))
+        self.projectTabs.setTabText(self.projectTabs.indexOf(self.programmingProjectsTab), QCoreApplication.translate("Viewer", u"Programming projects", None))
+        self.projectTabs.setTabText(self.projectTabs.indexOf(self.allProjectsTab), QCoreApplication.translate("Viewer", u"All projects", None))
+        self.weeklyLabel.setText(QCoreApplication.translate("Viewer", u"Weekly tasks", None))
+        self.weeklyDone.setText(QCoreApplication.translate("Viewer", u"Task done", None))
+        self.weeklyReset.setText(QCoreApplication.translate("Viewer", u"Reset weekly", None))
+        self.biLabel.setText(QCoreApplication.translate("Viewer", u"Bi-weekly tasks", None))
+        self.biDone.setText(QCoreApplication.translate("Viewer", u"Task done", None))
+        self.biReset.setText(QCoreApplication.translate("Viewer", u"Reset Bb-weekly", None))
+        self.otherLabel.setText(QCoreApplication.translate("Viewer", u"Other tasks", None))
+        self.otherDone.setText(QCoreApplication.translate("Viewer", u"Task done", None))
+        self.otherReset.setText(QCoreApplication.translate("Viewer", u"Reset other", None))
+        self.projectTabs.setTabText(self.projectTabs.indexOf(self.recurringProjectsTab), QCoreApplication.translate("Viewer", u"Recurring projects", None))
         self.viewer.setTabText(self.viewer.indexOf(self.currentProjects), QCoreApplication.translate("Viewer", u"Current projects", None))
         self.archivedTabs.setTabText(self.archivedTabs.indexOf(self.everydayArchiveTab), QCoreApplication.translate("Viewer", u"Everyday projects", None))
         self.archivedTabs.setTabText(self.archivedTabs.indexOf(self.programmingArchiveTab), QCoreApplication.translate("Viewer", u"Programming projects", None))

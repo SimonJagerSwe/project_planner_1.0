@@ -37,6 +37,53 @@
         </rect>
        </property>
        <layout class="QGridLayout" name="projectTabLayout">
+        <item row="1" column="0">
+         <layout class="QGridLayout" name="projectMenuLayout">
+          <item row="0" column="0">
+           <layout class="QHBoxLayout" name="projectManagerLayout">
+            <item>
+             <widget class="QPushButton" name="editProject">
+              <property name="text">
+               <string>Edit project</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="archiveProject">
+              <property name="text">
+               <string>Archive project</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="deleteProject">
+              <property name="text">
+               <string>Delete project</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="projectsNavigatorLayout">
+            <item>
+             <widget class="QPushButton" name="returnToMainProjects">
+              <property name="text">
+               <string>Return to main menu</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="exitProjects">
+              <property name="text">
+               <string>Exit program</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
         <item row="0" column="0">
          <widget class="QTabWidget" name="projectTabs">
           <property name="enabled">
@@ -103,65 +150,143 @@
            <attribute name="title">
             <string>Recurring projects</string>
            </attribute>
-           <widget class="QListWidget" name="recurringProjects">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
-              <x>10</x>
-              <y>10</y>
+              <x>12</x>
+              <y>12</y>
               <width>521</width>
-              <height>421</height>
+              <height>121</height>
              </rect>
             </property>
+            <layout class="QGridLayout" name="weeklyGrid">
+             <item row="0" column="0">
+              <widget class="QLabel" name="weeklyLabel">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Weekly tasks</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QListWidget" name="recurringWeekly"/>
+             </item>
+             <item row="1" column="1">
+              <layout class="QVBoxLayout" name="weeklyButtonLayout">
+               <item>
+                <widget class="QPushButton" name="weeklyDone">
+                 <property name="text">
+                  <string>Task done</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="weeklyReset">
+                 <property name="text">
+                  <string>Reset weekly</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="layoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>11</x>
+              <y>151</y>
+              <width>521</width>
+              <height>121</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="biGrid">
+             <item row="0" column="0">
+              <widget class="QLabel" name="biLabel">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Bi-weekly tasks</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QListWidget" name="recurringBi"/>
+             </item>
+             <item row="1" column="1">
+              <layout class="QVBoxLayout" name="biButtonLayout">
+               <item>
+                <widget class="QPushButton" name="biDone">
+                 <property name="text">
+                  <string>Task done</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="biReset">
+                 <property name="text">
+                  <string>Reset Bb-weekly</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="">
+            <property name="geometry">
+             <rect>
+              <x>11</x>
+              <y>301</y>
+              <width>521</width>
+              <height>111</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="otherGrid">
+             <item row="0" column="0">
+              <widget class="QLabel" name="otherLabel">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Other tasks</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QListWidget" name="recurringOther"/>
+             </item>
+             <item row="1" column="1">
+              <layout class="QVBoxLayout" name="otherButtonLayout">
+               <item>
+                <widget class="QPushButton" name="otherDone">
+                 <property name="text">
+                  <string>Task done</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="otherReset">
+                 <property name="text">
+                  <string>Reset other</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
            </widget>
           </widget>
          </widget>
-        </item>
-        <item row="1" column="0">
-         <layout class="QGridLayout" name="projectMenuLayout">
-          <item row="0" column="0">
-           <layout class="QHBoxLayout" name="projectManagerLayout">
-            <item>
-             <widget class="QPushButton" name="editProject">
-              <property name="text">
-               <string>Edit project</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="archiveProject">
-              <property name="text">
-               <string>Archive project</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="deleteProject">
-              <property name="text">
-               <string>Delete project</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="1" column="0">
-           <layout class="QHBoxLayout" name="projectsNavigatorLayout">
-            <item>
-             <widget class="QPushButton" name="returnToMainProjects">
-              <property name="text">
-               <string>Return to main menu</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="exitProjects">
-              <property name="text">
-               <string>Exit program</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
         </item>
        </layout>
       </widget>
