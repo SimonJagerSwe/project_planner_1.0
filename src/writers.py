@@ -86,28 +86,36 @@ def writer(ui, projects_file, current_dialog=None, main_window=None):
 # Clear project input
 def clear_input(ui):
     if "everydayClear" in dir(ui):
-        print("Everyday project clearing")
+        print("Clearing everyday project...")
+        ui.everydayName.setText("")
+        ui.everydayStart.setDate(QDate.currentDate())
+        ui.everydayFinish.setDate(QDate.currentDate())
+        ui.everydayNotes.setText("")
+        ui.everydayProgressSlider.setValue(0)
+        ui.everydayProgressPercent.setText("0%")
+        ui.everydayStatus.setCurrentText("Select project status")
     elif "programmingClear" in dir(ui):
-        print("Programming project clearing")
+        print("Clearing programming project")
+        ui.programmingName.setText("")
+        ui.programmingStart.setDate(QDate.currentDate())
+        ui.programmingFinish.setDate(QDate.currentDate())
+        ui.languagesEdit.setText("")
+        ui.githubEdit.setText("")
+        ui.programmingNotes.setText("")
+        ui.programmingProgressSlider.setValue(0)
+        ui.programmingProgressPercent.setText("0%")
+        ui.programmingStatus.setCurrentText("Select project status")
     else:
-        print("Recurring task clearing")
+        print("Clearing recurring task")
+        ui.recurringName.setText("")
+        ui.recurringFrequency.setCurrentText("Select frequency")
+        ui.recurringNotes.setText("")
 
 
 '''
 # Project editor
 def editor(ui):
     print("Editing everyday project...")
-
-# Clear everyday project input
-def c_e_project(ui):
-    print("Clearing everyday project...")
-    ui.everydayName.setText("")
-    ui.everydayStart.setDate(QDate.currentDate())
-    ui.everydayFinish.setDate(QDate.currentDate())
-    ui.everydayNotes.setText("")
-    ui.everydayProgressSlider.setValue(0)
-    ui.everydayProgressPercent.setText("0%")
-    ui.everydayStatus.setCurrentText("Select project status")
 
 # Delete everyday project
 def d_e_project():
@@ -162,18 +170,6 @@ def w_p_project(ui, current_dialog=None, main_window=None):
 def e_p_project(ui):
     print("Editing programming project...")
 
-# Clear programming project
-def c_p_project(ui):
-    print("Clearing programming project...")
-    ui.programmingName.setText("")
-    ui.programmingStart.setDate(QDate.currentDate())
-    ui.programmingFinish.setDate(QDate.currentDate())
-    ui.languagesEdit.setText("")
-    ui.githubEdit.setText("")
-    ui.programmingNotes.setText("")
-    ui.programmingProgressSlider.setValue(0)
-    ui.programmingProgressPercent.setText("0%")
-    ui.programmingStatus.setCurrentText("Select project status")
 
 # Delete programming project
 def d_e_project():
@@ -183,13 +179,6 @@ def d_e_project():
 # Edit recurring task
 def e_r_task():
     print("Editing recurring task...")
-
-# Clear recurring task
-def c_r_task(ui):
-    print("Clearing recurring task")
-    ui.recurringName.setText("")
-    ui.recurringFrequency.setCurrentText("Select frequency")
-    ui.recurringNotes.setText("")
     
     
 # Delete recurring task
