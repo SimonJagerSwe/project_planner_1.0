@@ -12,6 +12,7 @@ from PySide6.QtCore import QDate
 # Project writer
 def writer(ui, projects_file, current_dialog=None, main_window=None):
     projects = load_file(projects_file)
+    all_projects = load_file(resources.ALL_PROJECTS_FILE)
     print(f"Working file:\n{projects_file}\n\n")
     print(f"Projects in file:\n{projects}\n\n")
 
@@ -66,22 +67,26 @@ def writer(ui, projects_file, current_dialog=None, main_window=None):
 
     print(f"Project to be added:\n{project}\n\n")
     projects.append(project)
+    all_projects.append(project)
     print(f"Updated projects file:\n{projects}\n\n")
 
 
     # Write updated projects file
     with open(projects_file, "w") as file:
         json.dump(projects, file)
+    with open(resources.ALL_PROJECTS_FILE, "w") as file:
+        json.dump(all_projects, file)
     resources.success_message()
 
     # Return to main menu
     if current_dialog and main_window:
-        button_handler.return_to_main_clicked(current_dialog, main_window)
+        resources.return_to_main_clicked(current_dialog, main_window)
 
 
 # Clear project input
 def clear_input():
     ...
+
 
 '''
 # Project editor
