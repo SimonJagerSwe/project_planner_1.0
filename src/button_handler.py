@@ -89,7 +89,7 @@ def programming_project_clicked(current_dialog, main_window):
     ui.programmingProgressSlider.valueChanged.connect(lambda value:
         ui.programmingProgressPercent.setText(f"{value}%"))
     ui.programmingSave.clicked.connect(lambda: writers.writer(ui, resources.PROGRAMING_FILE, programming_dialog, main_window))
-    ui.programmingClear.clicked.connect(lambda: writers.c_p_project(ui))
+    ui.programmingClear.clicked.connect(lambda: writers.clear_input(ui))
     ui.programmingReturn.clicked.connect(lambda: resources.return_to_main_clicked(programming_dialog, main_window))
     ui.programmingExit.clicked.connect(lambda: resources.exit_clicked(programming_dialog))
     programming_dialog.exec()
@@ -106,7 +106,7 @@ def recurring_project_clicked(current_dialog, main_window):
     ui = Ui_recurringProjectEditor()
     ui.setupUi(recurring_dialog)
     ui.saveRecurring.clicked.connect(lambda: writers.writer(ui, resources.RECURRING_FILE, recurring_dialog, main_window))
-    ui.clearRecurring.clicked.connect(lambda: writers.c_r_task(ui))
+    ui.clearRecurring.clicked.connect(lambda: writers.clear_input(ui))
     ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(recurring_dialog, main_window))
     ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(recurring_dialog))
     recurring_dialog.exec()

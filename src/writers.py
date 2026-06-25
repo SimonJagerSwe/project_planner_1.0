@@ -84,8 +84,8 @@ def writer(ui, projects_file, current_dialog=None, main_window=None):
 
 
 # Clear project input
-def clear_input():
-    ...
+def clear_input(ui):
+    print(ui)
 
 
 '''
