@@ -7,6 +7,7 @@ from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_recurring import Ui_recurringProjectEditor
 from loader import load_file as loader
 
+from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QDialog
 
 # Function to determine which ui to use for editing
@@ -28,16 +29,16 @@ def project_parser(project, type):
     # Find project name
     for var in project.text().split("\n"):
         if "name" in var:
-            print(var)
+            # print(var)
             project_name = var.split(":")[1].strip()
-            print(project_name)
+            # print(project_name)
     
     # Load everyday file
     if type == "everyday":
         e_projects = loader(resources.EVERYDAY_FILE)
         for project in e_projects:
             if project["Project name"] == project_name:
-                print(f"Project found:\n{project}")
+                return project
     elif type == "programming":
         p_projects = loader(resources.PROGRAMING_FILE)
         for project in p_projects:
@@ -57,6 +58,15 @@ def edit_everyday(ui, project):
     print(current_project)
     dialog = QDialog()
     ui.setupUi(dialog)
+    ui.everydayName.setText(current_project["Project name"])
+    ui.everydayStart.setDate(QDate.fromString(current_project["Project start"], "yyyy-MM-dd"))
+    ui.everydayFinish.setDate(QDate.fromString(current_project["Project end"], "yyyy-MM-dd"))
+    ui.everydayNotes.setText(current_project["Project notes"])
+    progress_text = current_project["Project progress"]
+    progress_value = int(progress_text.strip("%"))
+    ui.everydayProgressSlider.setValue(progress_value)
+    ui.everydayProgressPercent.setText(progress_text)
+    ui.everydayStatus.setCurrentText(current_project["Project status"])
     dialog.exec()
 
 
