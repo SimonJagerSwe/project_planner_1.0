@@ -42,18 +42,19 @@ def project_parser(project, type):
         p_projects = loader(resources.PROGRAMING_FILE)
         for project in p_projects:
             if project["Project name"] == project_name:
-                print(f"Project found:\n{project}")
+                return project
         
     else:
         r_tasks = loader(resources.RECURRING_FILE)
         for task in r_tasks:
             if task["Task name"] == project_name:
-                print(f"Task found:\n{project_name}")
+                return task
 
 
 def edit_everyday(ui, project):
     print("Editing everyday...")
-    project_parser(project, "everyday")
+    current_project = project_parser(project, "everyday")
+    print(current_project)
     dialog = QDialog()
     ui.setupUi(dialog)
     dialog.exec()
@@ -61,7 +62,8 @@ def edit_everyday(ui, project):
 
 def edit_programming(ui, project):
     print("Editing programming...")
-    project_parser(project, "programming")
+    current_project = project_parser(project, "programming")
+    print(current_project)
     dialog = QDialog()
     ui.setupUi(dialog)
     dialog.exec()
@@ -69,7 +71,8 @@ def edit_programming(ui, project):
 
 def edit_recurring(ui, project):
     print("Editing recurring project...")
-    project_parser(project, "recurring")
+    current_project = project_parser(project, "recurring")
+    print(current_project)
     dialog = QDialog()
     ui.setupUi(dialog)
     dialog.exec()
