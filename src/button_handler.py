@@ -139,7 +139,7 @@ def project_viewer_clicked(main_window, idx):
     # Use a clicked project to set an item to use
     # for editing, archiving or deleting
     def project_clicked(item):
-        print(f"Project clicked:\n{item.text()}")
+        print(f"Project variables:\n{dir(item)}")
         resources.selected_project = item
 
     # Use set item to call the edit function
@@ -171,10 +171,9 @@ def project_viewer_clicked(main_window, idx):
                     if item is not current_item:
                         item.clearSelection()
 
-
-            for list_widget in recurring_list:
-                list_widget.itemClicked.connect(clear_other_recurring)
-                list_widget.itemClicked.connect(project_clicked)
+            for item in recurring_list:
+                item.itemClicked.connect(clear_other_recurring)
+                item.itemClicked.connect(project_clicked)
 
         # If the item is everyday or programming
         # ignore above clearing

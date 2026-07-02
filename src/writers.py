@@ -2,7 +2,7 @@
 # Imports
 import json
 
-import button_handler, resources
+import resources
 
 from loader import load_file
 
