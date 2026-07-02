@@ -1,7 +1,5 @@
 ########## Button handler ##########
 # Imports
-import sys
-
 import project_editors, resources, writers
 
 from interface.ui_everyday import Ui_everydayProjectEditor
@@ -148,16 +146,7 @@ def project_viewer_clicked(main_window, idx):
         if resources.selected_project is None:
             resources.no_project_selected()
         else:
-            if "Language(s)" in resources.selected_project.text():
-                print("Programming project\n")
-                ui = Ui_programmingProjectEditor()
-            elif "Task frequency" in resources.selected_project.text():
-                print("Recurring task\n")
-                ui = Ui_everydayProjectEditor()
-            else:
-                print("Everyday project\n")
-                ui = Ui_recurringProjectEditor()
-            project_editors.edit_project(ui, resources.selected_project)
+            project_editors.edit_parser(resources.selected_project)
         
 
     # Logic for project selection
