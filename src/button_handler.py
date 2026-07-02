@@ -139,7 +139,12 @@ def project_viewer_clicked(main_window, idx):
     # Use a clicked project to set an item to use
     # for editing, archiving or deleting
     def project_clicked(item):
-        print(f"Project variables:\n{type(item)}")
+        if "Language(s)" in item.text():
+            print("Programming project\n")
+        elif "Task frequency" in item.text():
+            print("Recurring task\n")
+        else:
+            print("Everyday project\n")
         resources.selected_project = item
 
     # Use set item to call the edit function
@@ -173,7 +178,7 @@ def project_viewer_clicked(main_window, idx):
 
             for item in recurring_list:
                 item.itemClicked.connect(clear_other_recurring)
-                item.itemClicked.connect(project_clicked)
+            list_item.itemClicked.connect(project_clicked)
 
         # If the item is everyday or programming
         # ignore above clearing
