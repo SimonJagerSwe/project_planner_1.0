@@ -13,7 +13,7 @@ from project_printers import print_projects as printer
 
 from PySide6.QtCore import QDate
 from PySide6.QtGui import QAction
-from PySide6.QtWidgets import QDialog, QPushButton, QMessageBox
+from PySide6.QtWidgets import QDialog, QListWidget, QPushButton 
 
 
 # Main menu buttons
@@ -136,38 +136,62 @@ def project_viewer_clicked(main_window, idx):
     # to avoid user being greeted by an empty project view
     tab_changed(ui.viewer.currentIndex(), 0)
 
+    # Use a clicked project to set an item to use
+    # for editing, archiving or deleting
     def project_clicked(item):
         print(f"Project clicked:\n{item.text()}")
         resources.selected_project = item
 
+    # Use set item to call the edit function
     def edit_clicked():
         if resources.selected_project is not None:
             project_editors.edit_project(ui, resources.selected_project)
         else:
             resources.no_project_selected()
 
+    # Logic for project selection
+    recurring_list = [ui.recurringBi, ui.recurringOther, ui.recurringWeekly]
     for list_item in [
         ui.everydayProjects,
         ui.programmingProjects,
         ui.allProjects,
-        ui.recurringWeekly,
         ui.recurringBi,
-        ui.recurringOther
+        ui.recurringOther,
+        ui.recurringWeekly
     ]:
-        list_item.itemClicked.connect(project_clicked)
+        # If the user is selecting a recurring task
+        # make sure to clear other fields to only use one item
+        if list_item in recurring_list:
+            for tab in recurring_list:
+                tab.setSelectionMode(QListWidget.SingleSelection)
+
+            def clear_other_recurring(clicked_item):
+                current_item = clicked_item.listWidget()
+                for item in recurring_list:
+                    if item is not current_item:
+                        item.clearSelection()
+
+
+            for list_widget in recurring_list:
+                list_widget.itemClicked.connect(clear_other_recurring)
+                list_widget.itemClicked.connect(project_clicked)
+
+        # If the item is everyday or programming
+        # ignore above clearing
+        else:
+            list_item.itemClicked.connect(project_clicked)
 
     # Action connections etc.
     ui.viewer.currentChanged.connect(lambda: tab_changed(ui.viewer.currentIndex(), 0))
     ui.projectTabs.currentChanged.connect(lambda index: tab_changed(0, index))
     ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
-    # ui.editProject.clicked.connect(lambda: project_editors.edit_project(ui))
     ui.editProject.clicked.connect(edit_clicked)
     ui.archiveProject.clicked.connect(lambda: archive_project_clicked)
     ui.deleteProject.clicked.connect(lambda: delete_project_clicked)
     ui.returnToMainProjects.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitProjects.clicked.connect(lambda: resources.exit_clicked(viewer))
     ui.restoreArchived.clicked.connect(restore_project_clicked)
-    ui.deleteArchived.clicked.connect(delete_archive_clicked)
+    # ui.deleteArchived.clicked.connect(delete_archive_clicked)
     ui.returnToMainArchive.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitArchive.clicked.connect(lambda: resources.exit_clicked(viewer))
     viewer.exec()
@@ -175,7 +199,6 @@ def project_viewer_clicked(main_window, idx):
 
 
 # Placeholder functions
-
 def archive_project_clicked():      # Check if project is completed or to be archived as is
     print("Archiving project...")
 
@@ -185,5 +208,5 @@ def delete_project_clicked():
 def restore_project_clicked():
     print("Restore project...")
 
-def delete_archive_clicked():
-    print("Deleting project from archive...")       # Needs a safety check
+# def delete_archive_clicked():
+#     print("Deleting project from archive...")       # Needs a safety check
