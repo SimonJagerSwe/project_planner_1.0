@@ -2,7 +2,7 @@
 # Imports
 import sys
 
-import resources, writers
+import project_editors, resources, writers
 
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
@@ -13,7 +13,7 @@ from project_printers import print_projects as printer
 
 from PySide6.QtCore import QDate
 from PySide6.QtGui import QAction
-from PySide6.QtWidgets import QDialog, QPushButton
+from PySide6.QtWidgets import QDialog, QPushButton, QMessageBox
 
 
 # Main menu buttons
@@ -136,11 +136,32 @@ def project_viewer_clicked(main_window, idx):
     # to avoid user being greeted by an empty project view
     tab_changed(ui.viewer.currentIndex(), 0)
 
+    def project_clicked(item):
+        print(f"Project clicked:\n{item.text()}")
+        resources.selected_project = item
+
+    def edit_clicked():
+        if resources.selected_project is not None:
+            project_editors.edit_project(ui, resources.selected_project)
+        else:
+            resources.no_project_selected()
+
+    for list_item in [
+        ui.everydayProjects,
+        ui.programmingProjects,
+        ui.allProjects,
+        ui.recurringWeekly,
+        ui.recurringBi,
+        ui.recurringOther
+    ]:
+        list_item.itemClicked.connect(project_clicked)
+
     # Action connections etc.
     ui.viewer.currentChanged.connect(lambda: tab_changed(ui.viewer.currentIndex(), 0))
     ui.projectTabs.currentChanged.connect(lambda index: tab_changed(0, index))
     ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
-    ui.editProject.clicked.connect(lambda: edit_project_clicked)
+    # ui.editProject.clicked.connect(lambda: project_editors.edit_project(ui))
+    ui.editProject.clicked.connect(edit_clicked)
     ui.archiveProject.clicked.connect(lambda: archive_project_clicked)
     ui.deleteProject.clicked.connect(lambda: delete_project_clicked)
     ui.returnToMainProjects.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
@@ -154,8 +175,6 @@ def project_viewer_clicked(main_window, idx):
 
 
 # Placeholder functions
-def edit_project_clicked():
-    print("Editing project...")
 
 def archive_project_clicked():      # Check if project is completed or to be archived as is
     print("Archiving project...")
