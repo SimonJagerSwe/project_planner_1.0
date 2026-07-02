@@ -55,7 +55,7 @@ def project_parser(project, type):
 def edit_everyday(ui, project):
     print("Editing everyday...")
     current_project = project_parser(project, "everyday")
-    print(current_project)
+    # print(current_project)
     dialog = QDialog()
     ui.setupUi(dialog)
     ui.everydayName.setText(current_project["Project name"])
@@ -76,6 +76,16 @@ def edit_programming(ui, project):
     print(current_project)
     dialog = QDialog()
     ui.setupUi(dialog)
+    ui.programmingName.setText(current_project["Project name"])
+    ui.programmingStart.setDate(QDate.fromString(current_project["Project start"], "yyyy-MM-dd"))
+    ui.programmingFinish.setDate(QDate.fromString(current_project["Project end"], "yyyy-MM-dd"))
+    ui.languagesEdit.setText(current_project["Language(s)"])
+    ui.githubEdit.setText(current_project["GitHub link"])
+    progress_text = current_project["Project progress"]
+    progress_value = int(progress_text.strip("%"))
+    ui.programmingProgressSlider.setValue(progress_value)
+    ui.programmingProgressPercent.setText(progress_text)
+    ui.programmingStatus.setCurrentText(current_project["Project status"])
     dialog.exec()
 
 
