@@ -116,6 +116,7 @@ def recurring_project_clicked(current_dialog, main_window):
 # View projects and archives
 def project_viewer_clicked(main_window, idx):
     print("Loading viewer...")
+    resources.selected_project = None
     main_window.close()
     viewer = QDialog(main_window)
     ui = Ui_Viewer()
@@ -124,6 +125,7 @@ def project_viewer_clicked(main_window, idx):
     # Function to handle tab changes
     def tab_changed(top_tab, sub_tab):
         printer(ui, top_tab, sub_tab)
+        resources.selected_project = None
 
     # Initialise tab index based on user selection
     ui.viewer.setCurrentIndex(idx)
@@ -138,21 +140,25 @@ def project_viewer_clicked(main_window, idx):
 
     # Use a clicked project to set an item to use
     # for editing, archiving or deleting
-    def project_clicked(item):
-        if "Language(s)" in item.text():
-            print("Programming project\n")
-        elif "Task frequency" in item.text():
-            print("Recurring task\n")
-        else:
-            print("Everyday project\n")
+    def project_clicked(item):        
         resources.selected_project = item
 
     # Use set item to call the edit function
     def edit_clicked():
-        if resources.selected_project is not None:
-            project_editors.edit_project(ui, resources.selected_project)
-        else:
+        if resources.selected_project is None:
             resources.no_project_selected()
+        else:
+            if "Language(s)" in resources.selected_project.text():
+                print("Programming project\n")
+                ui = Ui_programmingProjectEditor()
+            elif "Task frequency" in resources.selected_project.text():
+                print("Recurring task\n")
+                ui = Ui_everydayProjectEditor()
+            else:
+                print("Everyday project\n")
+                ui = Ui_recurringProjectEditor()
+            project_editors.edit_project(ui, resources.selected_project)
+        
 
     # Logic for project selection
     recurring_list = [ui.recurringBi, ui.recurringOther, ui.recurringWeekly]

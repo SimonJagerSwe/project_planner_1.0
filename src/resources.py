@@ -68,6 +68,7 @@ def success_message():
 
 # No project for editing or archiving selected
 def no_project_selected():
+    print("No project selected")
     no_project_selected = QMessageBox()
     no_project_selected.setWindowTitle("No project selected")
     no_project_selected.setText("No project selected")
