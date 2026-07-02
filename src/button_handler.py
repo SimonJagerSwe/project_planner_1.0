@@ -139,7 +139,7 @@ def project_viewer_clicked(main_window, idx):
     # Use a clicked project to set an item to use
     # for editing, archiving or deleting
     def project_clicked(item):
-        print(f"Project variables:\n{dir(item)}")
+        print(f"Project variables:\n{type(item)}")
         resources.selected_project = item
 
     # Use set item to call the edit function
