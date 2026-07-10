@@ -13,19 +13,20 @@ from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QDialog
 
 # Connect editor buttons to reuse the button calls from button_handler.py
-def connect_buttons(ui, dialog, main_window, project_type, viewer_dialog=None):
+def connect_buttons(ui, dialog, main_window, project_type, viewer_dialog=None, current_project=None):
     if project_type == "everyday":
-        ui.everydaySave.clicked.connect(lambda: writer(ui, resources.EVERYDAY_FILE, dialog))
+        # ui.everydaySave.clicked.connect(lambda: writer(ui, resources.EVERYDAY_FILE, dialog))
         ui.everydayClear.clicked.connect(lambda: clear_input(ui))
         ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(dialog))
     elif project_type == "programming":
-        ui.programmingSave.clicked.connect(lambda: writer(ui, resources.PROGRAMING_FILE, dialog))
+        # ui.programmingSave.clicked.connect(lambda: writer(ui, resources.PROGRAMING_FILE, dialog))
         ui.programmingClear.clicked.connect(lambda: clear_input(ui))
         ui.programmingReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.programmingExit.clicked.connect(lambda: resources.exit_clicked(dialog))
     else:
-        ui.saveRecurring.clicked.connect(lambda: writer(ui, resources.RECURRING_FILE, dialog, main_window))
+        ui.saveRecurring.clicked.connect(lambda: resources.delete_project(current_project, "recurring"))
+        # ui.saveRecurring.clicked.connect(lambda: writer(ui, resources.RECURRING_FILE, dialog, main_window))
         ui.clearRecurring.clicked.connect(lambda: clear_input(ui))
         ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(dialog))
@@ -46,7 +47,8 @@ def edit_parser(project, viewer_dialog, main_window):
         ui = Ui_recurringProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        connect_buttons(ui, dialog, main_window, "recurring", viewer_dialog)
+        current_project = project_parser(project, "recurring")
+        connect_buttons(ui, dialog, main_window, "recurring", viewer_dialog, current_project)
         edit_recurring(ui, project, main_window)
         dialog.exec()
     else:
@@ -71,12 +73,13 @@ def project_parser(project, type):
         for project in e_projects:
             if project["Project name"] == project_name:
                 return project
+    # Load programming file
     elif type == "programming":
         p_projects = loader(resources.PROGRAMING_FILE)
         for project in p_projects:
             if project["Project name"] == project_name:
                 return project
-        
+    # Load recurring task file
     else:
         r_tasks = loader(resources.RECURRING_FILE)
         for task in r_tasks:

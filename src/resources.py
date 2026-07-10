@@ -31,9 +31,7 @@ tab_handler = [
     }
 ]
 
-
 # Utility functions
-##### Universal buttons #####
 # Return to main menu
 def return_to_main_clicked(current_dialog, main_window, parent_dialog=None):
     print("Return to main menu clicked")
@@ -68,6 +66,10 @@ def success_message():
     success_message.setText(f"{SUCCESS_TEXT}")
     success_message.setStandardButtons(QMessageBox.Ok)
     success_message.exec()
+
+
+def delete_project(project, type):
+    print(f"Project for deletion:\n{project}")
 
 # No project for editing or archiving selected
 def no_project_selected():
