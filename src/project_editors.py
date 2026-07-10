@@ -12,21 +12,21 @@ from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QDialog
 
 # Connect editor buttons to reuse the button calls from button_handler.py
-def connect_buttons(ui, dialog, main_window, project_type):
+def connect_buttons(ui, dialog, project_type):
     if project_type == "everyday":
         ui.saveEveryday.clicked.connect(lambda: writer)
         ui.everydayClear.clicked.connect(lambda: clear_input(ui))
-        ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window))
+        ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog))
         ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(dialog))
     elif project_type == "programming":
-        ui.programmingSave.clicked.connect(lambda: writer(ui, resources.PROGRAMING_FILE, dialog, main_window))
+        ui.programmingSave.clicked.connect(lambda: writer(ui, resources.PROGRAMING_FILE, dialog))
         ui.programmingClear.clicked.connect(lambda: clear_input(ui))
-        ui.programmingReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window))
+        ui.programmingReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog))
         ui.programmingExit.clicked.connect(lambda: resources.exit_clicked(dialog))
     else:
-        ui.saveRecurring.clicked.connect(lambda: writer(ui, resources.RECURRING_FILE, dialog, main_window))
+        ui.saveRecurring.clicked.connect(lambda: writer(ui, resources.RECURRING_FILE, dialog))
         ui.clearRecurring.clicked.connect(lambda: clear_input(ui))
-        ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window))
+        ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(dialog))
         ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(dialog))
 
 # Function to determine which ui to use for editing
@@ -84,6 +84,7 @@ def edit_everyday(ui, project):
     ui.everydayProgressSlider.setValue(progress_value)
     ui.everydayProgressPercent.setText(progress_text)
     ui.everydayStatus.setCurrentText(current_project["Project status"])
+    connect_buttons(ui, dialog, project_type="everyday")
     dialog.exec()
 
 
@@ -103,6 +104,7 @@ def edit_programming(ui, project):
     ui.programmingProgressSlider.setValue(progress_value)
     ui.programmingProgressPercent.setText(progress_text)
     ui.programmingStatus.setCurrentText(current_project["Project status"])
+    connect_buttons(ui, dialog, project_type="programming")
     dialog.exec()
 
 
@@ -115,4 +117,5 @@ def edit_recurring(ui, project):
     ui.recurringName.setText(current_project["Task name"])
     ui.recurringFrequency.setCurrentText(current_project["Task frequency"])
     ui.recurringNotes.setText(current_project["Task notes"])
+    connect_buttons(ui, dialog, project_type="recurring")
     dialog.exec()
