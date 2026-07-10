@@ -1,7 +1,12 @@
 ########## Resources ##########
 # Imports
+import json
 import sys
 
+from loader import load_file as loader
+from writers import writer
+
+from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QMessageBox
 
 # Resource files
@@ -59,6 +64,35 @@ def exit_clicked(parent=None):
     else:
         print("Returning to previous menu")
 
+
+# Clear project input
+def clear_input(ui):
+    if "everydayClear" in dir(ui):
+        print("Clearing everyday project...")
+        ui.everydayName.setText("")
+        ui.everydayStart.setDate(QDate.currentDate())
+        ui.everydayFinish.setDate(QDate.currentDate())
+        ui.everydayNotes.setText("")
+        ui.everydayProgressSlider.setValue(0)
+        ui.everydayProgressPercent.setText("0%")
+        ui.everydayStatus.setCurrentText("Select project status")
+    elif "programmingClear" in dir(ui):
+        print("Clearing programming project")
+        ui.programmingName.setText("")
+        ui.programmingStart.setDate(QDate.currentDate())
+        ui.programmingFinish.setDate(QDate.currentDate())
+        ui.languagesEdit.setText("")
+        ui.githubEdit.setText("")
+        ui.programmingNotes.setText("")
+        ui.programmingProgressSlider.setValue(0)
+        ui.programmingProgressPercent.setText("0%")
+        ui.programmingStatus.setCurrentText("Select project status")
+    else:
+        print("Clearing recurring task")
+        ui.recurringName.setText("")
+        ui.recurringFrequency.setCurrentText("Select frequency")
+        ui.recurringNotes.setText("")
+
 # Successfull project creation
 def success_message():
     success_message = QMessageBox()
@@ -70,6 +104,33 @@ def success_message():
 
 def delete_project(project, type):
     print(f"Project for deletion:\n{project}")
+    if type == "everyday":
+        projects_file = EVERYDAY_FILE
+    elif type == "programming":
+        projects_file = PROGRAMING_FILE
+    else:
+        projects_file = RECURRING_FILE
+
+    projects = loader(projects_file)
+    all_projects = loader(ALL_PROJECTS_FILE)
+    print(f"Current projects:\n{projects}\n")
+    try:
+        projects.remove(project)
+    except:
+        print("Project not present in selected projects type")
+    try:
+        all_projects.remove(project)
+    except:
+        print("Project not present in full projects")
+
+    print(f"Selected projects type after removal:\n{projects}")
+    print(f"Full projects after removal:\n{all_projects}\n")
+    
+    with open(projects_file, "w") as file:
+        json.dump(projects, file)
+    with open(ALL_PROJECTS_FILE, "w") as file:
+        json.dump(all_projects, file)
+
 
 # No project for editing or archiving selected
 def no_project_selected():

@@ -7,7 +7,7 @@ from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_programming import Ui_programmingProjectEditor 
 from interface.ui_recurring import Ui_recurringProjectEditor
 from loader import load_file as loader
-from writers import writer, clear_input
+from writers import writer
 
 from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QDialog
@@ -15,19 +15,21 @@ from PySide6.QtWidgets import QDialog
 # Connect editor buttons to reuse the button calls from button_handler.py
 def connect_buttons(ui, dialog, main_window, project_type, viewer_dialog=None, current_project=None):
     if project_type == "everyday":
+        ui.everydaySave.clicked.connect(lambda: resources.delete_project(current_project, "everyday"))
         # ui.everydaySave.clicked.connect(lambda: writer(ui, resources.EVERYDAY_FILE, dialog))
-        ui.everydayClear.clicked.connect(lambda: clear_input(ui))
+        ui.everydayClear.clicked.connect(lambda: resources.clear_input(ui))
         ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(dialog))
     elif project_type == "programming":
+        ui.programmingSave.clicked.connect(lambda: resources.delete_project(current_project, "programming"))
         # ui.programmingSave.clicked.connect(lambda: writer(ui, resources.PROGRAMING_FILE, dialog))
-        ui.programmingClear.clicked.connect(lambda: clear_input(ui))
+        ui.programmingClear.clicked.connect(lambda: resources.clear_input(ui))
         ui.programmingReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.programmingExit.clicked.connect(lambda: resources.exit_clicked(dialog))
     else:
         ui.saveRecurring.clicked.connect(lambda: resources.delete_project(current_project, "recurring"))
         # ui.saveRecurring.clicked.connect(lambda: writer(ui, resources.RECURRING_FILE, dialog, main_window))
-        ui.clearRecurring.clicked.connect(lambda: clear_input(ui))
+        ui.clearRecurring.clicked.connect(lambda: resources.clear_input(ui))
         ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(dialog))
 
@@ -40,7 +42,8 @@ def edit_parser(project, viewer_dialog, main_window):
         ui = Ui_programmingProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        connect_buttons(ui, dialog, main_window, "programming", viewer_dialog)
+        current_project = project_parser(project, "programming")
+        connect_buttons(ui, dialog, main_window, "programming", viewer_dialog, current_project)
         edit_programming(ui, project, main_window)
         dialog.exec()
     elif "Task frequency" in project.text():
@@ -55,7 +58,8 @@ def edit_parser(project, viewer_dialog, main_window):
         ui = Ui_everydayProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        connect_buttons(ui, dialog, main_window, "everyday", viewer_dialog)
+        current_project = project_parser(project, "everyday")
+        connect_buttons(ui, dialog, main_window, "everyday", viewer_dialog, current_project)
         edit_everyday(ui, project, main_window)
         dialog.exec()
 
