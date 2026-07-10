@@ -148,7 +148,7 @@ def project_viewer_clicked(main_window, idx):
         if resources.selected_project is None:
             resources.no_project_selected()
         else:
-            project_editors.edit_parser(resources.selected_project, main_window)
+            project_editors.edit_parser(resources.selected_project, viewer, main_window)
         
 
     # Logic for project selection

@@ -13,7 +13,7 @@ from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QDialog
 
 # Connect editor buttons to reuse the button calls from button_handler.py
-def connect_buttons(ui, dialog, main_window, project_type):
+def connect_buttons(ui, dialog, main_window, project_type, parent_dialog=None):
     if project_type == "everyday":
         ui.saveEveryday.clicked.connect(lambda: writer)
         ui.everydayClear.clicked.connect(lambda: clear_input(ui))
@@ -27,12 +27,13 @@ def connect_buttons(ui, dialog, main_window, project_type):
     else:
         ui.saveRecurring.clicked.connect(lambda: writer(ui, resources.RECURRING_FILE, dialog))
         ui.clearRecurring.clicked.connect(lambda: clear_input(ui))
-        ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window))
+        ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, parent_dialog))
         ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(dialog))
 
 # Function to determine which ui to use for editing
-def edit_parser(project, main_window):
+def edit_parser(project, viewer_dialog, main_window):
     print(f"Project to edit:\n{project.text()}")
+    dialog = QDialog(viewer_dialog)
     # Identify project type
     if "Language(s)" in project.text():
         ui = Ui_programmingProjectEditor()

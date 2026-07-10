@@ -35,12 +35,15 @@ tab_handler = [
 # Utility functions
 ##### Universal buttons #####
 # Return to main menu
-def return_to_main_clicked(current_dialog, main_window):
+def return_to_main_clicked(current_dialog, main_window, parent_dialog=None):
     print("Return to main menu clicked")
     if current_dialog is not None:
         current_dialog.close()
-    main_window.show()
-    main_window.setEnabled(True)
+    if parent_dialog is not None:
+        parent_dialog.close()
+    if main_window is not None:
+        main_window.show()
+        main_window.setEnabled(True)
 
 
 # Exit program
