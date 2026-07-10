@@ -104,6 +104,7 @@ def recurring_project_clicked(current_dialog, main_window):
     ui = Ui_recurringProjectEditor()
     ui.setupUi(recurring_dialog)
     ui.saveRecurring.clicked.connect(lambda: writers.writer(ui, resources.RECURRING_FILE, recurring_dialog, main_window))
+    project_editors.connect_buttons(ui, recurring_dialog, main_window, "recurring")
     ui.clearRecurring.clicked.connect(lambda: writers.clear_input(ui))
     ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(recurring_dialog, main_window))
     ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(recurring_dialog))

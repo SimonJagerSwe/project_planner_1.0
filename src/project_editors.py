@@ -1,18 +1,38 @@
 ########## Project editors ##########
 # Imports
-import resources, writers
+import resources
 
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_programming import Ui_programmingProjectEditor 
 from interface.ui_recurring import Ui_recurringProjectEditor
 from loader import load_file as loader
+from writers import writer, clear_input
 
 from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QDialog
 
+# Connect editor buttons to reuse the button calls from button_handler.py
+def connect_buttons(ui, dialog, main_window, project_type):
+    if project_type == "everyday":
+        ui.saveEveryday.clicked.connect(lambda: writer)
+        ui.everydayClear.clicked.connect(lambda: clear_input(ui))
+        ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window))
+        ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(dialog))
+    elif project_type == "programming":
+        ui.programmingSave.clicked.connect(lambda: writer(ui, resources.PROGRAMING_FILE, dialog, main_window))
+        ui.programmingClear.clicked.connect(lambda: clear_input(ui))
+        ui.programmingReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window))
+        ui.programmingExit.clicked.connect(lambda: resources.exit_clicked(dialog))
+    else:
+        ui.saveRecurring.clicked.connect(lambda: writer(ui, resources.RECURRING_FILE, dialog, main_window))
+        ui.clearRecurring.clicked.connect(lambda: clear_input(ui))
+        ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window))
+        ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(dialog))
+
 # Function to determine which ui to use for editing
 def edit_parser(project):
     print(f"Project to edit:\n{project.text()}")
+    # Identify project type
     if "Language(s)" in project.text():
         ui = Ui_programmingProjectEditor()
         edit_programming(ui, project)
@@ -29,9 +49,7 @@ def project_parser(project, type):
     # Find project name
     for var in project.text().split("\n"):
         if "name" in var:
-            # print(var)
             project_name = var.split(":")[1].strip()
-            # print(project_name)
     
     # Load everyday file
     if type == "everyday":
@@ -55,7 +73,6 @@ def project_parser(project, type):
 def edit_everyday(ui, project):
     print("Editing everyday...")
     current_project = project_parser(project, "everyday")
-    # print(current_project)
     dialog = QDialog()
     ui.setupUi(dialog)
     ui.everydayName.setText(current_project["Project name"])
@@ -95,36 +112,7 @@ def edit_recurring(ui, project):
     print(current_project)
     dialog = QDialog()
     ui.setupUi(dialog)
+    ui.recurringName.setText(current_project["Task name"])
+    ui.recurringFrequency.setCurrentText(current_project["Task frequency"])
+    ui.recurringNotes.setText(current_project["Task notes"])
     dialog.exec()
-
-'''
-def connect_editor_buttons(ui, dialog, main_window, project_type):
-    if project_type == "everyday":
-        ui.everydaySave.clicked.connect(
-            lambda: writers.writer(ui, resources.EVERYDAY_FILE, dialog, main_window)
-        )
-        ui.everydayClear.clicked.connect(lambda: writers.clear_input(ui))
-        ui.everydayReturn.clicked.connect(
-            lambda: resources.return_to_main_clicked(dialog, main_window)
-        )
-        ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(dialog))
-
-    elif project_type == "programming":
-        ui.programmingSave.clicked.connect(
-            lambda: writers.writer(ui, resources.PROGRAMMING_FILE, dialog, main_window)
-        )
-        ui.programmingClear.clicked.connect(lambda: writers.clear_input(ui))
-        ui.programmingReturn.clicked.connect(
-            lambda: resources.return_to_main_clicked(dialog, main_window)
-        )
-        ui.programmingExit.clicked.connect(lambda: resources.exit_clicked(dialog))
-
-    elif project_type == "recurring":
-        ui.saveRecurring.clicked.connect(
-            lambda: writers.writer(ui, resources.RECURRING_FILE, dialog, main_window)
-        )
-        ui.clearRecurring.clicked.connect(lambda: writers.clear_input(ui))
-        ui.returnToMainRecurring.clicked.connect(
-            lambda: resources.return_to_main_clicked(dialog, main_window)
-        )
-        ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(dialog))'''
