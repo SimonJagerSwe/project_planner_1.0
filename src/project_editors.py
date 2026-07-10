@@ -13,37 +13,49 @@ from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QDialog
 
 # Connect editor buttons to reuse the button calls from button_handler.py
-def connect_buttons(ui, dialog, main_window, project_type, parent_dialog=None):
+def connect_buttons(ui, dialog, main_window, project_type, viewer_dialog=None):
     if project_type == "everyday":
-        ui.saveEveryday.clicked.connect(lambda: writer)
+        ui.everydaySave.clicked.connect(lambda: writer(ui, resources.EVERYDAY_FILE, dialog))
         ui.everydayClear.clicked.connect(lambda: clear_input(ui))
-        ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window))
+        ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(dialog))
     elif project_type == "programming":
         ui.programmingSave.clicked.connect(lambda: writer(ui, resources.PROGRAMING_FILE, dialog))
         ui.programmingClear.clicked.connect(lambda: clear_input(ui))
-        ui.programmingReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window))
+        ui.programmingReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.programmingExit.clicked.connect(lambda: resources.exit_clicked(dialog))
     else:
-        ui.saveRecurring.clicked.connect(lambda: writer(ui, resources.RECURRING_FILE, dialog))
+        ui.saveRecurring.clicked.connect(lambda: writer(ui, resources.RECURRING_FILE, dialog, main_window))
         ui.clearRecurring.clicked.connect(lambda: clear_input(ui))
-        ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, parent_dialog))
+        ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(dialog))
 
 # Function to determine which ui to use for editing
 def edit_parser(project, viewer_dialog, main_window):
     print(f"Project to edit:\n{project.text()}")
-    dialog = QDialog(viewer_dialog)
+
     # Identify project type
     if "Language(s)" in project.text():
         ui = Ui_programmingProjectEditor()
+        dialog = QDialog(viewer_dialog)
+        ui.setupUi(dialog)
+        connect_buttons(ui, dialog, main_window, "programming", viewer_dialog)
         edit_programming(ui, project, main_window)
+        dialog.exec()
     elif "Task frequency" in project.text():
         ui = Ui_recurringProjectEditor()
+        dialog = QDialog(viewer_dialog)
+        ui.setupUi(dialog)
+        connect_buttons(ui, dialog, main_window, "recurring", viewer_dialog)
         edit_recurring(ui, project, main_window)
+        dialog.exec()
     else:
         ui = Ui_everydayProjectEditor()
+        dialog = QDialog(viewer_dialog)
+        ui.setupUi(dialog)
+        connect_buttons(ui, dialog, main_window, "everyday", viewer_dialog)
         edit_everyday(ui, project, main_window)
+        dialog.exec()
 
 
 # Get the correct projects file to delete old version of project
@@ -72,11 +84,10 @@ def project_parser(project, type):
                 return task
 
 
-def edit_everyday(ui, project):
+def edit_everyday(ui, project, main_window):
     print("Editing everyday...")
     current_project = project_parser(project, "everyday")
-    dialog = QDialog()
-    ui.setupUi(dialog)
+    print(current_project)
     ui.everydayName.setText(current_project["Project name"])
     ui.everydayStart.setDate(QDate.fromString(current_project["Project start"], "yyyy-MM-dd"))
     ui.everydayFinish.setDate(QDate.fromString(current_project["Project end"], "yyyy-MM-dd"))
@@ -86,16 +97,12 @@ def edit_everyday(ui, project):
     ui.everydayProgressSlider.setValue(progress_value)
     ui.everydayProgressPercent.setText(progress_text)
     ui.everydayStatus.setCurrentText(current_project["Project status"])
-    connect_buttons(ui, dialog, project_type="everyday")
-    dialog.exec()
 
 
-def edit_programming(ui, project):
+def edit_programming(ui, project, main_window):
     print("Editing programming...")
     current_project = project_parser(project, "programming")
     print(current_project)
-    dialog = QDialog()
-    ui.setupUi(dialog)
     ui.programmingName.setText(current_project["Project name"])
     ui.programmingStart.setDate(QDate.fromString(current_project["Project start"], "yyyy-MM-dd"))
     ui.programmingFinish.setDate(QDate.fromString(current_project["Project end"], "yyyy-MM-dd"))
@@ -106,19 +113,13 @@ def edit_programming(ui, project):
     ui.programmingProgressSlider.setValue(progress_value)
     ui.programmingProgressPercent.setText(progress_text)
     ui.programmingStatus.setCurrentText(current_project["Project status"])
-    connect_buttons(ui, dialog, project_type="programming")
-    dialog.exec()
 
 
 def edit_recurring(ui, project, main_window):
     print("Editing recurring project...")
     current_project = project_parser(project, "recurring")
     print(current_project)
-    dialog = QDialog()
-    ui.setupUi(dialog)
     ui.recurringName.setText(current_project["Task name"])
     ui.recurringFrequency.setCurrentText(current_project["Task frequency"])
     ui.recurringNotes.setText(current_project["Task notes"])
-    connect_buttons(ui, dialog, main_window, project_type="recurring")
-    dialog.exec()
     
