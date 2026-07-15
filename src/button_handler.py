@@ -20,7 +20,7 @@ def main_menu_buttons(main_window):
     add_project = main_window.findChild(QPushButton, "addProject")
     add_project.clicked.connect(lambda: add_project_clicked(main_window))
     view_projects = main_window.findChild(QPushButton, "viewProjects")
-    view_projects.clicked.connect(lambda: project_viewer_clicked(main_window, 0))
+    view_projects.clicked.connect(lambda: project_viewer_clicked(main_window, 0, 0))
     view_archive = main_window.findChild(QPushButton, "viewArchive")
     view_archive.clicked.connect(lambda: project_viewer_clicked(main_window, 1))
     main_exit = main_window.findChild(QPushButton, "mainExit")
@@ -104,7 +104,6 @@ def recurring_project_clicked(current_dialog, main_window):
     ui = Ui_recurringProjectEditor()
     ui.setupUi(recurring_dialog)
     ui.saveRecurring.clicked.connect(lambda: writers.project_data(ui, "recurring", recurring_dialog, main_window, "new"))
-    # project_editors.connect_buttons(ui, recurring_dialog, main_window, "recurring", main_window)
     ui.clearRecurring.clicked.connect(lambda: resources.clear_input(ui))
     ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(recurring_dialog, main_window))
     ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(recurring_dialog))
@@ -113,7 +112,7 @@ def recurring_project_clicked(current_dialog, main_window):
 
 
 # View projects and archives
-def project_viewer_clicked(main_window, idx):
+def project_viewer_clicked(main_window, top_idx, sub_idx):
     print("Loading viewer...")
     resources.selected_project = None
     main_window.close()
@@ -127,15 +126,16 @@ def project_viewer_clicked(main_window, idx):
         resources.selected_project = None
 
     # Initialise tab index based on user selection
-    ui.viewer.setCurrentIndex(idx)
-    if ui.viewer.currentIndex == 0:
-        ui.currentProjects.setCurrentIndex(0)
-    if ui.viewer.currentIndex == 1:
-        ui.archive.setCurrentIndex(0)
+    ui.viewer.setCurrentIndex(top_idx)
+    if ui.viewer.currentIndex() == 0:
+        ui.projectTabs.setCurrentIndex(sub_idx)
+    if ui.viewer.currentIndex() == 1:
+        ui.archive.setCurrentIndex(sub_idx)
     
     # Print everyday projects to interface without having to select a tab first
     # to avoid user being greeted by an empty project view
-    tab_changed(ui.viewer.currentIndex(), 0)
+    # tab_changed(ui.viewer.currentIndex(), 0)
+    tab_changed(top_idx, sub_idx)
 
     # Use a clicked project to set an item to use
     # for editing, archiving or deleting
@@ -148,7 +148,6 @@ def project_viewer_clicked(main_window, idx):
             resources.no_project_selected()
         else:
             project_editors.edit_parser(resources.selected_project, viewer, main_window)
-        
 
     # Logic for project selection
     recurring_list = [ui.recurringBi, ui.recurringOther, ui.recurringWeekly]
@@ -186,8 +185,8 @@ def project_viewer_clicked(main_window, idx):
     ui.projectTabs.currentChanged.connect(lambda index: tab_changed(0, index))
     ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
     ui.editProject.clicked.connect(edit_clicked)
-    ui.archiveProject.clicked.connect(lambda: archive_project_clicked)
-    ui.deleteProject.clicked.connect(lambda: delete_project_clicked)
+    ui.archiveProject.clicked.connect(lambda: archive_project_clicked())
+    ui.deleteProject.clicked.connect(lambda: delete_project_clicked())
     ui.returnToMainProjects.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitProjects.clicked.connect(lambda: resources.exit_clicked(viewer))
     ui.restoreArchived.clicked.connect(restore_project_clicked)

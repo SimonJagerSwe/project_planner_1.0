@@ -100,8 +100,15 @@ def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, curren
     dialog.close()
     if viewer_dialog is not None:
         viewer_dialog.close()
-        button_handler.project_viewer_clicked(main_window, 0)
-        
+        if project_type == "everyday":
+            print("Sub idx: 0")
+            button_handler.project_viewer_clicked(main_window, 0, 0)
+        elif project_type == "programming":
+            print("Sub-idx: 1")
+            button_handler.project_viewer_clicked(main_window, 0, 1)
+        else:
+            print("Sub idx: 3")
+            button_handler.project_viewer_clicked(main_window, 0, 3)       
 
 
 # Edit everyday project 
