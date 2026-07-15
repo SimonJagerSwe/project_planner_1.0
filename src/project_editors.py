@@ -103,7 +103,8 @@ def edit_everyday(ui, project, main_window):
     progress_text = current_project["Project progress"]
     progress_value = int(progress_text.strip("%"))
     ui.everydayProgressSlider.setValue(progress_value)
-    ui.everydayProgressPercent.setText(progress_text)
+    ui.everydayProgressSlider.valueChanged.connect(lambda value: 
+        ui.everydayProgressPercent.setText(f"{value}%"))
     ui.everydayStatus.setCurrentText(current_project["Project status"])
 
 
@@ -118,6 +119,9 @@ def edit_programming(ui, project, main_window):
     ui.githubEdit.setText(current_project["GitHub link"])
     progress_text = current_project["Project progress"]
     progress_value = int(progress_text.strip("%"))
+    ui.programmingProgressSlider.setValue(progress_value)
+    ui.programmingProgressSlider.valueChanged.connect(lambda value:
+        ui.programmingProgressPercent.setText(f"{value}%"))
     ui.programmingProgressSlider.setValue(progress_value)
     ui.programmingProgressPercent.setText(progress_text)
     ui.programmingStatus.setCurrentText(current_project["Project status"])
