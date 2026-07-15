@@ -106,11 +106,12 @@ def writer(project, project_type, write_type):
     except:
         print(f"Unexpected error while writing to {project_type} project file occurred")
     # Write to full project file
-    try:
-        with open(resources.ALL_PROJECTS_FILE, "w") as file:
-            json.dump(all_projects, file)
-    except:
-        print("Unexpected error while writing to full project file occurred")
+    if "Task frequency" not in project:
+        try:
+            with open(resources.ALL_PROJECTS_FILE, "w") as file:
+                json.dump(all_projects, file)
+        except:
+            print("Unexpected error while writing to full project file occurred")
 
     # Trigger success message
     if write_type == "new":
