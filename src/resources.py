@@ -93,6 +93,7 @@ def clear_input(ui):
         ui.recurringFrequency.setCurrentText("Select frequency")
         ui.recurringNotes.setText("")
 
+
 # Successfull project creation
 def success_message():
     success_message = QMessageBox()
@@ -128,13 +129,9 @@ def delete_project(project, type):
     print(f"Full projects after removal:\n{all_projects}\n")
 
     writer(projects, type)
-    
-    # with open(projects_file, "w") as file:
-    #     json.dump(projects, file)
-    # with open(ALL_PROJECTS_FILE, "w") as file:
-    #     json.dump(all_projects, file)
 
 
+# TODO
 # No project for editing or archiving selected
 def no_project_selected():
     print("No project selected")
