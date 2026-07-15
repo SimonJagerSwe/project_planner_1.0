@@ -79,8 +79,7 @@ def writer(project, project_type):
             print(f"Current projects of {project_type} type:\n{current_type_projects}\n\n")
             print(current_type_projects)
     except:
-        print("Project type file empty")
-    
+        print("Project type file empty")    
     current_type_projects.append(project)
     print(f"Updated projects of {project_type} type:\n{current_type_projects}\n\n")
     
@@ -91,7 +90,8 @@ def writer(project, project_type):
             print(f"All current projects:\n{all_projects}\n\n")
     except:
         print("All projects file empty")
-
+    all_projects.append(project)
+    
     # Write to project type file
     try:
         with open(projects_file, "w") as file:
@@ -101,7 +101,7 @@ def writer(project, project_type):
     # Write to full project file
     try:
         with open(resources.ALL_PROJECTS_FILE, "w") as file:
-            json.dump(project, file)
+            json.dump(all_projects, file)
     except:
         print("Unexpected error while writing to full project file occurred")
     resources.success_message()
