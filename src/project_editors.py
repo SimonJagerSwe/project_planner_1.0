@@ -88,6 +88,9 @@ def project_parser(project, type):
             if task["Task name"] == project_name:
                 return task
 
+
+# Save edited file, refresh project files read
+# And return to project viewer 
 def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, write_type):
     resources.delete_project(current_project, project_type)
     project_data(ui, project_type, dialog, main_window, write_type)
@@ -95,8 +98,10 @@ def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, curren
     if viewer_dialog is not None:
         viewer_dialog.close()
         button_handler.project_viewer_clicked(main_window, 0)
+        
 
 
+# Edit everyday project 
 def edit_everyday(ui, project, main_window):
     print("Editing everyday...")
     current_project = project_parser(project, "everyday")
@@ -115,6 +120,7 @@ def edit_everyday(ui, project, main_window):
     ui.everydayStatus.setCurrentText(current_project["Project status"])
 
 
+# Edit programming project
 def edit_programming(ui, project, main_window):
     print("Editing programming...")
     current_project = project_parser(project, "programming")
@@ -134,6 +140,7 @@ def edit_programming(ui, project, main_window):
     ui.programmingStatus.setCurrentText(current_project["Project status"])
 
 
+# Edit recurring project
 def edit_recurring(ui, project, main_window):
     print("Editing recurring project...")
     current_project = project_parser(project, "recurring")

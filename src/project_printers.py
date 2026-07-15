@@ -12,6 +12,7 @@ def print_projects(ui, top_tab, sub_tab):
     ui.recurringWeekly.clear()
     ui.recurringBi.clear()
     ui.recurringOther.clear()
+    ui.allProjects.clear()
 
     # Open project file based on tab indices
     project_file = resources.tab_handler[top_tab][sub_tab]

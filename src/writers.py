@@ -4,6 +4,8 @@ import json
 
 import resources
 
+from project_printers import print_projects
+
 # from loader import load_file
 
 # Project file creator
@@ -97,7 +99,6 @@ def writer(project, project_type, write_type):
         all_projects = []
         all_projects.append(project)
     
-    
     # Write to project type file
     try:
         with open(projects_file, "w") as file:
@@ -111,6 +112,7 @@ def writer(project, project_type, write_type):
     except:
         print("Unexpected error while writing to full project file occurred")
 
+    # Trigger success message
     if write_type == "new":
         resources.success_message_main()
     else:
