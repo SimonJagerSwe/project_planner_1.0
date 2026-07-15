@@ -65,7 +65,7 @@ def everyday_project_clicked(current_dialog, main_window):
     ui.everydayFinish.setDate(QDate.currentDate())
     ui.everydayProgressSlider.valueChanged.connect(lambda value: 
         ui.everydayProgressPercent.setText(f"{value}%"))
-    ui.everydaySave.clicked.connect(lambda: writers.writer(ui, resources.EVERYDAY_FILE, everyday_dialog, main_window))
+    ui.everydaySave.clicked.connect(lambda: writers.project_data(ui, "everyday", everyday_dialog, main_window))
     ui.everydayClear.clicked.connect(lambda: resources.clear_input(ui))
     ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(everyday_dialog, main_window))
     ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(everyday_dialog))
@@ -104,7 +104,6 @@ def recurring_project_clicked(current_dialog, main_window):
     ui = Ui_recurringProjectEditor()
     ui.setupUi(recurring_dialog)
     # ui.saveRecurring.clicked.connect(lambda: writers.writer(ui, resources.RECURRING_FILE, recurring_dialog, main_window))
-    # ui.saveRecurring.clicked.connect(lambda: writers.project_data(ui, resources.RECURRING_FILE, recurring_dialog, main_window))
     ui.saveRecurring.clicked.connect(lambda: writers.project_data(ui, "recurring", recurring_dialog, main_window))
     project_editors.connect_buttons(ui, recurring_dialog, main_window, "recurring", main_window)
     # project_editors.edit_recurring(ui, recurring_dialog, main_window)

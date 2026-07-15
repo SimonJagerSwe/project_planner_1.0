@@ -7,7 +7,7 @@ from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_programming import Ui_programmingProjectEditor 
 from interface.ui_recurring import Ui_recurringProjectEditor
 from loader import load_file as loader
-from writers import writer
+from writers import project_data
 
 from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QDialog
@@ -16,7 +16,7 @@ from PySide6.QtWidgets import QDialog
 def connect_buttons(ui, dialog, main_window, project_type, viewer_dialog=None, current_project=None):
     if project_type == "everyday":
         ui.everydaySave.clicked.connect(lambda: resources.delete_project(current_project, "everyday"))
-        # ui.everydaySave.clicked.connect(lambda: writer(ui, resources.EVERYDAY_FILE, dialog))
+        ui.everydaySave.clicked.connect(lambda: project_data(ui, resources.EVERYDAY_FILE, dialog))
         ui.everydayClear.clicked.connect(lambda: resources.clear_input(ui))
         ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(dialog))
@@ -32,6 +32,7 @@ def connect_buttons(ui, dialog, main_window, project_type, viewer_dialog=None, c
         ui.clearRecurring.clicked.connect(lambda: resources.clear_input(ui))
         ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(dialog))
+
 
 # Function to determine which ui to use for editing
 def edit_parser(project, viewer_dialog, main_window):

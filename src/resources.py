@@ -102,6 +102,7 @@ def success_message():
     success_message.exec()
 
 
+# Delete project from project type file, both for deletion and for editing
 def delete_project(project, type):
     print(f"Project for deletion:\n{project}")
     if type == "everyday":
@@ -125,11 +126,13 @@ def delete_project(project, type):
 
     print(f"Selected projects type after removal:\n{projects}")
     print(f"Full projects after removal:\n{all_projects}\n")
+
+    writer(projects, type)
     
-    with open(projects_file, "w") as file:
-        json.dump(projects, file)
-    with open(ALL_PROJECTS_FILE, "w") as file:
-        json.dump(all_projects, file)
+    # with open(projects_file, "w") as file:
+    #     json.dump(projects, file)
+    # with open(ALL_PROJECTS_FILE, "w") as file:
+    #     json.dump(all_projects, file)
 
 
 # No project for editing or archiving selected
