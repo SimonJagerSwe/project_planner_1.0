@@ -78,9 +78,12 @@ def writer(project, project_type):
             current_type_projects = json.load(file)
             print(f"Current projects of {project_type} type:\n{current_type_projects}\n\n")
             print(current_type_projects)
+            current_type_projects.append(project)
     except:
-        print("Project type file empty")    
-    current_type_projects.append(project)
+        print("Project type file empty")
+        current_type_projects = []
+        current_type_projects.append(project)
+    
     print(f"Updated projects of {project_type} type:\n{current_type_projects}\n\n")
     
     # Read full projects file
@@ -88,9 +91,12 @@ def writer(project, project_type):
         with open(resources.ALL_PROJECTS_FILE, "r") as file:
             all_projects = json.load(file)
             print(f"All current projects:\n{all_projects}\n\n")
+            all_projects.append(project)
     except:
         print("All projects file empty")
-    all_projects.append(project)
+        all_projects = []
+        all_projects.append(project)
+    
     
     # Write to project type file
     try:

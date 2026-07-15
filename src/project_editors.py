@@ -15,20 +15,20 @@ from PySide6.QtWidgets import QDialog
 # Connect editor buttons to reuse the button calls from button_handler.py
 def connect_buttons(ui, dialog, main_window, project_type, viewer_dialog=None, current_project=None):
     if project_type == "everyday":
-        ui.everydaySave.clicked.connect(lambda: resources.delete_project(current_project, "everyday"))
-        ui.everydaySave.clicked.connect(lambda: project_data(ui, resources.EVERYDAY_FILE, dialog))
+        ui.everydaySave.clicked.connect(lambda: resources.delete_project(current_project, project_type))
+        ui.everydaySave.clicked.connect(lambda: project_data(ui, project_type, dialog, main_window))
         ui.everydayClear.clicked.connect(lambda: resources.clear_input(ui))
         ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(dialog))
     elif project_type == "programming":
-        ui.programmingSave.clicked.connect(lambda: resources.delete_project(current_project, "programming"))
-        # ui.programmingSave.clicked.connect(lambda: writer(ui, resources.PROGRAMING_FILE, dialog))
+        ui.programmingSave.clicked.connect(lambda: resources.delete_project(current_project, project_type))
+        ui.programmingSave.clicked.connect(lambda: project_data(ui,project_type, dialog))
         ui.programmingClear.clicked.connect(lambda: resources.clear_input(ui))
         ui.programmingReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.programmingExit.clicked.connect(lambda: resources.exit_clicked(dialog))
     else:
-        ui.saveRecurring.clicked.connect(lambda: resources.delete_project(current_project, "recurring"))
-        # ui.saveRecurring.clicked.connect(lambda: writer(ui, resources.RECURRING_FILE, dialog, main_window))
+        ui.saveRecurring.clicked.connect(lambda: resources.delete_project(current_project, project_type))
+        ui.saveRecurring.clicked.connect(lambda: project_type(ui, project_type, dialog, main_window))
         ui.clearRecurring.clicked.connect(lambda: resources.clear_input(ui))
         ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(dialog))
