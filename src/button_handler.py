@@ -103,7 +103,7 @@ def recurring_project_clicked(current_dialog, main_window):
     recurring_dialog = QDialog(main_window)
     ui = Ui_recurringProjectEditor()
     ui.setupUi(recurring_dialog)
-    ui.saveRecurring.clicked.connect(lambda: writers.project_data(ui, "recurring", recurring_dialog, main_window))
+    # ui.saveRecurring.clicked.connect(lambda: writers.project_data(ui, "recurring", recurring_dialog, main_window))
     project_editors.connect_buttons(ui, recurring_dialog, main_window, "recurring", main_window)
     ui.clearRecurring.clicked.connect(lambda: resources.clear_input(ui))
     ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(recurring_dialog, main_window))
