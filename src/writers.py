@@ -2,22 +2,16 @@
 # Imports
 import json
 
-import button_handler, resources
+import resources
 
-from loader import load_file
+from project_printers import print_projects
 
-from PySide6.QtCore import QDate
+# from loader import load_file
 
-
-# Project writer
-def writer(ui, projects_file, current_dialog=None, main_window=None):
-    projects = load_file(projects_file)
-    all_projects = load_file(resources.ALL_PROJECTS_FILE)
-    print(f"Working file:\n{projects_file}\n\n")
-    print(f"Projects in file:\n{projects}\n\n")
-
+# Project file creator
+def project_data(ui, project_type, current_dialog, main_window, write_type):
     # Create everyday project
-    if projects_file == resources.EVERYDAY_FILE:
+    if project_type == "everyday":
         name = ui.everydayName.text()
         start = ui.everydayStart.date().toString("yyyy-MM-dd")
         finish = ui.everydayFinish.date().toString("yyyy-MM-dd")
@@ -32,9 +26,8 @@ def writer(ui, projects_file, current_dialog=None, main_window=None):
             "Project progress" : percent,
             "Project status" : status
         }
-    
     # Create programming project
-    elif projects_file == resources.PROGRAMING_FILE:
+    elif project_type == "programming":
         name = ui.programmingName.text()
         start = ui.programmingStart.date().toString("yyyy-MM-dd")
         finish = ui.programmingFinish.date().toString("yyyy-MM-dd")
@@ -53,7 +46,6 @@ def writer(ui, projects_file, current_dialog=None, main_window=None):
             "Project progress" : percent,
             "Project status" : status
         }
-
     # Create recurring task
     else:
         name = ui.recurringName.text()
@@ -65,157 +57,65 @@ def writer(ui, projects_file, current_dialog=None, main_window=None):
             "Task notes" : notes
         }
 
-    print(f"Project to be added:\n{project}\n\n")
-    projects.append(project)
-    all_projects.append(project)
-    print(f"Updated projects file:\n{projects}\n\n")
-
-
-    # Write updated projects file
-    with open(projects_file, "w") as file:
-        json.dump(projects, file)
-    with open(resources.ALL_PROJECTS_FILE, "w") as file:
-        json.dump(all_projects, file)
-    resources.success_message()
+    # Write new file
+    writer(project, project_type, write_type)
 
     # Return to main menu
     if current_dialog and main_window:
         resources.return_to_main_clicked(current_dialog, main_window)
 
+# Project writer
+def writer(project, project_type, write_type):
+    # Determine which project file to write to
+    if project_type == "everyday":
+        projects_file = resources.EVERYDAY_FILE
+    elif project_type == "programming":
+        projects_file = resources.PROGRAMING_FILE
+    else:
+        projects_file = resources.RECURRING_FILE
 
-# Clear project input
-def clear_input():
-    ...
-
-
-'''
-# Project editor
-def editor(ui):
-    print("Editing everyday project...")
-
-# Clear everyday project input
-def c_e_project(ui):
-    print("Clearing everyday project...")
-    ui.everydayName.setText("")
-    ui.everydayStart.setDate(QDate.currentDate())
-    ui.everydayFinish.setDate(QDate.currentDate())
-    ui.everydayNotes.setText("")
-    ui.everydayProgressSlider.setValue(0)
-    ui.everydayProgressPercent.setText("0%")
-    ui.everydayStatus.setCurrentText("Select project status")
-
-# Delete everyday project
-def d_e_project():
-    print("Deleting everyday project...")
-
-# Write programming project
-def w_p_project(ui, current_dialog=None, main_window=None):
-    # Call reader to fetch all current programming projects
-    projects = reader(resources.PROGRAMING_FILE)
-    print(f"Current programming projects:\n{projects}")
-
-    # Read project parameters from gui
-    name = ui.programmingName.text()
-    start = ui.programmingStart.date().toString("yyyy-MM-dd")
-    finish = ui.programmingFinish.date().toString("yyyy-MM-dd")
-    language = ui.languagesEdit.text()
-    link = ui.githubEdit.text()
-    notes = ui.programmingNotes.text()
-    percent = ui.programmingProgressPercent.text()
-    status = ui.programmingStatus.currentText()
-
-    # Store project parameters in project dict
-    p_project = {
-        "Project name" : name,
-        "Project start date" : start,
-        "Project end date" : finish,
-        "Language(s)" : language,
-        "GitHub link" : link,
-        "Project notes" : notes,
-        "Project progress" : percent,
-        "Project status" : status
-    }
-    print(f"Project variables to save:\n{p_project}")
-
-    # Append new project to the end of the programming projects file
-    projects.append(p_project)
-    print(projects)
-
-    # Write updated programming projects file
-    with open(resources.PROGRAMING_FILE, "w") as file:
-        json.dump(projects, file)
-
-    # Display message to let user know that the programming project has been saved
-    resources.success_message("Programming")
-
-    # Return to main menu
-    if current_dialog and main_window:
-        button_handler.return_to_main_clicked(current_dialog, main_window)
-
-
-# Edit programming project
-def e_p_project(ui):
-    print("Editing programming project...")
-
-# Clear programming project
-def c_p_project(ui):
-    print("Clearing programming project...")
-    ui.programmingName.setText("")
-    ui.programmingStart.setDate(QDate.currentDate())
-    ui.programmingFinish.setDate(QDate.currentDate())
-    ui.languagesEdit.setText("")
-    ui.githubEdit.setText("")
-    ui.programmingNotes.setText("")
-    ui.programmingProgressSlider.setValue(0)
-    ui.programmingProgressPercent.setText("0%")
-    ui.programmingStatus.setCurrentText("Select project status")
-
-# Delete programming project
-def d_e_project():
-    print("Deleting programming project...")
-
+    # Read current project type projects
+    try:
+        with open(projects_file, "r") as file:
+            current_type_projects = json.load(file)
+            print(f"Current projects of {project_type} type:\n{current_type_projects}\n\n")
+            print(current_type_projects)
+            current_type_projects.append(project)
+    except:
+        print("Project type file empty")
+        current_type_projects = []
+        current_type_projects.append(project)
     
-# Edit recurring task
-def e_r_task():
-    print("Editing recurring task...")
-
-# Clear recurring task
-def c_r_task(ui):
-    print("Clearing recurring task")
-    ui.recurringName.setText("")
-    ui.recurringFrequency.setCurrentText("Select frequency")
-    ui.recurringNotes.setText("")
+    print(f"Updated projects of {project_type} type:\n{current_type_projects}\n\n")
     
+    # Read full projects file
+    try:
+        with open(resources.ALL_PROJECTS_FILE, "r") as file:
+            all_projects = json.load(file)
+            print(f"All current projects:\n{all_projects}\n\n")
+            all_projects.append(project)
+    except:
+        print("All projects file empty")
+        all_projects = []
+        all_projects.append(project)
     
-# Delete recurring task
-def d_r_task():
-    print("Deleting recurring task...")
+    # Write to project type file
+    try:
+        with open(projects_file, "w") as file:
+            json.dump(current_type_projects, file)
+    except:
+        print(f"Unexpected error while writing to {project_type} project file occurred")
+    # Write to full project file
+    if "Task frequency" not in project:
+        try:
+            with open(resources.ALL_PROJECTS_FILE, "w") as file:
+                json.dump(all_projects, file)
+        except:
+            print("Unexpected error while writing to full project file occurred")
 
-# Write all projects
-def w_a_projects():
-    print(f"Writing project to {resources.ALL_PROJECTS_FILE}")
-    a_projects = {
-
-    }
-
-# Write everyday archive
-def w_e_archive():
-    print(f"Writing everyday project to {resources.EVERYDAY_ARCHIVE}")
-    e_archive = {
-
-    }
-
-# Write programming archive
-def w_p_archive():
-    print(f"Writing programming project to {resources.PROGRAMMING_ARCHIVE}")
-    p_archive = {
-
-    }
-
-# Write full archive
-def w_f_archive():
-    print(f"Writing project to {resources.FULL_ARCHIVE}")
-    f_archive = {
-
-    }
-'''
+    # Trigger success message
+    if write_type == "new":
+        resources.success_message_main()
+    else:
+        resources.success_message_viewer()
+    

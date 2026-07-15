@@ -12,6 +12,7 @@ def print_projects(ui, top_tab, sub_tab):
     ui.recurringWeekly.clear()
     ui.recurringBi.clear()
     ui.recurringOther.clear()
+    ui.allProjects.clear()
 
     # Open project file based on tab indices
     project_file = resources.tab_handler[top_tab][sub_tab]
@@ -20,6 +21,8 @@ def print_projects(ui, top_tab, sub_tab):
     # Print all projects
     if sub_tab == 2:
         for project in projects:
+            if "Project name" not in project:
+                continue
             name = project["Project name"]
             start = project["Project start"]
             end = project["Project end"]
@@ -36,7 +39,6 @@ def print_projects(ui, top_tab, sub_tab):
             else:
                 full_project = f"Project name:\t{name}\nStart date:\t\t{start}\nEnd date:\t\t{end}\nProject notes:\t{notes}\nProject progress:\t{progress}\nProject status:\t{status}\n"
                 ui.allProjects.addItem(full_project)
-
     # Print precurring tasks depending on frequency
     elif sub_tab == 3:
         for project in projects:
@@ -50,10 +52,11 @@ def print_projects(ui, top_tab, sub_tab):
                 ui.recurringBi.addItem(full_project)
             else:
                 ui.recurringOther.addItem(full_project)
-
     # Print everyday or programming projects, based on whether programming-specific variables exist
     else:
         for project in projects:
+            if "Project name" not in project:
+                continue
             name = project["Project name"]
             start = project["Project start"]
             end = project["Project end"]
@@ -64,6 +67,7 @@ def print_projects(ui, top_tab, sub_tab):
             notes = project["Project notes"]
             progress = project["Project progress"]
             status = project["Project status"]
+
             if "Language(s)" in project:
                 full_project = f"Project name:\t{name}\nStart date:\t\t{start}\nEnd date:\t\t{end}\nLanguage(s):\t\t{language}\nGitHub link:\t\t{link}\nProject notes:\t{notes}\nProject progress:\t{progress}\nProject status:\t{status}\n"
                 ui.programmingProjects.addItem(full_project)

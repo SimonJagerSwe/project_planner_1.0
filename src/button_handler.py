@@ -1,8 +1,6 @@
 ########## Button handler ##########
 # Imports
-import sys
-
-import resources, writers
+import project_editors, resources, writers
 
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
@@ -13,7 +11,7 @@ from project_printers import print_projects as printer
 
 from PySide6.QtCore import QDate
 from PySide6.QtGui import QAction
-from PySide6.QtWidgets import QDialog, QPushButton
+from PySide6.QtWidgets import QDialog, QListWidget, QPushButton 
 
 
 # Main menu buttons
@@ -22,7 +20,7 @@ def main_menu_buttons(main_window):
     add_project = main_window.findChild(QPushButton, "addProject")
     add_project.clicked.connect(lambda: add_project_clicked(main_window))
     view_projects = main_window.findChild(QPushButton, "viewProjects")
-    view_projects.clicked.connect(lambda: project_viewer_clicked(main_window, 0))
+    view_projects.clicked.connect(lambda: project_viewer_clicked(main_window, 0, 0))
     view_archive = main_window.findChild(QPushButton, "viewArchive")
     view_archive.clicked.connect(lambda: project_viewer_clicked(main_window, 1))
     main_exit = main_window.findChild(QPushButton, "mainExit")
@@ -67,8 +65,8 @@ def everyday_project_clicked(current_dialog, main_window):
     ui.everydayFinish.setDate(QDate.currentDate())
     ui.everydayProgressSlider.valueChanged.connect(lambda value: 
         ui.everydayProgressPercent.setText(f"{value}%"))
-    ui.everydaySave.clicked.connect(lambda: writers.writer(ui, resources.EVERYDAY_FILE, everyday_dialog, main_window))
-    ui.everydayClear.clicked.connect(lambda: writers.clear_input(ui))
+    ui.everydaySave.clicked.connect(lambda: writers.project_data(ui, "everyday", everyday_dialog, main_window, "new"))
+    ui.everydayClear.clicked.connect(lambda: resources.clear_input(ui))
     ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(everyday_dialog, main_window))
     ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(everyday_dialog))
     everyday_dialog.exec()
@@ -88,8 +86,8 @@ def programming_project_clicked(current_dialog, main_window):
     ui.programmingFinish.setDate(QDate.currentDate())
     ui.programmingProgressSlider.valueChanged.connect(lambda value:
         ui.programmingProgressPercent.setText(f"{value}%"))
-    ui.programmingSave.clicked.connect(lambda: writers.writer(ui, resources.PROGRAMING_FILE, programming_dialog, main_window))
-    ui.programmingClear.clicked.connect(lambda: writers.c_p_project(ui))
+    ui.programmingSave.clicked.connect(lambda: writers.project_data(ui, "programming", programming_dialog, main_window, "new"))
+    ui.programmingClear.clicked.connect(lambda: resources.clear_input(ui))
     ui.programmingReturn.clicked.connect(lambda: resources.return_to_main_clicked(programming_dialog, main_window))
     ui.programmingExit.clicked.connect(lambda: resources.exit_clicked(programming_dialog))
     programming_dialog.exec()
@@ -105,8 +103,8 @@ def recurring_project_clicked(current_dialog, main_window):
     recurring_dialog = QDialog(main_window)
     ui = Ui_recurringProjectEditor()
     ui.setupUi(recurring_dialog)
-    ui.saveRecurring.clicked.connect(lambda: writers.writer(ui, resources.RECURRING_FILE, recurring_dialog, main_window))
-    ui.clearRecurring.clicked.connect(lambda: writers.c_r_task(ui))
+    ui.saveRecurring.clicked.connect(lambda: writers.project_data(ui, "recurring", recurring_dialog, main_window, "new"))
+    ui.clearRecurring.clicked.connect(lambda: resources.clear_input(ui))
     ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(recurring_dialog, main_window))
     ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(recurring_dialog))
     recurring_dialog.exec()
@@ -114,8 +112,9 @@ def recurring_project_clicked(current_dialog, main_window):
 
 
 # View projects and archives
-def project_viewer_clicked(main_window, idx):
+def project_viewer_clicked(main_window, top_idx, sub_idx):
     print("Loading viewer...")
+    resources.selected_project = None
     main_window.close()
     viewer = QDialog(main_window)
     ui = Ui_Viewer()
@@ -124,29 +123,74 @@ def project_viewer_clicked(main_window, idx):
     # Function to handle tab changes
     def tab_changed(top_tab, sub_tab):
         printer(ui, top_tab, sub_tab)
+        resources.selected_project = None
 
     # Initialise tab index based on user selection
-    ui.viewer.setCurrentIndex(idx)
-    if ui.viewer.currentIndex == 0:
-        ui.currentProjects.setCurrentIndex(0)
-    if ui.viewer.currentIndex == 1:
-        ui.archive.setCurrentIndex(0)
+    ui.viewer.setCurrentIndex(top_idx)
+    if ui.viewer.currentIndex() == 0:
+        ui.projectTabs.setCurrentIndex(sub_idx)
+    if ui.viewer.currentIndex() == 1:
+        ui.archive.setCurrentIndex(sub_idx)
     
     # Print everyday projects to interface without having to select a tab first
     # to avoid user being greeted by an empty project view
-    tab_changed(ui.viewer.currentIndex(), 0)
+    # tab_changed(ui.viewer.currentIndex(), 0)
+    tab_changed(top_idx, sub_idx)
+
+    # Use a clicked project to set an item to use
+    # for editing, archiving or deleting
+    def project_clicked(item):        
+        resources.selected_project = item
+
+    # Use set item to call the edit function
+    def edit_clicked():
+        if resources.selected_project is None:
+            resources.no_project_selected()
+        else:
+            project_editors.edit_parser(resources.selected_project, viewer, main_window)
+
+    # Logic for project selection
+    recurring_list = [ui.recurringBi, ui.recurringOther, ui.recurringWeekly]
+    for list_item in [
+        ui.everydayProjects,
+        ui.programmingProjects,
+        ui.allProjects,
+        ui.recurringBi,
+        ui.recurringOther,
+        ui.recurringWeekly
+    ]:
+        # If the user is selecting a recurring task
+        # make sure to clear other fields to only use one item
+        if list_item in recurring_list:
+            for tab in recurring_list:
+                tab.setSelectionMode(QListWidget.SingleSelection)
+
+            def clear_other_recurring(clicked_item):
+                current_item = clicked_item.listWidget()
+                for item in recurring_list:
+                    if item is not current_item:
+                        item.clearSelection()
+
+            for item in recurring_list:
+                item.itemClicked.connect(clear_other_recurring)
+            list_item.itemClicked.connect(project_clicked)
+
+        # If the item is everyday or programming
+        # ignore above clearing
+        else:
+            list_item.itemClicked.connect(project_clicked)
 
     # Action connections etc.
     ui.viewer.currentChanged.connect(lambda: tab_changed(ui.viewer.currentIndex(), 0))
     ui.projectTabs.currentChanged.connect(lambda index: tab_changed(0, index))
     ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
-    ui.editProject.clicked.connect(lambda: edit_project_clicked)
-    ui.archiveProject.clicked.connect(lambda: archive_project_clicked)
-    ui.deleteProject.clicked.connect(lambda: delete_project_clicked)
+    ui.editProject.clicked.connect(edit_clicked)
+    ui.archiveProject.clicked.connect(lambda: archive_project_clicked())
+    ui.deleteProject.clicked.connect(lambda: delete_project_clicked())
     ui.returnToMainProjects.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitProjects.clicked.connect(lambda: resources.exit_clicked(viewer))
     ui.restoreArchived.clicked.connect(restore_project_clicked)
-    ui.deleteArchived.clicked.connect(delete_archive_clicked)
+    # ui.deleteArchived.clicked.connect(delete_archive_clicked)
     ui.returnToMainArchive.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitArchive.clicked.connect(lambda: resources.exit_clicked(viewer))
     viewer.exec()
@@ -154,9 +198,6 @@ def project_viewer_clicked(main_window, idx):
 
 
 # Placeholder functions
-def edit_project_clicked():
-    print("Editing project...")
-
 def archive_project_clicked():      # Check if project is completed or to be archived as is
     print("Archiving project...")
 
@@ -166,5 +207,5 @@ def delete_project_clicked():
 def restore_project_clicked():
     print("Restore project...")
 
-def delete_archive_clicked():
-    print("Deleting project from archive...")       # Needs a safety check
+# def delete_archive_clicked():
+#     print("Deleting project from archive...")       # Needs a safety check
