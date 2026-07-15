@@ -131,7 +131,7 @@ def delete_project(project, type):
     # writer(projects, type)
     with open (projects_file, "w") as file:
         json.dump(projects, file)
-    with open(all_projects, "w") as file:
+    with open(ALL_PROJECTS_FILE, "w") as file:
         json.dump(all_projects, file)
 
 
