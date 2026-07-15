@@ -17,15 +17,18 @@
         - Overview of projects in life
 
 
+# No
 2. User stories
     - Ugh
 
 
+# DONE
 3. Data management
     - .json files for projects
     - PySide files for GUI
 
 
+# DONE
 4. MVP
     - Add projects
     - Display projects
@@ -72,4 +75,4 @@
 
 
 Misc.
-    - Fix slight discrepancy for alignment of windows for current projects/archive
+    - Add project stats
