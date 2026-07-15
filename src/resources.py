@@ -128,7 +128,11 @@ def delete_project(project, type):
     print(f"Selected projects type after removal:\n{projects}")
     print(f"Full projects after removal:\n{all_projects}\n")
 
-    writer(projects, type)
+    # writer(projects, type)
+    with open (projects_file, "w") as file:
+        json.dump(projects, file)
+    with open(all_projects, "w") as file:
+        json.dump(all_projects, file)
 
 
 # TODO
