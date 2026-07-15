@@ -39,7 +39,6 @@ def print_projects(ui, top_tab, sub_tab):
             else:
                 full_project = f"Project name:\t{name}\nStart date:\t\t{start}\nEnd date:\t\t{end}\nProject notes:\t{notes}\nProject progress:\t{progress}\nProject status:\t{status}\n"
                 ui.allProjects.addItem(full_project)
-
     # Print precurring tasks depending on frequency
     elif sub_tab == 3:
         for project in projects:
@@ -53,7 +52,6 @@ def print_projects(ui, top_tab, sub_tab):
                 ui.recurringBi.addItem(full_project)
             else:
                 ui.recurringOther.addItem(full_project)
-
     # Print everyday or programming projects, based on whether programming-specific variables exist
     else:
         for project in projects:

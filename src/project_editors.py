@@ -73,8 +73,11 @@ def project_parser(project, type):
     if type == "everyday":
         e_projects = loader(resources.EVERYDAY_FILE)
         for project in e_projects:
-            if project["Project name"] == project_name:
-                return project
+            try:
+                if project["Project name"] == project_name:
+                    return project
+            except:
+                print(project)
     # Load programming file
     elif type == "programming":
         p_projects = loader(resources.PROGRAMING_FILE)
