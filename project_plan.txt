@@ -81,3 +81,4 @@ Misc.
         - If done == True:
             - Change colour
         - Reset by changing all done statuses in category to False
+    - Add "add new project" button to project/archive viewer
