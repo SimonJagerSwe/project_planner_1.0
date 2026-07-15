@@ -7,7 +7,7 @@ import resources
 # from loader import load_file
 
 # Project file creator
-def project_data(ui, project_type, current_dialog, main_window):
+def project_data(ui, project_type, current_dialog, main_window, write_type):
     # Create everyday project
     if project_type == "everyday":
         name = ui.everydayName.text()
@@ -56,14 +56,14 @@ def project_data(ui, project_type, current_dialog, main_window):
         }
 
     # Write new file
-    writer(project, project_type)
+    writer(project, project_type, write_type)
 
     # Return to main menu
     if current_dialog and main_window:
         resources.return_to_main_clicked(current_dialog, main_window)
 
 # Project writer
-def writer(project, project_type):
+def writer(project, project_type, write_type):
     # Determine which project file to write to
     if project_type == "everyday":
         projects_file = resources.EVERYDAY_FILE
@@ -110,5 +110,9 @@ def writer(project, project_type):
             json.dump(all_projects, file)
     except:
         print("Unexpected error while writing to full project file occurred")
-    resources.success_message()
+
+    if write_type == "new":
+        resources.success_message_main()
+    else:
+        resources.success_message_viewer()
     

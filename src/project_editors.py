@@ -15,17 +15,17 @@ from PySide6.QtWidgets import QDialog
 # Connect editor buttons to reuse the button calls from button_handler.py
 def connect_buttons(ui, dialog, main_window, project_type, viewer_dialog=None, current_project=None):
     if project_type == "everyday":
-        ui.everydaySave.clicked.connect(lambda: save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project))
+        ui.everydaySave.clicked.connect(lambda: save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, "edit"))
         ui.everydayClear.clicked.connect(lambda: resources.clear_input(ui))
         ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(dialog))
     elif project_type == "programming":
-        ui.programmingSave.clicked.connect(lambda: save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project))
+        ui.programmingSave.clicked.connect(lambda: save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, "edit"))
         ui.programmingClear.clicked.connect(lambda: resources.clear_input(ui))
         ui.programmingReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.programmingExit.clicked.connect(lambda: resources.exit_clicked(dialog))
     else:
-        ui.saveRecurring.clicked.connect(lambda: save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project))
+        ui.saveRecurring.clicked.connect(lambda: save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, "edit"))
         ui.clearRecurring.clicked.connect(lambda: resources.clear_input(ui))
         ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(dialog))
@@ -88,9 +88,9 @@ def project_parser(project, type):
             if task["Task name"] == project_name:
                 return task
 
-def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project):
+def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, write_type):
     resources.delete_project(current_project, project_type)
-    project_data(ui, project_type, dialog, main_window)
+    project_data(ui, project_type, dialog, main_window, write_type)
     dialog.close()
     if viewer_dialog is not None:
         viewer_dialog.close()

@@ -18,7 +18,8 @@ EVERYDAY_ARCHIVE = "project_files/everyday_archive.json"
 PROGRAMMING_ARCHIVE = "project_files/programming_archive.json"
 FULL_ARCHIVE = "project_files/full_archive.json"
 SUCCESS_WINDOW_TITLE = "Project saved"
-SUCCESS_TEXT = "Project saved successfully!\nClick OK to return to main menu."
+SUCCESS_TEXT_MAIN = "Project saved successfully!\nClick OK to return to main menu."
+SUCCESS_TEXT_VIEWER = "Project updated successfully!\nClick OK to return to project viewer."
 
 # Utility variables
 selected_project = None
@@ -94,11 +95,20 @@ def clear_input(ui):
         ui.recurringNotes.setText("")
 
 
-# Successfull project creation
-def success_message():
+# Successfull project creation and return to main menu
+def success_message_main():
     success_message = QMessageBox()
     success_message.setWindowTitle(SUCCESS_WINDOW_TITLE)
-    success_message.setText(f"{SUCCESS_TEXT}")
+    success_message.setText(SUCCESS_TEXT_MAIN)
+    success_message.setStandardButtons(QMessageBox.Ok)
+    success_message.exec()
+
+
+# Successful project edit and return to project viewer
+def success_message_viewer():
+    success_message = QMessageBox()
+    success_message.setWindowTitle(SUCCESS_WINDOW_TITLE)
+    success_message.setText(SUCCESS_TEXT_VIEWER)
     success_message.setStandardButtons(QMessageBox.Ok)
     success_message.exec()
 
