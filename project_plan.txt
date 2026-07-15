@@ -76,3 +76,8 @@
 
 Misc.
     - Add project stats
+    - For colouring tasks:
+        - Add status parameter
+        - If done == True:
+            - Change colour
+        - Reset by changing all done statuses in category to False
