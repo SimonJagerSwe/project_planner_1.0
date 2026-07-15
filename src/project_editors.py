@@ -116,6 +116,7 @@ def edit_everyday(ui, project, main_window):
     ui.everydayProgressSlider.setValue(progress_value)
     ui.everydayProgressSlider.valueChanged.connect(lambda value: 
         ui.everydayProgressPercent.setText(f"{value}%"))
+    ui.everydayProgressPercent.setText(f"{progress_value}%")
     ui.everydayStatus.setCurrentText(current_project["Project status"])
 
 
