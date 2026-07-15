@@ -6,17 +6,101 @@ import resources
 
 from loader import load_file
 
-from PySide6.QtCore import QDate
+# Project file creator
+def project_data(ui, project_type, current_dialog, main_window):
+    # Create everyday project
+    if project_type == "everyday":
+        name = ui.everydayName.text()
+        start = ui.everydayStart.date().toString("yyyy-MM-dd")
+        finish = ui.everydayFinish.date().toString("yyyy-MM-dd")
+        notes = ui.everydayNotes.text()
+        percent = ui.everydayProgressPercent.text()
+        status = ui.everydayStatus.currentText()
+        project = {
+            "Project name" : name,
+            "Project start" : start,
+            "Project end" : finish,
+            "Project notes" : notes,
+            "Project progress" : percent,
+            "Project status" : status
+        }
+    # Create programming project
+    elif project_type == "programming":
+        name = ui.programmingName.text()
+        start = ui.programmingStart.date().toString("yyyy-MM-dd")
+        finish = ui.programmingFinish.date().toString("yyyy-MM-dd")
+        language = ui.languagesEdit.text()
+        link = ui.githubEdit.text()
+        notes = ui.programmingNotes.text()
+        percent = ui.programmingProgressPercent.text()
+        status = ui.programmingStatus.currentText()
+        project = {
+            "Project name" : name,
+            "Project start" : start,
+            "Project end" : finish,
+            "Language(s)" : language,
+            "GitHub link" : link,
+            "Project notes" : notes,
+            "Project progress" : percent,
+            "Project status" : status
+        }
+    # Create recurring task
+    else:
+        name = ui.recurringName.text()
+        frequency = ui.recurringFrequency.currentText()
+        notes = ui.recurringNotes.text()
+        project = {
+            "Task name" : name,
+            "Task frequency" : frequency,
+            "Task notes" : notes
+        }
 
+    # Write new file
+    writer(project, project_type)
+
+    # Return to main menu
+    if current_dialog and main_window:
+        resources.return_to_main_clicked(current_dialog, main_window)
 
 # Project writer
-def writer(ui, projects_file, current_dialog=None, main_window=None):
-    projects = load_file(projects_file)
-    all_projects = load_file(resources.ALL_PROJECTS_FILE)
-    print(f"Working file:\n{projects_file}\n\n")
-    print(f"Projects in file:\n{projects}\n\n")
+def writer(project, project_type):
+    # Determine which project file to write to
+    if project_type == "everyday":
+        projects_file = resources.EVERYDAY_FILE
+    elif project_type == "programming":
+        projects_file = resources.PROGRAMING_FILE
+    else:
+        projects_file = resources.RECURRING_FILE
 
-    # Create everyday project
+    with open(projects_file, "r") as file:
+        current_type_projects = json.load(file)
+        print(f"Current projects of {project_type} type:\n{current_type_projects}\n\n")
+        print(current_type_projects)
+    
+    current_type_projects.append(project)
+    print(f"Updated projects of {project_type} type:\n{current_type_projects}\n\n")
+    
+    with open(resources.ALL_PROJECTS_FILE, "r") as file:
+        all_projects = json.load(file)
+        print(f"All current projects:\n{all_projects}\n\n")
+    # Write to project type file
+    try:
+        with open(projects_file, "w") as file:
+            json.dump(project, file)
+    except:
+        print(f"Unexpected error while writing to {project_type} project file occurred")
+    # Write to full project file
+    try:
+        with open(resources.ALL_PROJECTS_FILE, "w") as file:
+            json.dump(project, file)
+    except:
+        print("Unexpected error while writing to full project file occurred")
+    resources.success_message()
+
+
+
+
+'''# Create everyday project
     if projects_file == resources.EVERYDAY_FILE:
         name = ui.everydayName.text()
         start = ui.everydayStart.date().toString("yyyy-MM-dd")
@@ -64,20 +148,10 @@ def writer(ui, projects_file, current_dialog=None, main_window=None):
             "Task frequency" : frequency,
             "Task notes" : notes
         }
-
+    
     print(f"Project to be added:\n{project}\n\n")
     projects.append(project)
     all_projects.append(project)
-    print(f"Updated projects file:\n{projects}\n\n")
+    print(f"Updated projects file:\n{projects}\n\n")'''
 
-
-    # Write updated projects file
-    with open(projects_file, "w") as file:
-        json.dump(projects, file)
-    with open(resources.ALL_PROJECTS_FILE, "w") as file:
-        json.dump(all_projects, file)
-    resources.success_message()
-
-    # Return to main menu
-    if current_dialog and main_window:
-        resources.return_to_main_clicked(current_dialog, main_window)
+    
