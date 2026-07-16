@@ -5,7 +5,7 @@ import json
 import button_handler
 
 from loader import load_file as loader
-from resources import ALL_PROJECTS_FILE, EVERYDAY_FILE, PROGRAMING_FILE, RECURRING_FILE
+from resources import ALL_PROJECTS_FILE, EVERYDAY_FILE, PROGRAMMING_FILE, RECURRING_FILE
 from resources import project_parser as parser
 
 
@@ -20,7 +20,7 @@ def delete_project(project, type, viewer, main_window, delete_type):
     if type == "everyday":
         projects_file = EVERYDAY_FILE
     elif type == "programming":
-        projects_file = PROGRAMING_FILE
+        projects_file = PROGRAMMING_FILE
     elif type == "recurring":
         projects_file = RECURRING_FILE
     else:

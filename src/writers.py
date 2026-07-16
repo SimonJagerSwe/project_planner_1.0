@@ -88,6 +88,18 @@ def writer(project, project_type, current_dialog, main_window, write_type):
         else:
             print("Unknown error occurred")
 
+    # Read target file
+    try:
+        with open(target_file, "r") as file:
+            target = json.load(file)
+            print(f"File loaded\nProjects found:\n{target}\n")
+            target.append(project)
+            print(f"Updated projects list:\n{target}\n")
+    except:
+        print("Project file empty or not found")
+        target = []
+        target.append(project)
+        print(f"Updated projects list:\n{target}\n")
 
 
 
@@ -96,16 +108,6 @@ def writer(project, project_type, current_dialog, main_window, write_type):
         resources.return_to_main_clicked(current_dialog, main_window)
 
 '''
-# Project writer
-def writer(project, project_type, write_type):
-    # Determine which project file to write to
-    if project_type == "everyday":
-        projects_file = resources.EVERYDAY_FILE
-    elif project_type == "programming":
-        projects_file = resources.PROGRAMING_FILE
-    else:
-        projects_file = resources.RECURRING_FILE
-
     # Read current project type projects
     try:
         with open(projects_file, "r") as file:
