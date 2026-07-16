@@ -113,6 +113,7 @@ def writer(project, project_type, write_type):
     # Trigger success message
     if write_type == "new":
         resources.success_message_main()
-    else:
+    elif write_type == "edit":
         resources.success_message_viewer()
-    
+    else:
+        resources.success_message_archive()

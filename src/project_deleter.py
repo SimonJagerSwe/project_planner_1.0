@@ -48,6 +48,7 @@ def delete_project(project, type, viewer, main_window, delete_type):
 
     if viewer is not None:
         viewer.close()
+
     if delete_type == "delete":
         if type == "everyday":
             button_handler.project_viewer_clicked(main_window, 0, 0)

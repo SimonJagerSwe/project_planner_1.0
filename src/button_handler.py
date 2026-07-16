@@ -149,6 +149,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         else:
             project_editors.edit_parser(resources.selected_project, viewer, main_window)
 
+    # use set item to call the archive function
     def archive_clicked():
         if resources.selected_project is None:
             resources.no_project_selected()
@@ -158,6 +159,8 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
             project_archive_handler.archive_project(resources.selected_project, project_type, viewer, main_window)
             archive = resources.archive_check(viewer)
             print(archive)
+            if archive == "archive":
+                project_archive_handler.archive_project(resources.selected_project, project_type, viewer, main_window)
 
     # Use set item to call the delete function
     def delete_clicked():

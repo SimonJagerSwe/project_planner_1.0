@@ -20,6 +20,8 @@ FULL_ARCHIVE = "project_files/full_archive.json"
 SUCCESS_WINDOW_TITLE = "Project saved"
 SUCCESS_TEXT_MAIN = "Project saved successfully!\nClick OK to return to main menu."
 SUCCESS_TEXT_VIEWER = "Project updated successfully!\nClick OK to return to project viewer."
+SUCCESS_ARCHIVE_WINDOW = "Project archived"
+SUCCESS_ARCHIVE_TEXT = "Project archived successfully\nClick OK to return to return to project viewer"
 SAFETY_WINDOW = "Confirm project deletion"
 SAFETY_TEXT = "Are you sure you want to delete this project?"
 ARCHIVE_WINDOW = "Confirm project archiving"
@@ -44,7 +46,7 @@ tab_handler = [
     }
 ]
 
-# Utility functions
+##### Utility functions #####
 # Return to main menu
 def return_to_main_clicked(current_dialog, main_window, parent_dialog=None):
     print("Return to main menu clicked")
@@ -86,7 +88,7 @@ def clear_input(ui):
         ui.recurringNotes.setText("")
 
 
-# Message box dialogs
+##### Message box dialogs #####
 # Exit program
 def exit_clicked(parent=None):
     print("Exiting program...")
@@ -121,6 +123,15 @@ def success_message_viewer():
     success_message.exec()
 
 
+# Successful project archiving
+def success_message_archive():
+    success_message = QMessageBox()
+    success_message.setWindowTitle(SUCCESS_ARCHIVE_WINDOW)
+    success_message.setText(SUCCESS_ARCHIVE_TEXT)
+    success_message.setStandardButtons(QMessageBox.Ok)
+    success_message.exec()
+
+
 # Delete yes/no message box
 def safety_check(parent=None):
     safety_check = QMessageBox()
@@ -138,6 +149,8 @@ def safety_check(parent=None):
     else:
         return "cancel"
 
+
+# Archive yes/no checker
 def archive_check(parent=None):
     archive_check = QMessageBox()
     archive_check.setWindowTitle(ARCHIVE_WINDOW)
@@ -154,6 +167,10 @@ def archive_check(parent=None):
     else:
         return "cancel"
 
+# TODO
+# Archive finish yes/no checker
+def complete_archive(parent=None):
+    ...
 
 # TODO
 # No project for editing, deleting or archiving selected
@@ -165,6 +182,8 @@ def no_project_selected():
     no_project_selected.setStandardButtons(QMessageBox.Ok)
     # no_project_selected.exec()
 
+
+##### Parsers #####
 # Project type parser
 def parse_type(project):
     if "Language(s)" in project.text():
