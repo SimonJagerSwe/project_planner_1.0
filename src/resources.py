@@ -1,17 +1,16 @@
 ########## Resources ##########
 # Imports
-import json
 import sys
 
 from loader import load_file as loader
-from writers import writer
 
 from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QMessageBox
 
+
 # Resource files
 EVERYDAY_FILE = "project_files/everyday_projects.json"
-PROGRAMING_FILE = "project_files/programming_projects.json"
+PROGRAMMING_FILE = "project_files/programming_projects.json"
 RECURRING_FILE = "project_files/recurring_tasks.json"
 ALL_PROJECTS_FILE = "project_files/all_projects.json"
 EVERYDAY_ARCHIVE = "project_files/everyday_archive.json"
@@ -35,7 +34,7 @@ selected_project = None
 tab_handler = [
     {
         0 : EVERYDAY_FILE,
-        1 : PROGRAMING_FILE,
+        1 : PROGRAMMING_FILE,
         2 : ALL_PROJECTS_FILE,
         3 : RECURRING_FILE
     }, 
@@ -214,7 +213,7 @@ def project_parser(project, type):
                 print(project)
     # Load programming file
     elif type == "programming":
-        p_projects = loader(PROGRAMING_FILE)
+        p_projects = loader(PROGRAMMING_FILE)
         for project in p_projects:
             if project["Project name"] == project_name:
                 return project
