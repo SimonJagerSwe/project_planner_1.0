@@ -113,6 +113,16 @@ def success_message_viewer():
     success_message.exec()
 
 
+# Project type parser
+def parse_type(project):
+    if "Language(s)" in project.text():
+        project_type = "programming"
+    elif "Recurring task" in project.text():
+        project_type = "recurring"
+    else:
+       project_type =  "everyday"
+    return project_type
+
 # Delete project from project type file, both for deletion and for editing
 def delete_project(project, type):
     print(f"Project for deletion:\n{project}")
@@ -124,25 +134,25 @@ def delete_project(project, type):
         projects_file = RECURRING_FILE
 
     projects = loader(projects_file)
-    all_projects = loader(ALL_PROJECTS_FILE)
     print(f"Current projects:\n{projects}\n")
     try:
         projects.remove(project)
+        print(f"Selected projects type after removal:\n{projects}")
     except:
         print("Project not present in selected projects type")
-    try:
-        all_projects.remove(project)
-    except:
-        print("Project not present in full projects")
+    
+    if "Task frequency" not in project:        
+        all_projects = loader(ALL_PROJECTS_FILE)
+        try:
+            all_projects.remove(project)
+            print(f"Full projects after removal:\n{all_projects}\n")
+            with open(ALL_PROJECTS_FILE, "w") as file:
+                json.dump(all_projects, file)
+        except:
+            print("Project not present in full projects")
 
-    print(f"Selected projects type after removal:\n{projects}")
-    print(f"Full projects after removal:\n{all_projects}\n")
-
-    # writer(projects, type)
     with open (projects_file, "w") as file:
         json.dump(projects, file)
-    with open(ALL_PROJECTS_FILE, "w") as file:
-        json.dump(all_projects, file)
 
 
 # TODO

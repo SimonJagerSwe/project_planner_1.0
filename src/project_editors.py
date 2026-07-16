@@ -36,7 +36,9 @@ def edit_parser(project, viewer_dialog, main_window):
     print(f"Project to edit:\n{project.text()}")
 
     # Identify project type
-    if "Language(s)" in project.text():
+    project_type = resources.parse_type(project)
+    
+    if project_type == "programming":
         ui = Ui_programmingProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
@@ -44,7 +46,7 @@ def edit_parser(project, viewer_dialog, main_window):
         connect_buttons(ui, dialog, main_window, "programming", viewer_dialog, current_project)
         edit_programming(ui, project, main_window)
         dialog.exec()
-    elif "Task frequency" in project.text():
+    elif project_type == "recurring":
         ui = Ui_recurringProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
