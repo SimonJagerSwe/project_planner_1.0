@@ -91,18 +91,37 @@ def writer(project, project_type, current_dialog, main_window, write_type):
     # Read target file
     try:
         with open(target_file, "r") as file:
-            target = json.load(file)
-            print(f"File loaded\nProjects found:\n{target}\n")
-            target.append(project)
-            print(f"Updated projects list:\n{target}\n")
+            updated_list = json.load(file)
+            print(f"File loaded\nProjects found:\n{updated_list}\n")
+            updated_list.append(project)
+            print(f"Updated projects list:\n{updated_list}\n")
     except:
         print("Project file empty or not found")
-        target = []
-        target.append(project)
-        print(f"Updated projects list:\n{target}\n")
+        updated_list = []
+        updated_list.append(project)
+        print(f"Updated projects list:\n{updated_list}\n")
 
+    # Write to target file/archive
+    try:
+        with open(target_file, "w") as file:
+            print(f"Writing {updated_list} to {target_file}...")
+            json.dump(updated_list, file)
+    except:
+        print(f"Writing {updated_list} to {target_file} failed")
 
-
+    # Write to full project files/archive files if not recurring    
+    if "Task frequency" not in project:
+        if write_type == "new" or write_type == "edit":
+            full_file = resources.ALL_PROJECTS_FILE
+        else:
+            full_file = resources.FULL_ARCHIVE        
+        try:
+            with open(full_file, "w") as file:
+                print(f"Writing {updated_list} to {target_file}...")
+                json.dump(updated_list, file)
+        except:
+            print(f"Writing {updated_list} to {target_file} failed")
+    
     # Return to main menu
     if current_dialog and main_window:
         resources.return_to_main_clicked(current_dialog, main_window)

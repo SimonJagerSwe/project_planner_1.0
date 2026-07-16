@@ -6,7 +6,6 @@ import button_handler
 
 from loader import load_file as loader
 from resources import ALL_PROJECTS_FILE, EVERYDAY_FILE, PROGRAMMING_FILE, RECURRING_FILE
-from resources import project_parser as parser
 
 
 # Delete project from project type file, both for deletion and for editing
@@ -14,8 +13,6 @@ def delete_project(project, type, viewer, main_window, delete_type):
     print(project, type)
     print(delete_type)
     print(f"Project in delete function: {project}")
-    # current_project = parser(project, type)
-    # print(f"Project for deletion:\n{current_project}")
     print(f"Project type in delete function: {type}")
     if type == "everyday":
         projects_file = EVERYDAY_FILE
