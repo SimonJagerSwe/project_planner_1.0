@@ -91,5 +91,7 @@ TODO
     - Save tab state for recalling tab position after edit/adding/deleting/archiving (save as two indices to be called with main_window)
     - Possibly make size dynamically adjustable?
     - Sort projects in view?
+        - By added, name, start date, finish date, programming language
     - Remove frequency print in recurring tasks
     - Remove archiving from recurring tasks
+    
