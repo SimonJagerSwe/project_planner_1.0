@@ -1,6 +1,7 @@
 ########## Project editors ##########
 # Imports
 import button_handler
+import project_deleter
 import resources
 
 from interface.ui_everyday import Ui_everydayProjectEditor
@@ -97,7 +98,7 @@ def project_parser(project, type):
 # Save edited file, refresh project files read
 # And return to project viewer 
 def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, write_type):
-    resources.delete_project(current_project, project_type)
+    project_deleter.delete_project(current_project, project_type)
     project_data(ui, project_type, dialog, main_window, write_type)
     dialog.close()
     if viewer_dialog is not None:

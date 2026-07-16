@@ -124,7 +124,7 @@ def parse_type(project):
     return project_type
 
 # Delete project from project type file, both for deletion and for editing
-def delete_project(project, type):
+'''def delete_project(project, type):
     print(f"Project for deletion:\n{project}")
     if type == "everyday":
         projects_file = EVERYDAY_FILE
@@ -152,7 +152,7 @@ def delete_project(project, type):
             print("Project not present in full projects")
 
     with open (projects_file, "w") as file:
-        json.dump(projects, file)
+        json.dump(projects, file)'''
 
 
 # TODO
