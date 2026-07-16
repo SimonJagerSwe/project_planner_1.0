@@ -1,6 +1,6 @@
 ########## Button handler ##########
 # Imports
-import project_editors, resources, writers
+import project_deleter, project_editors, resources, writers
 
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
@@ -155,6 +155,10 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
             resources.no_project_selected()
         else:
             print(resources.selected_project.text())
+            project_type = resources.parse_type(resources.selected_project)
+            delete = resources.safety_check(viewer)
+            if delete == "yes":
+                project_deleter.delete_project(resources.selected_project, project_type)
 
     # Logic for project selection
     recurring_list = [ui.recurringBi, ui.recurringOther, ui.recurringWeekly]

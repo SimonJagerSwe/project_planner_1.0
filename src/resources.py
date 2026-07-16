@@ -20,6 +20,9 @@ FULL_ARCHIVE = "project_files/full_archive.json"
 SUCCESS_WINDOW_TITLE = "Project saved"
 SUCCESS_TEXT_MAIN = "Project saved successfully!\nClick OK to return to main menu."
 SUCCESS_TEXT_VIEWER = "Project updated successfully!\nClick OK to return to project viewer."
+SAFETY_WINDOW = "Are you sure?"
+SAFETY_TEXT = "Are you sure you want to delete this project?"
+
 
 # Utility variables
 selected_project = None
@@ -48,22 +51,6 @@ def return_to_main_clicked(current_dialog, main_window, parent_dialog=None):
     if main_window is not None:
         main_window.show()
         main_window.setEnabled(True)
-
-
-# Exit program
-def exit_clicked(parent=None):
-    print("Exiting program...")
-    close = QMessageBox.question(
-        parent, 
-        "Confirm exit", 
-        "Are you sure you want to quit?",
-        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-        QMessageBox.StandardButton.No
-        )
-    if close == QMessageBox.StandardButton.Yes:
-        sys.exit()
-    else:
-        print("Returning to previous menu")
 
 
 # Clear project input
@@ -95,6 +82,23 @@ def clear_input(ui):
         ui.recurringNotes.setText("")
 
 
+# Message box dialogs
+# Exit program
+def exit_clicked(parent=None):
+    print("Exiting program...")
+    close = QMessageBox.question(
+        parent, 
+        "Confirm exit", 
+        "Are you sure you want to quit?",
+        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        QMessageBox.StandardButton.No
+        )
+    if close == QMessageBox.StandardButton.Yes:
+        sys.exit()
+    else:
+        print("Returning to previous menu")
+
+
 # Successfull project creation and return to main menu
 def success_message_main():
     success_message = QMessageBox()
@@ -113,6 +117,34 @@ def success_message_viewer():
     success_message.exec()
 
 
+# Delete yes/no message box
+def safety_check(parent=None):
+    safety_check = QMessageBox()
+    safety_check.setWindowTitle(SAFETY_WINDOW)
+    safety_check.setText(SAFETY_TEXT)
+    delete = QMessageBox.question(
+        parent, 
+        "Confirm exit", 
+        "Are you sure you want to quit?",
+        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        QMessageBox.StandardButton.No
+        )
+    if delete == QMessageBox.StandardButton.Yes:
+        return "delete"
+    else:
+        return "cancel"
+
+
+# TODO
+# No project for editing, deleting or archiving selected
+def no_project_selected():
+    print("No project selected")
+    no_project_selected = QMessageBox()
+    no_project_selected.setWindowTitle("No project selected")
+    no_project_selected.setText("No project selected")
+    no_project_selected.setStandardButtons(QMessageBox.Ok)
+    # no_project_selected.exec()
+
 # Project type parser
 def parse_type(project):
     if "Language(s)" in project.text():
@@ -122,45 +154,3 @@ def parse_type(project):
     else:
        project_type =  "everyday"
     return project_type
-
-# Delete project from project type file, both for deletion and for editing
-'''def delete_project(project, type):
-    print(f"Project for deletion:\n{project}")
-    if type == "everyday":
-        projects_file = EVERYDAY_FILE
-    elif type == "programming":
-        projects_file = PROGRAMING_FILE
-    else:
-        projects_file = RECURRING_FILE
-
-    projects = loader(projects_file)
-    print(f"Current projects:\n{projects}\n")
-    try:
-        projects.remove(project)
-        print(f"Selected projects type after removal:\n{projects}")
-    except:
-        print("Project not present in selected projects type")
-    
-    if "Task frequency" not in project:        
-        all_projects = loader(ALL_PROJECTS_FILE)
-        try:
-            all_projects.remove(project)
-            print(f"Full projects after removal:\n{all_projects}\n")
-            with open(ALL_PROJECTS_FILE, "w") as file:
-                json.dump(all_projects, file)
-        except:
-            print("Project not present in full projects")
-
-    with open (projects_file, "w") as file:
-        json.dump(projects, file)'''
-
-
-# TODO
-# No project for editing or archiving selected
-def no_project_selected():
-    print("No project selected")
-    no_project_selected = QMessageBox()
-    no_project_selected.setWindowTitle("No project selected")
-    no_project_selected.setText("No project selected")
-    no_project_selected.setStandardButtons(QMessageBox.Ok)
-    # no_project_selected.exec()
