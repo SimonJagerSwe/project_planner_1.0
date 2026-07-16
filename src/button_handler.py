@@ -160,7 +160,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
             delete = resources.safety_check(viewer)
             print(delete)
             if delete == "delete":
-                project_deleter.delete_project(resources.selected_project, project_type, viewer, main_window)
+                project_deleter.delete_project(resources.selected_project, project_type, viewer, main_window, "delete")
 
     # Logic for project selection
     recurring_list = [ui.recurringBi, ui.recurringOther, ui.recurringWeekly]

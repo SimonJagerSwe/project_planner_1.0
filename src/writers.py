@@ -6,6 +6,7 @@ import resources
 
 # Project file creator
 def project_data(ui, project_type, current_dialog, main_window, write_type):
+    print("Writing project data...")
     # Create everyday project
     if project_type == "everyday":
         name = ui.everydayName.text()

@@ -10,8 +10,9 @@ from resources import project_parser as parser
 
 
 # Delete project from project type file, both for deletion and for editing
-def delete_project(project, type, viewer, main_window):
+def delete_project(project, type, viewer, main_window, delete_type):
     print(project, type)
+    print(delete_type)
     print(f"Project in delete function: {project}")
     # current_project = parser(project, type)
     # print(f"Project for deletion:\n{current_project}")
@@ -47,10 +48,11 @@ def delete_project(project, type, viewer, main_window):
 
     if viewer is not None:
         viewer.close()
-    if type == "everyday":
-        button_handler.project_viewer_clicked(main_window, 0, 0)
-    elif type == "programming":
-        button_handler.project_viewer_clicked(main_window, 0, 1)
-    else:
-        button_handler.project_viewer_clicked(main_window, 0, 3)
+    if delete_type == "delete":
+        if type == "everyday":
+            button_handler.project_viewer_clicked(main_window, 0, 0)
+        elif type == "programming":
+            button_handler.project_viewer_clicked(main_window, 0, 1)
+        else:
+            button_handler.project_viewer_clicked(main_window, 0, 3)
         
