@@ -65,36 +65,6 @@ def edit_parser(project, viewer_dialog, main_window):
         dialog.exec()
 
 
-'''# Get the correct projects file to delete old version of project
-def project_parser(project, type):
-    # Find project name
-    for var in project.text().split("\n"):
-        if "name" in var:
-            project_name = var.split(":")[1].strip()
-    
-    # Load everyday file
-    if type == "everyday":
-        e_projects = loader(resources.EVERYDAY_FILE)
-        for project in e_projects:
-            try:
-                if project["Project name"] == project_name:
-                    return project
-            except:
-                print(project)
-    # Load programming file
-    elif type == "programming":
-        p_projects = loader(resources.PROGRAMING_FILE)
-        for project in p_projects:
-            if project["Project name"] == project_name:
-                return project
-    # Load recurring task file
-    else:
-        r_tasks = loader(resources.RECURRING_FILE)
-        for task in r_tasks:
-            if task["Task name"] == project_name:
-                return task'''
-
-
 # Save edited file, refresh project files read
 # And return to project viewer 
 def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, write_type):
