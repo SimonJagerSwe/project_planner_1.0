@@ -27,8 +27,8 @@ def delete_project(project, type):
         try:
             all_projects.remove(current_project)
             print(f"Full projects after removal:\n{all_projects}\n")
-            # with open(ALL_PROJECTS_FILE, "w") as file:
-            #     json.dump(all_projects, file)
+            with open(ALL_PROJECTS_FILE, "w") as file:
+                json.dump(all_projects, file)
         except:
             print("Project not present in full projects")
 
@@ -37,7 +37,7 @@ def delete_project(project, type):
     try:
         projects.remove(current_project)
         print(f"Selected projects type after removal:\n{projects}")
-        # with open (projects_file, "w") as file:
-        #     json.dump(projects, file)
+        with open (projects_file, "w") as file:
+            json.dump(projects, file)
     except:
         print("Project not present in selected projects type")
