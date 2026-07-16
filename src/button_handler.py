@@ -138,7 +138,6 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     
     # Print everyday projects to interface without having to select a tab first
     # to avoid user being greeted by an empty project view
-    # tab_changed(ui.viewer.currentIndex(), 0)
     tab_changed(top_idx, sub_idx)
 
     # Use a clicked project to set an item to use
@@ -216,7 +215,8 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
     ui.editProject.clicked.connect(edit_clicked)
     ui.archiveProject.clicked.connect(lambda: archive_clicked())
-    ui.deleteProject.clicked.connect(lambda: delete_clicked())
+    # ui.deleteProject.clicked.connect(lambda: delete_clicked())
+    ui.deleteProject.clicked.connect(delete_clicked)
     ui.returnToMainProjects.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitProjects.clicked.connect(lambda: resources.exit_clicked(viewer))
     ui.restoreArchived.clicked.connect(restore_project_clicked)

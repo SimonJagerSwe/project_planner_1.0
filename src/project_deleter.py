@@ -5,15 +5,12 @@ import json
 import button_handler
 
 from loader import load_file as loader
-from resources import ALL_PROJECTS_FILE, EVERYDAY_FILE, PROGRAMMING_FILE, RECURRING_FILE
+from resources import ALL_PROJECTS_FILE, EVERYDAY_FILE, PROGRAMMING_FILE, RECURRING_FILE, project_parser
 
 
 # Delete project from project type file, both for deletion and for editing
 def delete_project(project, project_type, viewer, main_window, delete_type):
-    print(project, project_type)
-    print(delete_type)
-    print(f"Project in delete function: {project}")
-    print(f"Project type in delete function: {project_type}")
+    print(f"Project received by delete function:\n{project}\nProject type:\n{project_type}\nDelete type:\n{delete_type}\n")
     if project_type == "everyday":
         projects_file = EVERYDAY_FILE
     elif project_type == "programming":
@@ -23,8 +20,14 @@ def delete_project(project, project_type, viewer, main_window, delete_type):
     else:
         print("Unknown error")
 
-    if project_type != "recurring":        
+    project = project_parser(project, project_type)
+    print(f"Parsed project:\n{project}\n")
+    print(f"Project file fetched:\n{projects_file}")
+
+    if project_type != "recurring":
+        print("Non-recurring task detected\n")
         all_projects = loader(ALL_PROJECTS_FILE)
+        print(all_projects)
         try:
             all_projects.remove(project)
             print(f"Full projects after removal:\n{all_projects}\n")
