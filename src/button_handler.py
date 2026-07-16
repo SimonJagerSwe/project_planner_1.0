@@ -8,6 +8,7 @@ from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_recurring import Ui_recurringProjectEditor
 from interface.ui_tabs import Ui_Viewer
 from project_printers import print_projects as printer
+from writers import writer as writer
 
 from PySide6.QtCore import QDate
 from PySide6.QtGui import QAction
@@ -66,7 +67,7 @@ def everyday_project_clicked(current_dialog, main_window):
     ui.everydayProgressSlider.valueChanged.connect(lambda value: 
         ui.everydayProgressPercent.setText(f"{value}%"))
     # ui.everydaySave.clicked.connect(lambda: writers.project_data(ui, "everyday", everyday_dialog, main_window, "new"))
-    ui.everydaySave.clicked.connect(lambda: writers.writer(ui, "everyday", everyday_dialog, main_window, "new"))
+    ui.everydaySave.clicked.connect(lambda: writer(ui, "everyday", everyday_dialog, main_window, "new"))
     ui.everydayClear.clicked.connect(lambda: resources.clear_input(ui))
     ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(everyday_dialog, main_window))
     ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(everyday_dialog))
@@ -87,7 +88,8 @@ def programming_project_clicked(current_dialog, main_window):
     ui.programmingFinish.setDate(QDate.currentDate())
     ui.programmingProgressSlider.valueChanged.connect(lambda value:
         ui.programmingProgressPercent.setText(f"{value}%"))
-    ui.programmingSave.clicked.connect(lambda: writers.project_data(ui, "programming", programming_dialog, main_window, "new"))
+    # ui.programmingSave.clicked.connect(lambda: writers.project_data(ui, "programming", programming_dialog, main_window, "new"))
+    ui.programmingSave.clicked.connect(lambda: writer(ui, "programming", programming_dialog, main_window, "new"))
     ui.programmingClear.clicked.connect(lambda: resources.clear_input(ui))
     ui.programmingReturn.clicked.connect(lambda: resources.return_to_main_clicked(programming_dialog, main_window))
     ui.programmingExit.clicked.connect(lambda: resources.exit_clicked(programming_dialog))
@@ -104,7 +106,8 @@ def recurring_project_clicked(current_dialog, main_window):
     recurring_dialog = QDialog(main_window)
     ui = Ui_recurringProjectEditor()
     ui.setupUi(recurring_dialog)
-    ui.saveRecurring.clicked.connect(lambda: writers.project_data(ui, "recurring", recurring_dialog, main_window, "new"))
+    # ui.saveRecurring.clicked.connect(lambda: writers.project_data(ui, "recurring", recurring_dialog, main_window, "new"))
+    ui.saveRecurring.clicked.connect(lambda: writer(ui, "recurring", recurring_dialog, main_window, "new"))
     ui.clearRecurring.clicked.connect(lambda: resources.clear_input(ui))
     ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(recurring_dialog, main_window))
     ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(recurring_dialog))
