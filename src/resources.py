@@ -159,6 +159,7 @@ def parse_type(project):
 # Get the correct projects file to delete old version of project
 def project_parser(project, type):
     # Find project name
+    print(f"From parser: {project}")
     for var in project.text().split("\n"):
         if "name" in var:
             project_name = var.split(":")[1].strip()

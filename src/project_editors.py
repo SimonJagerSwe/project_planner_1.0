@@ -7,7 +7,6 @@ import resources
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_programming import Ui_programmingProjectEditor 
 from interface.ui_recurring import Ui_recurringProjectEditor
-from loader import load_file as loader
 from writers import project_data
 
 from PySide6.QtCore import QDate
@@ -43,24 +42,24 @@ def edit_parser(project, viewer_dialog, main_window):
         ui = Ui_programmingProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        current_project = resources.project_parser(project, "programming")
-        connect_buttons(ui, dialog, main_window, "programming", viewer_dialog, current_project)
+        current_project = resources.project_parser(project, project_type)
+        connect_buttons(ui, dialog, main_window, project_type, viewer_dialog, current_project)
         edit_programming(ui, project, main_window)
         dialog.exec()
     elif project_type == "recurring":
         ui = Ui_recurringProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        current_project = resources.project_parser(project, "recurring")
-        connect_buttons(ui, dialog, main_window, "recurring", viewer_dialog, current_project)
+        current_project = resources.project_parser(project, project_type)
+        connect_buttons(ui, dialog, main_window, project_type, viewer_dialog, current_project)
         edit_recurring(ui, project, main_window)
         dialog.exec()
     else:
         ui = Ui_everydayProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        current_project = resources.project_parser(project, "everyday")
-        connect_buttons(ui, dialog, main_window, "everyday", viewer_dialog, current_project)
+        current_project = resources.project_parser(project, project_type)
+        connect_buttons(ui, dialog, main_window, project_type, viewer_dialog, current_project)
         edit_everyday(ui, project, main_window)
         dialog.exec()
 
@@ -68,7 +67,7 @@ def edit_parser(project, viewer_dialog, main_window):
 # Save edited file, refresh project files read
 # And return to project viewer 
 def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, write_type):
-    project_deleter.delete_project(current_project, project_type)
+    project_deleter.delete_project(current_project, project_type, viewer_dialog, main_window)
     project_data(ui, project_type, dialog, main_window, write_type)
     dialog.close()
     if viewer_dialog is not None:
@@ -87,6 +86,7 @@ def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, curren
 # Edit everyday project 
 def edit_everyday(ui, project, main_window):
     print("Editing everyday...")
+    print(f"Everyday project: {project}")
     current_project = resources.project_parser(project, "everyday")
     print(current_project)
     ui.everydayName.setText(current_project["Project name"])

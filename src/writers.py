@@ -1,12 +1,8 @@
 ########## Writers ##########
 # Imports
 import json
-
 import resources
 
-from project_printers import print_projects
-
-# from loader import load_file
 
 # Project file creator
 def project_data(ui, project_type, current_dialog, main_window, write_type):
