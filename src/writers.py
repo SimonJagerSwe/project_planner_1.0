@@ -5,6 +5,101 @@ import resources
 
 
 # Project file creator
+def project_data(ui, project_type):     # , current_dialog, main_window, write_type
+    print("Writing project data...")
+    print(f"Ui fetched: {ui}")
+    print(project_type)
+
+
+    # Create everyday project
+    if project_type == "everyday":
+        name = ui.everydayName.text()
+        start = ui.everydayStart.date().toString("yyyy-MM-dd")
+        finish = ui.everydayFinish.date().toString("yyyy-MM-dd")
+        notes = ui.everydayNotes.text()
+        percent = ui.everydayProgressPercent.text()
+        status = ui.everydayStatus.currentText()
+        project = {
+            "Project name" : name,
+            "Project start" : start,
+            "Project end" : finish,
+            "Project notes" : notes,
+            "Project progress" : percent,
+            "Project status" : status
+        }
+    # Create programming project
+    elif project_type == "programming":
+        name = ui.programmingName.text()
+        start = ui.programmingStart.date().toString("yyyy-MM-dd")
+        finish = ui.programmingFinish.date().toString("yyyy-MM-dd")
+        language = ui.languagesEdit.text()
+        link = ui.githubEdit.text()
+        notes = ui.programmingNotes.text()
+        percent = ui.programmingProgressPercent.text()
+        status = ui.programmingStatus.currentText()
+        project = {
+            "Project name" : name,
+            "Project start" : start,
+            "Project end" : finish,
+            "Language(s)" : language,
+            "GitHub link" : link,
+            "Project notes" : notes,
+            "Project progress" : percent,
+            "Project status" : status
+        }
+    # Create recurring task
+    else:
+        name = ui.recurringName.text()
+        frequency = ui.recurringFrequency.currentText()
+        notes = ui.recurringNotes.text()
+        project = {
+            "Task name" : name,
+            "Task frequency" : frequency,
+            "Task notes" : notes
+        }
+    
+    return project
+
+    # Write new file
+     # writer(project, project_type, write_type)
+
+    # Return to main menu
+    # if current_dialog and main_window:
+    #     resources.return_to_main_clicked(current_dialog, main_window)
+
+# Project writer
+def writer(project, project_type, current_dialog, main_window, write_type):
+    print(f"Writing file using: {project}")
+    print(f"Project type: {project_type}")
+    print(f"Write type: {write_type}")
+    if write_type == "new":
+        project = project_data(project, project_type)
+
+    # project = resources.project_parser(project, project_type)
+    print(project)
+    
+    '''if project_type == "everyday":
+        name = ui.everydayName.text()
+        start = ui.everydayStart.date().toString("yyyy-MM-dd")
+        finish = ui.everydayFinish.date().toString("yyyy-MM-dd")
+        notes = ui.everydayNotes.text()
+        percent = ui.everydayProgressPercent.text()
+        status = ui.everydayStatus.currentText()
+        project = {
+            "Project name" : name,
+            "Project start" : start,
+            "Project end" : finish,
+            "Project notes" : notes,
+            "Project progress" : percent,
+            "Project status" : status
+        }'''
+
+    # Return to main menu
+    if current_dialog and main_window:
+        resources.return_to_main_clicked(current_dialog, main_window)
+
+'''
+# Project file creator
 def project_data(ui, project_type, current_dialog, main_window, write_type):
     print("Writing project data...")
     # Create everyday project
@@ -117,3 +212,4 @@ def writer(project, project_type, write_type):
         resources.success_message_viewer()
     else:
         resources.success_message_archive()
+'''
