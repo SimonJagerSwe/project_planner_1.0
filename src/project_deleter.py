@@ -9,6 +9,7 @@ from resources import project_parser as parser
 
 # Delete project from project type file, both for deletion and for editing
 def delete_project(project, type):
+    print(project, type)
     current_project = parser(project, type)
     print(f"Project for deletion:\n{current_project}")
     print(f"Project type: {type}")
@@ -18,6 +19,8 @@ def delete_project(project, type):
         projects_file = PROGRAMING_FILE
     elif type == "recurring":
         projects_file = RECURRING_FILE
+    else:
+        print("Unknown error")
 
     if type != "recurring":        
         all_projects = loader(ALL_PROJECTS_FILE)

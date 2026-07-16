@@ -156,6 +156,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         else:
             print(resources.selected_project.text())
             project_type = resources.parse_type(resources.selected_project)
+            print(project_type)
             delete = resources.safety_check(viewer)
             print(delete)
             if delete == "delete":

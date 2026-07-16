@@ -149,7 +149,7 @@ def no_project_selected():
 def parse_type(project):
     if "Language(s)" in project.text():
         project_type = "programming"
-    elif "Recurring task" in project.text():
+    elif "Task name" in project.text():
         project_type = "recurring"
     else:
        project_type =  "everyday"
