@@ -1,6 +1,6 @@
 ########## Button handler ##########
 # Imports
-import project_deleter, project_editors, resources, writers
+import project_deleter, project_editors, project_archive_handler, resources, writers
 
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
@@ -149,6 +149,16 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         else:
             project_editors.edit_parser(resources.selected_project, viewer, main_window)
 
+    def archive_clicked():
+        if resources.selected_project is None:
+            resources.no_project_selected()
+        else:
+            project_type = resources.parse_type(resources.selected_project)
+            print(project_type)
+            project_archive_handler.archive_project(resources.selected_project, project_type, viewer, main_window)
+            archive = resources.archive_check(viewer)
+            print(archive)
+
     # Use set item to call the delete function
     def delete_clicked():
         if resources.selected_project is None:
@@ -198,7 +208,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.projectTabs.currentChanged.connect(lambda index: tab_changed(0, index))
     ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
     ui.editProject.clicked.connect(edit_clicked)
-    ui.archiveProject.clicked.connect(lambda: archive_project_clicked())
+    ui.archiveProject.clicked.connect(lambda: archive_clicked())
     ui.deleteProject.clicked.connect(lambda: delete_clicked())
     ui.returnToMainProjects.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitProjects.clicked.connect(lambda: resources.exit_clicked(viewer))
@@ -210,8 +220,6 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
 
 
 # Placeholder functions
-def archive_project_clicked():      # Check if project is completed or to be archived as is
-    print("Archiving project...")
 
 def restore_project_clicked():
     print("Restore project...")

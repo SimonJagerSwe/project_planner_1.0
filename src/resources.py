@@ -22,6 +22,10 @@ SUCCESS_TEXT_MAIN = "Project saved successfully!\nClick OK to return to main men
 SUCCESS_TEXT_VIEWER = "Project updated successfully!\nClick OK to return to project viewer."
 SAFETY_WINDOW = "Confirm project deletion"
 SAFETY_TEXT = "Are you sure you want to delete this project?"
+ARCHIVE_WINDOW = "Confirm project archiving"
+ARCHIVE_TEXT = "Are you sure you want to archive this project?"
+ARCHIVE_DONE_WINDOW = "Finish project"
+ARCHIVE_DONE_TEXT = "Do you want to finish this project (set status to Completed and set progress to 100%)?"
 
 
 # Utility variables
@@ -131,6 +135,22 @@ def safety_check(parent=None):
         )
     if delete == QMessageBox.StandardButton.Yes:
         return "delete"
+    else:
+        return "cancel"
+
+def archive_check(parent=None):
+    archive_check = QMessageBox()
+    archive_check.setWindowTitle(ARCHIVE_WINDOW)
+    archive_check.setText(ARCHIVE_TEXT)
+    archive = QMessageBox.question(
+        parent,
+        ARCHIVE_WINDOW,
+        ARCHIVE_TEXT,
+        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        QMessageBox.StandardButton.No
+    )
+    if archive == QMessageBox.StandardButton.Yes:
+        return "archive"
     else:
         return "cancel"
 
