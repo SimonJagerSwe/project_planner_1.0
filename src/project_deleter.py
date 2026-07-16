@@ -9,21 +9,21 @@ from resources import ALL_PROJECTS_FILE, EVERYDAY_FILE, PROGRAMMING_FILE, RECURR
 
 
 # Delete project from project type file, both for deletion and for editing
-def delete_project(project, type, viewer, main_window, delete_type):
-    print(project, type)
+def delete_project(project, project_type, viewer, main_window, delete_type):
+    print(project, project_type)
     print(delete_type)
     print(f"Project in delete function: {project}")
-    print(f"Project type in delete function: {type}")
-    if type == "everyday":
+    print(f"Project type in delete function: {project_type}")
+    if project_type == "everyday":
         projects_file = EVERYDAY_FILE
-    elif type == "programming":
+    elif project_type == "programming":
         projects_file = PROGRAMMING_FILE
-    elif type == "recurring":
+    elif project_type == "recurring":
         projects_file = RECURRING_FILE
     else:
         print("Unknown error")
 
-    if type != "recurring":        
+    if project_type != "recurring":        
         all_projects = loader(ALL_PROJECTS_FILE)
         try:
             all_projects.remove(project)
@@ -47,9 +47,9 @@ def delete_project(project, type, viewer, main_window, delete_type):
         viewer.close()
 
     if delete_type == "delete":
-        if type == "everyday":
+        if project_type == "everyday":
             button_handler.project_viewer_clicked(main_window, 0, 0)
-        elif type == "programming":
+        elif project_type == "programming":
             button_handler.project_viewer_clicked(main_window, 0, 1)
         else:
             button_handler.project_viewer_clicked(main_window, 0, 3)
