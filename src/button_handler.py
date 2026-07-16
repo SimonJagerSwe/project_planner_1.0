@@ -1,6 +1,6 @@
 ########## Button handler ##########
 # Imports
-import project_editors, resources, writers
+import project_deleter, project_editors, resources, writers
 
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
@@ -149,6 +149,19 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         else:
             project_editors.edit_parser(resources.selected_project, viewer, main_window)
 
+    # Use set item to call the delete function
+    def delete_clicked():
+        if resources.selected_project is None:
+            resources.no_project_selected()
+        else:
+            print(resources.selected_project.text())
+            project_type = resources.parse_type(resources.selected_project)
+            print(project_type)
+            delete = resources.safety_check(viewer)
+            print(delete)
+            if delete == "delete":
+                project_deleter.delete_project(resources.selected_project, project_type, viewer, main_window)
+
     # Logic for project selection
     recurring_list = [ui.recurringBi, ui.recurringOther, ui.recurringWeekly]
     for list_item in [
@@ -186,11 +199,10 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
     ui.editProject.clicked.connect(edit_clicked)
     ui.archiveProject.clicked.connect(lambda: archive_project_clicked())
-    ui.deleteProject.clicked.connect(lambda: delete_project_clicked())
+    ui.deleteProject.clicked.connect(lambda: delete_clicked())
     ui.returnToMainProjects.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitProjects.clicked.connect(lambda: resources.exit_clicked(viewer))
     ui.restoreArchived.clicked.connect(restore_project_clicked)
-    # ui.deleteArchived.clicked.connect(delete_archive_clicked)
     ui.returnToMainArchive.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitArchive.clicked.connect(lambda: resources.exit_clicked(viewer))
     viewer.exec()
@@ -201,11 +213,5 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
 def archive_project_clicked():      # Check if project is completed or to be archived as is
     print("Archiving project...")
 
-def delete_project_clicked():
-    print("Deleting project from project list...")   # Needs a safety check
-
 def restore_project_clicked():
     print("Restore project...")
-
-# def delete_archive_clicked():
-#     print("Deleting project from archive...")       # Needs a safety check

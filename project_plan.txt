@@ -47,7 +47,6 @@
     - Deploy online?
     - App?
     - User specified project types?
-    - Recurring tasks
 
 
 7. Specific components
@@ -74,11 +73,18 @@
 
 
 
-Misc.
+TODO
+    - Arcive projects
+    - Increase window size
     - Add project stats
+    - Add new project from 
+    - Make everyday projects expandable/collapsable
     - For colouring tasks:
         - Add status parameter
         - If done == True:
             - Change colour
         - Reset by changing all done statuses in category to False
+        - Refresh viewer
     - Add "add new project" button to project/archive viewer
+    - Save tab state for recalling tab position after edit/adding/deleting/archiving (save as two indices to be called with main_window)
+    - Possibly make size dynamically adjustable?

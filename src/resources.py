@@ -20,6 +20,9 @@ FULL_ARCHIVE = "project_files/full_archive.json"
 SUCCESS_WINDOW_TITLE = "Project saved"
 SUCCESS_TEXT_MAIN = "Project saved successfully!\nClick OK to return to main menu."
 SUCCESS_TEXT_VIEWER = "Project updated successfully!\nClick OK to return to project viewer."
+SAFETY_WINDOW = "Confirm project deletion"
+SAFETY_TEXT = "Are you sure you want to delete this project?"
+
 
 # Utility variables
 selected_project = None
@@ -48,22 +51,6 @@ def return_to_main_clicked(current_dialog, main_window, parent_dialog=None):
     if main_window is not None:
         main_window.show()
         main_window.setEnabled(True)
-
-
-# Exit program
-def exit_clicked(parent=None):
-    print("Exiting program...")
-    close = QMessageBox.question(
-        parent, 
-        "Confirm exit", 
-        "Are you sure you want to quit?",
-        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-        QMessageBox.StandardButton.No
-        )
-    if close == QMessageBox.StandardButton.Yes:
-        sys.exit()
-    else:
-        print("Returning to previous menu")
 
 
 # Clear project input
@@ -95,6 +82,23 @@ def clear_input(ui):
         ui.recurringNotes.setText("")
 
 
+# Message box dialogs
+# Exit program
+def exit_clicked(parent=None):
+    print("Exiting program...")
+    close = QMessageBox.question(
+        parent, 
+        "Confirm exit", 
+        "Are you sure you want to quit?",
+        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        QMessageBox.StandardButton.No
+        )
+    if close == QMessageBox.StandardButton.Yes:
+        sys.exit()
+    else:
+        print("Returning to previous menu")
+
+
 # Successfull project creation and return to main menu
 def success_message_main():
     success_message = QMessageBox()
@@ -113,40 +117,26 @@ def success_message_viewer():
     success_message.exec()
 
 
-# Delete project from project type file, both for deletion and for editing
-def delete_project(project, type):
-    print(f"Project for deletion:\n{project}")
-    if type == "everyday":
-        projects_file = EVERYDAY_FILE
-    elif type == "programming":
-        projects_file = PROGRAMING_FILE
+# Delete yes/no message box
+def safety_check(parent=None):
+    safety_check = QMessageBox()
+    safety_check.setWindowTitle(SAFETY_WINDOW)
+    safety_check.setText(SAFETY_TEXT)
+    delete = QMessageBox.question(
+        parent, 
+        SAFETY_WINDOW, 
+        SAFETY_TEXT,
+        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        QMessageBox.StandardButton.No
+        )
+    if delete == QMessageBox.StandardButton.Yes:
+        return "delete"
     else:
-        projects_file = RECURRING_FILE
-
-    projects = loader(projects_file)
-    all_projects = loader(ALL_PROJECTS_FILE)
-    print(f"Current projects:\n{projects}\n")
-    try:
-        projects.remove(project)
-    except:
-        print("Project not present in selected projects type")
-    try:
-        all_projects.remove(project)
-    except:
-        print("Project not present in full projects")
-
-    print(f"Selected projects type after removal:\n{projects}")
-    print(f"Full projects after removal:\n{all_projects}\n")
-
-    # writer(projects, type)
-    with open (projects_file, "w") as file:
-        json.dump(projects, file)
-    with open(ALL_PROJECTS_FILE, "w") as file:
-        json.dump(all_projects, file)
+        return "cancel"
 
 
 # TODO
-# No project for editing or archiving selected
+# No project for editing, deleting or archiving selected
 def no_project_selected():
     print("No project selected")
     no_project_selected = QMessageBox()
@@ -154,3 +144,44 @@ def no_project_selected():
     no_project_selected.setText("No project selected")
     no_project_selected.setStandardButtons(QMessageBox.Ok)
     # no_project_selected.exec()
+
+# Project type parser
+def parse_type(project):
+    if "Language(s)" in project.text():
+        project_type = "programming"
+    elif "Task name" in project.text():
+        project_type = "recurring"
+    else:
+       project_type =  "everyday"
+    return project_type
+
+
+# Get the correct projects file to delete old version of project
+def project_parser(project, type):
+    # Find project name
+    for var in project.text().split("\n"):
+        if "name" in var:
+            project_name = var.split(":")[1].strip()
+    
+    # Load everyday file
+    if type == "everyday":
+        e_projects = loader(EVERYDAY_FILE)
+        for project in e_projects:
+            try:
+                if project["Project name"] == project_name:
+                    return project
+            except:
+                print(project)
+    # Load programming file
+    elif type == "programming":
+        p_projects = loader(PROGRAMING_FILE)
+        for project in p_projects:
+            if project["Project name"] == project_name:
+                return project
+    # Load recurring task file
+    else:
+        r_tasks = loader(RECURRING_FILE)
+        for task in r_tasks:
+            if task["Task name"] == project_name:
+                return task
+            
