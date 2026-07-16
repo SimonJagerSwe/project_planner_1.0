@@ -20,7 +20,7 @@ FULL_ARCHIVE = "project_files/full_archive.json"
 SUCCESS_WINDOW_TITLE = "Project saved"
 SUCCESS_TEXT_MAIN = "Project saved successfully!\nClick OK to return to main menu."
 SUCCESS_TEXT_VIEWER = "Project updated successfully!\nClick OK to return to project viewer."
-SAFETY_WINDOW = "Are you sure?"
+SAFETY_WINDOW = "Confirm project deletion"
 SAFETY_TEXT = "Are you sure you want to delete this project?"
 
 
@@ -124,8 +124,8 @@ def safety_check(parent=None):
     safety_check.setText(SAFETY_TEXT)
     delete = QMessageBox.question(
         parent, 
-        "Confirm exit", 
-        "Are you sure you want to quit?",
+        SAFETY_WINDOW, 
+        SAFETY_TEXT,
         QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
         QMessageBox.StandardButton.No
         )
@@ -154,3 +154,34 @@ def parse_type(project):
     else:
        project_type =  "everyday"
     return project_type
+
+
+# Get the correct projects file to delete old version of project
+def project_parser(project, type):
+    # Find project name
+    for var in project.text().split("\n"):
+        if "name" in var:
+            project_name = var.split(":")[1].strip()
+    
+    # Load everyday file
+    if type == "everyday":
+        e_projects = loader(EVERYDAY_FILE)
+        for project in e_projects:
+            try:
+                if project["Project name"] == project_name:
+                    return project
+            except:
+                print(project)
+    # Load programming file
+    elif type == "programming":
+        p_projects = loader(PROGRAMING_FILE)
+        for project in p_projects:
+            if project["Project name"] == project_name:
+                return project
+    # Load recurring task file
+    else:
+        r_tasks = loader(RECURRING_FILE)
+        for task in r_tasks:
+            if task["Task name"] == project_name:
+                return task
+            

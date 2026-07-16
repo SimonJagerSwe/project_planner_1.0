@@ -157,7 +157,8 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
             print(resources.selected_project.text())
             project_type = resources.parse_type(resources.selected_project)
             delete = resources.safety_check(viewer)
-            if delete == "yes":
+            print(delete)
+            if delete == "delete":
                 project_deleter.delete_project(resources.selected_project, project_type)
 
     # Logic for project selection
@@ -201,7 +202,6 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.returnToMainProjects.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitProjects.clicked.connect(lambda: resources.exit_clicked(viewer))
     ui.restoreArchived.clicked.connect(restore_project_clicked)
-    # ui.deleteArchived.clicked.connect(delete_archive_clicked)
     ui.returnToMainArchive.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitArchive.clicked.connect(lambda: resources.exit_clicked(viewer))
     viewer.exec()
@@ -214,6 +214,3 @@ def archive_project_clicked():      # Check if project is completed or to be arc
 
 def restore_project_clicked():
     print("Restore project...")
-
-# def delete_archive_clicked():
-#     print("Deleting project from archive...")       # Needs a safety check

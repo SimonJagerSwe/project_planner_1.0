@@ -9,22 +9,15 @@ from resources import ALL_PROJECTS_FILE, EVERYDAY_FILE, PROGRAMING_FILE, RECURRI
 # Delete project from project type file, both for deletion and for editing
 def delete_project(project, type):
     print(f"Project for deletion:\n{project}")
+    print(f"Project type: {type}")
     if type == "everyday":
         projects_file = EVERYDAY_FILE
     elif type == "programming":
         projects_file = PROGRAMING_FILE
-    else:
+    elif type == "recurring":
         projects_file = RECURRING_FILE
 
-    projects = loader(projects_file)
-    print(f"Current projects:\n{projects}\n")
-    try:
-        projects.remove(project)
-        print(f"Selected projects type after removal:\n{projects}")
-    except:
-        print("Project not present in selected projects type")
-    
-    if "Task frequency" not in project:        
+    if type != "recurring":        
         all_projects = loader(ALL_PROJECTS_FILE)
         try:
             all_projects.remove(project)
@@ -34,6 +27,12 @@ def delete_project(project, type):
         except:
             print("Project not present in full projects")
 
-    with open (projects_file, "w") as file:
-        json.dump(projects, file)
-        
+    projects = loader(projects_file)
+    print(f"Current projects:\n{projects}\n")
+    try:
+        projects.remove(project)
+        print(f"Selected projects type after removal:\n{projects}")
+        with open (projects_file, "w") as file:
+            json.dump(projects, file)
+    except:
+        print("Project not present in selected projects type")

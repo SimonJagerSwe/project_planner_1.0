@@ -43,7 +43,7 @@ def edit_parser(project, viewer_dialog, main_window):
         ui = Ui_programmingProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        current_project = project_parser(project, "programming")
+        current_project = resources.project_parser(project, "programming")
         connect_buttons(ui, dialog, main_window, "programming", viewer_dialog, current_project)
         edit_programming(ui, project, main_window)
         dialog.exec()
@@ -51,7 +51,7 @@ def edit_parser(project, viewer_dialog, main_window):
         ui = Ui_recurringProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        current_project = project_parser(project, "recurring")
+        current_project = resources.project_parser(project, "recurring")
         connect_buttons(ui, dialog, main_window, "recurring", viewer_dialog, current_project)
         edit_recurring(ui, project, main_window)
         dialog.exec()
@@ -59,13 +59,13 @@ def edit_parser(project, viewer_dialog, main_window):
         ui = Ui_everydayProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        current_project = project_parser(project, "everyday")
+        current_project = resources.project_parser(project, "everyday")
         connect_buttons(ui, dialog, main_window, "everyday", viewer_dialog, current_project)
         edit_everyday(ui, project, main_window)
         dialog.exec()
 
 
-# Get the correct projects file to delete old version of project
+'''# Get the correct projects file to delete old version of project
 def project_parser(project, type):
     # Find project name
     for var in project.text().split("\n"):
@@ -92,7 +92,7 @@ def project_parser(project, type):
         r_tasks = loader(resources.RECURRING_FILE)
         for task in r_tasks:
             if task["Task name"] == project_name:
-                return task
+                return task'''
 
 
 # Save edited file, refresh project files read
@@ -117,7 +117,7 @@ def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, curren
 # Edit everyday project 
 def edit_everyday(ui, project, main_window):
     print("Editing everyday...")
-    current_project = project_parser(project, "everyday")
+    current_project = resources.project_parser(project, "everyday")
     print(current_project)
     ui.everydayName.setText(current_project["Project name"])
     ui.everydayStart.setDate(QDate.fromString(current_project["Project start"], "yyyy-MM-dd"))
@@ -136,7 +136,7 @@ def edit_everyday(ui, project, main_window):
 # Edit programming project
 def edit_programming(ui, project, main_window):
     print("Editing programming...")
-    current_project = project_parser(project, "programming")
+    current_project = resources.project_parser(project, "programming")
     print(current_project)
     ui.programmingName.setText(current_project["Project name"])
     ui.programmingStart.setDate(QDate.fromString(current_project["Project start"], "yyyy-MM-dd"))
@@ -156,7 +156,7 @@ def edit_programming(ui, project, main_window):
 # Edit recurring project
 def edit_recurring(ui, project, main_window):
     print("Editing recurring project...")
-    current_project = project_parser(project, "recurring")
+    current_project = resources.project_parser(project, "recurring")
     print(current_project)
     ui.recurringName.setText(current_project["Task name"])
     ui.recurringFrequency.setCurrentText(current_project["Task frequency"])
