@@ -75,10 +75,12 @@
 
 TODO
     - Arcive projects
+    - Add and connect top menu bar
     - Increase window size
     - Add project stats
-    - Add new project from 
-    - Make everyday projects expandable/collapsable
+    - Add new project from viewer
+    - Clean up writer/project_data flow
+    - Make recurring tasks expandable/collapsable
     - For colouring tasks:
         - Add status parameter
         - If done == True:
@@ -88,3 +90,6 @@ TODO
     - Add "add new project" button to project/archive viewer
     - Save tab state for recalling tab position after edit/adding/deleting/archiving (save as two indices to be called with main_window)
     - Possibly make size dynamically adjustable?
+    - Sort projects in view?
+    - Remove frequency print in recurring tasks
+    - Remove archiving from recurring tasks
