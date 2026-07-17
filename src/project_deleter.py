@@ -24,18 +24,6 @@ def delete_project(project, project_type, viewer, main_window, delete_type):
     print(f"Parsed project:\n{project}\n")
     print(f"Project file fetched:\n{projects_file}")
 
-    if project_type != "recurring":
-        print("Non-recurring task detected\n")
-        all_projects = loader(ALL_PROJECTS_FILE)
-        print(all_projects)
-        try:
-            all_projects.remove(project)
-            print(f"Full projects after removal:\n{all_projects}\n")
-            with open(ALL_PROJECTS_FILE, "w") as file:
-                json.dump(all_projects, file)
-        except:
-            print("Project not present in full projects")
-
     projects = loader(projects_file)
     print(f"Current projects:\n{projects}\n")
     try:

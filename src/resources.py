@@ -195,32 +195,31 @@ def parse_type(project):
 
 
 # Get the correct projects file to delete old version of project
-def project_parser(project, type):
+def project_parser(project, project_type):
     # Find project name
-    print(f"From parser: {project}")
+    print(f"Project received by parser: {project}")
     for var in project.text().split("\n"):
         if "name" in var:
             project_name = var.split(":")[1].strip()
+            
     
     # Load everyday file
-    if type == "everyday":
+    if project_type == "everyday":
         e_projects = loader(EVERYDAY_FILE)
         for project in e_projects:
-            try:
-                if project["Project name"] == project_name:
-                    return project
-            except:
-                print(project)
+            if project["Project name"].strip() == project_name:
+                print(f"Project found: {project["Project name"]}")
+                return project
     # Load programming file
-    elif type == "programming":
+    elif project_type == "programming":
         p_projects = loader(PROGRAMMING_FILE)
         for project in p_projects:
-            if project["Project name"] == project_name:
+            if project["Project name"].strip() == project_name:
                 return project
     # Load recurring task file
     else:
         r_tasks = loader(RECURRING_FILE)
         for task in r_tasks:
-            if task["Task name"] == project_name:
+            if task["Task name"].strip() == project_name:
                 return task
             
