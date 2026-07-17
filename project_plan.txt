@@ -34,7 +34,7 @@
     - Display projects
     - Close projects
 
-
+# DONE
 5. Draw a simple prototype/wireframe
     - Keep
     - It
@@ -94,4 +94,5 @@ TODO
         - By added, name, start date, finish date, programming language
     - Remove frequency print in recurring tasks
     - Remove archiving from recurring tasks
-    
+    - Use both types of project files/archive files to create list of full, rather than a separate file
+    - Add version number to each window
