@@ -91,26 +91,26 @@ def writer(project, project_type, current_dialog, main_window, write_type):
     # Read target file
     try:
         with open(target_file, "r") as file:
-            updated_list = json.load(file)
-            print(f"File loaded\nProjects found:\n{updated_list}\n")
-            updated_list.append(project)
-            print(f"Updated projects list:\n{updated_list}\n")
+            project_list = json.load(file)
+            print(f"File loaded\nProjects found:\n{project_list}\n")
+            project_list.append(project)
+            print(f"Updated projects list:\n{project_list}\n")
     except:
         print("Project file empty or not found")
-        updated_list = []
-        updated_list.append(project)
-        print(f"Updated projects list:\n{updated_list}\n")
+        project_list = []
+        project.append(project)
+        print(f"Updated projects list:\n{project_list}\n")
 
     # Write to target file/archive
     try:
         with open(target_file, "w") as file:
-            print(f"Writing {updated_list} to {target_file}...")
-            json.dump(updated_list, file)
+            print(f"Writing {project_list} to {target_file}...")
+            json.dump(project_list, file)
     except:
-        print(f"Writing {updated_list} to {target_file} failed")
+        print(f"Writing {project_list} to {target_file} failed")
 
     # Write to full project files/archive files if not recurring    
-    if "Task frequency" not in project:
+    '''if "Task frequency" not in project:
         if write_type == "new" or write_type == "edit":
             full_file = resources.ALL_PROJECTS_FILE
         else:
@@ -120,11 +120,21 @@ def writer(project, project_type, current_dialog, main_window, write_type):
                 print(f"Writing {updated_list} to {target_file}...")
                 json.dump(updated_list, file)
         except:
-            print(f"Writing {updated_list} to {target_file} failed")
+            print(f"Writing {updated_list} to {target_file} failed")'''
     
     # Return to main menu
     if current_dialog and main_window:
         resources.return_to_main_clicked(current_dialog, main_window)
+
+
+    # Trigger success message
+    if write_type == "new":
+        resources.success_message_main()
+    elif write_type == "edit":
+        resources.success_message_viewer()
+    else:
+        resources.success_message_archive()
+
 
 '''
     # Read current project type projects
@@ -166,11 +176,5 @@ def writer(project, project_type, current_dialog, main_window, write_type):
         except:
             print("Unexpected error while writing to full project file occurred")
 
-    # Trigger success message
-    if write_type == "new":
-        resources.success_message_main()
-    elif write_type == "edit":
-        resources.success_message_viewer()
-    else:
-        resources.success_message_archive()
+    
 '''
