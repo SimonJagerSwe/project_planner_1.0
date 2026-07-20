@@ -12,8 +12,6 @@ def archive_project(project, project_type, viewer, main_window):
     print(f"Project:\n{project}\n")
     print(f"Project type:\n{project_type}\n")
     print(f"Unpacked project:\n{unpacked_project}\n")
-    project_deleter.delete_project(project, project_type, viewer, main_window, "archive")
-    print("Archiving step 1 - Delete from file: Done")
     print(f"Sending project to archive writer: {project}\n")
     complete = resources.complete_archive()
     if complete == "yes":
@@ -24,4 +22,6 @@ def archive_project(project, project_type, viewer, main_window):
     else:
         print("Archive project as is...")
     writers.writer(unpacked_project, project_type, viewer, main_window, "archive")
-    print("Archiving step 2 - Write to archive file: Done")
+    print("Archiving step 1 - Write to archive file: Done")
+    project_deleter.delete_project(project, project_type, viewer, main_window, "archive")
+    print("Archiving step 2 - Delete from file: Done")
