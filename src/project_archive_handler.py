@@ -2,7 +2,6 @@
 # Imports
 import project_deleter, resources, writers
 
-from PySide6.QtCore import QDate
 
 # Archiving function
 def archive_project(project, project_type, viewer, main_window):

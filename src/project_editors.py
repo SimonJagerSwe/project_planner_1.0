@@ -5,7 +5,6 @@ import button_handler, project_deleter, resources, writers
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_programming import Ui_programmingProjectEditor 
 from interface.ui_recurring import Ui_recurringProjectEditor
-# from writers import project_data
 
 from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QDialog
@@ -125,7 +124,6 @@ def edit_programming(ui, project, current_project, main_window):
 def edit_recurring(ui, project, current_project, main_window):
     print("Editing recurring task...\n")
     print(f"Recurring task:\n{project}\n")
-    current_project = resources.project_parser(project, "recurring")
     print(f"Parsed recurring task:\n{current_project}\n")
     ui.recurringName.setText(current_project["Task name"])
     ui.recurringFrequency.setCurrentText(current_project["Task frequency"])

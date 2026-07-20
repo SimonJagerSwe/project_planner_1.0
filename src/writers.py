@@ -51,16 +51,13 @@ def project_data(ui, project_type):
         name = ui.recurringName.text()
         frequency = ui.recurringFrequency.currentText()
         notes = ui.recurringNotes.text()
-        status = False
+        status = False  # Never printed, only to use for status check
         project = {
             "Task name" : name,
             "Task frequency" : frequency,
             "Task notes" : notes,
             "Task status" : status
         }
-        # Status is never printed, but used to determine background colour
-        # Green when done, white when not
-        # project["Task status"] = False
     return project
 
 
@@ -71,8 +68,6 @@ def writer(project, project_type, current_dialog, main_window, write_type):
     print(f"Write type:\n{write_type}\n")
     if write_type != "archive":
         project = project_data(project, project_type)
-    # else:
-        # project = resources.project_parser(project, project_type)
     print(f"Project to write:\n{project}\n")
 
     # Determine if project should be written to project files or archive files
