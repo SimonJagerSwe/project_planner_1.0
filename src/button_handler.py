@@ -8,6 +8,7 @@ from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_recurring import Ui_recurringProjectEditor
 from interface.ui_tabs import Ui_Viewer
 from project_printers import print_projects as printer
+from writers import writer as writer
 
 from PySide6.QtCore import QDate
 from PySide6.QtGui import QAction
@@ -65,7 +66,7 @@ def everyday_project_clicked(current_dialog, main_window):
     ui.everydayFinish.setDate(QDate.currentDate())
     ui.everydayProgressSlider.valueChanged.connect(lambda value: 
         ui.everydayProgressPercent.setText(f"{value}%"))
-    ui.everydaySave.clicked.connect(lambda: writers.project_data(ui, "everyday", everyday_dialog, main_window, "new"))
+    ui.everydaySave.clicked.connect(lambda: writer(ui, "everyday", everyday_dialog, main_window, "new"))
     ui.everydayClear.clicked.connect(lambda: resources.clear_input(ui))
     ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(everyday_dialog, main_window))
     ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(everyday_dialog))
@@ -86,7 +87,7 @@ def programming_project_clicked(current_dialog, main_window):
     ui.programmingFinish.setDate(QDate.currentDate())
     ui.programmingProgressSlider.valueChanged.connect(lambda value:
         ui.programmingProgressPercent.setText(f"{value}%"))
-    ui.programmingSave.clicked.connect(lambda: writers.project_data(ui, "programming", programming_dialog, main_window, "new"))
+    ui.programmingSave.clicked.connect(lambda: writer(ui, "programming", programming_dialog, main_window, "new"))
     ui.programmingClear.clicked.connect(lambda: resources.clear_input(ui))
     ui.programmingReturn.clicked.connect(lambda: resources.return_to_main_clicked(programming_dialog, main_window))
     ui.programmingExit.clicked.connect(lambda: resources.exit_clicked(programming_dialog))
@@ -103,7 +104,7 @@ def recurring_project_clicked(current_dialog, main_window):
     recurring_dialog = QDialog(main_window)
     ui = Ui_recurringProjectEditor()
     ui.setupUi(recurring_dialog)
-    ui.saveRecurring.clicked.connect(lambda: writers.project_data(ui, "recurring", recurring_dialog, main_window, "new"))
+    ui.saveRecurring.clicked.connect(lambda: writer(ui, "recurring", recurring_dialog, main_window, "new"))
     ui.clearRecurring.clicked.connect(lambda: resources.clear_input(ui))
     ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(recurring_dialog, main_window))
     ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(recurring_dialog))
@@ -134,7 +135,6 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     
     # Print everyday projects to interface without having to select a tab first
     # to avoid user being greeted by an empty project view
-    # tab_changed(ui.viewer.currentIndex(), 0)
     tab_changed(top_idx, sub_idx)
 
     # Use a clicked project to set an item to use
@@ -149,15 +149,17 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         else:
             project_editors.edit_parser(resources.selected_project, viewer, main_window)
 
+    # use set item to call the archive function
     def archive_clicked():
         if resources.selected_project is None:
             resources.no_project_selected()
         else:
             project_type = resources.parse_type(resources.selected_project)
             print(project_type)
-            project_archive_handler.archive_project(resources.selected_project, project_type, viewer, main_window)
             archive = resources.archive_check(viewer)
             print(archive)
+            if archive == "archive":
+                project_archive_handler.archive_project(resources.selected_project, project_type, viewer, main_window)
 
     # Use set item to call the delete function
     def delete_clicked():
@@ -209,7 +211,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
     ui.editProject.clicked.connect(edit_clicked)
     ui.archiveProject.clicked.connect(lambda: archive_clicked())
-    ui.deleteProject.clicked.connect(lambda: delete_clicked())
+    ui.deleteProject.clicked.connect(delete_clicked)
     ui.returnToMainProjects.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitProjects.clicked.connect(lambda: resources.exit_clicked(viewer))
     ui.restoreArchived.clicked.connect(restore_project_clicked)
@@ -220,6 +222,5 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
 
 
 # Placeholder functions
-
 def restore_project_clicked():
     print("Restore project...")

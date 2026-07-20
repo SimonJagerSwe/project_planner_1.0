@@ -5,36 +5,24 @@ import json
 import button_handler
 
 from loader import load_file as loader
-from resources import ALL_PROJECTS_FILE, EVERYDAY_FILE, PROGRAMING_FILE, RECURRING_FILE
-from resources import project_parser as parser
+from resources import ALL_PROJECTS_FILE, EVERYDAY_FILE, PROGRAMMING_FILE, RECURRING_FILE, project_parser
 
 
 # Delete project from project type file, both for deletion and for editing
-def delete_project(project, type, viewer, main_window, delete_type):
-    print(project, type)
-    print(delete_type)
-    print(f"Project in delete function: {project}")
-    # current_project = parser(project, type)
-    # print(f"Project for deletion:\n{current_project}")
-    print(f"Project type in delete function: {type}")
-    if type == "everyday":
+def delete_project(project, project_type, viewer, main_window, delete_type):
+    print(f"Project received by delete function:\n{project}\nProject type:\n{project_type}\nDelete type:\n{delete_type}\n")
+    if project_type == "everyday":
         projects_file = EVERYDAY_FILE
-    elif type == "programming":
-        projects_file = PROGRAMING_FILE
-    elif type == "recurring":
+    elif project_type == "programming":
+        projects_file = PROGRAMMING_FILE
+    elif project_type == "recurring":
         projects_file = RECURRING_FILE
     else:
         print("Unknown error")
 
-    if type != "recurring":        
-        all_projects = loader(ALL_PROJECTS_FILE)
-        try:
-            all_projects.remove(project)
-            print(f"Full projects after removal:\n{all_projects}\n")
-            with open(ALL_PROJECTS_FILE, "w") as file:
-                json.dump(all_projects, file)
-        except:
-            print("Project not present in full projects")
+    project = project_parser(project, project_type)
+    print(f"Parsed project:\n{project}\n")
+    print(f"Project file fetched:\n{projects_file}")
 
     projects = loader(projects_file)
     print(f"Current projects:\n{projects}\n")
@@ -48,10 +36,11 @@ def delete_project(project, type, viewer, main_window, delete_type):
 
     if viewer is not None:
         viewer.close()
+
     if delete_type == "delete":
-        if type == "everyday":
+        if project_type == "everyday":
             button_handler.project_viewer_clicked(main_window, 0, 0)
-        elif type == "programming":
+        elif project_type == "programming":
             button_handler.project_viewer_clicked(main_window, 0, 1)
         else:
             button_handler.project_viewer_clicked(main_window, 0, 3)

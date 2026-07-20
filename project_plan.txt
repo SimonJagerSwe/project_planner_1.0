@@ -34,7 +34,7 @@
     - Display projects
     - Close projects
 
-
+# DONE
 5. Draw a simple prototype/wireframe
     - Keep
     - It
@@ -74,12 +74,11 @@
 
 
 TODO
-    - Arcive projects
+    - Archive projects
     - Add and connect top menu bar
     - Increase window size
     - Add project stats
     - Add new project from viewer
-    - Clean up writer/project_data flow
     - Make recurring tasks expandable/collapsable
     - For colouring tasks:
         - Add status parameter
@@ -87,11 +86,11 @@ TODO
             - Change colour
         - Reset by changing all done statuses in category to False
         - Refresh viewer
-    - Add "add new project" button to project/archive viewer
     - Save tab state for recalling tab position after edit/adding/deleting/archiving (save as two indices to be called with main_window)
     - Possibly make size dynamically adjustable?
     - Sort projects in view?
         - By added, name, start date, finish date, programming language
-    - Remove frequency print in recurring tasks
     - Remove archiving from recurring tasks
-    
+    - Use both types of project files/archive files to create list of full, rather than a separate file
+    - Add version number to each window
+    - Remove extraneous calls to project_parser

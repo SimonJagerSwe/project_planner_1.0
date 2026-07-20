@@ -1,17 +1,16 @@
 ########## Resources ##########
 # Imports
-import json
 import sys
 
 from loader import load_file as loader
-from writers import writer
 
 from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QMessageBox
 
+
 # Resource files
 EVERYDAY_FILE = "project_files/everyday_projects.json"
-PROGRAMING_FILE = "project_files/programming_projects.json"
+PROGRAMMING_FILE = "project_files/programming_projects.json"
 RECURRING_FILE = "project_files/recurring_tasks.json"
 ALL_PROJECTS_FILE = "project_files/all_projects.json"
 EVERYDAY_ARCHIVE = "project_files/everyday_archive.json"
@@ -20,12 +19,14 @@ FULL_ARCHIVE = "project_files/full_archive.json"
 SUCCESS_WINDOW_TITLE = "Project saved"
 SUCCESS_TEXT_MAIN = "Project saved successfully!\nClick OK to return to main menu."
 SUCCESS_TEXT_VIEWER = "Project updated successfully!\nClick OK to return to project viewer."
+SUCCESS_ARCHIVE_WINDOW = "Project archived"
+SUCCESS_ARCHIVE_TEXT = "Project archived successfully\nClick OK to return to return to project viewer"
 SAFETY_WINDOW = "Confirm project deletion"
 SAFETY_TEXT = "Are you sure you want to delete this project?"
 ARCHIVE_WINDOW = "Confirm project archiving"
 ARCHIVE_TEXT = "Are you sure you want to archive this project?"
-ARCHIVE_DONE_WINDOW = "Finish project"
-ARCHIVE_DONE_TEXT = "Do you want to finish this project (set status to Completed and set progress to 100%)?"
+ARCHIVE_DONE_WINDOW = "Mark project as complete"
+ARCHIVE_DONE_TEXT = "Do you want to mark this project as complete (set status to Completed and set progress to 100%)?"
 
 
 # Utility variables
@@ -33,7 +34,7 @@ selected_project = None
 tab_handler = [
     {
         0 : EVERYDAY_FILE,
-        1 : PROGRAMING_FILE,
+        1 : PROGRAMMING_FILE,
         2 : ALL_PROJECTS_FILE,
         3 : RECURRING_FILE
     }, 
@@ -44,7 +45,7 @@ tab_handler = [
     }
 ]
 
-# Utility functions
+##### Utility functions #####
 # Return to main menu
 def return_to_main_clicked(current_dialog, main_window, parent_dialog=None):
     print("Return to main menu clicked")
@@ -86,7 +87,7 @@ def clear_input(ui):
         ui.recurringNotes.setText("")
 
 
-# Message box dialogs
+##### Message box dialogs #####
 # Exit program
 def exit_clicked(parent=None):
     print("Exiting program...")
@@ -121,6 +122,15 @@ def success_message_viewer():
     success_message.exec()
 
 
+# Successful project archiving
+def success_message_archive():
+    success_message = QMessageBox()
+    success_message.setWindowTitle(SUCCESS_ARCHIVE_WINDOW)
+    success_message.setText(SUCCESS_ARCHIVE_TEXT)
+    success_message.setStandardButtons(QMessageBox.Ok)
+    success_message.exec()
+
+
 # Delete yes/no message box
 def safety_check(parent=None):
     safety_check = QMessageBox()
@@ -138,6 +148,8 @@ def safety_check(parent=None):
     else:
         return "cancel"
 
+
+# Archive yes/no checker
 def archive_check(parent=None):
     archive_check = QMessageBox()
     archive_check.setWindowTitle(ARCHIVE_WINDOW)
@@ -154,6 +166,23 @@ def archive_check(parent=None):
     else:
         return "cancel"
 
+# TODO
+# Archive finish yes/no checker
+def complete_archive(parent=None):
+    complete = QMessageBox()
+    complete.setWindowTitle(ARCHIVE_DONE_WINDOW)
+    complete.setText(ARCHIVE_DONE_TEXT)
+    answer = QMessageBox.question(
+        parent,
+        ARCHIVE_DONE_WINDOW,
+        ARCHIVE_DONE_TEXT,
+        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        QMessageBox.StandardButton.No
+    )
+    if answer == QMessageBox.StandardButton.Yes:
+        return "yes"
+    else:
+        return "no"
 
 # TODO
 # No project for editing, deleting or archiving selected
@@ -165,6 +194,8 @@ def no_project_selected():
     no_project_selected.setStandardButtons(QMessageBox.Ok)
     # no_project_selected.exec()
 
+
+##### Parsers #####
 # Project type parser
 def parse_type(project):
     if "Language(s)" in project.text():
@@ -177,32 +208,34 @@ def parse_type(project):
 
 
 # Get the correct projects file to delete old version of project
-def project_parser(project, type):
+def project_parser(project, project_type):
     # Find project name
-    print(f"From parser: {project}")
-    for var in project.text().split("\n"):
-        if "name" in var:
-            project_name = var.split(":")[1].strip()
+    print(f"Project received by parser: {project}\nProject type: {type(project)}\n")
+    if type(project) == dict:
+        project_name = project["Project name"]
+    else:
+        for var in project.text().split("\n"):
+            if "name" in var:
+                project_name = var.split(":")[1].strip()
+            
     
     # Load everyday file
-    if type == "everyday":
+    if project_type == "everyday":
         e_projects = loader(EVERYDAY_FILE)
         for project in e_projects:
-            try:
-                if project["Project name"] == project_name:
-                    return project
-            except:
-                print(project)
+            if project["Project name"].strip() == project_name:
+                print(f"Project found: {project["Project name"]}")
+                return project
     # Load programming file
-    elif type == "programming":
-        p_projects = loader(PROGRAMING_FILE)
+    elif project_type == "programming":
+        p_projects = loader(PROGRAMMING_FILE)
         for project in p_projects:
-            if project["Project name"] == project_name:
+            if project["Project name"].strip() == project_name:
                 return project
     # Load recurring task file
     else:
         r_tasks = loader(RECURRING_FILE)
         for task in r_tasks:
-            if task["Task name"] == project_name:
+            if task["Task name"].strip() == project_name:
                 return task
             
