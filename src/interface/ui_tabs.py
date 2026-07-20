@@ -170,31 +170,31 @@ class Ui_Viewer(object):
 
         self.biGrid.addLayout(self.biButtonLayout, 1, 1, 1, 1)
 
-        self.widget = QWidget(self.recurringProjectsTab)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(11, 301, 521, 111))
-        self.otherGrid = QGridLayout(self.widget)
+        self.layoutWidget3 = QWidget(self.recurringProjectsTab)
+        self.layoutWidget3.setObjectName(u"layoutWidget3")
+        self.layoutWidget3.setGeometry(QRect(11, 301, 521, 111))
+        self.otherGrid = QGridLayout(self.layoutWidget3)
         self.otherGrid.setObjectName(u"otherGrid")
         self.otherGrid.setContentsMargins(0, 0, 0, 0)
-        self.otherLabel = QLabel(self.widget)
+        self.otherLabel = QLabel(self.layoutWidget3)
         self.otherLabel.setObjectName(u"otherLabel")
         self.otherLabel.setFont(font)
 
         self.otherGrid.addWidget(self.otherLabel, 0, 0, 1, 1)
 
-        self.recurringOther = QListWidget(self.widget)
+        self.recurringOther = QListWidget(self.layoutWidget3)
         self.recurringOther.setObjectName(u"recurringOther")
 
         self.otherGrid.addWidget(self.recurringOther, 1, 0, 1, 1)
 
         self.otherButtonLayout = QVBoxLayout()
         self.otherButtonLayout.setObjectName(u"otherButtonLayout")
-        self.otherDone = QPushButton(self.widget)
+        self.otherDone = QPushButton(self.layoutWidget3)
         self.otherDone.setObjectName(u"otherDone")
 
         self.otherButtonLayout.addWidget(self.otherDone)
 
-        self.otherReset = QPushButton(self.widget)
+        self.otherReset = QPushButton(self.layoutWidget3)
         self.otherReset.setObjectName(u"otherReset")
 
         self.otherButtonLayout.addWidget(self.otherReset)
@@ -209,13 +209,13 @@ class Ui_Viewer(object):
         self.viewer.addTab(self.currentProjects, "")
         self.archive = QWidget()
         self.archive.setObjectName(u"archive")
-        self.layoutWidget3 = QWidget(self.archive)
-        self.layoutWidget3.setObjectName(u"layoutWidget3")
-        self.layoutWidget3.setGeometry(QRect(9, 9, 551, 531))
-        self.archiveTabLayout = QGridLayout(self.layoutWidget3)
+        self.layoutWidget4 = QWidget(self.archive)
+        self.layoutWidget4.setObjectName(u"layoutWidget4")
+        self.layoutWidget4.setGeometry(QRect(9, 9, 551, 531))
+        self.archiveTabLayout = QGridLayout(self.layoutWidget4)
         self.archiveTabLayout.setObjectName(u"archiveTabLayout")
         self.archiveTabLayout.setContentsMargins(0, 0, 0, 0)
-        self.archivedTabs = QTabWidget(self.layoutWidget3)
+        self.archivedTabs = QTabWidget(self.layoutWidget4)
         self.archivedTabs.setObjectName(u"archivedTabs")
         self.archivedTabs.setElideMode(Qt.TextElideMode.ElideNone)
         self.archivedTabs.setTabsClosable(False)
@@ -244,12 +244,12 @@ class Ui_Viewer(object):
         self.archiveMenuLayout.setObjectName(u"archiveMenuLayout")
         self.archiveManagerLayout = QHBoxLayout()
         self.archiveManagerLayout.setObjectName(u"archiveManagerLayout")
-        self.restoreArchived = QPushButton(self.layoutWidget3)
+        self.restoreArchived = QPushButton(self.layoutWidget4)
         self.restoreArchived.setObjectName(u"restoreArchived")
 
         self.archiveManagerLayout.addWidget(self.restoreArchived)
 
-        self.deleteArchived = QPushButton(self.layoutWidget3)
+        self.deleteArchived = QPushButton(self.layoutWidget4)
         self.deleteArchived.setObjectName(u"deleteArchived")
 
         self.archiveManagerLayout.addWidget(self.deleteArchived)
@@ -259,12 +259,12 @@ class Ui_Viewer(object):
 
         self.archiveNavigatorLayout = QHBoxLayout()
         self.archiveNavigatorLayout.setObjectName(u"archiveNavigatorLayout")
-        self.returnToMainArchive = QPushButton(self.layoutWidget3)
+        self.returnToMainArchive = QPushButton(self.layoutWidget4)
         self.returnToMainArchive.setObjectName(u"returnToMainArchive")
 
         self.archiveNavigatorLayout.addWidget(self.returnToMainArchive)
 
-        self.exitArchive = QPushButton(self.layoutWidget3)
+        self.exitArchive = QPushButton(self.layoutWidget4)
         self.exitArchive.setObjectName(u"exitArchive")
 
         self.archiveNavigatorLayout.addWidget(self.exitArchive)
@@ -305,7 +305,7 @@ class Ui_Viewer(object):
         self.weeklyReset.setText(QCoreApplication.translate("Viewer", u"Reset weekly", None))
         self.biLabel.setText(QCoreApplication.translate("Viewer", u"Bi-weekly tasks", None))
         self.biDone.setText(QCoreApplication.translate("Viewer", u"Task done", None))
-        self.biReset.setText(QCoreApplication.translate("Viewer", u"Reset Bb-weekly", None))
+        self.biReset.setText(QCoreApplication.translate("Viewer", u"Reset Bi-weekly", None))
         self.otherLabel.setText(QCoreApplication.translate("Viewer", u"Other tasks", None))
         self.otherDone.setText(QCoreApplication.translate("Viewer", u"Task done", None))
         self.otherReset.setText(QCoreApplication.translate("Viewer", u"Reset other", None))

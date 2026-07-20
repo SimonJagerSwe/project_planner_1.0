@@ -232,7 +232,7 @@
                <item>
                 <widget class="QPushButton" name="biReset">
                  <property name="text">
-                  <string>Reset Bb-weekly</string>
+                  <string>Reset Bi-weekly</string>
                  </property>
                 </widget>
                </item>
@@ -240,7 +240,7 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>11</x>
