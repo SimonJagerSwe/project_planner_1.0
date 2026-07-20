@@ -197,10 +197,13 @@ def parse_type(project):
 # Get the correct projects file to delete old version of project
 def project_parser(project, project_type):
     # Find project name
-    print(f"Project received by parser: {project}")
-    for var in project.text().split("\n"):
-        if "name" in var:
-            project_name = var.split(":")[1].strip()
+    print(f"Project received by parser: {project}\nProject type: {type(project)}\n")
+    if type(project) == dict:
+        project_name = project["Project name"]
+    else:
+        for var in project.text().split("\n"):
+            if "name" in var:
+                project_name = var.split(":")[1].strip()
             
     
     # Load everyday file

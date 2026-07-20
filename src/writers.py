@@ -64,7 +64,10 @@ def writer(project, project_type, current_dialog, main_window, write_type):
     print(f"Writing file using:\n{project}")
     print(f"Project type to write:\n{project_type}")
     print(f"Write type:\n{write_type}")
-    project = project_data(project, project_type)
+    if write_type != "archive":
+        project = project_data(project, project_type)
+    else:
+        project = resources.project_parser(project, project_type)
     print(f"Project to write:\n{project}")
 
     # Determine if project should be written to project files or archive files

@@ -1,13 +1,11 @@
 ########## Project editors ##########
 # Imports
-import button_handler
-import project_deleter
-import resources
+import button_handler, project_deleter, resources, writers
 
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_programming import Ui_programmingProjectEditor 
 from interface.ui_recurring import Ui_recurringProjectEditor
-from writers import project_data
+# from writers import project_data
 
 from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QDialog
@@ -71,7 +69,8 @@ def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, curren
     print("Deleting current project from project file(s)...")
     project_deleter.delete_project(current_project, project_type, viewer_dialog, main_window, "edit")
     print("Project deleted from project files")
-    project_data(ui, project_type, dialog, main_window, write_type)
+    # project_data(ui, project_type, dialog, main_window, write_type)
+    writers.writer(ui, project_type, dialog, main_window, write_type)
     dialog.close()
     if viewer_dialog is not None:
         viewer_dialog.close()
