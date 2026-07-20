@@ -101,7 +101,7 @@ def writer(project, project_type, current_dialog, main_window, write_type):
     except:
         print("Project file empty or not found")
         project_list = []
-        project.append(project)
+        project_list.append(project)
         print(f"Updated projects list:\n{project_list}\n")
 
     # Write to target file/archive
