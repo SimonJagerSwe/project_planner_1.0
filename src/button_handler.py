@@ -214,7 +214,14 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.deleteProject.clicked.connect(delete_clicked)
     ui.returnToMainProjects.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitProjects.clicked.connect(lambda: resources.exit_clicked(viewer))
-    # ui.weeklyDone.clicked.connect()
+    ui.weeklyDone.clicked.connect(weekly_done)
+    ui.weeklyResetTask.clicked.connect(weekly_reset)
+    ui.weeklyResetAll.clicked.connect(weekly_reset_all)
+    ui.biDone.clicked.connect(bi_done)
+    ui.biResetTask.clicked.connect(bi_reset)
+    ui.biResetAll.clicked.connect(bi_reset_all)
+    ui.otherDone.clicked.connect(other_done)
+    ui.otherReset.clicked.connect(other_reset)
     ui.restoreArchived.clicked.connect(restore_project_clicked)
     ui.returnToMainArchive.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitArchive.clicked.connect(lambda: resources.exit_clicked(viewer))
@@ -225,3 +232,27 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
 # Placeholder functions
 def restore_project_clicked():
     print("Restore project...")
+
+def weekly_done():
+    print("Weekly task marked as done")
+
+def weekly_reset():
+    print("Weekly task reset")
+
+def weekly_reset_all():
+    print("All weekly tasks reset")
+
+def bi_done():
+    print("Bi-weekly task marked as done")
+
+def bi_reset():
+    print("Bi-weekly task reset")
+
+def bi_reset_all():
+    print("Bi-weekly tasks reset")
+
+def other_done():
+    print("Other task done")
+
+def other_reset():
+    print("Other task reset")

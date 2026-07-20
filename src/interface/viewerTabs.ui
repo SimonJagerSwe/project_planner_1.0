@@ -99,7 +99,7 @@
            <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="everydayProjectsTab">
            <attribute name="title">
@@ -148,7 +148,7 @@
           </widget>
           <widget class="QWidget" name="recurringProjectsTab">
            <attribute name="title">
-            <string>Recurring projects</string>
+            <string>Recurring tasks</string>
            </attribute>
            <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
@@ -185,9 +185,16 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="weeklyReset">
+                <widget class="QPushButton" name="weeklyResetTask">
                  <property name="text">
-                  <string>Reset weekly</string>
+                  <string>Reset task</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="weeklyResetAll">
+                 <property name="text">
+                  <string>Reset all</string>
                  </property>
                 </widget>
                </item>
@@ -230,9 +237,16 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="biReset">
+                <widget class="QPushButton" name="biResetTask">
                  <property name="text">
-                  <string>Reset Bi-weekly</string>
+                  <string>Reset task</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="biResetAll">
+                 <property name="text">
+                  <string>Reset all</string>
                  </property>
                 </widget>
                </item>
@@ -277,7 +291,7 @@
                <item>
                 <widget class="QPushButton" name="otherReset">
                  <property name="text">
-                  <string>Reset other</string>
+                  <string>Reset task</string>
                  </property>
                 </widget>
                </item>
