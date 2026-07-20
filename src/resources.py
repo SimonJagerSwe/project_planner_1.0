@@ -197,19 +197,20 @@ def no_project_selected():
 ##### Parsers #####
 # Project type parser
 def parse_type(project):
+    print(f"Project received by type parser:\n{project}\n")
     if "Language(s)" in project.text():
         project_type = "programming"
     elif "Task name" in project.text():
         project_type = "recurring"
     else:
-       project_type =  "everyday"
+       project_type = "everyday"
     return project_type
 
 
 # Parse project object and return project name
 def project_parser(project, project_type):
     # Find project name
-    print(f"Project received by parser: {project}\nProject type: {type(project)}\n")
+    print(f"Project received by parser:\n{project}\nProject type:\n{type(project)}\n")
     if type(project) == dict:
         project_name = project["Project name"]
     else:
@@ -223,7 +224,7 @@ def project_parser(project, project_type):
         e_projects = loader(EVERYDAY_FILE)
         for project in e_projects:
             if project["Project name"].strip() == project_name:
-                print(f"Project found: {project["Project name"]}")
+                # print(f"Project found:\n{project["Project name"]}\n")
                 return project
     # Load programming file
     elif project_type == "programming":

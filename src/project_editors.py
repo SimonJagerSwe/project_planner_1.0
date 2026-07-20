@@ -31,17 +31,18 @@ def connect_buttons(ui, dialog, main_window, project_type, viewer_dialog=None, c
 
 # Function to determine which ui to use for editing
 def edit_parser(project, viewer_dialog, main_window):
-    print(f"Project to edit:\n{project.text()}")
+    print(f"Project to edit:\n{project.text()}\n")
 
     # Identify project type
     project_type = resources.parse_type(project)
-    print(project_type)
+    print(f"Project type received by edit parser:\n{project_type}\n")
+    current_project = resources.project_parser(project, project_type)
+    print(f"Name of current project:\n{current_project}\n")
     
     if project_type == "programming":
         ui = Ui_programmingProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        current_project = resources.project_parser(project, project_type)
         connect_buttons(ui, dialog, main_window, project_type, viewer_dialog, current_project)
         edit_programming(ui, project, main_window)
         dialog.exec()
@@ -49,7 +50,6 @@ def edit_parser(project, viewer_dialog, main_window):
         ui = Ui_recurringProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        current_project = resources.project_parser(project, project_type)
         connect_buttons(ui, dialog, main_window, project_type, viewer_dialog, current_project)
         edit_recurring(ui, project, main_window)
         dialog.exec()
@@ -57,39 +57,37 @@ def edit_parser(project, viewer_dialog, main_window):
         ui = Ui_everydayProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        current_project = resources.project_parser(project, project_type)
         connect_buttons(ui, dialog, main_window, project_type, viewer_dialog, current_project)
-        edit_everyday(ui, project, main_window)
+        edit_everyday(ui, project, current_project, main_window)
         dialog.exec()
 
 
 # Save edited file, refresh project files read
 # And return to project viewer 
 def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, write_type):
-    print("Deleting current project from project file(s)...")
+    print("Deleting current project from project file(s)...\n")
     project_deleter.delete_project(current_project, project_type, viewer_dialog, main_window, "edit")
-    print("Project deleted from project files")
+    print("Project deleted from project files\n")
     writers.writer(ui, project_type, dialog, main_window, write_type)
     dialog.close()
     if viewer_dialog is not None:
         viewer_dialog.close()
         if project_type == "everyday":
-            print("Sub idx: 0")
+            print("Sub idx: 0\n")
             button_handler.project_viewer_clicked(main_window, 0, 0)
         elif project_type == "programming":
-            print("Sub-idx: 1")
+            print("Sub-idx: 1\n")
             button_handler.project_viewer_clicked(main_window, 0, 1)
         else:
-            print("Sub idx: 3")
+            print("Sub idx: 3\n")
             button_handler.project_viewer_clicked(main_window, 0, 3)       
 
 
 # Edit everyday project 
-def edit_everyday(ui, project, main_window):
-    print("Editing everyday...")
-    print(f"Everyday project: {project}")
-    current_project = resources.project_parser(project, "everyday")
-    print(current_project)
+def edit_everyday(ui, project, current_project, main_window):
+    print("Editing everyday...\n")
+    print(f"Everyday project:\n{project}\n")
+    # current_project = resources.project_parser(project, "everyday")
     ui.everydayName.setText(current_project["Project name"])
     ui.everydayStart.setDate(QDate.fromString(current_project["Project start"], "yyyy-MM-dd"))
     ui.everydayFinish.setDate(QDate.fromString(current_project["Project end"], "yyyy-MM-dd"))
@@ -106,9 +104,10 @@ def edit_everyday(ui, project, main_window):
 
 # Edit programming project
 def edit_programming(ui, project, main_window):
-    print("Editing programming...")
+    print("Editing programming...\n")
+    print(f"Programming project:\n{project}\n")
     current_project = resources.project_parser(project, "programming")
-    print(current_project)
+    print(f"Parsed programming project:\n{current_project}\n")
     ui.programmingName.setText(current_project["Project name"])
     ui.programmingStart.setDate(QDate.fromString(current_project["Project start"], "yyyy-MM-dd"))
     ui.programmingFinish.setDate(QDate.fromString(current_project["Project end"], "yyyy-MM-dd"))
@@ -126,9 +125,10 @@ def edit_programming(ui, project, main_window):
 
 # Edit recurring project
 def edit_recurring(ui, project, main_window):
-    print("Editing recurring project...")
+    print("Editing recurring task...\n")
+    print(f"Recurring task:\n{project}\n")
     current_project = resources.project_parser(project, "recurring")
-    print(current_project)
+    print(f"Parsed recurring task:\n{current_project}\n")
     ui.recurringName.setText(current_project["Task name"])
     ui.recurringFrequency.setCurrentText(current_project["Task frequency"])
     ui.recurringNotes.setText(current_project["Task notes"])

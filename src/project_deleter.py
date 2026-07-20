@@ -20,10 +20,6 @@ def delete_project(project, project_type, viewer, main_window, delete_type):
     else:
         print("Unknown error")
 
-    project = project_parser(project, project_type)
-    print(f"Parsed project:\n{project}\n")
-    print(f"Project file fetched:\n{projects_file}")
-
     projects = loader(projects_file)
     print(f"Current projects:\n{projects}\n")
     try:
