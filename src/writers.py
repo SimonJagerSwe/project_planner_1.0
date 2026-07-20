@@ -66,14 +66,14 @@ def project_data(ui, project_type):
 
 # Project writer
 def writer(project, project_type, current_dialog, main_window, write_type):
-    print(f"Writing file using:\n{project}")
-    print(f"Project type to write:\n{project_type}")
-    print(f"Write type:\n{write_type}")
+    print(f"Writing file using:\n{project}\n")
+    print(f"Project type to write:\n{project_type}\n")
+    print(f"Write type:\n{write_type}\n")
     if write_type != "archive":
         project = project_data(project, project_type)
-    else:
-        project = resources.project_parser(project, project_type)
-    print(f"Project to write:\n{project}")
+    # else:
+        # project = resources.project_parser(project, project_type)
+    print(f"Project to write:\n{project}\n")
 
     # Determine if project should be written to project files or archive files
     if write_type == "new" or write_type == "edit":

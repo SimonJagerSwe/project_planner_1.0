@@ -44,14 +44,14 @@ def edit_parser(project, viewer_dialog, main_window):
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
         connect_buttons(ui, dialog, main_window, project_type, viewer_dialog, current_project)
-        edit_programming(ui, project, main_window)
+        edit_programming(ui, project, current_project, main_window)
         dialog.exec()
     elif project_type == "recurring":
         ui = Ui_recurringProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
         connect_buttons(ui, dialog, main_window, project_type, viewer_dialog, current_project)
-        edit_recurring(ui, project, main_window)
+        edit_recurring(ui, project, current_project, main_window)
         dialog.exec()
     else:
         ui = Ui_everydayProjectEditor()
@@ -87,7 +87,6 @@ def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, curren
 def edit_everyday(ui, project, current_project, main_window):
     print("Editing everyday...\n")
     print(f"Everyday project:\n{project}\n")
-    # current_project = resources.project_parser(project, "everyday")
     ui.everydayName.setText(current_project["Project name"])
     ui.everydayStart.setDate(QDate.fromString(current_project["Project start"], "yyyy-MM-dd"))
     ui.everydayFinish.setDate(QDate.fromString(current_project["Project end"], "yyyy-MM-dd"))
@@ -103,10 +102,9 @@ def edit_everyday(ui, project, current_project, main_window):
 
 
 # Edit programming project
-def edit_programming(ui, project, main_window):
+def edit_programming(ui, project, current_project, main_window):
     print("Editing programming...\n")
     print(f"Programming project:\n{project}\n")
-    current_project = resources.project_parser(project, "programming")
     print(f"Parsed programming project:\n{current_project}\n")
     ui.programmingName.setText(current_project["Project name"])
     ui.programmingStart.setDate(QDate.fromString(current_project["Project start"], "yyyy-MM-dd"))
@@ -124,7 +122,7 @@ def edit_programming(ui, project, main_window):
 
 
 # Edit recurring project
-def edit_recurring(ui, project, main_window):
+def edit_recurring(ui, project, current_project, main_window):
     print("Editing recurring task...\n")
     print(f"Recurring task:\n{project}\n")
     current_project = resources.project_parser(project, "recurring")

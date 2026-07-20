@@ -11,7 +11,7 @@ def archive_project(project, project_type, viewer, main_window):
     print(f"Project:\n{project}\n")
     print(f"Project type:\n{project_type}\n")
     print(f"Unpacked project:\n{unpacked_project}\n")
-    print(f"Sending project to archive writer: {project}\n")
+    print(f"Sending project to archive writer:\n{project}\n")
     complete = resources.complete_archive()
     if complete == "yes":
         print("Marking project as completed and archiving...")
