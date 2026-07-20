@@ -17,13 +17,13 @@ def print_projects(ui, top_tab, sub_tab):
     # Open project file based on tab indices
     project_file = resources.tab_handler[top_tab][sub_tab]
     projects = load_file(project_file)
-    everyday_projects = load_file(resources.EVERYDAY_FILE)
-    programming_projects = load_file(resources.PROGRAMMING_FILE)
+    
 
     # Print active projects
     if top_tab == 0:
     # Print all projects
         if sub_tab == 2:
+            everyday_projects = load_file(resources.EVERYDAY_FILE)
             for project in everyday_projects:
                 name = project["Project name"]
                 start = project["Project start"]
@@ -33,6 +33,7 @@ def print_projects(ui, top_tab, sub_tab):
                 status = project["Project status"]
                 everyday_project = f"Project name:\t{name}\nStart date:\t\t{start}\nEnd date:\t\t{end}\nProject notes:\t{notes}\nProject progress:\t{progress}\nProject status:\t{status}\n"
                 ui.allProjects.addItem(everyday_project)
+            programming_projects = load_file(resources.PROGRAMMING_FILE)
             for project in programming_projects:
                 name = project["Project name"]
                 start = project["Project start"]
