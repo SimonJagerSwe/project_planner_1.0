@@ -5,7 +5,7 @@ import resources
 
 
 # Project file creator
-def project_data(ui, project_type):     # , current_dialog, main_window, write_type
+def project_data(ui, project_type):
     print("Writing project data...")
     print(f"Ui fetched: {ui}")
     print(project_type)
