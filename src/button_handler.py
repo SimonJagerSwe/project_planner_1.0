@@ -214,6 +214,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.deleteProject.clicked.connect(delete_clicked)
     ui.returnToMainProjects.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitProjects.clicked.connect(lambda: resources.exit_clicked(viewer))
+    # ui.weeklyDone.clicked.connect()
     ui.restoreArchived.clicked.connect(restore_project_clicked)
     ui.returnToMainArchive.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitArchive.clicked.connect(lambda: resources.exit_clicked(viewer))

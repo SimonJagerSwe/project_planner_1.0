@@ -51,11 +51,16 @@ def project_data(ui, project_type):
         name = ui.recurringName.text()
         frequency = ui.recurringFrequency.currentText()
         notes = ui.recurringNotes.text()
+        status = False
         project = {
             "Task name" : name,
             "Task frequency" : frequency,
-            "Task notes" : notes
+            "Task notes" : notes,
+            "Task status" : status
         }
+        # Status is never printed, but used to determine background colour
+        # Green when done, white when not
+        # project["Task status"] = False
     return project
 
 
