@@ -74,7 +74,6 @@
 
 
 TODO
-    - Archive projects
     - Add and connect top menu bar
     - Increase window size
     - Add project stats
@@ -91,6 +90,5 @@ TODO
     - Sort projects in view?
         - By added, name, start date, finish date, programming language
     - Remove archiving from recurring tasks
-    - Use both types of project files/archive files to create list of full, rather than a separate file
     - Add version number to each window
     - Remove extraneous calls to project_parser

@@ -111,24 +111,10 @@ def writer(project, project_type, current_dialog, main_window, write_type):
             json.dump(project_list, file)
     except:
         print(f"Writing {project_list} to {target_file} failed")
-
-    # Write to full project files/archive files if not recurring    
-    '''if "Task frequency" not in project:
-        if write_type == "new" or write_type == "edit":
-            full_file = resources.ALL_PROJECTS_FILE
-        else:
-            full_file = resources.FULL_ARCHIVE        
-        try:
-            with open(full_file, "w") as file:
-                print(f"Writing {updated_list} to {target_file}...")
-                json.dump(updated_list, file)
-        except:
-            print(f"Writing {updated_list} to {target_file} failed")'''
     
     # Return to main menu
     if current_dialog and main_window:
         resources.return_to_main_clicked(current_dialog, main_window)
-
 
     # Trigger success message
     if write_type == "new":
@@ -137,47 +123,3 @@ def writer(project, project_type, current_dialog, main_window, write_type):
         resources.success_message_viewer()
     else:
         resources.success_message_archive()
-
-
-'''
-    # Read current project type projects
-    try:
-        with open(projects_file, "r") as file:
-            current_type_projects = json.load(file)
-            print(f"Current projects of {project_type} type:\n{current_type_projects}\n\n")
-            print(current_type_projects)
-            current_type_projects.append(project)
-    except:
-        print("Project type file empty")
-        current_type_projects = []
-        current_type_projects.append(project)
-    
-    print(f"Updated projects of {project_type} type:\n{current_type_projects}\n\n")
-    
-    # Read full projects file
-    try:
-        with open(resources.ALL_PROJECTS_FILE, "r") as file:
-            all_projects = json.load(file)
-            print(f"All current projects:\n{all_projects}\n\n")
-            all_projects.append(project)
-    except:
-        print("All projects file empty")
-        all_projects = []
-        all_projects.append(project)
-    
-    # Write to project type file
-    try:
-        with open(projects_file, "w") as file:
-            json.dump(current_type_projects, file)
-    except:
-        print(f"Unexpected error while writing to {project_type} project file occurred")
-    # Write to full project file
-    if "Task frequency" not in project:
-        try:
-            with open(resources.ALL_PROJECTS_FILE, "w") as file:
-                json.dump(all_projects, file)
-        except:
-            print("Unexpected error while writing to full project file occurred")
-
-    
-'''

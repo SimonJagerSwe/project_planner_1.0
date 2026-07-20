@@ -12,10 +12,10 @@ from PySide6.QtWidgets import QMessageBox
 EVERYDAY_FILE = "project_files/everyday_projects.json"
 PROGRAMMING_FILE = "project_files/programming_projects.json"
 RECURRING_FILE = "project_files/recurring_tasks.json"
-ALL_PROJECTS_FILE = "project_files/all_projects.json"
+ALL_PROJECTS_FILE = [EVERYDAY_FILE, PROGRAMMING_FILE]
 EVERYDAY_ARCHIVE = "project_files/everyday_archive.json"
 PROGRAMMING_ARCHIVE = "project_files/programming_archive.json"
-FULL_ARCHIVE = "project_files/full_archive.json"
+FULL_ARCHIVE = [EVERYDAY_ARCHIVE, PROGRAMMING_ARCHIVE]
 SUCCESS_WINDOW_TITLE = "Project saved"
 SUCCESS_TEXT_MAIN = "Project saved successfully!\nClick OK to return to main menu."
 SUCCESS_TEXT_VIEWER = "Project updated successfully!\nClick OK to return to project viewer."
@@ -166,7 +166,6 @@ def archive_check(parent=None):
     else:
         return "cancel"
 
-# TODO
 # Archive finish yes/no checker
 def complete_archive(parent=None):
     complete = QMessageBox()
@@ -207,7 +206,7 @@ def parse_type(project):
     return project_type
 
 
-# Get the correct projects file to delete old version of project
+# Parse project object and return project name
 def project_parser(project, project_type):
     # Find project name
     print(f"Project received by parser: {project}\nProject type: {type(project)}\n")

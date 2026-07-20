@@ -81,6 +81,7 @@ def print_projects(ui, top_tab, sub_tab):
                     ui.everydayProjects.addItem(full_project)
     # Print archives                
     else:
+        # Print full archive
         if sub_tab == 2:
             everyday_projects = load_file(resources.EVERYDAY_ARCHIVE)
             for project in everyday_projects:
@@ -104,6 +105,7 @@ def print_projects(ui, top_tab, sub_tab):
                 status = project["Project status"]
                 programming_project = f"Project name:\t{name}\nStart date:\t\t{start}\nEnd date:\t\t{end}\nLanguage(s):\t\t{language}\nGitHub link:\t\t{link}\nProject notes:\t{notes}\nProject progress:\t{progress}\nProject status:\t{status}\n"
                 ui.fullArchive.addItem(programming_project)
+        # Print individual archive types
         else:
             for project in projects:
                 if "Project name" not in project:

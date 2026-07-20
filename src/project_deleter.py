@@ -5,7 +5,7 @@ import json
 import button_handler
 
 from loader import load_file as loader
-from resources import ALL_PROJECTS_FILE, EVERYDAY_FILE, PROGRAMMING_FILE, RECURRING_FILE, project_parser
+from resources import EVERYDAY_FILE, PROGRAMMING_FILE, RECURRING_FILE, project_parser
 
 
 # Delete project from project type file, both for deletion and for editing
