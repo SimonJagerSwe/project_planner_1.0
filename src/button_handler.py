@@ -159,7 +159,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         else:
             project_type = resources.parse_type(resources.selected_project)
             print(project_type)
-            project_archive_handler.archive_project(resources.selected_project, project_type, viewer, main_window)
+            # project_archive_handler.archive_project(resources.selected_project, project_type, viewer, main_window)
             archive = resources.archive_check(viewer)
             print(archive)
             if archive == "archive":

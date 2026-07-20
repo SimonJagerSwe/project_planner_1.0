@@ -25,8 +25,8 @@ SAFETY_WINDOW = "Confirm project deletion"
 SAFETY_TEXT = "Are you sure you want to delete this project?"
 ARCHIVE_WINDOW = "Confirm project archiving"
 ARCHIVE_TEXT = "Are you sure you want to archive this project?"
-ARCHIVE_DONE_WINDOW = "Finish project"
-ARCHIVE_DONE_TEXT = "Do you want to finish this project (set status to Completed and set progress to 100%)?"
+ARCHIVE_DONE_WINDOW = "Mark project as complete"
+ARCHIVE_DONE_TEXT = "Do you want to mark this project as complete (set status to Completed and set progress to 100%)?"
 
 
 # Utility variables
@@ -169,7 +169,20 @@ def archive_check(parent=None):
 # TODO
 # Archive finish yes/no checker
 def complete_archive(parent=None):
-    ...
+    complete = QMessageBox()
+    complete.setWindowTitle(ARCHIVE_DONE_WINDOW)
+    complete.setText(ARCHIVE_DONE_TEXT)
+    answer = QMessageBox.question(
+        parent,
+        ARCHIVE_DONE_WINDOW,
+        ARCHIVE_DONE_TEXT,
+        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        QMessageBox.StandardButton.No
+    )
+    if answer == QMessageBox.StandardButton.Yes:
+        return "yes"
+    else:
+        return "no"
 
 # TODO
 # No project for editing, deleting or archiving selected
