@@ -80,7 +80,6 @@ TODO
     - Add new project from viewer
     - Make recurring tasks expandable/collapsable
     - For colouring tasks:
-        - Add status parameter
         - If done == True:
             - Change colour
         - Reset by changing all done statuses in category to False
