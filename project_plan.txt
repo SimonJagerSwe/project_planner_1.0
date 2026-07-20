@@ -91,4 +91,3 @@ TODO
         - By added, name, start date, finish date, programming language
     - Remove archiving from recurring tasks
     - Add version number to each window
-    - Remove extraneous calls to project_parser
