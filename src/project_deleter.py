@@ -10,6 +10,7 @@ from resources import EVERYDAY_FILE, PROGRAMMING_FILE, RECURRING_FILE, project_p
 
 # Delete project from project type file, both for deletion and for editing
 def delete_project(project, project_type, viewer, main_window, delete_type):
+    current_project = project_parser(project, project_type)
     print(f"Project received by delete function:\n{project}\nProject type:\n{project_type}\nDelete type:\n{delete_type}\n")
     if project_type == "everyday":
         projects_file = EVERYDAY_FILE
@@ -23,7 +24,7 @@ def delete_project(project, project_type, viewer, main_window, delete_type):
     projects = loader(projects_file)
     print(f"Current projects:\n{projects}\n")
     try:
-        projects.remove(project)
+        projects.remove(current_project)
         print(f"Selected projects type after removal:\n{projects}")
         with open (projects_file, "w") as file:
             json.dump(projects, file)
