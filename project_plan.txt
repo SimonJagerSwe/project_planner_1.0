@@ -92,4 +92,5 @@ TODO
     - Add version number to each window
     - Rename "edit project" to "edit task" in recurring tasks viewer
     - See if deleter needs to call the project parser in order to clean up code
+    - Archive doesn't clear full view after switching away from full archive view, causing repeated printing of extant projects
     
