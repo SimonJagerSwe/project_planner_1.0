@@ -91,3 +91,5 @@ TODO
     - Remove archiving from recurring tasks
     - Add version number to each window
     - Rename "edit project" to "edit task" in recurring tasks viewer
+    - See if deleter needs to call the project parser in order to clean up code
+    
