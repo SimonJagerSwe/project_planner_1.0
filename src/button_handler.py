@@ -174,6 +174,16 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
             if delete == "delete":
                 project_deleter.delete_project(resources.selected_project, project_type, viewer, main_window, "delete")
 
+    # Use set item to set recurring task status to done
+    def recurring_done(task):
+        print(f"Setting task status to done for:\n{task.text()}\n")
+        current_project = resources.project_parser(task, "recurring")
+        print(f"Task after parsing:\n{current_project}\n")
+
+    # Reset recurring task status
+    def recurring_reset():
+        print("Setting task status to not done")
+
     # Logic for project selection
     recurring_list = [ui.recurringBi, ui.recurringOther, ui.recurringWeekly]
     for list_item in [
@@ -214,7 +224,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.deleteProject.clicked.connect(delete_clicked)
     ui.returnToMainProjects.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitProjects.clicked.connect(lambda: resources.exit_clicked(viewer))
-    ui.weeklyDone.clicked.connect(weekly_done)
+    ui.weeklyDone.clicked.connect(lambda: recurring_done(resources.selected_project))
     ui.weeklyResetTask.clicked.connect(weekly_reset)
     ui.weeklyResetAll.clicked.connect(weekly_reset_all)
     ui.biDone.clicked.connect(bi_done)
