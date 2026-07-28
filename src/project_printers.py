@@ -4,10 +4,31 @@ import resources
 
 from loader import load_file
 
+
+# Clear tab in order to populate it with the correct projects
+def clear_target_tab(ui, top_tab, sub_tab):
+    if top_tab == 0:
+        if sub_tab == 2:
+            ui.allProjects.clear()
+        elif sub_tab == 3:
+            ui.recurringWeekly.clear()
+            ui.recurringBi.clear()
+            ui.recurringOther.clear()
+        else:
+            ui.everydayProjects.clear()
+            ui.programmingProjects.clear()
+    else:
+        if sub_tab == 2:
+            ui.fullArchive.clear()
+        else:
+            ui.everydayArchive.clear()
+            ui.programmingArchive.clear()
+
+
 # Print contents of file obtained from loaded projects file
 def print_projects(ui, top_tab, sub_tab):
     # Clear ui on tab switch, otherwise all projects will be printed multiple times
-    ui.everydayProjects.clear()
+    '''ui.everydayProjects.clear()
     ui.programmingProjects.clear()
     ui.recurringWeekly.clear()
     ui.recurringBi.clear()
@@ -15,7 +36,8 @@ def print_projects(ui, top_tab, sub_tab):
     ui.allProjects.clear()
     ui.everydayArchive.clear()
     ui.programmingArchive.clear()
-    ui.fullArchive.clear()
+    ui.fullArchive.clear()'''
+    clear_target_tab(ui, top_tab, sub_tab)
 
     # Open project file based on tab indices
     project_file = resources.tab_handler[top_tab][sub_tab]
