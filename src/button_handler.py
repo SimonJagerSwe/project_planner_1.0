@@ -149,7 +149,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         else:
             project_editors.edit_parser(resources.selected_project, viewer, main_window)
 
-    # use set item to call the archive function
+    # Use set item to call the archive function
     def archive_clicked():
         if resources.selected_project is None:
             resources.no_project_selected()

@@ -18,7 +18,7 @@ def archive_project(project, project_type, viewer, main_window):
         unpacked_project["Project status"] = "Completed"
         print(f"Completed project:\n{unpacked_project}\n")
     else:
-        print("Archive project as is...")
+        print("Archiving project as is...")
     writers.writer(unpacked_project, project_type, viewer, main_window, "archive")
     print("Archiving step 1 - Write to archive file: Done")
     project_deleter.delete_project(project, project_type, viewer, main_window, "archive")
