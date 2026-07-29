@@ -222,8 +222,11 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
             project_list.append(project)
         print(project_list)
         # Write to recurring tasks file, temporary fix circumventing the writer function TODO
-        with open(resources.RECURRING_FILE, "w") as file:
-            json.dump(project_list, file)
+        # with open(resources.RECURRING_FILE, "w") as file:
+        #     json.dump(project_list, file)
+        writer(project_list, "recurring", viewer, main_window, "reset")
+        print(f"{category} tasks reset")
+        
 
     # Logic for project selection
     recurring_list = [ui.recurringBi, ui.recurringOther, ui.recurringWeekly]
