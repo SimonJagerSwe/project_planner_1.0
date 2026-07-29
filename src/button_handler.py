@@ -1,5 +1,7 @@
 ########## Button handler ##########
 # Imports
+import json
+
 import project_archive_handler, resources
 
 from interface.ui_everyday import Ui_everydayProjectEditor
@@ -203,9 +205,10 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         print("Project status set to done and saved!\n")
 
     # Reset full category of recurring tasks
-    def recurring_reset_frequency_group(category):
+    def recurring_reset_group(category):
         print(f"Setting {category} tasks to not done")
         projects = loader(resources.RECURRING_FILE)
+        project_list = []
         # Reset all weekly tasks
         for project in projects:
             print(project["Task frequency"])
@@ -216,6 +219,11 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
                     project["Task status"] = False
                     print(f"Updated project:\n{project}\n")
                 print(f"Task status: {project["Task status"]}")
+            project_list.append(project)
+        print(project_list)
+        # Write to recurring tasks file, temporary fix circumventing the writer function TODO
+        with open(resources.RECURRING_FILE, "w") as file:
+            json.dump(project_list, file)
 
     # Logic for project selection
     recurring_list = [ui.recurringBi, ui.recurringOther, ui.recurringWeekly]
@@ -259,10 +267,10 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.exitProjects.clicked.connect(lambda: resources.exit_clicked(viewer))
     ui.weeklyDone.clicked.connect(lambda: recurring_done(resources.selected_project))
     ui.weeklyResetTask.clicked.connect(lambda: recurring_reset_single(resources.selected_project))
-    ui.weeklyResetAll.clicked.connect(lambda : recurring_reset_frequency_group("Weekly"))
+    ui.weeklyResetAll.clicked.connect(lambda : recurring_reset_group("Weekly"))
     ui.biDone.clicked.connect(lambda: recurring_done(resources.selected_project))
     ui.biResetTask.clicked.connect(lambda: recurring_reset_single(resources.selected_project))
-    ui.biResetAll.clicked.connect(lambda : recurring_reset_frequency_group("Bi-weekly"))
+    ui.biResetAll.clicked.connect(lambda : recurring_reset_group("Bi-weekly"))
     ui.otherDone.clicked.connect(lambda: recurring_done(resources.selected_project))
     ui.otherReset.clicked.connect(lambda: recurring_reset_single(resources.selected_project))
     ui.restoreArchived.clicked.connect(restore_project_clicked)
