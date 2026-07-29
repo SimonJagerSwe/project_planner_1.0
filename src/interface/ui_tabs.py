@@ -130,10 +130,15 @@ class Ui_Viewer(object):
 
         self.weeklyButtonLayout.addWidget(self.weeklyDone)
 
-        self.weeklyReset = QPushButton(self.layoutWidget1)
-        self.weeklyReset.setObjectName(u"weeklyReset")
+        self.weeklyResetTask = QPushButton(self.layoutWidget1)
+        self.weeklyResetTask.setObjectName(u"weeklyResetTask")
 
-        self.weeklyButtonLayout.addWidget(self.weeklyReset)
+        self.weeklyButtonLayout.addWidget(self.weeklyResetTask)
+
+        self.weeklyResetAll = QPushButton(self.layoutWidget1)
+        self.weeklyResetAll.setObjectName(u"weeklyResetAll")
+
+        self.weeklyButtonLayout.addWidget(self.weeklyResetAll)
 
 
         self.weeklyGrid.addLayout(self.weeklyButtonLayout, 1, 1, 1, 1)
@@ -162,10 +167,15 @@ class Ui_Viewer(object):
 
         self.biButtonLayout.addWidget(self.biDone)
 
-        self.biReset = QPushButton(self.layoutWidget2)
-        self.biReset.setObjectName(u"biReset")
+        self.biResetTask = QPushButton(self.layoutWidget2)
+        self.biResetTask.setObjectName(u"biResetTask")
 
-        self.biButtonLayout.addWidget(self.biReset)
+        self.biButtonLayout.addWidget(self.biResetTask)
+
+        self.biResetAll = QPushButton(self.layoutWidget2)
+        self.biResetAll.setObjectName(u"biResetAll")
+
+        self.biButtonLayout.addWidget(self.biResetAll)
 
 
         self.biGrid.addLayout(self.biButtonLayout, 1, 1, 1, 1)
@@ -283,7 +293,7 @@ class Ui_Viewer(object):
         self.retranslateUi(Viewer)
 
         self.viewer.setCurrentIndex(0)
-        self.projectTabs.setCurrentIndex(0)
+        self.projectTabs.setCurrentIndex(3)
         self.archivedTabs.setCurrentIndex(0)
 
 
@@ -302,14 +312,16 @@ class Ui_Viewer(object):
         self.projectTabs.setTabText(self.projectTabs.indexOf(self.allProjectsTab), QCoreApplication.translate("Viewer", u"All projects", None))
         self.weeklyLabel.setText(QCoreApplication.translate("Viewer", u"Weekly tasks", None))
         self.weeklyDone.setText(QCoreApplication.translate("Viewer", u"Task done", None))
-        self.weeklyReset.setText(QCoreApplication.translate("Viewer", u"Reset weekly", None))
+        self.weeklyResetTask.setText(QCoreApplication.translate("Viewer", u"Reset task", None))
+        self.weeklyResetAll.setText(QCoreApplication.translate("Viewer", u"Reset all", None))
         self.biLabel.setText(QCoreApplication.translate("Viewer", u"Bi-weekly tasks", None))
         self.biDone.setText(QCoreApplication.translate("Viewer", u"Task done", None))
-        self.biReset.setText(QCoreApplication.translate("Viewer", u"Reset Bi-weekly", None))
+        self.biResetTask.setText(QCoreApplication.translate("Viewer", u"Reset task", None))
+        self.biResetAll.setText(QCoreApplication.translate("Viewer", u"Reset all", None))
         self.otherLabel.setText(QCoreApplication.translate("Viewer", u"Other tasks", None))
         self.otherDone.setText(QCoreApplication.translate("Viewer", u"Task done", None))
-        self.otherReset.setText(QCoreApplication.translate("Viewer", u"Reset other", None))
-        self.projectTabs.setTabText(self.projectTabs.indexOf(self.recurringProjectsTab), QCoreApplication.translate("Viewer", u"Recurring projects", None))
+        self.otherReset.setText(QCoreApplication.translate("Viewer", u"Reset task", None))
+        self.projectTabs.setTabText(self.projectTabs.indexOf(self.recurringProjectsTab), QCoreApplication.translate("Viewer", u"Recurring tasks", None))
         self.viewer.setTabText(self.viewer.indexOf(self.currentProjects), QCoreApplication.translate("Viewer", u"Current projects", None))
         self.archivedTabs.setTabText(self.archivedTabs.indexOf(self.everydayArchiveTab), QCoreApplication.translate("Viewer", u"Everyday projects", None))
         self.archivedTabs.setTabText(self.archivedTabs.indexOf(self.programmingArchiveTab), QCoreApplication.translate("Viewer", u"Programming projects", None))

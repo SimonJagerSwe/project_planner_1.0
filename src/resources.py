@@ -21,6 +21,12 @@ SUCCESS_TEXT_MAIN = "Project saved successfully!\nClick OK to return to main men
 SUCCESS_TEXT_VIEWER = "Project updated successfully!\nClick OK to return to project viewer."
 SUCCESS_ARCHIVE_WINDOW = "Project archived"
 SUCCESS_ARCHIVE_TEXT = "Project archived successfully\nClick OK to return to return to project viewer"
+SUCCESS_TASK_DONE_WINDOW = "Task done"
+SUCCESS_TASK_DONE_TEXT = "Task successfully marked as done!\nClick OK to return to return to project viewer"
+SUCCESS_TASK_RESET_WINDOW = "Task reset"
+SUCCESS_TASK_RESET_TEXT = "Task successfully reset!\nClick OK to return to return to project viewer"
+SUCCESS_TASKS_RESET_WINDOW = "Tasks reset"
+SUCCES_TASKS_RESET_TEXT = "Tasks successfully reset!\nClick OK to return to return to project viewer"
 SAFETY_WINDOW = "Confirm project deletion"
 SAFETY_TEXT = "Are you sure you want to delete this project?"
 ARCHIVE_WINDOW = "Confirm project archiving"
@@ -130,6 +136,29 @@ def success_message_archive():
     success_message.setStandardButtons(QMessageBox.Ok)
     success_message.exec()
 
+# Successful task marked as done
+def task_done():
+    success_message = QMessageBox()
+    success_message.setWindowTitle(SUCCESS_TASK_DONE_WINDOW)
+    success_message.setText(SUCCESS_TASK_DONE_TEXT)
+    success_message.setStandardButtons(QMessageBox.Ok)
+    success_message.exec()
+
+# Successful task reset
+def task_reset():
+    success_message = QMessageBox()
+    success_message.setWindowTitle(SUCCESS_TASK_RESET_WINDOW)
+    success_message.setText(SUCCESS_TASK_RESET_TEXT)
+    success_message.setStandardButtons(QMessageBox.Ok)
+    success_message.exec()
+
+# Successful reset of all tasks in category
+def tasks_reset():
+    success_message = QMessageBox()
+    success_message.setWindowTitle(SUCCESS_TASKS_RESET_WINDOW)
+    success_message.setText(SUCCES_TASKS_RESET_TEXT)
+    success_message.setStandardButtons(QMessageBox.Ok)
+    success_message.exec()
 
 # Delete yes/no message box
 def safety_check(parent=None):

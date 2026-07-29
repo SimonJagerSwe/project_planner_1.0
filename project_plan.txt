@@ -79,14 +79,14 @@ TODO
     - Add project stats
     - Add new project from viewer
     - Make recurring tasks expandable/collapsable
-    - For colouring tasks:
-        - If done == True:
-            - Change colour
-        - Reset by changing all done statuses in category to False
-        - Refresh viewer
     - Save tab state for recalling tab position after edit/adding/deleting/archiving (save as two indices to be called with main_window)
     - Possibly make size dynamically adjustable?
     - Sort projects in view?
         - By added, name, start date, finish date, programming language
     - Remove archiving from recurring tasks
     - Add version number to each window
+    - Rename "edit project" to "edit task" in recurring tasks viewer
+    - Append edited project/task to the original place in their respective dicts for writing to project/task files
+    - Unify code with importing as x instead of x.function
+    - Setup test suite
+    
