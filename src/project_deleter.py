@@ -31,11 +31,11 @@ def delete_project(project, project_type, viewer, main_window, delete_type):
     print(f"Current projects:\n{projects}\n")
     try:
         projects.remove(current_project)
-        print(f"Selected projects type after removal:\n{projects}")
+        print(f"Selected projects type after removal:\n{projects}\n")
         with open (projects_file, "w") as file:
             json.dump(projects, file)
     except:
-        print("Project not present in selected projects type")
+        print("Project not present in selected projects type\n")
 
     if viewer is not None:
         viewer.close()

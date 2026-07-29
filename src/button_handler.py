@@ -200,7 +200,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         deleter(project, "recurring", viewer, main_window, "edit")
         print("Project deleted from recurring file\n")
         project["Task status"] = False
-        print(f"Task after altering status:\n{project}\n")        
+        print(f"Task after altering status:\n{project}\n")
         writer(project, "recurring", viewer, main_window, "reset")
         print("Project status set to done and saved!\n")
 

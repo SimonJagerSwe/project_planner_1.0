@@ -75,28 +75,33 @@ def writer(project, project_type, current_dialog, main_window, write_type):
     print(f"Project type to write:\n{project_type}\n")
     print(f"Write type:\n{write_type}\n")
     # This is for resetting recurring task statuses
-    if write_type == "reset" or write_type == "reset all":
+    if write_type == "reset all":
+        print("Resetting all recurring tasks of current type\n")
         target_file = resources.RECURRING_FILE
         project_list = []
         for task in project:
             project_list.append(task)
+
     else:
-        if write_type == "new" or write_type == "edit":
+        if write_type == "new" or write_type == "edit" or write_type == "reset":
             project = project_data(project, project_type)
         print(f"Project to write:\n{project}\n")
 
         # Determine if project should be written to project files or archive files
-        if write_type == "new" or write_type == "edit" or write_type == "reset" or write_type == "reset all":
-            print("Writing project to current project files")
+        if write_type == "new" or write_type == "edit" or write_type == "reset":
+            print("Writing project to current project files\n")
             # Determine what project file to write to
             if project_type == "everyday":
+                print("Target file is everyday file\n")
                 target_file = resources.EVERYDAY_FILE
             elif project_type == "programming":
+                print("Target file is programming file\n")
                 target_file = resources.PROGRAMMING_FILE
             elif project_type == "recurring":
+                print("Target file is recurring file\n")
                 target_file = resources.RECURRING_FILE
             else:
-                print("Unknown error occurred")
+                print("Unknown error occurred\n")
         # Determine which archive file to write to
         else:
             if project_type == "everyday":
@@ -104,7 +109,7 @@ def writer(project, project_type, current_dialog, main_window, write_type):
             elif project_type == "programming":
                 target_file = resources.PROGRAMMING_ARCHIVE
             else:
-                print("Unknown error occurred")
+                print("Unknown error occurred\n")
 
         # Read target file
         try:
@@ -114,7 +119,7 @@ def writer(project, project_type, current_dialog, main_window, write_type):
                 project_list.append(project)
                 print(f"Updated projects list:\n{project_list}\n")
         except:
-            print("Project file empty or not found")
+            print("Project file empty or not found\n")
             project_list = []
             project_list.append(project)
             print(f"Updated projects list:\n{project_list}\n")
@@ -122,10 +127,10 @@ def writer(project, project_type, current_dialog, main_window, write_type):
     # Write to target file/archive
     try:
         with open(target_file, "w") as file:
-            print(f"Writing {project_list} to {target_file}...")
+            print(f"Writing project:\n{project_list}\nTo target file:\n{target_file}...\n")
             json.dump(project_list, file)
     except:
-        print(f"Writing {project_list} to {target_file} failed")
+        print(f"Writing {project_list} to {target_file} failed\n")
     
     # Return to main menu
     if current_dialog and main_window:
