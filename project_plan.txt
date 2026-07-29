@@ -92,5 +92,3 @@ TODO
     - Add version number to each window
     - Rename "edit project" to "edit task" in recurring tasks viewer
     - Append edited project/task to the original place in their respective dicts for writing to project/task files
-    - Figure out how to use the writer function from the reset_recurring_group
-    

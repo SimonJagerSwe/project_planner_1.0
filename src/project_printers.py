@@ -28,15 +28,6 @@ def clear_target_tab(ui, top_tab, sub_tab):
 # Print contents of file obtained from loaded projects file
 def print_projects(ui, top_tab, sub_tab):
     # Clear ui on tab switch, otherwise all projects will be printed multiple times
-    '''ui.everydayProjects.clear()
-    ui.programmingProjects.clear()
-    ui.recurringWeekly.clear()
-    ui.recurringBi.clear()
-    ui.recurringOther.clear()
-    ui.allProjects.clear()
-    ui.everydayArchive.clear()
-    ui.programmingArchive.clear()
-    ui.fullArchive.clear()'''
     clear_target_tab(ui, top_tab, sub_tab)
 
     # Open project file based on tab indices
