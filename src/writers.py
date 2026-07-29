@@ -26,6 +26,7 @@ def project_data(ui, project_type):
             "Project progress" : percent,
             "Project status" : status
         }
+        print(f"Everyday project for printing:\n{project}\n")
     # Create programming project
     elif project_type == "programming":
         name = ui.programmingName.text()
@@ -46,18 +47,25 @@ def project_data(ui, project_type):
             "Project progress" : percent,
             "Project status" : status
         }
+        print(f"Programming project for printing:\n{project}\n")
     # Create recurring task
     else:
-        name = ui.recurringName.text()
-        frequency = ui.recurringFrequency.currentText()
-        notes = ui.recurringNotes.text()
-        status = False  # Never printed, only to use for status check
-        project = {
-            "Task name" : name,
-            "Task frequency" : frequency,
-            "Task notes" : notes,
-            "Task status" : status
-        }
+        # This receives a new or edited recurring task
+        if type(ui) != dict:
+            name = ui.recurringName.text()
+            frequency = ui.recurringFrequency.currentText()
+            notes = ui.recurringNotes.text()
+            status = False  # Never printed, only to use for status check
+            project = {
+                "Task name" : name,
+                "Task frequency" : frequency,
+                "Task notes" : notes,
+                "Task status" : status
+            }
+        # This is only in effect when marking a recurring task as done or resetting
+        else:
+            project = ui
+        print(f"Recurring task for printing:\n{project}\n")
     return project
 
 

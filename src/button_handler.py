@@ -190,8 +190,12 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
 
 
     # Reset recurring task status
-    def recurring_reset():
-        print("Setting task status to not done")
+    def recurring_reset_single():
+        print("Setting single task status to not done")
+
+
+    def recurring_reset_frequency_group():
+        print("Setting full category to not done")
 
     # Logic for project selection
     recurring_list = [ui.recurringBi, ui.recurringOther, ui.recurringWeekly]
