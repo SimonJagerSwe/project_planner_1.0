@@ -4,6 +4,9 @@ import resources
 
 from loader import load_file
 
+from PySide6.QtWidgets import QListWidgetItem
+from PySide6.QtGui import QColor
+
 
 # Clear tab in order to populate it with the correct projects
 def clear_target_tab(ui, top_tab, sub_tab):
@@ -60,19 +63,23 @@ def print_projects(ui, top_tab, sub_tab):
                 status = project["Project status"]
                 programming_project = f"Project name:\t{name}\nStart date:\t\t{start}\nEnd date:\t\t{end}\nLanguage(s):\t\t{language}\nGitHub link:\t\t{link}\nProject notes:\t{notes}\nProject progress:\t{progress}\nProject status:\t{status}\n"
                 ui.allProjects.addItem(programming_project)
-        # Print precurring tasks depending on frequency
+        # Print recurring tasks depending on frequency
         elif sub_tab == 3:
             for project in projects:
+                # print(f"Recurring task:\n{project}\n")
                 name = project["Task name"]
                 frequency = project["Task frequency"]
                 notes = project["Task notes"]
                 full_project = f"Task name:\t\t{name}\nTask notes:\t\t{notes}\n"
+                list_item = QListWidgetItem(full_project)
+                if project["Task status"] == True:
+                    list_item.setBackground(QColor("#87d489"))
                 if frequency == "Weekly":
-                    ui.recurringWeekly.addItem(full_project)
+                    ui.recurringWeekly.addItem(list_item)
                 elif frequency == "Bi-weekly":
-                    ui.recurringBi.addItem(full_project)
+                    ui.recurringBi.addItem(list_item)    
                 else:
-                    ui.recurringOther.addItem(full_project)
+                    ui.recurringOther.addItem(list_item)
         # Print everyday or programming projects, based on whether programming-specific variables exist
         else:
             for project in projects:
