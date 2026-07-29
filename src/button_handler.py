@@ -190,8 +190,16 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
 
 
     # Reset recurring task status
-    def recurring_reset_single():
-        print("Setting single task status to not done")
+    def recurring_reset_single(task):
+        print(f"Setting task status to done for:\n{task.text()}\n")
+        project = resources.project_parser(task, "recurring")
+        print(f"Task after parsing:\n{project}\n")
+        deleter(project, "recurring", viewer, main_window, "edit")
+        print("Project deleted from recurring file\n")
+        project["Task status"] = False
+        print(f"Task after altering status:\n{project}\n")        
+        writer(project, "recurring", viewer, main_window, "edit")
+        print("Project status set to done and saved!\n")
 
 
     def recurring_reset_frequency_group():
@@ -238,13 +246,13 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.returnToMainProjects.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitProjects.clicked.connect(lambda: resources.exit_clicked(viewer))
     ui.weeklyDone.clicked.connect(lambda: recurring_done(resources.selected_project))
-    ui.weeklyResetTask.clicked.connect(weekly_reset)
-    ui.weeklyResetAll.clicked.connect(weekly_reset_all)
-    ui.biDone.clicked.connect(bi_done)
-    ui.biResetTask.clicked.connect(bi_reset)
-    ui.biResetAll.clicked.connect(bi_reset_all)
-    ui.otherDone.clicked.connect(other_done)
-    ui.otherReset.clicked.connect(other_reset)
+    ui.weeklyResetTask.clicked.connect(lambda: recurring_reset_single(resources.selected_project))
+    ui.weeklyResetAll.clicked.connect(lambda : recurring_reset_frequency_group(resources.selected_project))
+    ui.biDone.clicked.connect(lambda: recurring_done(resources.selected_project))
+    ui.biResetTask.clicked.connect(lambda: recurring_reset_single(resources.selected_project))
+    ui.biResetAll.clicked.connect(lambda : recurring_reset_frequency_group(resources.selected_project))
+    ui.otherDone.clicked.connect(lambda: recurring_done(resources.selected_project))
+    ui.otherReset.clicked.connect(lambda: recurring_reset_single(resources.selected_project))
     ui.restoreArchived.clicked.connect(restore_project_clicked)
     ui.returnToMainArchive.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitArchive.clicked.connect(lambda: resources.exit_clicked(viewer))
@@ -255,27 +263,3 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
 # Placeholder functions
 def restore_project_clicked():
     print("Restore project...")
-
-def weekly_done():
-    print("Weekly task marked as done")
-
-def weekly_reset():
-    print("Weekly task reset")
-
-def weekly_reset_all():
-    print("All weekly tasks reset")
-
-def bi_done():
-    print("Bi-weekly task marked as done")
-
-def bi_reset():
-    print("Bi-weekly task reset")
-
-def bi_reset_all():
-    print("Bi-weekly tasks reset")
-
-def other_done():
-    print("Other task done")
-
-def other_reset():
-    print("Other task reset")
