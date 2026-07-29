@@ -1,12 +1,14 @@
 ########## Button handler ##########
 # Imports
-import project_deleter, project_editors, project_archive_handler, resources, writers
+import project_archive_handler, resources
 
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
 from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_recurring import Ui_recurringProjectEditor
 from interface.ui_tabs import Ui_Viewer
+from project_deleter import delete_project as deleter
+from project_editors import edit_parser as editor
 from project_printers import print_projects as printer
 from writers import writer as writer
 
@@ -147,7 +149,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         if resources.selected_project is None:
             resources.no_project_selected()
         else:
-            project_editors.edit_parser(resources.selected_project, viewer, main_window)
+            editor(resources.selected_project, viewer, main_window)
 
     # Use set item to call the archive function
     def archive_clicked():
@@ -172,13 +174,20 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
             delete = resources.safety_check(viewer)
             print(delete)
             if delete == "delete":
-                project_deleter.delete_project(resources.selected_project, project_type, viewer, main_window, "delete")
+                deleter(resources.selected_project, project_type, viewer, main_window, "delete")
 
     # Use set item to set recurring task status to done
     def recurring_done(task):
         print(f"Setting task status to done for:\n{task.text()}\n")
-        current_project = resources.project_parser(task, "recurring")
-        print(f"Task after parsing:\n{current_project}\n")
+        project = resources.project_parser(task, "recurring")
+        print(f"Task after parsing:\n{project}\n")
+        project["Task status"] = True
+        print(f"Task after altering status:\n{project}\n")
+        deleter(project, viewer, main_window, "recurring")
+        print("Project deleted from recurring file\n")
+        writer(project, "recurring", viewer, main_window, "edit")
+        print("Project status set to done and saved!\n")
+
 
     # Reset recurring task status
     def recurring_reset():
