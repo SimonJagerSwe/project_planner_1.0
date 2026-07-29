@@ -220,10 +220,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
                     print(f"Updated project:\n{project}\n")
                 print(f"Task status: {project["Task status"]}")
             project_list.append(project)
-        print(project_list)
-        # Write to recurring tasks file, temporary fix circumventing the writer function TODO
-        # with open(resources.RECURRING_FILE, "w") as file:
-        #     json.dump(project_list, file)
+        print(f"Reset projects list to write to recurring file:\n{project_list}\n")
         writer(project_list, "recurring", viewer, main_window, "reset")
         print(f"{category} tasks reset")
         
