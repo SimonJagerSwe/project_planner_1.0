@@ -1,0 +1,52 @@
+Main menu tests:
+- Click Add project
+  - Dialog for project creation with Add everyday project, Add programming project, Add recurring task, Return to main menu & Exit program button should appear
+- Click View projects
+  - Project viewer should open on Current projects -> Everyday projects
+- Click View archive
+  - Project viewer should open on Archived projects -> Everyday archive
+- Click Exit
+  - Dialog box prompting the user for yes or no should appear
+    - No should return the user to the main menu
+    - Yes should terminate the program
+
+Project adding tests (from the Add project dialog):
+- Click Add everyday project
+  - Everyday project editor should appear with Name, Start, Finish, Notes, Progress bar, Progress percentage & Status for user input, and Save project, Clear all, Return to main & Exit program buttons
+    - Project name should take text
+    - Project start & finish should open the date picker
+    - Notes should take text
+    - Moving the progress slider should update the percentage counter
+    - Drop-down menu for project status should save user input
+    - Clicking Save project should save all input to the everyday_projects.json file, and project should be visible in the project viewer under the Everyday projects & All projects tabs in the Current projects view
+    - Clicking Clear all should remove all user input from the input fields, set progress to 0% and Status to Select project status
+    - Clicking Return to main should return the user to main menu
+    - Clicking Exit program should open exit dialog box, prompting the user for Yes or No
+      - No should return the user to the everyday project editor
+      - Yes should terminate the program
+- Click Add programming project
+  - Programming project editor should appear with Name, Start, Finish, Languages, GitHub link, Notes, Progress bar, Progress percentage & Status for user input, and Save project, Clear all, Return to main & Exit program buttons
+    - Project name should take text
+    - Project start & finish should open the date picker
+    - Languages should take text
+    - GitHub link should take text
+    - Notes should take text
+    - Moving the progress slider should update the percentage counter
+    - Drop-down menu for project status should save user input
+    - Clicking Save project should save all input to the programming_projects.json file, and project should be visible in the project viewer under the Everyday projects & All projects tabs in the Current projects view
+    - Clicking Clear all should remove all user input from the input fields, set progress to 0% and Status to Select project status
+    - Clicking Return to main should return the user to main menu
+    - Clicking Exit program should open exit dialog box, prompting the user for Yes or No
+      - No should return the user to the everyday project editor
+      - Yes should terminate the program
+- Click Add recurring task
+  - Recurring task editor should appear with Name, Frequency & Notes for user input, and Save task, Clear all, Return to main & Exit program buttons
+    - Task name should take text
+    - Drop-down menu for frequency should save user input
+    - Notes should take text
+    - Clicking Save task should save all input to the recurring_tasks.json file, and task should be visible in the project viewer under the recurring tasks tab in the Current projects view
+    - Clicking Clear all should remove all user input from input fields & set Frequency to Select frequency
+    - Clicking Return to main should return user to main menu
+    - Clicking Exit program should open exit dialog box, prompting the user for Yes or No
+      - No should return the user to the everyday project editor
+      - Yes should terminate the program
