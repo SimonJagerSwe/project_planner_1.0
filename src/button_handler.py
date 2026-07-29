@@ -9,6 +9,7 @@ from interface.ui_recurring import Ui_recurringProjectEditor
 from interface.ui_tabs import Ui_Viewer
 from project_deleter import delete_project as deleter
 from project_editors import edit_parser as editor
+from loader import load_file as loader
 from project_printers import print_projects as printer
 from writers import writer as writer
 
@@ -29,7 +30,7 @@ def main_menu_buttons(main_window):
     main_exit = main_window.findChild(QPushButton, "mainExit")
     main_exit.clicked.connect(lambda: resources.exit_clicked(main_window))
     
-    # Drop down menu actions
+    # Drop down menu actions TODO
     everyday_action = main_window.findChild(QAction, "actionAddEveryday")
     everyday_action.triggered.connect(lambda: everyday_project_clicked(None, main_window))
     programming_action = main_window.findChild(QAction, "actionAddProgramming")
@@ -54,6 +55,7 @@ def add_project_clicked(main_window):
     ui.returnToMainAddProject.clicked.connect(lambda: (resources.return_to_main_clicked(add_project, main_window)))
     ui.exitAddProject.clicked.connect(lambda: resources.exit_clicked(add_project))
     add_project.exec()
+
 
 # Add everyday project
 def everyday_project_clicked(current_dialog, main_window):
@@ -188,8 +190,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         writer(project, "recurring", viewer, main_window, "edit")
         print("Project status set to done and saved!\n")
 
-
-    # Reset recurring task status
+    # Reset single recurring task status
     def recurring_reset_single(task):
         print(f"Setting task status to done for:\n{task.text()}\n")
         project = resources.project_parser(task, "recurring")
@@ -201,9 +202,20 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         writer(project, "recurring", viewer, main_window, "edit")
         print("Project status set to done and saved!\n")
 
-
-    def recurring_reset_frequency_group():
-        print("Setting full category to not done")
+    # Reset full category of recurring tasks
+    def recurring_reset_frequency_group(category):
+        print(f"Setting {category} tasks to not done")
+        projects = loader(resources.RECURRING_FILE)
+        # Reset all weekly tasks
+        for project in projects:
+            print(project["Task frequency"])
+            if project["Task frequency"] == category:
+                print(f"{category} task found")
+                if project["Task status"] == True:
+                    print("Done task detected, resetting")
+                    project["Task status"] = False
+                    print(f"Updated project:\n{project}\n")
+                print(f"Task status: {project["Task status"]}")
 
     # Logic for project selection
     recurring_list = [ui.recurringBi, ui.recurringOther, ui.recurringWeekly]
@@ -247,10 +259,10 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.exitProjects.clicked.connect(lambda: resources.exit_clicked(viewer))
     ui.weeklyDone.clicked.connect(lambda: recurring_done(resources.selected_project))
     ui.weeklyResetTask.clicked.connect(lambda: recurring_reset_single(resources.selected_project))
-    ui.weeklyResetAll.clicked.connect(lambda : recurring_reset_frequency_group(resources.selected_project))
+    ui.weeklyResetAll.clicked.connect(lambda : recurring_reset_frequency_group("Weekly"))
     ui.biDone.clicked.connect(lambda: recurring_done(resources.selected_project))
     ui.biResetTask.clicked.connect(lambda: recurring_reset_single(resources.selected_project))
-    ui.biResetAll.clicked.connect(lambda : recurring_reset_frequency_group(resources.selected_project))
+    ui.biResetAll.clicked.connect(lambda : recurring_reset_frequency_group("Bi-weekly"))
     ui.otherDone.clicked.connect(lambda: recurring_done(resources.selected_project))
     ui.otherReset.clicked.connect(lambda: recurring_reset_single(resources.selected_project))
     ui.restoreArchived.clicked.connect(restore_project_clicked)
@@ -258,7 +270,6 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.exitArchive.clicked.connect(lambda: resources.exit_clicked(viewer))
     viewer.exec()
     main_window.show()
-
 
 # Placeholder functions
 def restore_project_clicked():
