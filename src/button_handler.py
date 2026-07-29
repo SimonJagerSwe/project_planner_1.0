@@ -28,7 +28,7 @@ def main_menu_buttons(main_window):
     view_projects = main_window.findChild(QPushButton, "viewProjects")
     view_projects.clicked.connect(lambda: project_viewer_clicked(main_window, 0, 0))
     view_archive = main_window.findChild(QPushButton, "viewArchive")
-    view_archive.clicked.connect(lambda: project_viewer_clicked(main_window, 1))
+    view_archive.clicked.connect(lambda: project_viewer_clicked(main_window, 1, 0))
     main_exit = main_window.findChild(QPushButton, "mainExit")
     main_exit.clicked.connect(lambda: resources.exit_clicked(main_window))
     
@@ -137,7 +137,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     if ui.viewer.currentIndex() == 0:
         ui.projectTabs.setCurrentIndex(sub_idx)
     if ui.viewer.currentIndex() == 1:
-        ui.archive.setCurrentIndex(sub_idx)
+        ui.archivedTabs.setCurrentIndex(sub_idx)
     
     # Print everyday projects to interface without having to select a tab first
     # to avoid user being greeted by an empty project view
