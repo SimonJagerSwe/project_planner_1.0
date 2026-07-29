@@ -10,10 +10,13 @@ from resources import EVERYDAY_FILE, PROGRAMMING_FILE, RECURRING_FILE, project_p
 
 # Delete project from project type file, both for deletion and for editing
 def delete_project(project, project_type, viewer, main_window, delete_type):
-    if project.text():
+    if type(project) != dict:
+        print(f"Project sent to parser from deleter:\n{project}\n")
         current_project = project_parser(project, project_type)
     else:
+        print(f"Already parsed project received by deleter:\n{project}\n")
         current_project = project
+
     print(f"Project received by delete function:\n{project}\nProject type:\n{project_type}\nDelete type:\n{delete_type}\n")
     if project_type == "everyday":
         projects_file = EVERYDAY_FILE

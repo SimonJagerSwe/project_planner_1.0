@@ -181,10 +181,10 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         print(f"Setting task status to done for:\n{task.text()}\n")
         project = resources.project_parser(task, "recurring")
         print(f"Task after parsing:\n{project}\n")
-        project["Task status"] = True
-        print(f"Task after altering status:\n{project}\n")
-        deleter(project, viewer, main_window, "recurring")
+        deleter(project, "recurring", viewer, main_window, "edit")
         print("Project deleted from recurring file\n")
+        project["Task status"] = True
+        print(f"Task after altering status:\n{project}\n")        
         writer(project, "recurring", viewer, main_window, "edit")
         print("Project status set to done and saved!\n")
 
