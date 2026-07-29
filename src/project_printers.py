@@ -66,7 +66,7 @@ def print_projects(ui, top_tab, sub_tab):
         # Print recurring tasks depending on frequency
         elif sub_tab == 3:
             for project in projects:
-                # print(f"Recurring task:\n{project}\n")
+                print(f"Recurring task:\n{project}\n")
                 name = project["Task name"]
                 frequency = project["Task frequency"]
                 notes = project["Task notes"]

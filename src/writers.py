@@ -75,7 +75,7 @@ def writer(project, project_type, current_dialog, main_window, write_type):
     print(f"Project type to write:\n{project_type}\n")
     print(f"Write type:\n{write_type}\n")
     # This is for resetting recurring task statuses
-    if write_type == "reset":
+    if write_type == "reset" or write_type == "reset all":
         target_file = resources.RECURRING_FILE
         project_list = []
         for task in project:
@@ -86,7 +86,7 @@ def writer(project, project_type, current_dialog, main_window, write_type):
         print(f"Project to write:\n{project}\n")
 
         # Determine if project should be written to project files or archive files
-        if write_type == "new" or write_type == "edit" or write_type == "reset":
+        if write_type == "new" or write_type == "edit" or write_type == "reset" or write_type == "reset all":
             print("Writing project to current project files")
             # Determine what project file to write to
             if project_type == "everyday":
@@ -136,5 +136,9 @@ def writer(project, project_type, current_dialog, main_window, write_type):
         resources.success_message_main()
     elif write_type == "edit":
         resources.success_message_viewer()
+    elif write_type == "reset":
+        resources.task_reset()
+    elif write_type == "reset_all":
+        resources.tasks_reset()
     else:
         resources.success_message_archive()
