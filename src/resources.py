@@ -7,6 +7,8 @@ from loader import load_file as loader
 from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QMessageBox
 
+# Version number
+VERSION = "1.01"
 
 # Resource files
 EVERYDAY_FILE = "project_files/everyday_projects.json"
@@ -16,6 +18,8 @@ ALL_PROJECTS_FILE = [EVERYDAY_FILE, PROGRAMMING_FILE]
 EVERYDAY_ARCHIVE = "project_files/everyday_archive.json"
 PROGRAMMING_ARCHIVE = "project_files/programming_archive.json"
 FULL_ARCHIVE = [EVERYDAY_ARCHIVE, PROGRAMMING_ARCHIVE]
+
+# Messages
 SUCCESS_WINDOW_TITLE = "Project saved"
 SUCCESS_TEXT_MAIN = "Project saved successfully!\nClick OK to return to main menu."
 SUCCESS_TEXT_VIEWER = "Project updated successfully!\nClick OK to return to project viewer."

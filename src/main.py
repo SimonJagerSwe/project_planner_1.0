@@ -17,7 +17,10 @@
 # Imports
 import sys
 import button_handler
+
 from loader import load_ui
+from resources import VERSION
+
 from PySide6.QtWidgets import QApplication
 
 
@@ -26,6 +29,7 @@ def main():
     app = QApplication(sys.argv)
     main_window = load_ui("interface/main.ui")
     button_handler.main_menu_buttons(main_window)
+    main_window.setWindowTitle(f"Project planner {VERSION}")
     main_window.show()
     sys.exit(app.exec())
 
