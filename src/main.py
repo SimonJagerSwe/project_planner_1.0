@@ -29,7 +29,7 @@ def main():
     app = QApplication(sys.argv)
     main_window = load_ui("interface/main.ui")
     button_handler.main_menu_buttons(main_window)
-    main_window.setWindowTitle(f"Project planner {VERSION}")
+    main_window.setWindowTitle(f"{VERSION} - Main menu")
     main_window.show()
     sys.exit(app.exec())
 
