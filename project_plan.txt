@@ -75,16 +75,13 @@
 
 TODO
     - Add and connect top menu bar
-    - Increase window size
     - Add project stats
-    - Add new project from viewer
     - Make recurring tasks expandable/collapsable
-    - Save tab state for recalling tab position after edit/adding/deleting/archiving (save as two indices to be called with main_window)
+    - Verify functionality of new indexing functions
     - Possibly make size dynamically adjustable?
     - Sort projects in view?
         - By added, name, start date, finish date, programming language
     - Remove archiving from recurring tasks
-    - Add version number to each window
     - Rename "edit project" to "edit task" in recurring tasks viewer
     - Append edited project/task to the original place in their respective dicts for writing to project/task files
     - Unify code with importing as x instead of x.function
