@@ -29,7 +29,7 @@ def connect_buttons(ui, dialog, main_window, project_type, viewer_dialog=None, c
 
 
 # Function to determine which ui to use for editing
-def edit_parser(project, viewer_dialog, main_window):
+def edit_parser(project, viewer_dialog, main_window, tab_state):
     print(f"Project to edit:\n{project.text()}\n")
 
     # Identify project type
@@ -49,7 +49,7 @@ def edit_parser(project, viewer_dialog, main_window):
         ui = Ui_recurringProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        connect_buttons(ui, dialog, main_window, project_type, viewer_dialog, current_project)
+        connect_buttons(ui, dialog, main_window, project_type, viewer_dialog, current_project, tab_state)
         edit_recurring(ui, project, current_project, main_window)
         dialog.exec()
     else:
@@ -63,7 +63,7 @@ def edit_parser(project, viewer_dialog, main_window):
 
 # Save edited file, refresh project files read
 # And return to project viewer 
-def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, write_type):
+def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, write_type, tab_state):
     print("Deleting current project from project file(s)...\n")
     project_deleter.delete_project(current_project, project_type, viewer_dialog, main_window, "edit")
     print("Project deleted from project files\n")
@@ -71,15 +71,16 @@ def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, curren
     dialog.close()
     if viewer_dialog is not None:
         viewer_dialog.close()
-        if project_type == "everyday":
-            print("Sub idx: 0\n")
-            button_handler.project_viewer_clicked(main_window, 0, 0)
-        elif project_type == "programming":
-            print("Sub-idx: 1\n")
-            button_handler.project_viewer_clicked(main_window, 0, 1)
-        else:
-            print("Sub idx: 3\n")
-            button_handler.project_viewer_clicked(main_window, 0, 3)       
+        ### if project_type == "everyday":
+        ###     print("Sub idx: 0\n")
+        ###     button_handler.project_viewer_clicked(main_window, 0, 0)
+        ### elif project_type == "programming":
+        ###     print("Sub-idx: 1\n")
+        ###     button_handler.project_viewer_clicked(main_window, 0, 1)
+        ### else:
+        ###     print("Sub idx: 3\n")
+        ###     button_handler.project_viewer_clicked(main_window, 0, 3)
+        button_handler.project_viewer_clicked(main_window, tab_state["main_index"],tab_state["sub_index"])
 
 
 # Edit everyday project 
