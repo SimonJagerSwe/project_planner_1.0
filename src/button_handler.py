@@ -214,11 +214,12 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
         print(f"Setting task status to done for:\n{task.text()}\n")
         project = resources.project_parser(task, "recurring")
         print(f"Task after parsing:\n{project}\n")
-        deleter(project, "recurring", viewer, main_window, "edit")
+        deleter(project, "recurring", viewer, main_window, "edit", tab_state)
         print("Project deleted from recurring file\n")
         project["Task status"] = True
         print(f"Task after altering status:\n{project}\n")        
-        writer(project, "recurring", viewer, main_window, "edit")
+        writer(project, "recurring", viewer, main_window, "edit", return_to_main=False)
+        project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])
         print("Project status set to done and saved!\n")
 
     # Reset single recurring task status
@@ -226,11 +227,12 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
         print(f"Setting task status to done for:\n{task.text()}\n")
         project = resources.project_parser(task, "recurring")
         print(f"Task after parsing:\n{project}\n")
-        deleter(project, "recurring", viewer, main_window, "edit")
+        deleter(project, "recurring", viewer, main_window, "edit",tab_state)
         print("Project deleted from recurring file\n")
         project["Task status"] = False
         print(f"Task after altering status:\n{project}\n")
-        writer(project, "recurring", viewer, main_window, "reset")
+        writer(project, "recurring", viewer, main_window, "reset, return_to_main=False")
+        project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])
         print("Project status set to done and saved!\n")
 
     # Reset full category of recurring tasks
@@ -250,7 +252,8 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
                 print(f"Task status: {project["Task status"]}")
             project_list.append(project)
         print(f"Reset projects list to write to recurring file:\n{project_list}\n")
-        writer(project_list, "recurring", viewer, main_window, "reset all")
+        writer(project_list, "recurring", viewer, main_window, "reset all", return_to_main=False)
+        project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])
         print(f"{category} tasks reset")
         
 
@@ -286,13 +289,9 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
             list_item.itemClicked.connect(project_clicked)
 
     # Action connections etc.
-    # ui.viewer.currentChanged.connect(lambda: tab_changed(ui.viewer.currentIndex(), 0))
-    ui.viewer.currentChanged.connect(lambda index: tab_changed())
-    # ui.projectTabs.currentChanged.connect(lambda index: tab_changed(0, index))
-    ui.projectTabs.currentChanged.connect(lambda index: tab_changed())
-    # ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
-    ui.archivedTabs.currentChanged.connect(lambda index: tab_changed())
-    # ui.newProject.clicked.connect(lambda sub_idx: new_clicked(sub_idx))
+    ui.viewer.currentChanged.connect(tab_changed)
+    ui.projectTabs.currentChanged.connect(tab_changed)
+    ui.archivedTabs.currentChanged.connect(tab_changed)
     ui.newProject.clicked.connect(new_clicked)
     ui.editProject.clicked.connect(edit_clicked)
     ui.archiveProject.clicked.connect(lambda: archive_clicked())

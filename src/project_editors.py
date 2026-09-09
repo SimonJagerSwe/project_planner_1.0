@@ -10,19 +10,19 @@ from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QDialog
 
 # Connect editor buttons to reuse the button calls from button_handler.py
-def connect_buttons(ui, dialog, main_window, project_type, viewer_dialog=None, current_project=None):
+def connect_buttons(ui, dialog, main_window, project_type, viewer_dialog=None, current_project=None, tab_state=None):
     if project_type == "everyday":
-        ui.everydaySave.clicked.connect(lambda: save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, "edit"))
+        ui.everydaySave.clicked.connect(lambda: save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, "edit", tab_state))
         ui.everydayClear.clicked.connect(lambda: resources.clear_input(ui))
         ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(dialog))
     elif project_type == "programming":
-        ui.programmingSave.clicked.connect(lambda: save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, "edit"))
+        ui.programmingSave.clicked.connect(lambda: save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, "edit", tab_state))
         ui.programmingClear.clicked.connect(lambda: resources.clear_input(ui))
         ui.programmingReturn.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.programmingExit.clicked.connect(lambda: resources.exit_clicked(dialog))
     else:
-        ui.saveRecurring.clicked.connect(lambda: save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, "edit"))
+        ui.saveRecurring.clicked.connect(lambda: save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, "edit", tab_state))
         ui.clearRecurring.clicked.connect(lambda: resources.clear_input(ui))
         ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(dialog, main_window, viewer_dialog))
         ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(dialog))
@@ -42,7 +42,7 @@ def edit_parser(project, viewer_dialog, main_window, tab_state):
         ui = Ui_programmingProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        connect_buttons(ui, dialog, main_window, project_type, viewer_dialog, current_project)
+        connect_buttons(ui, dialog, main_window, project_type, viewer_dialog, current_project, tab_state)
         edit_programming(ui, project, current_project, main_window)
         dialog.exec()
     elif project_type == "recurring":
@@ -56,7 +56,7 @@ def edit_parser(project, viewer_dialog, main_window, tab_state):
         ui = Ui_everydayProjectEditor()
         dialog = QDialog(viewer_dialog)
         ui.setupUi(dialog)
-        connect_buttons(ui, dialog, main_window, project_type, viewer_dialog, current_project)
+        connect_buttons(ui, dialog, main_window, project_type, viewer_dialog, current_project, tab_state)
         edit_everyday(ui, project, current_project, main_window)
         dialog.exec()
 
@@ -67,19 +67,10 @@ def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, curren
     print("Deleting current project from project file(s)...\n")
     project_deleter.delete_project(current_project, project_type, viewer_dialog, main_window, "edit")
     print("Project deleted from project files\n")
-    writers.writer(ui, project_type, dialog, main_window, write_type)
+    writers.writer(ui, project_type, dialog, main_window, write_type, return_to_main=False)
     dialog.close()
     if viewer_dialog is not None:
         viewer_dialog.close()
-        ### if project_type == "everyday":
-        ###     print("Sub idx: 0\n")
-        ###     button_handler.project_viewer_clicked(main_window, 0, 0)
-        ### elif project_type == "programming":
-        ###     print("Sub-idx: 1\n")
-        ###     button_handler.project_viewer_clicked(main_window, 0, 1)
-        ### else:
-        ###     print("Sub idx: 3\n")
-        ###     button_handler.project_viewer_clicked(main_window, 0, 3)
         button_handler.project_viewer_clicked(main_window, tab_state["main_index"],tab_state["sub_index"])
 
 
