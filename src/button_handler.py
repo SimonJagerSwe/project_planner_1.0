@@ -173,7 +173,7 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
         if resources.selected_project is None:
             resources.no_project_selected()
         else:
-            editor(resources.selected_project, viewer, main_window)
+            editor(resources.selected_project, viewer, main_window, tab_state)
 
 
     # Use a set project type to create new project of same type
@@ -194,7 +194,7 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
             archive = resources.archive_check(viewer)
             print(archive)
             if archive == "archive":
-                project_archive_handler.archive_project(resources.selected_project, project_type, viewer, main_window)
+                project_archive_handler.archive_project(resources.selected_project, project_type, viewer, main_window, tab_state)
 
     # Use set item to call the delete function
     def delete_clicked():
@@ -207,7 +207,7 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
             delete = resources.safety_check(viewer)
             print(delete)
             if delete == "delete":
-                deleter(resources.selected_project, project_type, viewer, main_window, "delete")
+                deleter(resources.selected_project, project_type, viewer, main_window, "delete", tab_state)
 
     # Use set item to set recurring task status to done
     def recurring_done(task):
