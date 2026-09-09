@@ -1,7 +1,5 @@
 ########## Button handler ##########
 # Imports
-import json
-
 import project_archive_handler, resources
 
 from interface.ui_everyday import Ui_everydayProjectEditor
@@ -9,10 +7,11 @@ from interface.ui_new_project import Ui_addNewProject
 from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_recurring import Ui_recurringProjectEditor
 from interface.ui_tabs import Ui_Viewer
+from loader import load_file as loader
 from project_deleter import delete_project as deleter
 from project_editors import edit_parser as editor
-from loader import load_file as loader
 from project_printers import print_projects as printer
+from resources import VERSION
 from writers import writer as writer
 
 from PySide6.QtCore import QDate
@@ -51,6 +50,7 @@ def add_project_clicked(main_window):
     add_project = QDialog(main_window)
     ui = Ui_addNewProject()
     ui.setupUi(add_project)
+    add_project.setWindowTitle(f"{VERSION} - Add project")
     ui.addEveryday.clicked.connect(lambda: everyday_project_clicked(add_project, main_window))
     ui.addProgramming.clicked.connect(lambda: programming_project_clicked(add_project, main_window))
     ui.addRecurring.clicked.connect(lambda: recurring_project_clicked(add_project, main_window))
@@ -68,6 +68,7 @@ def everyday_project_clicked(current_dialog, main_window):
     everyday_dialog = QDialog(None)
     ui = Ui_everydayProjectEditor()
     ui.setupUi(everyday_dialog)
+    everyday_dialog.setWindowTitle(f"{VERSION} - Add everyday project")
     ui.everydayStart.setDate(QDate.currentDate())
     ui.everydayFinish.setDate(QDate.currentDate())
     ui.everydayProgressSlider.valueChanged.connect(lambda value: 
@@ -89,6 +90,7 @@ def programming_project_clicked(current_dialog, main_window):
     programming_dialog = QDialog(main_window)
     ui = Ui_programmingProjectEditor()
     ui.setupUi(programming_dialog)
+    programming_dialog.setWindowTitle(f"{VERSION} - Add programming project")
     ui.programmingStart.setDate(QDate.currentDate())
     ui.programmingFinish.setDate(QDate.currentDate())
     ui.programmingProgressSlider.valueChanged.connect(lambda value:
@@ -110,6 +112,7 @@ def recurring_project_clicked(current_dialog, main_window):
     recurring_dialog = QDialog(main_window)
     ui = Ui_recurringProjectEditor()
     ui.setupUi(recurring_dialog)
+    recurring_dialog.setWindowTitle(f"{VERSION} - Add recurring task")
     ui.saveRecurring.clicked.connect(lambda: writer(ui, "recurring", recurring_dialog, main_window, "new"))
     ui.clearRecurring.clicked.connect(lambda: resources.clear_input(ui))
     ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(recurring_dialog, main_window))
@@ -126,6 +129,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     viewer = QDialog(main_window)
     ui = Ui_Viewer()
     ui.setupUi(viewer)
+    viewer.setWindowTitle(f"{VERSION} - View projects")
 
     # Function to handle tab changes
     def tab_changed(top_tab, sub_tab):
@@ -154,6 +158,12 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
             resources.no_project_selected()
         else:
             editor(resources.selected_project, viewer, main_window)
+
+
+    # Use a set project type to create new project of same type
+    def new_clicked(sub_idx=0):
+        print(f"Sub tab:{sub_idx}\n")
+
 
     # Use set item to call the archive function
     def archive_clicked():
@@ -260,6 +270,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.viewer.currentChanged.connect(lambda: tab_changed(ui.viewer.currentIndex(), 0))
     ui.projectTabs.currentChanged.connect(lambda index: tab_changed(0, index))
     ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
+    ui.newProject.clicked.connect(lambda sub_idx: new_clicked(sub_idx))
     ui.editProject.clicked.connect(edit_clicked)
     ui.archiveProject.clicked.connect(lambda: archive_clicked())
     ui.deleteProject.clicked.connect(delete_clicked)
