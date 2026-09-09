@@ -37,9 +37,9 @@ def main_menu_buttons(main_window):
     programming_action = main_window.findChild(QAction, "actionAddProgramming")
     programming_action.triggered.connect(lambda: (programming_project_clicked(None, main_window)))
     projects_action = main_window.findChild(QAction, "actionProjects")
-    projects_action.triggered.connect(lambda: (project_viewer_clicked(main_window)))
+    projects_action.triggered.connect(lambda: (project_viewer_clicked(main_window, 0, 0)))
     archive_action = main_window.findChild(QAction, "actionArchive")
-    archive_action.triggered.connect(lambda: (project_viewer_clicked(main_window)))
+    archive_action.triggered.connect(lambda: (project_viewer_clicked(main_window, 1, 0)))
     exit_action = main_window.findChild(QAction, "actionExit")
     exit_action.triggered.connect(lambda: (resources.exit_clicked(main_window)))
 
@@ -153,7 +153,7 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
     if tab_state["main_index"] == 0:
         ui.projectTabs.setCurrentIndex(tab_state["sub_index"])
     else:
-        ui.archivedAtabs.setCurrentIndex(tab_state["sub_index"])
+        ui.archivedTabs.setCurrentIndex(tab_state["sub_index"])
     # if ui.viewer.currentIndex() == 0:
     #     ui.projectTabs.setCurrentIndex(sub_idx)
     # if ui.viewer.currentIndex() == 1:
