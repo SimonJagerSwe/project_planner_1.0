@@ -122,7 +122,7 @@ def recurring_project_clicked(current_dialog, main_window):
 
 
 # View projects and archives
-def project_viewer_clicked(main_window, top_idx, sub_idx):
+def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
     print("Loading viewer...")
     resources.selected_project = None
     main_window.close()
@@ -130,22 +130,38 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui = Ui_Viewer()
     ui.setupUi(viewer)
     viewer.setWindowTitle(f"{VERSION} - View projects")
+    tab_state = {
+        "main_index" : top_idx,
+        "sub_index" : sub_idx 
+    }
 
-    # Function to handle tab changes
-    def tab_changed(top_tab, sub_tab):
-        printer(ui, top_tab, sub_tab)
+    # Function to handle tab changes and store tab index values for function calls
+    def tab_changed():
+        top_idx = ui.viewer.currentIndex()
+        if top_idx == 0:
+            sub_idx = ui.projectTabs.currentIndex()
+        else:
+            sub_idx = ui.archivedTabs.currentIndex()
+        print(f"Tab change executed:\nTop index: {top_idx}\nSub index: {sub_idx}\n")
+        tab_state["main_index"] = top_idx
+        tab_state["sub_index"] = sub_idx
+        printer(ui, top_idx, sub_idx)
         resources.selected_project = None
 
     # Initialise tab index based on user selection
-    ui.viewer.setCurrentIndex(top_idx)
-    if ui.viewer.currentIndex() == 0:
-        ui.projectTabs.setCurrentIndex(sub_idx)
-    if ui.viewer.currentIndex() == 1:
-        ui.archivedTabs.setCurrentIndex(sub_idx)
+    ui.viewer.setCurrentIndex(tab_state["main_index"])
+    if tab_state["main_index"] == 0:
+        ui.projectTabs.setCurrentIndex(tab_state["sub_index"])
+    else:
+        ui.archivedAtabs.setCurrentIndex(tab_state["sub_index"])
+    # if ui.viewer.currentIndex() == 0:
+    #     ui.projectTabs.setCurrentIndex(sub_idx)
+    # if ui.viewer.currentIndex() == 1:
+    #     ui.archivedTabs.setCurrentIndex(sub_idx)
     
     # Print everyday projects to interface without having to select a tab first
     # to avoid user being greeted by an empty project view
-    tab_changed(top_idx, sub_idx)
+    tab_changed()
 
     # Use a clicked project to set an item to use
     # for editing, archiving or deleting
@@ -161,8 +177,11 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
 
 
     # Use a set project type to create new project of same type
-    def new_clicked(sub_idx=0):
-        print(f"Sub tab:{sub_idx}\n")
+    def new_clicked():
+        top_idx = tab_state["main_index"]
+        sub_idx = tab_state["sub_index"]
+
+        print(f"Main tab:\n{top_idx}\nSub tab:\n{sub_idx}\n")
 
 
     # Use set item to call the archive function
@@ -267,10 +286,14 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
             list_item.itemClicked.connect(project_clicked)
 
     # Action connections etc.
-    ui.viewer.currentChanged.connect(lambda: tab_changed(ui.viewer.currentIndex(), 0))
-    ui.projectTabs.currentChanged.connect(lambda index: tab_changed(0, index))
-    ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
-    ui.newProject.clicked.connect(lambda sub_idx: new_clicked(sub_idx))
+    # ui.viewer.currentChanged.connect(lambda: tab_changed(ui.viewer.currentIndex(), 0))
+    ui.viewer.currentChanged.connect(lambda index: tab_changed())
+    # ui.projectTabs.currentChanged.connect(lambda index: tab_changed(0, index))
+    ui.projectTabs.currentChanged.connect(lambda index: tab_changed())
+    # ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
+    ui.archivedTabs.currentChanged.connect(lambda index: tab_changed())
+    # ui.newProject.clicked.connect(lambda sub_idx: new_clicked(sub_idx))
+    ui.newProject.clicked.connect(new_clicked)
     ui.editProject.clicked.connect(edit_clicked)
     ui.archiveProject.clicked.connect(lambda: archive_clicked())
     ui.deleteProject.clicked.connect(delete_clicked)
