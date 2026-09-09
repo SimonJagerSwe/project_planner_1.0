@@ -159,6 +159,12 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         else:
             editor(resources.selected_project, viewer, main_window)
 
+
+    # Use a set project type to create new project of same type
+    def new_clicked(sub_idx=0):
+        print(f"Sub tab:{sub_idx}\n")
+
+
     # Use set item to call the archive function
     def archive_clicked():
         if resources.selected_project is None:
@@ -264,6 +270,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.viewer.currentChanged.connect(lambda: tab_changed(ui.viewer.currentIndex(), 0))
     ui.projectTabs.currentChanged.connect(lambda index: tab_changed(0, index))
     ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
+    ui.newProject.clicked.connect(lambda sub_idx: new_clicked(sub_idx))
     ui.editProject.clicked.connect(edit_clicked)
     ui.archiveProject.clicked.connect(lambda: archive_clicked())
     ui.deleteProject.clicked.connect(delete_clicked)
