@@ -86,8 +86,9 @@ TODO
     - Append edited project/task to the original place in their respective dicts for writing to project/task files
     - Unify code with importing as x instead of x.function
     - Setup test suite
+    - Add ability to delete projects from the archive
     
 
 ISSUES
-    - Reset all in bi-weekly tasks opens a new, updated task viewer without closing the old one
+    
     
