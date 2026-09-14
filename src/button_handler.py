@@ -37,9 +37,9 @@ def main_menu_buttons(main_window):
     programming_action = main_window.findChild(QAction, "actionAddProgramming")
     programming_action.triggered.connect(lambda: (programming_project_clicked(None, main_window)))
     projects_action = main_window.findChild(QAction, "actionProjects")
-    projects_action.triggered.connect(lambda: (project_viewer_clicked(main_window)))
+    projects_action.triggered.connect(lambda: (project_viewer_clicked(main_window, 0, 0)))
     archive_action = main_window.findChild(QAction, "actionArchive")
-    archive_action.triggered.connect(lambda: (project_viewer_clicked(main_window)))
+    archive_action.triggered.connect(lambda: (project_viewer_clicked(main_window, 1, 0)))
     exit_action = main_window.findChild(QAction, "actionExit")
     exit_action.triggered.connect(lambda: (resources.exit_clicked(main_window)))
 
@@ -122,7 +122,7 @@ def recurring_project_clicked(current_dialog, main_window):
 
 
 # View projects and archives
-def project_viewer_clicked(main_window, top_idx, sub_idx):
+def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
     print("Loading viewer...")
     resources.selected_project = None
     main_window.close()
@@ -130,22 +130,38 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui = Ui_Viewer()
     ui.setupUi(viewer)
     viewer.setWindowTitle(f"{VERSION} - View projects")
+    tab_state = {
+        "main_index" : top_idx,
+        "sub_index" : sub_idx 
+    }
 
-    # Function to handle tab changes
-    def tab_changed(top_tab, sub_tab):
-        printer(ui, top_tab, sub_tab)
+    # Function to handle tab changes and store tab index values for function calls
+    def tab_changed():
+        top_idx = ui.viewer.currentIndex()
+        if top_idx == 0:
+            sub_idx = ui.projectTabs.currentIndex()
+        else:
+            sub_idx = ui.archivedTabs.currentIndex()
+        print(f"Tab change executed:\nTop index: {top_idx}\nSub index: {sub_idx}\n")
+        tab_state["main_index"] = top_idx
+        tab_state["sub_index"] = sub_idx
+        printer(ui, top_idx, sub_idx)
         resources.selected_project = None
 
     # Initialise tab index based on user selection
-    ui.viewer.setCurrentIndex(top_idx)
-    if ui.viewer.currentIndex() == 0:
-        ui.projectTabs.setCurrentIndex(sub_idx)
-    if ui.viewer.currentIndex() == 1:
-        ui.archivedTabs.setCurrentIndex(sub_idx)
+    ui.viewer.setCurrentIndex(tab_state["main_index"])
+    if tab_state["main_index"] == 0:
+        ui.projectTabs.setCurrentIndex(tab_state["sub_index"])
+    else:
+        ui.archivedTabs.setCurrentIndex(tab_state["sub_index"])
+    # if ui.viewer.currentIndex() == 0:
+    #     ui.projectTabs.setCurrentIndex(sub_idx)
+    # if ui.viewer.currentIndex() == 1:
+    #     ui.archivedTabs.setCurrentIndex(sub_idx)
     
     # Print everyday projects to interface without having to select a tab first
     # to avoid user being greeted by an empty project view
-    tab_changed(top_idx, sub_idx)
+    tab_changed()
 
     # Use a clicked project to set an item to use
     # for editing, archiving or deleting
@@ -157,12 +173,15 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         if resources.selected_project is None:
             resources.no_project_selected()
         else:
-            editor(resources.selected_project, viewer, main_window)
+            editor(resources.selected_project, viewer, main_window, tab_state)
 
 
     # Use a set project type to create new project of same type
-    def new_clicked(sub_idx=0):
-        print(f"Sub tab:{sub_idx}\n")
+    def new_clicked():
+        top_idx = tab_state["main_index"]
+        sub_idx = tab_state["sub_index"]
+
+        print(f"Main tab:\n{top_idx}\nSub tab:\n{sub_idx}\n")
 
 
     # Use set item to call the archive function
@@ -175,7 +194,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
             archive = resources.archive_check(viewer)
             print(archive)
             if archive == "archive":
-                project_archive_handler.archive_project(resources.selected_project, project_type, viewer, main_window)
+                project_archive_handler.archive_project(resources.selected_project, project_type, viewer, main_window, tab_state)
 
     # Use set item to call the delete function
     def delete_clicked():
@@ -188,18 +207,19 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
             delete = resources.safety_check(viewer)
             print(delete)
             if delete == "delete":
-                deleter(resources.selected_project, project_type, viewer, main_window, "delete")
+                deleter(resources.selected_project, project_type, viewer, main_window, "delete", tab_state)
 
     # Use set item to set recurring task status to done
     def recurring_done(task):
         print(f"Setting task status to done for:\n{task.text()}\n")
         project = resources.project_parser(task, "recurring")
         print(f"Task after parsing:\n{project}\n")
-        deleter(project, "recurring", viewer, main_window, "edit")
+        deleter(project, "recurring", viewer, main_window, "edit", tab_state)
         print("Project deleted from recurring file\n")
         project["Task status"] = True
         print(f"Task after altering status:\n{project}\n")        
-        writer(project, "recurring", viewer, main_window, "edit")
+        writer(project, "recurring", viewer, main_window, "edit", return_to_main=False)
+        project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])
         print("Project status set to done and saved!\n")
 
     # Reset single recurring task status
@@ -207,11 +227,12 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
         print(f"Setting task status to done for:\n{task.text()}\n")
         project = resources.project_parser(task, "recurring")
         print(f"Task after parsing:\n{project}\n")
-        deleter(project, "recurring", viewer, main_window, "edit")
+        deleter(project, "recurring", viewer, main_window, "edit",tab_state)
         print("Project deleted from recurring file\n")
         project["Task status"] = False
         print(f"Task after altering status:\n{project}\n")
-        writer(project, "recurring", viewer, main_window, "reset")
+        writer(project, "recurring", viewer, main_window, "reset", return_to_main=False)
+        project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])
         print("Project status set to done and saved!\n")
 
     # Reset full category of recurring tasks
@@ -231,7 +252,9 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
                 print(f"Task status: {project["Task status"]}")
             project_list.append(project)
         print(f"Reset projects list to write to recurring file:\n{project_list}\n")
-        writer(project_list, "recurring", viewer, main_window, "reset all")
+        writer(project_list, "recurring", viewer, main_window, "reset all", return_to_main=False)
+        viewer.close()
+        project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])
         print(f"{category} tasks reset")
         
 
@@ -267,10 +290,10 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
             list_item.itemClicked.connect(project_clicked)
 
     # Action connections etc.
-    ui.viewer.currentChanged.connect(lambda: tab_changed(ui.viewer.currentIndex(), 0))
-    ui.projectTabs.currentChanged.connect(lambda index: tab_changed(0, index))
-    ui.archivedTabs.currentChanged.connect(lambda index: tab_changed(1, index))
-    ui.newProject.clicked.connect(lambda sub_idx: new_clicked(sub_idx))
+    ui.viewer.currentChanged.connect(tab_changed)
+    ui.projectTabs.currentChanged.connect(tab_changed)
+    ui.archivedTabs.currentChanged.connect(tab_changed)
+    ui.newProject.clicked.connect(new_clicked)
     ui.editProject.clicked.connect(edit_clicked)
     ui.archiveProject.clicked.connect(lambda: archive_clicked())
     ui.deleteProject.clicked.connect(delete_clicked)
@@ -284,6 +307,7 @@ def project_viewer_clicked(main_window, top_idx, sub_idx):
     ui.biResetAll.clicked.connect(lambda : recurring_reset_group("Bi-weekly"))
     ui.otherDone.clicked.connect(lambda: recurring_done(resources.selected_project))
     ui.otherReset.clicked.connect(lambda: recurring_reset_single(resources.selected_project))
+    ui.otherResetAll.clicked.connect(lambda: recurring_reset_group("Other"))
     ui.restoreArchived.clicked.connect(restore_project_clicked)
     ui.returnToMainArchive.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitArchive.clicked.connect(lambda: resources.exit_clicked(viewer))

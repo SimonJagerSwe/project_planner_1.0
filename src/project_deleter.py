@@ -9,7 +9,7 @@ from resources import EVERYDAY_FILE, PROGRAMMING_FILE, RECURRING_FILE, project_p
 
 
 # Delete project from project type file, both for deletion and for editing
-def delete_project(project, project_type, viewer, main_window, delete_type):
+def delete_project(project, project_type, viewer, main_window, delete_type, tab_state=None):
     if type(project) != dict:
         print(f"Project sent to parser from deleter:\n{project}\n")
         current_project = project_parser(project, project_type)
@@ -41,10 +41,16 @@ def delete_project(project, project_type, viewer, main_window, delete_type):
         viewer.close()
 
     if delete_type == "delete":
-        if project_type == "everyday":
+        if tab_state is None:
+            tab_state = {
+                "main_index" : 0,
+                "sub_index" : 0
+            }
+        '''if project_type == "everyday":
             button_handler.project_viewer_clicked(main_window, 0, 0)
         elif project_type == "programming":
             button_handler.project_viewer_clicked(main_window, 0, 1)
         else:
-            button_handler.project_viewer_clicked(main_window, 0, 3)
+            button_handler.project_viewer_clicked(main_window, 0, 3)'''
+        button_handler.project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])
         

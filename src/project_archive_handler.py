@@ -1,10 +1,10 @@
 ########## Archive handlers ##########
 # Imports
-import project_deleter, resources, writers
+import button_handler, project_deleter, resources, writers
 
 
 # Archiving function
-def archive_project(project, project_type, viewer, main_window):
+def archive_project(project, project_type, viewer, main_window, tab_state):
     unpacked_project = resources.project_parser(project, project_type)
     print("Archiving project...")
     print(f"Project:\n{project}\n")
@@ -19,7 +19,8 @@ def archive_project(project, project_type, viewer, main_window):
         print(f"Completed project:\n{unpacked_project}\n")
     else:
         print("Archiving project as is...")
-    writers.writer(unpacked_project, project_type, viewer, main_window, "archive")
+    writers.writer(unpacked_project, project_type, viewer, main_window, "archive", return_to_main=False)
     print("Archiving step 1 - Write to archive file: Done")
-    project_deleter.delete_project(project, project_type, viewer, main_window, "archive")
+    project_deleter.delete_project(project, project_type, viewer, main_window, "archive", tab_state)
     print("Archiving step 2 - Delete from file: Done")
+    button_handler.project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])

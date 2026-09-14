@@ -70,7 +70,7 @@ def project_data(ui, project_type):
 
 
 # Project writer
-def writer(project, project_type, current_dialog, main_window, write_type):
+def writer(project, project_type, current_dialog, main_window, write_type, return_to_main=True):
     print(f"Writing file using:\n{project}\n")
     print(f"Project type to write:\n{project_type}\n")
     print(f"Write type:\n{write_type}\n")
@@ -133,7 +133,9 @@ def writer(project, project_type, current_dialog, main_window, write_type):
         print(f"Writing {project_list} to {target_file} failed\n")
     
     # Return to main menu
-    if current_dialog and main_window:
+    # if current_dialog and main_window:
+    #     resources.return_to_main_clicked(current_dialog, main_window)
+    if return_to_main and main_window:
         resources.return_to_main_clicked(current_dialog, main_window)
 
     # Trigger success message
