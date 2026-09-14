@@ -87,3 +87,7 @@ TODO
     - Unify code with importing as x instead of x.function
     - Setup test suite
     
+
+ISSUES
+    - Reset all in bi-weekly tasks opens a new, updated task viewer without closing the old one
+    
