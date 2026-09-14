@@ -253,6 +253,7 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
             project_list.append(project)
         print(f"Reset projects list to write to recurring file:\n{project_list}\n")
         writer(project_list, "recurring", viewer, main_window, "reset all", return_to_main=False)
+        viewer.close()
         project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])
         print(f"{category} tasks reset")
         
@@ -306,6 +307,7 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
     ui.biResetAll.clicked.connect(lambda : recurring_reset_group("Bi-weekly"))
     ui.otherDone.clicked.connect(lambda: recurring_done(resources.selected_project))
     ui.otherReset.clicked.connect(lambda: recurring_reset_single(resources.selected_project))
+    ui.otherResetAll.clicked.connect(lambda: recurring_reset_group("Other"))
     ui.restoreArchived.clicked.connect(restore_project_clicked)
     ui.returnToMainArchive.clicked.connect(lambda: resources.return_to_main_clicked(viewer, main_window))
     ui.exitArchive.clicked.connect(lambda: resources.exit_clicked(viewer))
