@@ -8,7 +8,7 @@ from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QMessageBox
 
 # Version number
-VERSION = "Project planner v. 1.01"
+VERSION = "Project planner v. 1.02"
 
 # Resource files
 EVERYDAY_FILE = "project_files/everyday_projects.json"
