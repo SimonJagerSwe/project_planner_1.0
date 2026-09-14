@@ -86,6 +86,7 @@ TODO
     - Unify code with importing as x instead of x.function
     - Setup test suite
     - Add ability to delete projects from the archive
+    - Add "new project" button functionality to project viewer
     
 
 ISSUES
