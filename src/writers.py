@@ -1,6 +1,7 @@
 ########## Writers ##########
 # Imports
 import json
+import loader
 import resources
 
 
@@ -74,6 +75,25 @@ def writer(project, project_type, current_dialog, main_window, write_type, retur
     print(f"Writing file using:\n{project}\n")
     print(f"Project type to write:\n{project_type}\n")
     print(f"Write type:\n{write_type}\n")
+
+    # Get number of projects
+    ##### For new projects
+    ### Determine project type and load that file
+    if project == "everyday":
+        project_file = resources.EVERYDAY_FILE
+
+    ### Create list from file and find last ID/count number of projects
+
+    ### Create variable of number of projects in current project type + 1
+
+    ### Append new project ID to new project
+
+
+
+    ##### For edited projects
+    ### Extract project ID from project dictionary
+
+    ### Append existing Project ID to new project version
     
     # This is for resetting recurring task statuses
     if write_type == "reset all":
@@ -83,9 +103,12 @@ def writer(project, project_type, current_dialog, main_window, write_type, retur
         for task in project:
             project_list.append(task)
 
+    # All other write types
     else:
         if write_type == "new" or write_type == "edit" or write_type == "reset":
             project = project_data(project, project_type)
+        else:
+            print("Unknown type error encountered")
         print(f"Project to write:\n{project}\n")
 
         # Determine if project should be written to project files or archive files
