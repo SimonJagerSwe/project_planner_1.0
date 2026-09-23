@@ -274,7 +274,8 @@ def project_parser(project, project_type):
 
 
 # Project ID identifyer
-def identify_project_id(project, write_type, project_type):
+def identify_project_id(project, project_type, write_type):
+    print(f"Identifying project ID for project:\n{project}\n")
     try:
         if project_type == "everyday":
             project_file = loader(EVERYDAY_FILE)
@@ -291,6 +292,7 @@ def identify_project_id(project, write_type, project_type):
             print(f"Last project ID in {project_type}:\n{project_id - 1}\nProject ID for new project:\n{project_id}\n")
         else:
             project_id = project["Project ID"]
+            print(f"Saved project ID:\n{project_id}\n")
 
     except TypeError:
         print("Unknown write type error")
