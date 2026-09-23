@@ -1,9 +1,9 @@
 ########## Writers ##########
 # Imports
 import json
-import loader
 import resources
 
+from loader import load_file as loader
 
 # Project file creator
 def project_data(ui, project_type):
@@ -76,15 +76,29 @@ def writer(project, project_type, current_dialog, main_window, write_type, retur
     print(f"Project type to write:\n{project_type}\n")
     print(f"Write type:\n{write_type}\n")
 
-    # Get number of projects
+
+    # Get number of projects --- currently trying to run this as a method in resources
+    '''
     ##### For new projects
     ### Determine project type and load that file
-    if project == "everyday":
-        project_file = resources.EVERYDAY_FILE
+    try:
+        if project_type == "everyday":
+            project_file = loader(resources.EVERYDAY_FILE)
+        elif project_type == "programming":
+            project_file = loader(resources.PROGRAMMING_FILE)
+        else:
+            project_file = loader(resources.RECURRING_FILE)
+    except TypeError:
+        print("Unknown file type provided")
 
     ### Create list from file and find last ID/count number of projects
+    project_count = len(project_file)
+    # or
+    project_count = project_file[-1]["Project ID"]
+    print(f"Number of current projects in {project_type}:\n{project_count}\n")
 
     ### Create variable of number of projects in current project type + 1
+
 
     ### Append new project ID to new project
 
@@ -93,7 +107,7 @@ def writer(project, project_type, current_dialog, main_window, write_type, retur
     ##### For edited projects
     ### Extract project ID from project dictionary
 
-    ### Append existing Project ID to new project version
+    ### Append existing Project ID to new project version'''
     
     # This is for resetting recurring task statuses
     if write_type == "reset all":

@@ -271,4 +271,28 @@ def project_parser(project, project_type):
         for task in r_tasks:
             if task["Task name"].strip() == project_name:
                 return task
-            
+
+
+# Project ID identifyer
+def identify_project_id(project, write_type, project_type):
+    try:
+        if project_type == "everyday":
+            project_file = loader(EVERYDAY_FILE)
+        elif project_type == "programming":
+            project_file = loader(PROGRAMMING_FILE)
+        else:
+            project_file = loader(RECURRING_FILE)
+    except TypeError:
+                    print("Unknown project type error")
+
+    try: 
+        if write_type == "new":
+            project_id = project_file[-1]["Project ID"] + 1
+            print(f"Last project ID in {project_type}:\n{project_id - 1}\nProject ID for new project:\n{project_id}\n")
+        else:
+            project_id = project["Project ID"]
+
+    except TypeError:
+        print("Unknown write type error")
+
+    return project_id
