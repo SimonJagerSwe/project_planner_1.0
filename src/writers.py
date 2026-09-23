@@ -6,7 +6,7 @@ import resources
 from loader import load_file as loader
 
 # Project file creator
-def project_data(ui, project_type):
+def project_data(ui, project_type, project_id):
     print("Writing project data...")
     print(f"Ui fetched: {ui}")
     print(project_type)
@@ -76,38 +76,8 @@ def writer(project, project_type, current_dialog, main_window, write_type, retur
     print(f"Project type to write:\n{project_type}\n")
     print(f"Write type:\n{write_type}\n")
 
-
-    # Get number of projects --- currently trying to run this as a method in resources
-    '''
-    ##### For new projects
-    ### Determine project type and load that file
-    try:
-        if project_type == "everyday":
-            project_file = loader(resources.EVERYDAY_FILE)
-        elif project_type == "programming":
-            project_file = loader(resources.PROGRAMMING_FILE)
-        else:
-            project_file = loader(resources.RECURRING_FILE)
-    except TypeError:
-        print("Unknown file type provided")
-
-    ### Create list from file and find last ID/count number of projects
-    project_count = len(project_file)
-    # or
-    project_count = project_file[-1]["Project ID"]
-    print(f"Number of current projects in {project_type}:\n{project_count}\n")
-
-    ### Create variable of number of projects in current project type + 1
-
-
-    ### Append new project ID to new project
-
-
-
-    ##### For edited projects
-    ### Extract project ID from project dictionary
-
-    ### Append existing Project ID to new project version'''
+    # Decide project ID         --- Not best solution but will work for now
+    project_id = resources.identify_project_id(project, project_type, write_type)
     
     # This is for resetting recurring task statuses
     if write_type == "reset all":
@@ -120,7 +90,7 @@ def writer(project, project_type, current_dialog, main_window, write_type, retur
     # All other write types
     else:
         if write_type == "new" or write_type == "edit" or write_type == "reset":
-            project = project_data(project, project_type)
+            project = project_data(project, project_type, project_id)
         else:
             print("Unknown type error encountered")
         print(f"Project to write:\n{project}\n")
