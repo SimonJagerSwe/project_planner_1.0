@@ -80,7 +80,9 @@ def writer(project, project_type, current_dialog, main_window, write_type, retur
     print(f"Write type:\n{write_type}\n")
 
     # Decide project ID         --- Not best solution but will work for now
+    print("Fetching project ID...\n")
     project_id = resources.identify_project_id(project, project_type, write_type)
+    print(f"Fetched current project ID:\n{project_id}\n")
     
     # This is for resetting recurring task statuses
     if write_type == "reset all":
