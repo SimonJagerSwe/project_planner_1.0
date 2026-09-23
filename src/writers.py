@@ -25,7 +25,8 @@ def project_data(ui, project_type, project_id):
             "Project end" : finish,
             "Project notes" : notes,
             "Project progress" : percent,
-            "Project status" : status
+            "Project status" : status,
+            "Project ID" : project_id
         }
         print(f"Everyday project for printing:\n{project}\n")
     # Create programming project
@@ -46,7 +47,8 @@ def project_data(ui, project_type, project_id):
             "GitHub link" : link,
             "Project notes" : notes,
             "Project progress" : percent,
-            "Project status" : status
+            "Project status" : status,
+            "Project ID" : project_id
         }
         print(f"Programming project for printing:\n{project}\n")
     # Create recurring task
@@ -61,7 +63,8 @@ def project_data(ui, project_type, project_id):
                 "Task name" : name,
                 "Task frequency" : frequency,
                 "Task notes" : notes,
-                "Task status" : status
+                "Task status" : status,
+                "Project ID" : project_id
             }
         # This is only in effect when marking a recurring task as done or resetting
         else:
