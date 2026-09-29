@@ -153,10 +153,6 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
         ui.projectTabs.setCurrentIndex(tab_state["sub_index"])
     else:
         ui.archivedTabs.setCurrentIndex(tab_state["sub_index"])
-    # if ui.viewer.currentIndex() == 0:
-    #     ui.projectTabs.setCurrentIndex(sub_idx)
-    # if ui.viewer.currentIndex() == 1:
-    #     ui.archivedTabs.setCurrentIndex(sub_idx)
     
     # Print everyday projects to interface without having to select a tab first
     # to avoid user being greeted by an empty project view
@@ -166,6 +162,8 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
     # for editing, archiving or deleting
     def project_clicked(item):
         resources.selected_project = item
+        print(f"Project clicked:\n{resources.selected_project}\n")
+        project_id = resources.project_id()
 
     # Use set item to call the edit function
     def edit_clicked():
@@ -179,7 +177,6 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
     def new_clicked():
         top_idx = tab_state["main_index"]
         sub_idx = tab_state["sub_index"]
-
         print(f"Main tab:\n{top_idx}\nSub tab:\n{sub_idx}\n")
 
 

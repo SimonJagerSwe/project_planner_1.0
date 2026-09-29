@@ -2,6 +2,8 @@
 # Imports
 import sys
 
+import writers
+
 from loader import load_file as loader
 
 from PySide6.QtCore import QDate
@@ -54,6 +56,7 @@ tab_handler = [
         2 : FULL_ARCHIVE
     }
 ]
+
 
 ##### Utility functions #####
 # Return to main menu
@@ -258,7 +261,6 @@ def project_parser(project, project_type):
         e_projects = loader(EVERYDAY_FILE)
         for project in e_projects:
             if project["Project name"].strip() == project_name:
-                # print(f"Project found:\n{project["Project name"]}\n")
                 return project
     # Load programming file
     elif project_type == "programming":
@@ -275,7 +277,7 @@ def project_parser(project, project_type):
 
 
 # Project ID identifyer
-def identify_project_id(project, project_type, write_type):
+def project_id(project, project_type, write_type):
     print(f"Identifying project ID for project:\n{project} of project type \"{project_type}\"\n")
     try:
         if project_type == "everyday":
@@ -291,8 +293,14 @@ def identify_project_id(project, project_type, write_type):
         if write_type == "new":
             project_id = project_file[-1]["Project ID"] + 1
             print(f"Last project ID in {project_type}:\n{project_id - 1}\nProject ID for new project:\n{project_id}\n")
+        elif write_type == "edit":
+            print("Finding project ID for edited project...\n")
+            # project = project_parser(project, project_type)
+            project_id = project["Project ID"]
+            # project_id = project_parser(project, project_type)["Project ID"]
+            # print(f"Edited project ID:\n{project["Project ID"]}\n")
+            print(f"Edited project ID:\n{project_id}\n")
         else:
-            print()
             project_id = project["Project ID"]
             print(f"Saved project ID:\n{project_id}\n")
 

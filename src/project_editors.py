@@ -38,8 +38,8 @@ def edit_parser(project, viewer_dialog, main_window, tab_state):
     print(f"Project type received by edit parser:\n{project_type}\n")
     current_project = resources.project_parser(project, project_type)
     print(f"Fetched project:\n{current_project}\n")
-    project_id = resources.identify_project_id(current_project, project_type, "edit")
-    print(f"Project ID:\n{project_id}\n")
+    # project_id = resources.identify_project_id(current_project, project_type, "edit")
+    # print(f"Project ID:\n{project_id}\n")
     
     if project_type == "programming":
         ui = Ui_programmingProjectEditor()
@@ -67,9 +67,9 @@ def edit_parser(project, viewer_dialog, main_window, tab_state):
 # Save edited file, refresh project files read
 # And return to project viewer 
 def save_and_return(ui, dialog, main_window, viewer_dialog, project_type, current_project, write_type, tab_state):
-    print("Deleting current project from project file(s)...\n")
+    print("Deleting current project from project file...\n")
     project_deleter.delete_project(current_project, project_type, viewer_dialog, main_window, "edit")
-    print("Project deleted from project files\n")
+    print("Project deleted from project files...\n")
     writers.writer(ui, project_type, dialog, main_window, write_type, return_to_main=False)
     dialog.close()
     if viewer_dialog is not None:

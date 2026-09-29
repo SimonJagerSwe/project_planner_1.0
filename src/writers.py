@@ -3,7 +3,6 @@
 import json
 import resources
 
-from loader import load_file as loader
 
 # Project file creator
 def project_data(ui, project_type, project_id):
@@ -74,15 +73,12 @@ def project_data(ui, project_type, project_id):
 
 
 # Project writer
-def writer(project, project_type, current_dialog, main_window, write_type, return_to_main=True):
+def writer(project, project_type, project_id, current_dialog, main_window, write_type, return_to_main=True):
     print(f"Writing file using:\n{project}\n")
     print(f"Project type to write:\n{project_type}\n")
     print(f"Write type:\n{write_type}\n")
+    print(f"Project ID to write:\n{project_id}\n")
 
-    # Decide project ID         --- Not best solution but will work for now
-    print("Fetching project ID...\n")
-    project_id = resources.identify_project_id(project, project_type, write_type)
-    print(f"Fetched current project ID:\n{project_id}\n")
     
     # This is for resetting recurring task statuses
     if write_type == "reset all":
