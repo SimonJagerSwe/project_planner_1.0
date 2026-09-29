@@ -243,7 +243,8 @@ def parse_type(project):
 # Parse project object and return project name
 def project_parser(project, project_type):
     # Find project name
-    print(f"Project received by parser:\n{project}\nProject type:\n{type(project)}\n")
+    # print(f"Project received by parser:\n{project}\nProject type:\n{type(project)}\n")
+    print(f"Project received by parser:\n{project}\nProject object type:\n{type(project)}\nProject type:\n{project_type}\n")
     if type(project) == dict:
         project_name = project["Project name"]
     else:
@@ -291,6 +292,7 @@ def identify_project_id(project, project_type, write_type):
             project_id = project_file[-1]["Project ID"] + 1
             print(f"Last project ID in {project_type}:\n{project_id - 1}\nProject ID for new project:\n{project_id}\n")
         else:
+            print()
             project_id = project["Project ID"]
             print(f"Saved project ID:\n{project_id}\n")
 

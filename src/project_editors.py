@@ -31,12 +31,15 @@ def connect_buttons(ui, dialog, main_window, project_type, viewer_dialog=None, c
 # Function to determine which ui to use for editing
 def edit_parser(project, viewer_dialog, main_window, tab_state):
     print(f"Project to edit:\n{project.text()}\n")
+    print(f"Tab state:\n{tab_state}\n")
 
     # Identify project type
     project_type = resources.parse_type(project)
     print(f"Project type received by edit parser:\n{project_type}\n")
     current_project = resources.project_parser(project, project_type)
-    print(f"Name of current project:\n{current_project}\n")
+    print(f"Fetched project:\n{current_project}\n")
+    project_id = resources.identify_project_id(current_project, project_type, "edit")
+    print(f"Project ID:\n{project_id}\n")
     
     if project_type == "programming":
         ui = Ui_programmingProjectEditor()
