@@ -7,9 +7,9 @@ from loader import load_file as loader
 
 # Project file creator
 def project_data(ui, project_type, project_id):
-    print("Writing project data...")
-    print(f"Ui fetched: {ui}")
-    print(project_type)
+    print("Writing project data...\n")
+    print(f"Ui fetched: {ui}\n")
+    print(f"Project type to write:\n{project_type}\n")
 
     # Create everyday project
     if project_type == "everyday":
@@ -20,13 +20,13 @@ def project_data(ui, project_type, project_id):
         percent = ui.everydayProgressPercent.text()
         status = ui.everydayStatus.currentText()
         project = {
+            "Project ID" : project_id,
             "Project name" : name,
             "Project start" : start,
             "Project end" : finish,
             "Project notes" : notes,
             "Project progress" : percent,
-            "Project status" : status,
-            "Project ID" : project_id
+            "Project status" : status
         }
         print(f"Everyday project for printing:\n{project}\n")
     # Create programming project
@@ -40,6 +40,7 @@ def project_data(ui, project_type, project_id):
         percent = ui.programmingProgressPercent.text()
         status = ui.programmingStatus.currentText()
         project = {
+            "Project ID" : project_id,
             "Project name" : name,
             "Project start" : start,
             "Project end" : finish,
@@ -47,8 +48,7 @@ def project_data(ui, project_type, project_id):
             "GitHub link" : link,
             "Project notes" : notes,
             "Project progress" : percent,
-            "Project status" : status,
-            "Project ID" : project_id
+            "Project status" : status
         }
         print(f"Programming project for printing:\n{project}\n")
     # Create recurring task
@@ -60,11 +60,11 @@ def project_data(ui, project_type, project_id):
             notes = ui.recurringNotes.text()
             status = False  # Never printed, only to use for status check
             project = {
+                "Project ID" : project_id,
                 "Task name" : name,
                 "Task frequency" : frequency,
                 "Task notes" : notes,
-                "Task status" : status,
-                "Project ID" : project_id
+                "Task status" : status
             }
         # This is only in effect when marking a recurring task as done or resetting
         else:
@@ -91,6 +91,8 @@ def writer(project, project_type, current_dialog, main_window, write_type, retur
         project_list = []
         for task in project:
             project_list.append(task)
+            sorted_project_list = sorted(project_list, key=lambda x: x["Project ID"])
+            print(f"Reset sorted project list:\n{sorted_project_list}\n")
 
     # All other write types
     else:
@@ -128,20 +130,26 @@ def writer(project, project_type, current_dialog, main_window, write_type, retur
         try:
             with open(target_file, "r") as file:
                 project_list = json.load(file)
-                print(f"File loaded\nProjects found:\n{project_list}\n")
+                print(f"File loaded...\nProjects found:\n{project_list}\n")
                 project_list.append(project)
-                print(f"Updated projects list:\n{project_list}\n")
+                print(f"New project list\n{project_list}\n")
+                sorted_project_list = sorted(project_list, key=lambda x: x["Project ID"])
+                print(f"Updated sorted projects list:\n{sorted_project_list} of project type {project_type}\n")
         except:
             print("Project file empty or not found\n")
             project_list = []
             project_list.append(project)
+            # sorted_project_list = sorted(project_list, key=lambda x: x["Project ID"])
+            # print(f"Updated projects list:\n{sorted_project_list}\n")
             print(f"Updated projects list:\n{project_list}\n")
 
     # Write to target file/archive
     try:
         with open(target_file, "w") as file:
-            print(f"Writing project:\n{project_list}\nTo target file:\n{target_file}...\n")
-            json.dump(project_list, file)
+            # print(f"Writing project:\n{project_list}\nTo target file:\n{target_file...}\n)
+            print(f"Writing project:\n{sorted_project_list}\nTo target file:\n{target_file}...\n")
+            # json.dump(project_list, file)
+            json.dump(sorted_project_list, file)
     except:
         print(f"Writing {project_list} to {target_file} failed\n")
     

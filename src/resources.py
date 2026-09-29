@@ -275,7 +275,7 @@ def project_parser(project, project_type):
 
 # Project ID identifyer
 def identify_project_id(project, project_type, write_type):
-    print(f"Identifying project ID for project:\n{project}\n")
+    print(f"Identifying project ID for project:\n{project} of project type \"{project_type}\"\n")
     try:
         if project_type == "everyday":
             project_file = loader(EVERYDAY_FILE)

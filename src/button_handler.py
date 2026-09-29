@@ -11,7 +11,6 @@ from loader import load_file as loader
 from project_deleter import delete_project as deleter
 from project_editors import edit_parser as editor
 from project_printers import print_projects as printer
-from resources import VERSION
 from writers import writer as writer
 
 from PySide6.QtCore import QDate
@@ -50,7 +49,7 @@ def add_project_clicked(main_window):
     add_project = QDialog(main_window)
     ui = Ui_addNewProject()
     ui.setupUi(add_project)
-    add_project.setWindowTitle(f"{VERSION} - Add project")
+    add_project.setWindowTitle(f"{resources.VERSION} - Add project")
     ui.addEveryday.clicked.connect(lambda: everyday_project_clicked(add_project, main_window))
     ui.addProgramming.clicked.connect(lambda: programming_project_clicked(add_project, main_window))
     ui.addRecurring.clicked.connect(lambda: recurring_project_clicked(add_project, main_window))
@@ -68,7 +67,7 @@ def everyday_project_clicked(current_dialog, main_window):
     everyday_dialog = QDialog(None)
     ui = Ui_everydayProjectEditor()
     ui.setupUi(everyday_dialog)
-    everyday_dialog.setWindowTitle(f"{VERSION} - Add everyday project")
+    everyday_dialog.setWindowTitle(f"{resources.VERSION} - Add everyday project")
     ui.everydayStart.setDate(QDate.currentDate())
     ui.everydayFinish.setDate(QDate.currentDate())
     ui.everydayProgressSlider.valueChanged.connect(lambda value: 
@@ -90,7 +89,7 @@ def programming_project_clicked(current_dialog, main_window):
     programming_dialog = QDialog(main_window)
     ui = Ui_programmingProjectEditor()
     ui.setupUi(programming_dialog)
-    programming_dialog.setWindowTitle(f"{VERSION} - Add programming project")
+    programming_dialog.setWindowTitle(f"{resources.VERSION} - Add programming project")
     ui.programmingStart.setDate(QDate.currentDate())
     ui.programmingFinish.setDate(QDate.currentDate())
     ui.programmingProgressSlider.valueChanged.connect(lambda value:
@@ -112,7 +111,7 @@ def recurring_project_clicked(current_dialog, main_window):
     recurring_dialog = QDialog(main_window)
     ui = Ui_recurringProjectEditor()
     ui.setupUi(recurring_dialog)
-    recurring_dialog.setWindowTitle(f"{VERSION} - Add recurring task")
+    recurring_dialog.setWindowTitle(f"{resources.VERSION} - Add recurring task")
     ui.saveRecurring.clicked.connect(lambda: writer(ui, "recurring", recurring_dialog, main_window, "new"))
     ui.clearRecurring.clicked.connect(lambda: resources.clear_input(ui))
     ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(recurring_dialog, main_window))
@@ -129,7 +128,7 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
     viewer = QDialog(main_window)
     ui = Ui_Viewer()
     ui.setupUi(viewer)
-    viewer.setWindowTitle(f"{VERSION} - View projects")
+    viewer.setWindowTitle(f"{resources.VERSION} - View projects")
     tab_state = {
         "main_index" : top_idx,
         "sub_index" : sub_idx 
