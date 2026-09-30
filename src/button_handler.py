@@ -217,7 +217,7 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
         print("Project deleted from recurring file\n")
         project["Task status"] = True
         print(f"Task after altering status:\n{project}\n")        
-        writer(project, "recurring", viewer, main_window, "edit", return_to_main=False)
+        writer(project, "recurring", resources.project_id, viewer, main_window, "edit", return_to_main=False)
         project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])
         print("Project status set to done and saved!\n")
 
@@ -230,7 +230,7 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
         print("Project deleted from recurring file\n")
         project["Task status"] = False
         print(f"Task after altering status:\n{project}\n")
-        writer(project, "recurring", viewer, main_window, "reset", return_to_main=False)
+        writer(project, "recurring", resources.project_id, viewer, main_window, "reset", return_to_main=False)
         project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])
         print("Project status set to done and saved!\n")
 
@@ -251,7 +251,7 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
                 print(f"Task status: {project["Task status"]}")
             project_list.append(project)
         print(f"Reset projects list to write to recurring file:\n{project_list}\n")
-        writer(project_list, "recurring", viewer, main_window, "reset all", return_to_main=False)
+        writer(project_list, "recurring", resources.project_id, viewer, main_window, "reset all", return_to_main=False)
         viewer.close()
         project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])
         print(f"{category} tasks reset")
