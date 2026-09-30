@@ -56,7 +56,7 @@ tab_handler = [
         2 : FULL_ARCHIVE
     }
 ]
-
+selected_project_id = None
 
 ##### Utility functions #####
 # Return to main menu

@@ -13,7 +13,7 @@ from project_editors import edit_parser as editor
 from project_printers import print_projects as printer
 from writers import writer as writer
 
-from PySide6.QtCore import QDate
+from PySide6.QtCore import QDate, Qt
 from PySide6.QtGui import QAction
 from PySide6.QtWidgets import QDialog, QListWidget, QPushButton 
 
@@ -124,6 +124,7 @@ def recurring_project_clicked(current_dialog, main_window):
 def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
     print("Loading viewer...")
     resources.selected_project = None
+    resources.selected_project_id = None
     main_window.close()
     viewer = QDialog(main_window)
     ui = Ui_Viewer()
@@ -146,6 +147,7 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
         tab_state["sub_index"] = sub_idx
         printer(ui, top_idx, sub_idx)
         resources.selected_project = None
+        resources.selected_project_id = None
 
     # Initialise tab index based on user selection
     ui.viewer.setCurrentIndex(tab_state["main_index"])
@@ -162,8 +164,9 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
     # for editing, archiving or deleting
     def project_clicked(item):
         resources.selected_project = item
+        resources.selected_project_id = item.data(Qt.ItemDataRole.UserRole)
         print(f"Project clicked:\n{resources.selected_project}\n")
-        project_id = resources.project_id()
+        # project_id = resources.project_id()
 
     # Use set item to call the edit function
     def edit_clicked():
