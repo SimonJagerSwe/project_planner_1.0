@@ -72,7 +72,7 @@ def everyday_project_clicked(current_dialog, main_window):
     ui.everydayFinish.setDate(QDate.currentDate())
     ui.everydayProgressSlider.valueChanged.connect(lambda value: 
         ui.everydayProgressPercent.setText(f"{value}%"))
-    ui.everydaySave.clicked.connect(lambda: writer(ui, "everyday", everyday_dialog, main_window, "new"))
+    ui.everydaySave.clicked.connect(lambda: writer(ui, "everyday", resources.selected_project_id, everyday_dialog, main_window, "new"))
     ui.everydayClear.clicked.connect(lambda: resources.clear_input(ui))
     ui.everydayReturn.clicked.connect(lambda: resources.return_to_main_clicked(everyday_dialog, main_window))
     ui.everydayExit.clicked.connect(lambda: resources.exit_clicked(everyday_dialog))
@@ -165,8 +165,8 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
     def project_clicked(item):
         resources.selected_project = item
         resources.selected_project_id = item.data(Qt.ItemDataRole.UserRole)
-        print(f"Project clicked:\n{resources.selected_project}\n")
-        # project_id = resources.project_id()
+        print(f"Project clicked:\n{resources.selected_project}\nProject ID:\n{resources.selected_project_id}\n")
+        
 
     # Use set item to call the edit function
     def edit_clicked():

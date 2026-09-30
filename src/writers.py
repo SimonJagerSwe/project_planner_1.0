@@ -74,11 +74,13 @@ def project_data(ui, project_type, project_id):
 
 # Project writer
 def writer(project, project_type, project_id, current_dialog, main_window, write_type, return_to_main=True):
+    # Create project ID if none is currently available (used when creating a new project as no project has been selected)
+    if project_id is None:
+        project_id = resources.project_id(project, project_type)
     print(f"Writing file using:\n{project}\n")
     print(f"Project type to write:\n{project_type}\n")
     print(f"Write type:\n{write_type}\n")
     print(f"Project ID to write:\n{project_id}\n")
-
     
     # This is for resetting recurring task statuses
     if write_type == "reset all":

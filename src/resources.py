@@ -277,34 +277,19 @@ def project_parser(project, project_type):
 
 
 # Project ID identifyer
-def project_id(project, project_type, write_type):
+def project_id(project, project_type):
+    print(f"No project ID found...\n")
     print(f"Identifying project ID for project:\n{project} of project type \"{project_type}\"\n")
     try:
         if project_type == "everyday":
-            project_file = loader(EVERYDAY_FILE)
+            project_list = loader(EVERYDAY_FILE)
         elif project_type == "programming":
-            project_file = loader(PROGRAMMING_FILE)
+            project_list = loader(PROGRAMMING_FILE)
         else:
-            project_file = loader(RECURRING_FILE)
+            project_list = loader(RECURRING_FILE)
     except TypeError:
                     print("Unknown project type error")
 
-    try: 
-        if write_type == "new":
-            project_id = project_file[-1]["Project ID"] + 1
-            print(f"Last project ID in {project_type}:\n{project_id - 1}\nProject ID for new project:\n{project_id}\n")
-        elif write_type == "edit":
-            print("Finding project ID for edited project...\n")
-            # project = project_parser(project, project_type)
-            project_id = project["Project ID"]
-            # project_id = project_parser(project, project_type)["Project ID"]
-            # print(f"Edited project ID:\n{project["Project ID"]}\n")
-            print(f"Edited project ID:\n{project_id}\n")
-        else:
-            project_id = project["Project ID"]
-            print(f"Saved project ID:\n{project_id}\n")
-
-    except TypeError:
-        print("Unknown write type error")
+    project_id = project_list[-1]["Project ID"] + 1
 
     return project_id
