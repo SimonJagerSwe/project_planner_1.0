@@ -112,7 +112,7 @@ def recurring_project_clicked(current_dialog, main_window):
     ui = Ui_recurringProjectEditor()
     ui.setupUi(recurring_dialog)
     recurring_dialog.setWindowTitle(f"{resources.VERSION} - Add recurring task")
-    ui.saveRecurring.clicked.connect(lambda: writer(ui, "recurring", recurring_dialog, main_window, "new"))
+    ui.saveRecurring.clicked.connect(lambda: writer(ui, "recurring", resources.selected_project_id, recurring_dialog, main_window, "new"))
     ui.clearRecurring.clicked.connect(lambda: resources.clear_input(ui))
     ui.returnToMainRecurring.clicked.connect(lambda: resources.return_to_main_clicked(recurring_dialog, main_window))
     ui.exitRecurring.clicked.connect(lambda: resources.exit_clicked(recurring_dialog))

@@ -254,7 +254,7 @@ def project_parser(project, project_type):
         for var in project.text().split("\n"):
             if "name" in var:
                 project_name = var.split(":")[1].strip()
-                
+
     # Load everyday file
     if project_type == "everyday":
         e_projects = loader(EVERYDAY_FILE)
@@ -289,6 +289,9 @@ def project_id(project, project_type):
     except TypeError:
                     print("Unknown project type error")
 
-    project_id = project_list[-1]["Project ID"] + 1
+    if project_type == "recurring":
+        project_id = project_list[-1]["Task ID"] + 1
+    else:
+        project_id = project_list[-1]["Project ID"] + 1
 
     return project_id

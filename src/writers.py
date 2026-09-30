@@ -59,7 +59,7 @@ def project_data(ui, project_type, project_id):
             notes = ui.recurringNotes.text()
             status = False  # Never printed, only to use for status check
             project = {
-                "Project ID" : project_id,
+                "Task ID" : project_id,
                 "Task name" : name,
                 "Task frequency" : frequency,
                 "Task notes" : notes,
@@ -89,14 +89,16 @@ def writer(project, project_type, project_id, current_dialog, main_window, write
         project_list = []
         for task in project:
             project_list.append(task)
-            sorted_project_list = sorted(project_list, key=lambda x: x["Project ID"])
+            sorted_project_list = sorted(project_list, key=lambda x: x["Task ID"])
             print(f"Reset sorted project list:\n{sorted_project_list}\n")
 
     # All other write types
     else:
-        if write_type == "new" or write_type == "edit" or write_type == "reset":
+        # if write_type == "new" or write_type == "edit" or write_type == "reset":
+        try:
             project = project_data(project, project_type, project_id)
-        else:
+        # else:
+        except:
             print("Unknown type error encountered")
         print(f"Project to write:\n{project}\n")
 
@@ -105,16 +107,17 @@ def writer(project, project_type, project_id, current_dialog, main_window, write
             print("Writing project to current project files\n")
             # Determine what project file to write to
             if project_type == "everyday":
-                print("Target file is everyday file\n")
+                # print("Target file is everyday file\n")
                 target_file = resources.EVERYDAY_FILE
             elif project_type == "programming":
-                print("Target file is programming file\n")
+                # print("Target file is programming file\n")
                 target_file = resources.PROGRAMMING_FILE
             elif project_type == "recurring":
-                print("Target file is recurring file\n")
+                # print("Target file is recurring file\n")
                 target_file = resources.RECURRING_FILE
             else:
                 print("Unknown error occurred\n")
+            print(f"Target file is:\n{target_file}")
         # Determine which archive file to write to
         else:
             if project_type == "everyday":
@@ -131,29 +134,27 @@ def writer(project, project_type, project_id, current_dialog, main_window, write
                 print(f"File loaded...\nProjects found:\n{project_list}\n")
                 project_list.append(project)
                 print(f"New project list\n{project_list}\n")
-                sorted_project_list = sorted(project_list, key=lambda x: x["Project ID"])
+                if project_type == "recurring":
+                    sorted_project_list = sorted(project_list, key=lambda x: x["Task ID"])
+                else:
+                    sorted_project_list = sorted(project_list, key=lambda x: x["Project ID"])
                 print(f"Updated sorted projects list:\n{sorted_project_list} of project type {project_type}\n")
         except:
             print("Project file empty or not found\n")
-            project_list = []
-            project_list.append(project)
-            # sorted_project_list = sorted(project_list, key=lambda x: x["Project ID"])
-            # print(f"Updated projects list:\n{sorted_project_list}\n")
-            print(f"Updated projects list:\n{project_list}\n")
+            sorted_project_list = []
+            sorted_project_list.append(project)
+            print(f"Updated projects list:\n{sorted_project_list}\n")
 
     # Write to target file/archive
     try:
         with open(target_file, "w") as file:
-            # print(f"Writing project:\n{project_list}\nTo target file:\n{target_file...}\n)
             print(f"Writing project:\n{sorted_project_list}\nTo target file:\n{target_file}...\n")
-            # json.dump(project_list, file)
             json.dump(sorted_project_list, file)
     except:
         print(f"Writing {project_list} to {target_file} failed\n")
     
     # Return to main menu
     # if current_dialog and main_window:
-    #     resources.return_to_main_clicked(current_dialog, main_window)
     if return_to_main and main_window:
         resources.return_to_main_clicked(current_dialog, main_window)
 
