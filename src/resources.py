@@ -8,7 +8,7 @@ from PySide6.QtCore import QDate
 from PySide6.QtWidgets import QMessageBox
 
 # Version number
-VERSION = "Project planner v. 1.01"
+VERSION = "Project planner v. 1.02"
 
 # Resource files
 EVERYDAY_FILE = "project_files/everyday_projects.json"
@@ -54,6 +54,7 @@ tab_handler = [
         2 : FULL_ARCHIVE
     }
 ]
+selected_project_id = None
 
 ##### Utility functions #####
 # Return to main menu
@@ -243,21 +244,19 @@ def parse_type(project):
 # Parse project object and return project name
 def project_parser(project, project_type):
     # Find project name
-    print(f"Project received by parser:\n{project}\nProject type:\n{type(project)}\n")
+    print(f"Project received by parser:\n{project}\nProject object type:\n{type(project)}\nProject type:\n{project_type}\n")
     if type(project) == dict:
         project_name = project["Project name"]
     else:
         for var in project.text().split("\n"):
             if "name" in var:
                 project_name = var.split(":")[1].strip()
-            
-    
+
     # Load everyday file
     if project_type == "everyday":
         e_projects = loader(EVERYDAY_FILE)
         for project in e_projects:
             if project["Project name"].strip() == project_name:
-                # print(f"Project found:\n{project["Project name"]}\n")
                 return project
     # Load programming file
     elif project_type == "programming":
@@ -271,4 +270,25 @@ def project_parser(project, project_type):
         for task in r_tasks:
             if task["Task name"].strip() == project_name:
                 return task
-            
+
+
+# Project ID identifyer
+def project_id(project, project_type):
+    print(f"No project ID found...\n")
+    print(f"Identifying project ID for project:\n{project} of project type \"{project_type}\"\n")
+    try:
+        if project_type == "everyday":
+            project_list = loader(EVERYDAY_FILE)
+        elif project_type == "programming":
+            project_list = loader(PROGRAMMING_FILE)
+        else:
+            project_list = loader(RECURRING_FILE)
+    except TypeError:
+                    print("Unknown project type error")
+
+    if project_type == "recurring":
+        project_id = project_list[-1]["Task ID"] + 1
+    else:
+        project_id = project_list[-1]["Project ID"] + 1
+
+    return project_id

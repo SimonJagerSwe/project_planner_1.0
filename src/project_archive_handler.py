@@ -19,7 +19,7 @@ def archive_project(project, project_type, viewer, main_window, tab_state):
         print(f"Completed project:\n{unpacked_project}\n")
     else:
         print("Archiving project as is...")
-    writers.writer(unpacked_project, project_type, viewer, main_window, "archive", return_to_main=False)
+    writers.writer(unpacked_project, project_type, resources.project_id, viewer, main_window, "archive", return_to_main=False)
     print("Archiving step 1 - Write to archive file: Done")
     project_deleter.delete_project(project, project_type, viewer, main_window, "archive", tab_state)
     print("Archiving step 2 - Delete from file: Done")

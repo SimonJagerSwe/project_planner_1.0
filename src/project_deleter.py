@@ -46,11 +46,5 @@ def delete_project(project, project_type, viewer, main_window, delete_type, tab_
                 "main_index" : 0,
                 "sub_index" : 0
             }
-        '''if project_type == "everyday":
-            button_handler.project_viewer_clicked(main_window, 0, 0)
-        elif project_type == "programming":
-            button_handler.project_viewer_clicked(main_window, 0, 1)
-        else:
-            button_handler.project_viewer_clicked(main_window, 0, 3)'''
         button_handler.project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])
         

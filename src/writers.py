@@ -5,10 +5,10 @@ import resources
 
 
 # Project file creator
-def project_data(ui, project_type):
-    print("Writing project data...")
-    print(f"Ui fetched: {ui}")
-    print(project_type)
+def project_data(ui, project_type, project_id):
+    print("Writing project data...\n")
+    print(f"Ui fetched: {ui}\n")
+    print(f"Project type to write:\n{project_type}\n")
 
     # Create everyday project
     if project_type == "everyday":
@@ -19,6 +19,7 @@ def project_data(ui, project_type):
         percent = ui.everydayProgressPercent.text()
         status = ui.everydayStatus.currentText()
         project = {
+            "Project ID" : project_id,
             "Project name" : name,
             "Project start" : start,
             "Project end" : finish,
@@ -38,6 +39,7 @@ def project_data(ui, project_type):
         percent = ui.programmingProgressPercent.text()
         status = ui.programmingStatus.currentText()
         project = {
+            "Project ID" : project_id,
             "Project name" : name,
             "Project start" : start,
             "Project end" : finish,
@@ -57,6 +59,7 @@ def project_data(ui, project_type):
             notes = ui.recurringNotes.text()
             status = False  # Never printed, only to use for status check
             project = {
+                "Task ID" : project_id,
                 "Task name" : name,
                 "Task frequency" : frequency,
                 "Task notes" : notes,
@@ -70,10 +73,15 @@ def project_data(ui, project_type):
 
 
 # Project writer
-def writer(project, project_type, current_dialog, main_window, write_type, return_to_main=True):
+def writer(project, project_type, project_id, current_dialog, main_window, write_type, return_to_main=True):
+    # Create project ID if none is currently available (used when creating a new project as no project has been selected)
+    if project_id is None:
+        project_id = resources.project_id(project, project_type)
     print(f"Writing file using:\n{project}\n")
     print(f"Project type to write:\n{project_type}\n")
     print(f"Write type:\n{write_type}\n")
+    print(f"Project ID to write:\n{project_id}\n")
+    
     # This is for resetting recurring task statuses
     if write_type == "reset all":
         print("Resetting all recurring tasks of current type\n")
@@ -81,10 +89,17 @@ def writer(project, project_type, current_dialog, main_window, write_type, retur
         project_list = []
         for task in project:
             project_list.append(task)
+            sorted_project_list = sorted(project_list, key=lambda x: x["Task ID"])
+            print(f"Reset sorted project list:\n{sorted_project_list}\n")
 
+    # All other write types
     else:
-        if write_type == "new" or write_type == "edit" or write_type == "reset":
-            project = project_data(project, project_type)
+        # if write_type == "new" or write_type == "edit" or write_type == "reset":
+        try:
+            project = project_data(project, project_type, project_id)
+        # else:
+        except:
+            print("Unknown type error encountered")
         print(f"Project to write:\n{project}\n")
 
         # Determine if project should be written to project files or archive files
@@ -92,16 +107,17 @@ def writer(project, project_type, current_dialog, main_window, write_type, retur
             print("Writing project to current project files\n")
             # Determine what project file to write to
             if project_type == "everyday":
-                print("Target file is everyday file\n")
+                # print("Target file is everyday file\n")
                 target_file = resources.EVERYDAY_FILE
             elif project_type == "programming":
-                print("Target file is programming file\n")
+                # print("Target file is programming file\n")
                 target_file = resources.PROGRAMMING_FILE
             elif project_type == "recurring":
-                print("Target file is recurring file\n")
+                # print("Target file is recurring file\n")
                 target_file = resources.RECURRING_FILE
             else:
                 print("Unknown error occurred\n")
+            print(f"Target file is:\n{target_file}")
         # Determine which archive file to write to
         else:
             if project_type == "everyday":
@@ -115,26 +131,30 @@ def writer(project, project_type, current_dialog, main_window, write_type, retur
         try:
             with open(target_file, "r") as file:
                 project_list = json.load(file)
-                print(f"File loaded\nProjects found:\n{project_list}\n")
+                print(f"File loaded...\nProjects found:\n{project_list}\n")
                 project_list.append(project)
-                print(f"Updated projects list:\n{project_list}\n")
+                print(f"New project list\n{project_list}\n")
+                if project_type == "recurring":
+                    sorted_project_list = sorted(project_list, key=lambda x: x["Task ID"])
+                else:
+                    sorted_project_list = sorted(project_list, key=lambda x: x["Project ID"])
+                print(f"Updated sorted projects list:\n{sorted_project_list} of project type {project_type}\n")
         except:
             print("Project file empty or not found\n")
-            project_list = []
-            project_list.append(project)
-            print(f"Updated projects list:\n{project_list}\n")
+            sorted_project_list = []
+            sorted_project_list.append(project)
+            print(f"Updated projects list:\n{sorted_project_list}\n")
 
     # Write to target file/archive
     try:
         with open(target_file, "w") as file:
-            print(f"Writing project:\n{project_list}\nTo target file:\n{target_file}...\n")
-            json.dump(project_list, file)
+            print(f"Writing project:\n{sorted_project_list}\nTo target file:\n{target_file}...\n")
+            json.dump(sorted_project_list, file)
     except:
         print(f"Writing {project_list} to {target_file} failed\n")
     
     # Return to main menu
     # if current_dialog and main_window:
-    #     resources.return_to_main_clicked(current_dialog, main_window)
     if return_to_main and main_window:
         resources.return_to_main_clicked(current_dialog, main_window)
 

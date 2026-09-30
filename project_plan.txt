@@ -77,7 +77,6 @@ TODO
     - Add and connect top menu bar
     - Add project stats
     - Make recurring tasks expandable/collapsable
-    - Verify functionality of new indexing functions
     - Possibly make size dynamically adjustable?
     - Sort projects in view?
         - By added, name, start date, finish date, programming language
@@ -86,7 +85,9 @@ TODO
     - Unify code with importing as x instead of x.function
     - Setup test suite
     - Add ability to delete projects from the archive
-    
+    - Add "new project" button functionality to project viewer
+    - Add project type to project/task dictionary and use that to identify project types
+
 
 ISSUES
     
