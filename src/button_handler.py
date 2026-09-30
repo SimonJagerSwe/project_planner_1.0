@@ -239,7 +239,7 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
         print(f"Setting {category} tasks to not done")
         projects = loader(resources.RECURRING_FILE)
         project_list = []
-        # Reset all weekly tasks
+        # Reset all tasks in group
         for project in projects:
             print(project["Task frequency"])
             if project["Task frequency"] == category:

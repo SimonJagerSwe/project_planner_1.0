@@ -2,8 +2,6 @@
 # Imports
 import sys
 
-import writers
-
 from loader import load_file as loader
 
 from PySide6.QtCore import QDate
@@ -246,7 +244,6 @@ def parse_type(project):
 # Parse project object and return project name
 def project_parser(project, project_type):
     # Find project name
-    # print(f"Project received by parser:\n{project}\nProject type:\n{type(project)}\n")
     print(f"Project received by parser:\n{project}\nProject object type:\n{type(project)}\nProject type:\n{project_type}\n")
     if type(project) == dict:
         project_name = project["Project name"]
