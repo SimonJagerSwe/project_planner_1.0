@@ -254,8 +254,7 @@ def project_parser(project, project_type):
         for var in project.text().split("\n"):
             if "name" in var:
                 project_name = var.split(":")[1].strip()
-            
-    
+                
     # Load everyday file
     if project_type == "everyday":
         e_projects = loader(EVERYDAY_FILE)
