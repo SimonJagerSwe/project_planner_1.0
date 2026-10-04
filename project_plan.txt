@@ -74,15 +74,12 @@
 
 
 TODO
-    - Add and connect top menu bar
     - Add project stats
     - Make recurring tasks expandable/collapsable
     - Possibly make size dynamically adjustable?
     - Sort projects in view?
         - By added, name, start date, finish date, programming language
     - Rename "edit project" to "edit task" in recurring tasks viewer
-    - Append edited project/task to the original place in their respective dicts for writing to project/task files
-    - Unify code with importing as x instead of x.function
     - Setup test suite
     - Add ability to delete projects from the archive
     - Add "new project" button functionality to project viewer
