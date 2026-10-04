@@ -1,6 +1,6 @@
 ########## Button handler ##########
 # Imports
-import project_archive_handler, resources
+import resources
 
 from interface.ui_everyday import Ui_everydayProjectEditor
 from interface.ui_new_project import Ui_addNewProject
@@ -8,6 +8,7 @@ from interface.ui_programming import Ui_programmingProjectEditor
 from interface.ui_recurring import Ui_recurringProjectEditor
 from interface.ui_tabs import Ui_Viewer
 from loader import load_file as loader
+from project_archive_handler import archive_project
 from project_deleter import delete_project as deleter
 from project_editors import edit_parser as editor
 from project_printers import print_projects as printer
@@ -193,7 +194,7 @@ def project_viewer_clicked(main_window, top_idx=0, sub_idx=0):
             archive = resources.archive_check(viewer)
             print(archive)
             if archive == "archive":
-                project_archive_handler.archive_project(resources.selected_project, project_type, viewer, main_window, tab_state)
+                archive_project(resources.selected_project, project_type, viewer, main_window, tab_state)
 
     # Use set item to call the delete function
     def delete_clicked():

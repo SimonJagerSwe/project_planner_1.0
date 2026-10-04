@@ -2,8 +2,7 @@
 # Imports
 import json
 
-import button_handler
-
+from button_handler import project_viewer_clicked
 from loader import load_file as loader
 from resources import EVERYDAY_FILE, PROGRAMMING_FILE, RECURRING_FILE, project_parser
 
@@ -46,5 +45,5 @@ def delete_project(project, project_type, viewer, main_window, delete_type, tab_
                 "main_index" : 0,
                 "sub_index" : 0
             }
-        button_handler.project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])
+        project_viewer_clicked(main_window, tab_state["main_index"], tab_state["sub_index"])
         
