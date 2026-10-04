@@ -83,7 +83,6 @@ TODO
     - Setup test suite
     - Add ability to delete projects from the archive
     - Add "new project" button functionality to project viewer
-    - Add project type to project/task dictionary and use that to identify project types
     - Test templates for better look
 
 ISSUES
