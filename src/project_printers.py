@@ -57,7 +57,7 @@ def print_projects(ui, top_tab, sub_tab):
                 notes = project["Project notes"]
                 progress = project["Project progress"]
                 status = project["Project status"]
-                everyday_project = f"Project name:\t{name}\nStart date:\t\t{start}\nEnd date:\t\t{end}\nProject notes:\t\t{notes}\nProject progress:\t\t{progress}\nProject status:\t{status}\n"
+                everyday_project = f"Project name:\t{name}\nStart date:\t\t{start}\nEnd date:\t\t{end}\nProject notes:\t{notes}\nProject progress:\t{progress}\nProject status:\t{status}\n"
                 add_project_item(ui.allProjects, everyday_project, project)
             programming_projects = load_file(resources.PROGRAMMING_FILE)            
             for project in programming_projects:
@@ -69,7 +69,7 @@ def print_projects(ui, top_tab, sub_tab):
                 notes = project["Project notes"]
                 progress = project["Project progress"]
                 status = project["Project status"]
-                programming_project = f"Project name:\t{name}\nStart date:\t\t{start}\nEnd date:\t\t{end}\nLanguage(s):\t\t{language}\nGitHub link:\t\t{link}\nProject notes:\t\t{notes}\nProject progress:\t\t{progress}\nProject status:\t{status}\n"
+                programming_project = f"Project name:\t{name}\nStart date:\t\t{start}\nEnd date:\t\t{end}\nLanguage(s):\t{language}\nGitHub link:\t\t{link}\nProject notes:\t{notes}\nProject progress:\t{progress}\nProject status:\t{status}\n"
                 add_project_item(ui.allProjects, programming_project, project)
 
         # Print recurring tasks depending on frequency
