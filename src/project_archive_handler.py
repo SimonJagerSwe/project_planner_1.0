@@ -1,13 +1,14 @@
 ########## Archive handlers ##########
-# Imports
-from button_handler import project_viewer_clicked
-from project_deleter import delete_project as deleter
-from resources import project_parser as parser, complete_archive, project_id
-from writers import writer as writer
 
 
 # Archiving function
 def archive_project(project, project_type, viewer, main_window, tab_state):
+    # Imports
+    from button_handler import project_viewer_clicked
+    from project_deleter import delete_project as deleter
+    from resources import project_parser as parser, complete_archive, project_id
+    from writers import writer as writer
+    
     unpacked_project = parser(project, project_type)
     print("Archiving project...")
     print(f"Project:\n{project}\n")

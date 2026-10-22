@@ -2,13 +2,12 @@
 # Imports
 import json
 
-from button_handler import project_viewer_clicked
-from loader import load_file as loader
-from resources import EVERYDAY_FILE, PROGRAMMING_FILE, RECURRING_FILE, project_parser
-
 
 # Delete project from project type file, both for deletion and for editing
-def delete_project(project, project_type, viewer, main_window, delete_type, tab_state=None):
+def delete_project(project, project_type, viewer, main_window, delete_type, tab_state=None):    
+    from button_handler import project_viewer_clicked
+    from loader import load_file as loader
+    from resources import EVERYDAY_FILE, PROGRAMMING_FILE, RECURRING_FILE, project_parser
     if type(project) != dict:
         print(f"Project sent to parser from deleter:\n{project}\n")
         current_project = project_parser(project, project_type)
