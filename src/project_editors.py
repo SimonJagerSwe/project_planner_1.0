@@ -106,6 +106,7 @@ def edit_programming(ui, project, current_project, main_window):
     ui.programmingFinish.setDate(QDate.fromString(current_project["Project end"], "yyyy-MM-dd"))
     ui.languagesEdit.setText(current_project["Language(s)"])
     ui.githubEdit.setText(current_project["GitHub link"])
+    ui.programmingNotes.setText(current_project["Project notes"])
     progress_text = current_project["Project progress"]
     progress_value = int(progress_text.strip("%"))
     ui.programmingProgressSlider.setValue(progress_value)
